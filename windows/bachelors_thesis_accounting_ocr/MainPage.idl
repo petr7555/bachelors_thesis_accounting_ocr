@@ -1,0 +1,8 @@
+namespace bachelors_thesis_accounting_ocr
+{
+    [default_interface]
+    runtimeclass MainPage : Windows.UI.Xaml.Controls.Page
+    {
+        MainPage();
+    }
+}
