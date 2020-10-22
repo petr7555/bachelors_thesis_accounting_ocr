@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Install npm dependencies
         run: |
           npm install
@@ -16,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Install npm dependencies
         run: |
           npm install
@@ -34,9 +36,6 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install npm dependencies
-        run: |
-          npm install
 
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.2
@@ -46,6 +45,7 @@ jobs:
 
       - name: Nuget Restore
         run: nuget restore bachelors_thesis_accounting_ocr.sln
+        path: windows
 
       - name: Build Windows Release
         run: |
