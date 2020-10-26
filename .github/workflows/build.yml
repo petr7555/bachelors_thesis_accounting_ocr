@@ -41,21 +41,12 @@ jobs:
         run: |
           npm install
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.2
-
-      - name: Setup Nuget.exe
-        uses: warrenbuckley/Setup-Nuget@v1
-
-      - name: Nuget Restore
-        run: cd windows && nuget restore bachelors_thesis_accounting_ocr.sln
-
-      - name: Build Windows Release
+      - name: Run windows
         run: |
-          cd windows && msbuild bachelors_thesis_accounting_ocr.sln /p:Configuration=Release /p:Platform=x64
+          npx react-native run-windows --release --arch x64
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: bachelors_thesis_accounting_ocr.exe
+          name: bachelors_thesis_accounting_ocr_windows
           path: windows/x64/Release/bachelors_thesis_accounting_ocr
