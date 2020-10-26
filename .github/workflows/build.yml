@@ -45,12 +45,8 @@ jobs:
         run: |
           npx react-native run-windows --release --arch x64
 
-      - name: Create appx file
-        run: |
-          MakeAppx pack /d windows/x64/Release/bachelors_thesis_accounting_ocr /p bachelors_thesis_accounting_ocr.appx
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: bachelors_thesis_accounting_ocr_windows.appx
-          path: windows/x64/Release/bachelors_thesis_accounting_ocr/bachelors_thesis_accounting_ocr_windows.appx
+          name: bachelors_thesis_accounting_ocr_windows
+          path: windows/x64/Release/bachelors_thesis_accounting_ocr/
