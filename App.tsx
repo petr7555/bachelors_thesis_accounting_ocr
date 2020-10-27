@@ -25,6 +25,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import DarkModeDemo from './src/components/DarkModeDemo';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -43,6 +44,9 @@ const App = () => {
             </View>
           )}
           <View style={styles.body}>
+            <View style={styles.sectionContainer}>
+              <DarkModeDemo />
+            </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Step One</Text>
               <Text style={styles.sectionDescription}>
