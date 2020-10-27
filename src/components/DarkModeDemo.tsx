@@ -1,10 +1,26 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import Typography from '../global/styles/typography';
-import {useColorScheme} from 'react-native-appearance';
+import {Text, useColorScheme, View} from 'react-native';
+import Typography, {MyTextStyle} from '../global/styles/typography';
+import {useTheme} from 'react-native-themed-styles';
+import styleSheetFactory from '../global/styles/themes';
+
+const defaultStyles = styleSheetFactory((theme: MyTextStyle) => {
+  return {
+    header: {
+      ...Typography(theme).heading1,
+    },
+    subheader: {
+      ...Typography(theme).heading2,
+    },
+    content: {
+      ...Typography(theme).bodyText,
+    },
+  };
+});
 
 const DarkModeDemo = () => {
   const colorScheme = useColorScheme();
+  const [styles, theme, themeName] = useTheme(defaultStyles);
 
   return (
     <View>
@@ -13,21 +29,10 @@ const DarkModeDemo = () => {
       <Text
         style={
           styles.content
-        }>{`Some text that ignores theme. The system color scheme is ${colorScheme}`}</Text>
+        }>{`Some text that ignores theme. The system color scheme is ${colorScheme}, 
+        theme is ${theme}, themeName is ${themeName}`}</Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  header: {
-    ...Typography.heading1,
-    backgroundColor: 'white',
-  },
-  subheader: {
-    ...Typography.heading2,
-  },
-  content: {
-    ...Typography.bodyText,
-  },
-});
 export default DarkModeDemo;

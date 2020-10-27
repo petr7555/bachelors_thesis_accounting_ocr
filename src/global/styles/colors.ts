@@ -1,7 +1,12 @@
 const Colors = {
-  primary: 'black',
-  secondary: 'grey',
-  red: 'red',
+  primary: {
+    light: 'black',
+    dark: 'white',
+  },
+  secondary: {
+    light: 'grey',
+    dark: 'yellow',
+  },
 };
 
 export default Colors;
