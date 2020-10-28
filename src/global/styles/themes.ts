@@ -1,6 +1,8 @@
 import {useColorScheme} from 'react-native';
 import {registerThemes} from 'react-native-themed-styles';
 import Colors from './colors';
+import {useContext} from 'react';
+import {ThemeOptionsContext} from '../../../App';
 
 const styleSheetFactory = registerThemes(
   {
@@ -16,9 +18,12 @@ const styleSheetFactory = registerThemes(
     },
   },
   () => {
-    const colorScheme = useColorScheme();
-    return colorScheme || 'light';
+    const defaultTheme = 'light';
+    const colorScheme = useColorScheme() || defaultTheme;
+    const [themeOption] = useContext(ThemeOptionsContext);
+    return themeOption === 'reflectOS'
+      ? colorScheme
+      : themeOption || defaultTheme;
   },
 );
-
 export default styleSheetFactory;

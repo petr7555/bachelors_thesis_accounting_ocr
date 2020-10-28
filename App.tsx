@@ -1,7 +1,7 @@
 // needs to be first import
 // https://reactnative.dev/docs/navigation#react-navigation
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import InitialRNScreen from './src/components/InitialRNScreen';
@@ -14,19 +14,30 @@ export type RootStackParamList = {
   Settings: undefined;
 };
 
+export type ThemeOption = 'reflectOS' | 'light' | 'dark';
+type ThemeContextProps = [ThemeOption, Dispatch<SetStateAction<ThemeOption>>];
+
+export const ThemeOptionsContext = createContext<Partial<ThemeContextProps>>(
+  [],
+);
+
 const App = () => {
+  const [themeOption, setThemeOption] = useState<ThemeOption>('reflectOS');
+
   return (
     <>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={InitialRNScreen}
-            options={{title: 'Welcome'}}
-          />
-          <Stack.Screen name="Settings" component={SettingsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ThemeOptionsContext.Provider value={[themeOption, setThemeOption]}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={InitialRNScreen}
+              options={{title: 'Welcome'}}
+            />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ThemeOptionsContext.Provider>
     </>
   );
 };
