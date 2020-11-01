@@ -1,11 +1,11 @@
 Run on Windows:
 
 ```bash
-npx react-native run-windows
+npm run windows
 ```
 
 Run on Android:
 
 ```bash
-npx react-native run-android
+npm run android
 ```
