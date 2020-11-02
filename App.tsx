@@ -1,6 +1,3 @@
-// needs to be first import
-// https://reactnative.dev/docs/navigation#react-navigation
-import 'react-native-gesture-handler';
 import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
