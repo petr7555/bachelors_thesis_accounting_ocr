@@ -15,6 +15,10 @@ const defaultStyles = styleSheetFactory((theme: MyTextStyle) => {
     content: {
       ...Typography(theme).bodyText,
     },
+    container: {
+      flex: 1,
+      backgroundColor: theme.backgroundColor,
+    },
   };
 });
 
@@ -23,7 +27,7 @@ const DarkModeDemo = () => {
   const [styles, theme, themeName] = useTheme(defaultStyles);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.header}>Some primary color text</Text>
       <Text style={styles.subheader}>Some secondary color text</Text>
       <Text
