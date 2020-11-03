@@ -1,23 +1,39 @@
 import * as React from 'react';
-import {Text, useColorScheme, View} from 'react-native';
+import {StyleSheet, Text, useColorScheme, View} from 'react-native';
 import {
-  NavigationContainer,
-  DefaultTheme,
   DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
   useTheme,
 } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+declare const global: {HermesInternal: null | {}};
+
 const HomeScreen = () => {
   const {colors} = useTheme();
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{color: colors.text}}>Home!</Text>
-    </View>
+    <>
+      {__DEV__ && global.HermesInternal && (
+        <View style={styles.engine}>
+          <Text style={{color: colors.text}}>Engine: Hermes</Text>
+        </View>
+      )}
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={{color: colors.text}}>Home!</Text>
+      </View>
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  engine: {
+    position: 'absolute',
+    right: 0,
+  },
+});
 
 const CameraScreen = () => {
   const {colors} = useTheme();
