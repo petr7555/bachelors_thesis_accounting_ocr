@@ -1,29 +1,40 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {Text, useColorScheme, View} from 'react-native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+  useTheme,
+} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const HomeScreen = () => {
+  const {colors} = useTheme();
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
+      <Text style={{color: colors.text}}>Home!</Text>
     </View>
   );
 };
 
 const CameraScreen = () => {
+  const {colors} = useTheme();
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Camera!</Text>
+      <Text style={{color: colors.text}}>Camera!</Text>
     </View>
   );
 };
 
 const SettingsScreen = () => {
+  const {colors} = useTheme();
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings!</Text>
+      <Text style={{color: colors.text}}>Settings!</Text>
     </View>
   );
 };
@@ -38,9 +49,28 @@ const getTabBarIcon = (name: string) => ({
 
 const Tab = createBottomTabNavigator();
 
+const MyDefaultTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 45, 85)',
+  },
+};
+
+const MyDarkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: 'rgb(255, 45, 85)',
+  },
+};
+
 const App = () => {
+  const scheme = useColorScheme();
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
