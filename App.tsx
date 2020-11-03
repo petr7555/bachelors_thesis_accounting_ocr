@@ -8,6 +8,7 @@ import {
 } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import NewReceiptScreen from './src/components/NewReceiptScreen';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -41,16 +42,6 @@ const CameraScreen = () => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text style={{color: colors.text}}>Camera!</Text>
-    </View>
-  );
-};
-
-const NewReceiptScreen = () => {
-  const {colors} = useTheme();
-
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{color: colors.text}}>New receipt!</Text>
     </View>
   );
 };
