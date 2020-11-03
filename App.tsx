@@ -81,35 +81,41 @@ const MyDarkTheme = {
   },
 };
 
+export const TabNavigator = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: getTabBarIcon('home-outline'),
+        }}
+      />
+      <Tab.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{
+          tabBarIcon: getTabBarIcon('camera-outline'),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: getTabBarIcon('settings-outline'),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+
 const App = () => {
   const scheme = useColorScheme();
 
   return (
     <NavigationContainer
       theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            tabBarIcon: getTabBarIcon('home-outline'),
-          }}
-        />
-        <Tab.Screen
-          name="Camera"
-          component={CameraScreen}
-          options={{
-            tabBarIcon: getTabBarIcon('camera-outline'),
-          }}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{
-            tabBarIcon: getTabBarIcon('settings-outline'),
-          }}
-        />
-      </Tab.Navigator>
+      <TabNavigator />
     </NavigationContainer>
   );
 };
