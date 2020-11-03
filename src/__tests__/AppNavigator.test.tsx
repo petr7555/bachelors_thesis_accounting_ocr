@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import AppNavigator from '../components/AppNavigator';
 
 // Silence the warning https://github.com/facebook/react-native/issues/11094#issuecomment-263240420
@@ -19,5 +19,21 @@ describe('Testing AppNavigator', () => {
     const header = await findByText('Go to settings');
 
     expect(header).toBeTruthy();
+  });
+
+  test('clicking on Go to settings button takes you to the settings screen', async () => {
+    const component = (
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    );
+
+    const {findByText} = render(component);
+    const toClick = await findByText('Go to settings');
+
+    fireEvent.press(toClick);
+    const settingsScreenLabel = await findByText('This is Settings screen');
+
+    expect(settingsScreenLabel).toBeTruthy();
   });
 });
