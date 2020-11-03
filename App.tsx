@@ -45,6 +45,16 @@ const CameraScreen = () => {
   );
 };
 
+const NewReceiptScreen = () => {
+  const {colors} = useTheme();
+
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text style={{color: colors.text}}>New receipt!</Text>
+    </View>
+  );
+};
+
 const SettingsScreen = () => {
   const {colors} = useTheme();
 
@@ -96,6 +106,13 @@ export const TabNavigator = () => {
         component={CameraScreen}
         options={{
           tabBarIcon: getTabBarIcon('camera-outline'),
+        }}
+      />
+      <Tab.Screen
+        name="New receipt"
+        component={NewReceiptScreen}
+        options={{
+          tabBarIcon: getTabBarIcon('scan'),
         }}
       />
       <Tab.Screen
