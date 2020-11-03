@@ -1,10 +1,6 @@
 import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import InitialRNScreen from './src/components/InitialRNScreen';
-import SettingsScreen from './src/components/SettingsScreen';
-
-const Stack = createStackNavigator();
+import AppNavigator from './src/components/AppNavigator';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -25,14 +21,7 @@ const App = () => {
     <>
       <ThemeOptionsContext.Provider value={[themeOption, setThemeOption]}>
         <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Home"
-              component={InitialRNScreen}
-              options={{title: 'Welcome'}}
-            />
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-          </Stack.Navigator>
+          <AppNavigator />
         </NavigationContainer>
       </ThemeOptionsContext.Provider>
     </>

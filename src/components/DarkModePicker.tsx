@@ -1,4 +1,4 @@
-import {Picker} from '@react-native-picker/picker';
+import {Picker} from '@react-native-community/picker';
 import React, {useContext, useState} from 'react';
 import {ThemeOption, ThemeOptionsContext} from '../../App';
 import {StyleSheet} from 'react-native';
@@ -19,7 +19,7 @@ const DarkModePicker = () => {
       onValueChange={(itemValue, _itemIndex) =>
         onValueChange(itemValue as ThemeOption)
       }>
-      <Picker.Item label="Reflect OS setting" value="reflectOS" />
+      <Picker.Item label="Reflect OS settings" value="reflectOS" />
       <Picker.Item label="Dark mode" value="dark" />
       <Picker.Item label="Light mode" value="light" />
     </Picker>
