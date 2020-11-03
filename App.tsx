@@ -1,30 +1,70 @@
-import React, {createContext, Dispatch, SetStateAction, useState} from 'react';
+import * as React from 'react';
+import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import AppNavigator from './src/components/AppNavigator';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-export type RootStackParamList = {
-  Home: undefined;
-  Settings: undefined;
+const HomeScreen = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Home!</Text>
+    </View>
+  );
 };
 
-export type ThemeOption = 'reflectOS' | 'light' | 'dark';
-type ThemeContextProps = [ThemeOption, Dispatch<SetStateAction<ThemeOption>>];
+const CameraScreen = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Camera!</Text>
+    </View>
+  );
+};
 
-export const ThemeOptionsContext = createContext<Partial<ThemeContextProps>>(
-  [],
-);
+const SettingsScreen = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Settings!</Text>
+    </View>
+  );
+};
+
+const getTabBarIcon = (name: string) => ({
+  color,
+  size,
+}: {
+  color: string;
+  size: number;
+}) => <Icon name={name} color={color} size={size} />;
+
+const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [themeOption, setThemeOption] = useState<ThemeOption>('reflectOS');
-
   return (
-    <>
-      <ThemeOptionsContext.Provider value={[themeOption, setThemeOption]}>
-        <NavigationContainer>
-          <AppNavigator />
-        </NavigationContainer>
-      </ThemeOptionsContext.Provider>
-    </>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: getTabBarIcon('home-outline'),
+          }}
+        />
+        <Tab.Screen
+          name="Camera"
+          component={CameraScreen}
+          options={{
+            tabBarIcon: getTabBarIcon('camera-outline'),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            tabBarIcon: getTabBarIcon('settings-outline'),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 
