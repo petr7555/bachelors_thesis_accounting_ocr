@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, TextInput, Button, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import {useTheme} from '@react-navigation/native';
 
 type FormData = {
   description: string;
@@ -8,6 +9,7 @@ type FormData = {
 };
 
 const Form = () => {
+  const theme = useTheme();
   const {control, handleSubmit, errors} = useForm<FormData>();
   const onSubmit = (data: FormData) => console.log(data);
 
@@ -17,7 +19,7 @@ const Form = () => {
         control={control}
         render={({onChange, onBlur, value}) => (
           <TextInput
-            style={styles.input}
+            style={{...styles.input, color: theme.colors.text}}
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
@@ -33,7 +35,7 @@ const Form = () => {
         control={control}
         render={({onChange, onBlur, value}) => (
           <TextInput
-            style={styles.input}
+            style={{...styles.input, color: theme.colors.text}}
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
@@ -43,14 +45,19 @@ const Form = () => {
         defaultValue={0}
       />
 
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <Button
+        color={theme.colors.primary}
+        title="Submit"
+        onPress={handleSubmit(onSubmit)}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   input: {
-    borderColor: 'red',
+    height: 40,
+    borderColor: 'gray',
     borderWidth: 1,
   },
 });

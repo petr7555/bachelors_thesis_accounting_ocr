@@ -9,6 +9,7 @@ import {
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NewReceiptScreen from './src/components/NewReceiptScreen';
+import {Theme} from '@react-navigation/native/lib/typescript/src/types';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -66,19 +67,19 @@ const getTabBarIcon = (name: string) => ({
 
 const Tab = createBottomTabNavigator();
 
-const MyDefaultTheme = {
-  ...DefaultTheme,
+const MyDefaultTheme: Theme = {
+  dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: 'rgb(255, 45, 85)',
+    primary: '#078331',
   },
 };
 
-const MyDarkTheme = {
-  ...DarkTheme,
+const MyDarkTheme: Theme = {
+  dark: true,
   colors: {
     ...DarkTheme.colors,
-    primary: 'rgb(255, 45, 85)',
+    primary: '#078331',
   },
 };
 
