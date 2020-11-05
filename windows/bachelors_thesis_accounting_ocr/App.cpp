@@ -41,8 +41,6 @@ App::App() noexcept
 
     PackageProviders().Append(make<ReactPackageProvider>()); // Includes all modules in this project
 
-    PackageProviders().Append(winrt::ReactNativePicker::ReactPackageProvider()); // https://www.npmjs.com/package/@react-native-community/picker
-    
     InitializeComponent();
 }
 
