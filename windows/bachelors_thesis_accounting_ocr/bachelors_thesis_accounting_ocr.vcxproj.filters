@@ -60,4 +60,9 @@
   <ItemGroup>
     <Page Include="MainPage.xaml" />
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\Ionicons.ttf">
+      <Filter>Assets</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
 </Project>
