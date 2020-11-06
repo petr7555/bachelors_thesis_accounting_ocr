@@ -10,8 +10,11 @@ type FormData = {
 
 const Form = () => {
   const theme = useTheme();
-  const {control, handleSubmit, errors} = useForm<FormData>();
-  const onSubmit = (data: FormData) => console.log(data);
+  const {control, handleSubmit, errors, reset} = useForm<FormData>();
+  const onSubmit = (data: FormData) => {
+    reset();
+    console.log(data);
+  };
 
   return (
     <View>
@@ -23,13 +26,14 @@ const Form = () => {
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
+            placeholder="description"
           />
         )}
         name="description"
         rules={{required: true}}
         defaultValue=""
       />
-      {errors.description && <Text>This is required.</Text>}
+      {errors.description && <Text>This field is required.</Text>}
 
       <Controller
         control={control}
@@ -39,11 +43,27 @@ const Form = () => {
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
+            placeholder="total"
+            keyboardType="numeric"
           />
         )}
         name="total"
-        defaultValue={0}
+        rules={{
+          required: true,
+          pattern: {
+            value: /^[-+]?\d*\.?\d*$/,
+            message: 'Please enter valid number',
+          },
+        }}
+        defaultValue=""
       />
+      {errors.total && (
+        <Text>
+          {errors.total.message
+            ? errors.total.message
+            : 'This field is required'}
+        </Text>
+      )}
 
       <Button
         color={theme.colors.primary}
