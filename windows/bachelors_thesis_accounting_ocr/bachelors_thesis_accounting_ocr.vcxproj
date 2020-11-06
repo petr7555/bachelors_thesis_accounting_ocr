@@ -173,7 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\Ionicons.ttf">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
       <DeploymentContent>true</DeploymentContent>
     </CopyFileToFolders>
