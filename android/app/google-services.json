@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "729638290812",
+    "firebase_url": "https://bachelorsthesisaccountingocr.firebaseio.com",
+    "project_id": "bachelorsthesisaccountingocr",
+    "storage_bucket": "bachelorsthesisaccountingocr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729638290812:android:616deacc0673e498f810f9",
+        "android_client_info": {
+          "package_name": "com.bachelors_thesis_accounting_ocr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729638290812-k2lom3dbvbgu84o4a7i33e7me05c0012.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkxS7_3l9_v32lgY3QL8K5dY3smhOVyCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729638290812-k2lom3dbvbgu84o4a7i33e7me05c0012.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
