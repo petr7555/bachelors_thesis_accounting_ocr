@@ -135,6 +135,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // https://rnfirebase.io/enabling-multidex
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -191,6 +193,9 @@ dependencies {
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
+
+    // https://rnfirebase.io/enabling-multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
