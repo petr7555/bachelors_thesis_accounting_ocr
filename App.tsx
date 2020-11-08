@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Text, useColorScheme, View} from 'react-native';
+import {Button, Text, useColorScheme, View} from 'react-native';
 import {
   DarkTheme,
   DefaultTheme,
@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import NewReceiptScreen from './src/components/NewReceiptScreen';
 import {Theme} from '@react-navigation/native/lib/typescript/src/types';
 import HomeScreen from './src/components/HomeScreen';
+import {useEffect, useState} from 'react';
+import auth from '@react-native-firebase/auth';
 
 const CameraScreen = () => {
   const {colors} = useTheme();
@@ -25,9 +27,16 @@ const CameraScreen = () => {
 const SettingsScreen = () => {
   const {colors} = useTheme();
 
+  const logOut = () => {
+    auth()
+      .signOut()
+      .then(() => console.log('User signed out!'));
+  };
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text style={{color: colors.text}}>Settings!</Text>
+      <Button title="Log out" onPress={logOut} />
     </View>
   );
 };
@@ -95,6 +104,81 @@ export const TabNavigator = () => {
 
 const App = () => {
   const scheme = useColorScheme();
+
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) {
+      setInitializing(false);
+    }
+  }
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  const signUp = () => {
+    auth()
+      .createUserWithEmailAndPassword(
+        'jane.doe@example.com',
+        'SuperSecretPassword!',
+      )
+      .then(() => {
+        console.log('User account created & signed in!');
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
+
+  const signIn = () => {
+    auth()
+      .signInWithEmailAndPassword(
+        'jane.doe@example.com',
+        'SuperSecretPassword!',
+      )
+      .then(() => {
+        console.log('User account created & signed in!');
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
+
+  if (initializing) {
+    return null;
+  }
+
+  if (!user) {
+    return (
+      <View>
+        <Text>Login</Text>
+        <Button title="Sign up" onPress={signUp} />
+        <Button title="Sign in" onPress={signIn} />
+      </View>
+    );
+  }
 
   return (
     <NavigationContainer
