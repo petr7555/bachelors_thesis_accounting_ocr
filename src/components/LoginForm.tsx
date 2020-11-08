@@ -3,10 +3,40 @@ import {Text, View, TextInput, Button, StyleSheet} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {useTheme} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-community/google-signin';
 
 type FormData = {
   email: string;
   password: string;
+};
+
+GoogleSignin.configure({
+  webClientId:
+    '729638290812-k2lom3dbvbgu84o4a7i33e7me05c0012.apps.googleusercontent.com',
+});
+
+async function onGoogleButtonPress() {
+  // Get the users ID token
+  const {idToken} = await GoogleSignin.signIn();
+
+  // Create a Google credential with the token
+  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+  // Sign-in the user with the credential
+  return auth().signInWithCredential(googleCredential);
+}
+
+const GoogleSignIn = () => {
+  return (
+    <Button
+      title="Google Sign-In"
+      onPress={() =>
+        onGoogleButtonPress()
+          .then(() => console.log('Signed in with Google!'))
+          .catch((error) => console.log(error))
+      }
+    />
+  );
 };
 
 const LoginForm = () => {
@@ -62,6 +92,8 @@ const LoginForm = () => {
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
             placeholder="Email"
+            keyboardType="email-address"
+            textContentType="emailAddress"
           />
         )}
         name="email"
@@ -80,6 +112,7 @@ const LoginForm = () => {
             value={value}
             secureTextEntry={true}
             placeholder="Password"
+            textContentType="password"
           />
         )}
         name="password"
@@ -110,6 +143,7 @@ const LoginForm = () => {
         title="Sign up"
         onPress={handleSubmit(signUp)}
       />
+      <GoogleSignIn />
     </View>
   );
 };
