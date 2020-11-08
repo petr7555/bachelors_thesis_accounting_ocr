@@ -9,7 +9,8 @@
     "windows:release": "react-native run-windows --release",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "clean": "shx rm -rf node_modules && npm install && shx rm -rf android/build && (cd android && gradlew clean && cd ..) && npm start -- --reset-cache"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
