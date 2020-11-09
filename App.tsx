@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import {useColorScheme} from 'react-native';
 import {
   DarkTheme,
@@ -6,17 +7,16 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import {Theme} from '@react-navigation/native/lib/typescript/src/types';
-
-import {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {TabNavigator} from './src/components/TabNavigator';
 import LoginForm from './src/components/LoginForm';
+import Colors from './src/global/styles/colors';
 
 const MyDefaultTheme: Theme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#078331',
+    primary: Colors.primary,
   },
 };
 
@@ -24,7 +24,7 @@ const MyDarkTheme: Theme = {
   dark: true,
   colors: {
     ...DarkTheme.colors,
-    primary: '#078331',
+    primary: Colors.primary,
   },
 };
 
