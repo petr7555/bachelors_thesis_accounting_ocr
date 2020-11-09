@@ -11,7 +11,7 @@ import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {TabNavigator} from './src/components/TabNavigator';
 import LoginForm from './src/components/LoginForm';
 import Colors from './src/global/styles/colors';
-import User = FirebaseAuthTypes.User;
+import firestore from '@react-native-firebase/firestore';
 
 const MyDefaultTheme: Theme = {
   dark: false,
@@ -34,15 +34,39 @@ const App = () => {
 
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState<User | null>();
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
 
   // Handle user state changes
-  function onAuthStateChanged(user: User | null) {
+  const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
     setUser(user);
     if (initializing) {
       setInitializing(false);
     }
-  }
+    if (user !== null) {
+      const userUid = user.uid;
+      firestore()
+        .collection('Users')
+        .doc(userUid)
+        .get()
+        .then((documentSnapshot) => {
+          if (documentSnapshot.exists) {
+            console.log('User with uid', userUid, 'exists');
+          } else {
+            console.log('Creating User document with uid', userUid);
+            firestore()
+              .collection('Users')
+              .doc(userUid)
+              .set({
+                name: user.displayName,
+                email: user.email,
+              })
+              .then(() => {
+                console.log('User added!');
+              });
+          }
+        });
+    }
+  };
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -64,5 +88,4 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
 export default App;
