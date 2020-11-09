@@ -1,7 +1,6 @@
-import {useTheme} from '@react-navigation/native';
-import {Alert, Button, Text, View} from 'react-native';
+import {Alert, Button, View} from 'react-native';
 import * as React from 'react';
-import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 
 import vision from '@react-native-firebase/ml-vision';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -89,8 +88,6 @@ const requestStoragePermission = async () => {
 };
 
 const CameraScreen = () => {
-  const {colors} = useTheme();
-
   const takeAnImage = async () => {
     const cameraPermissionResult = await requestCameraPermission();
     if (cameraPermissionResult === RESULTS.GRANTED) {
@@ -124,7 +121,6 @@ const CameraScreen = () => {
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{color: colors.text}}>Camera!</Text>
       <Button title="Take an image" onPress={takeAnImage} />
       <Button title="Select from gallery" onPress={selectImage} />
     </View>
