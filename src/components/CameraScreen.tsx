@@ -3,7 +3,7 @@ import * as React from 'react';
 import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 
 import vision from '@react-native-firebase/ml-vision';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 
 const processDocument = async (localPath: string) => {
@@ -121,11 +121,11 @@ const CameraScreen = () => {
     }
   };
 
-  const getFilename = (image) => {
+  const getFilename = (image: Image) => {
     return image.path.split('/').slice(-1)[0];
   };
 
-  const uploadImage = async (image) => {
+  const uploadImage = async (image: Image) => {
     try {
       const reference = storage().ref('/receipts/' + getFilename(image));
       const task = await reference.putFile(image.path);
