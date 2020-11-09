@@ -1,5 +1,5 @@
 import {useTheme} from '@react-navigation/native';
-import {Button, Text, View} from 'react-native';
+import {Alert, Button, Text, View} from 'react-native';
 import * as React from 'react';
 import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
@@ -25,7 +25,7 @@ const processDocument = async (localPath: string) => {
 };
 
 const requestCameraPermission = async () => {
-  console.log('Asking for permissions...');
+  console.log('Requesting permissions...');
   const result = await request(PERMISSIONS.ANDROID.CAMERA);
   switch (result) {
     case RESULTS.UNAVAILABLE:
@@ -37,36 +37,96 @@ const requestCameraPermission = async () => {
       console.log(
         'The permission has not been requested / is denied but requestable',
       );
+      Alert.alert(
+        'Camera permission must be granted.',
+        "Please allow this app to use your device's camera",
+      );
       break;
     case RESULTS.GRANTED:
       console.log('The permission is granted');
       break;
     case RESULTS.BLOCKED:
       console.log('The permission is denied and not requestable anymore');
+      Alert.alert(
+        'Camera permission must be granted.',
+        "Please go to system settings and allow this app to use your device's camera.",
+      );
       break;
   }
+  return result;
+};
+
+const requestStoragePermission = async () => {
+  console.log('Requesting permissions...');
+  const result = await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+  switch (result) {
+    case RESULTS.UNAVAILABLE:
+      console.log(
+        'This feature is not available (on this device / in this context)',
+      );
+      break;
+    case RESULTS.DENIED:
+      console.log(
+        'The permission has not been requested / is denied but requestable',
+      );
+      Alert.alert(
+        'Storage must be enabled',
+        "Please allow this app to use your device's storage",
+      );
+      break;
+    case RESULTS.GRANTED:
+      console.log('The permission is granted');
+      break;
+    case RESULTS.BLOCKED:
+      console.log('The permission is denied and not requestable anymore');
+      Alert.alert(
+        'Storage must be enabled.',
+        "Please allow this app to use your device's storage in the system settings.",
+      );
+      break;
+  }
+  return result;
 };
 
 const CameraScreen = () => {
   const {colors} = useTheme();
 
-  const selectImage = async () => {
-    await requestCameraPermission();
+  const takeAnImage = async () => {
+    const cameraPermissionResult = await requestCameraPermission();
+    if (cameraPermissionResult === RESULTS.GRANTED) {
+      const storagePermissionResult = await requestStoragePermission();
+      if (storagePermissionResult === RESULTS.GRANTED) {
+        ImagePicker.openCamera({
+          cropping: true,
+          freeStyleCropEnabled: true,
+          hideBottomControls: true,
+        }).then((image) => {
+          console.log(image);
+          processDocument(image.path);
+        });
+      }
+    }
+  };
 
-    ImagePicker.openCamera({
-      cropping: true,
-      freeStyleCropEnabled: true,
-      hideBottomControls: true,
-    }).then((image) => {
-      console.log(image);
-      processDocument(image.path);
-    });
+  const selectImage = async () => {
+    const storagePermissionResult = await requestStoragePermission();
+    if (storagePermissionResult === RESULTS.GRANTED) {
+      ImagePicker.openPicker({
+        cropping: true,
+        freeStyleCropEnabled: true,
+        hideBottomControls: true,
+      }).then((image) => {
+        console.log(image);
+        processDocument(image.path);
+      });
+    }
   };
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text style={{color: colors.text}}>Camera!</Text>
-      <Button title="Select image" onPress={selectImage} />
+      <Button title="Take an image" onPress={takeAnImage} />
+      <Button title="Select from gallery" onPress={selectImage} />
     </View>
   );
 };
