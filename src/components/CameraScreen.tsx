@@ -4,6 +4,7 @@ import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 
 import vision from '@react-native-firebase/ml-vision';
 import ImagePicker from 'react-native-image-crop-picker';
+import storage from '@react-native-firebase/storage';
 
 const processDocument = async (localPath: string) => {
   try {
@@ -115,7 +116,24 @@ const CameraScreen = () => {
       }).then((image) => {
         console.log(image);
         processDocument(image.path);
+        uploadImage(image);
       });
+    }
+  };
+
+  const getFilename = (image) => {
+    return image.path.split('/').slice(-1)[0];
+  };
+
+  const uploadImage = async (image) => {
+    try {
+      const reference = storage().ref('/receipts/' + getFilename(image));
+      const task = await reference.putFile(image.path);
+      console.log('Image uploaded to the bucket!');
+      const downloadURL = await reference.getDownloadURL();
+      console.log('Download url is', downloadURL);
+    } catch (e) {
+      console.log(e);
     }
   };
 
