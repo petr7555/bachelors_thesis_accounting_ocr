@@ -115,6 +115,7 @@ const CameraScreen = () => {
         cropping: true,
         freeStyleCropEnabled: true,
         hideBottomControls: true,
+        compressImageMaxWidth: 720,
       }).then((image) => {
         console.log(image);
         // processDocument(image.path);
