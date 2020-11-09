@@ -5,6 +5,8 @@ import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 import vision from '@react-native-firebase/ml-vision';
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 const processDocument = async (localPath: string) => {
   try {
@@ -132,6 +134,21 @@ const CameraScreen = () => {
       console.log('Image uploaded to the bucket!');
       const downloadURL = await reference.getDownloadURL();
       console.log('Download url is', downloadURL);
+
+      const user = auth().currentUser;
+      if (user != null) {
+        firestore()
+          .collection('Users')
+          .doc(user.uid)
+          .collection('receipts')
+          .add({
+            url: downloadURL,
+            added: firestore.Timestamp.now(),
+          })
+          .then(() => {
+            console.log('Receipt added!');
+          });
+      }
     } catch (e) {
       console.log(e);
     }
