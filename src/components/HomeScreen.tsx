@@ -1,7 +1,7 @@
 import {useTheme} from '@react-navigation/native';
 import {StyleSheet, Text, View} from 'react-native';
 import * as React from 'react';
-import UsersList from './UsersList';
+import ReceiptsList from './ReceiptsList';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -17,7 +17,7 @@ const HomeScreen = () => {
       )}
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text style={{color: colors.text}}>Home!</Text>
-        <UsersList />
+        <ReceiptsList />
       </View>
     </>
   );
