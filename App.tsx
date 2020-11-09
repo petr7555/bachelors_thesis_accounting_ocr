@@ -7,10 +7,11 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import {Theme} from '@react-navigation/native/lib/typescript/src/types';
-import auth from '@react-native-firebase/auth';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {TabNavigator} from './src/components/TabNavigator';
 import LoginForm from './src/components/LoginForm';
 import Colors from './src/global/styles/colors';
+import User = FirebaseAuthTypes.User;
 
 const MyDefaultTheme: Theme = {
   dark: false,
@@ -33,10 +34,10 @@ const App = () => {
 
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<User | null>();
 
   // Handle user state changes
-  function onAuthStateChanged(user) {
+  function onAuthStateChanged(user: User | null) {
     setUser(user);
     if (initializing) {
       setInitializing(false);
