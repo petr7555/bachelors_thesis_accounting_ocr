@@ -100,7 +100,7 @@ const CameraScreen = () => {
           hideBottomControls: true,
         }).then((image) => {
           console.log(image);
-          processDocument(image.path);
+          // processDocument(image.path);
         });
       }
     }
@@ -115,7 +115,7 @@ const CameraScreen = () => {
         hideBottomControls: true,
       }).then((image) => {
         console.log(image);
-        processDocument(image.path);
+        // processDocument(image.path);
         uploadImage(image);
       });
     }
