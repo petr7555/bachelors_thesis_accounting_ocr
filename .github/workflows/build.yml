@@ -22,6 +22,9 @@ jobs:
         run: |
           npm install
 
+      - name: Install NDK
+        run: echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
+
       - name: Build Android Release
         run: |
           cd android && chmod +x ./gradlew && ./gradlew assembleRelease
