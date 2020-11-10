@@ -103,6 +103,7 @@ const CameraScreen = () => {
         }).then((image) => {
           console.log(image);
           // processDocument(image.path);
+          uploadImage(image);
         });
       }
     }
