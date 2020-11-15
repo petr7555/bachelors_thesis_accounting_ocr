@@ -11,7 +11,8 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "clean:windows": "del %appdata%\\Temp\\react-native-* & cd android & gradlew clean & cd .. & del node_modules/ & npm cache clean --force & npm install & npm start -- --reset-cache",
-    "clean:linux": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache"
+    "clean:linux": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@react-native-community/google-signin": "^5.0.0",
@@ -24,9 +25,11 @@
     "@react-navigation/bottom-tabs": "^5.10.4",
     "@react-navigation/native": "^5.8.0",
     "@react-navigation/stack": "^5.10.0",
+    "patch-package": "^6.2.2",
     "react": "16.13.1",
     "react-hook-form": "^6.10.1",
     "react-native": "0.63.3",
+    "react-native-elements": "^3.0.0-alpha.1",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-image-crop-picker": "^0.35.1",
     "react-native-modal": "^11.5.6",
