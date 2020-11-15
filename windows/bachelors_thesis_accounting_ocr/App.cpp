@@ -41,6 +41,8 @@ App::App() noexcept
 
     PackageProviders().Append(make<ReactPackageProvider>()); // Includes all modules in this project
 
+    PackageProviders().Append(winrt::RNPermissions::ReactPackageProvider()); // https://github.com/zoontek/react-native-permissions/tree/3.0.0
+
     InitializeComponent();
 }
 
