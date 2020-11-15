@@ -1,3 +1,6 @@
+// needs to be first import
+// https://reactnative.dev/docs/navigation#react-navigation
+import 'react-native-gesture-handler';
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useColorScheme} from 'react-native';
