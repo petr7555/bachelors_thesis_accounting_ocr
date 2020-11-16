@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  Button,
-  StyleSheet,
-  Platform,
-} from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
-import {useTheme} from '@react-navigation/native';
-import firebase from 'firebase/app';
+import {Platform, Text, View} from 'react-native';
+import {Button, Input} from 'react-native-elements';
+import {Controller, useForm} from 'react-hook-form';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {auth} from '../global/firebase';
 
 const GoogleSignIn = Platform.select({
   android: () => require('./GoogleSignIn'),
@@ -24,12 +18,10 @@ type FormData = {
 };
 
 const LoginForm = () => {
-  const theme = useTheme();
-  const {control, handleSubmit, errors, reset} = useForm<FormData>();
+  const {control, handleSubmit, errors} = useForm<FormData>();
 
   const signUp = (data: FormData) => {
-    firebase
-      .auth()
+    auth
       .createUserWithEmailAndPassword(data.email, data.password)
       .then(() => {
         console.log('User account created & signed in!');
@@ -48,8 +40,7 @@ const LoginForm = () => {
   };
 
   const signIn = (data: FormData) => {
-    firebase
-      .auth()
+    auth
       .signInWithEmailAndPassword(data.email, data.password)
       .then(() => {
         console.log('User account created & signed in!');
@@ -72,14 +63,14 @@ const LoginForm = () => {
       <Controller
         control={control}
         render={({onChange, onBlur, value}) => (
-          <TextInput
-            style={{...styles.input, color: theme.colors.text}}
+          <Input
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
-            placeholder="Email"
+            placeholder="Email addr"
             keyboardType="email-address"
             textContentType="emailAddress"
+            leftIcon={<Icon name="at" size={24} color="black" />}
           />
         )}
         name="email"
@@ -91,14 +82,14 @@ const LoginForm = () => {
       <Controller
         control={control}
         render={({onChange, onBlur, value}) => (
-          <TextInput
-            style={{...styles.input, color: theme.colors.text}}
+          <Input
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
             secureTextEntry={true}
             placeholder="Password"
             textContentType="password"
+            leftIcon={<Icon name="key" size={24} color="black" />}
           />
         )}
         name="password"
@@ -119,27 +110,11 @@ const LoginForm = () => {
         </Text>
       )}
 
-      <Button
-        color={theme.colors.primary}
-        title="Sign in"
-        onPress={handleSubmit(signIn)}
-      />
-      <Button
-        color={theme.colors.primary}
-        title="Sign up"
-        onPress={handleSubmit(signUp)}
-      />
+      <Button title="Sign in" onPress={handleSubmit(signIn)} />
+      <Button title="Sign up" onPress={handleSubmit(signUp)} />
       <GoogleSignIn />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-});
 
 export default LoginForm;

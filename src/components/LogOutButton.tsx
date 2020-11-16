@@ -1,9 +1,8 @@
 import {Button} from 'react-native';
-import React, {useContext} from 'react';
-import {AuthContext} from '../../App.windows';
+import React from 'react';
+import {auth} from '../global/firebase';
 
 const LogOutButton = () => {
-  const auth = useContext(AuthContext);
   const logOut = () => {
     auth.signOut().then(() => console.log('User signed out!'));
   };

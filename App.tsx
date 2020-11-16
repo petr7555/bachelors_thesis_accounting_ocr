@@ -2,19 +2,19 @@
 // https://reactnative.dev/docs/navigation#react-navigation
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {useEffect, useState} from 'react';
-import {useColorScheme} from 'react-native';
+import {useEffect} from 'react';
+import {ActivityIndicator, Text, useColorScheme} from 'react-native';
 import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
 } from '@react-navigation/native';
 import {Theme} from '@react-navigation/native/lib/typescript/src/types';
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {TabNavigator} from './src/components/TabNavigator';
 import LoginForm from './src/components/LoginForm';
 import Colors from './src/global/styles/colors';
-import firestore from '@react-native-firebase/firestore';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {auth, firestore} from './src/global/firebase';
 
 const MyDefaultTheme: Theme = {
   dark: false,
@@ -34,20 +34,12 @@ const MyDarkTheme: Theme = {
 
 const App = () => {
   const scheme = useColorScheme();
+  const [user, loading, error] = useAuthState(auth);
 
-  // Set an initializing state whilst Firebase connects
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
-
-  // Handle user state changes
-  const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
-    setUser(user);
-    if (initializing) {
-      setInitializing(false);
-    }
-    if (user !== null) {
+  useEffect(() => {
+    if (user) {
       const userUid = user.uid;
-      firestore()
+      firestore
         .collection('Users')
         .doc(userUid)
         .get()
@@ -56,7 +48,7 @@ const App = () => {
             console.log('User with uid', userUid, 'exists');
           } else {
             console.log('Creating User document with uid', userUid);
-            firestore()
+            firestore
               .collection('Users')
               .doc(userUid)
               .set({
@@ -69,15 +61,14 @@ const App = () => {
           }
         });
     }
-  };
+  }, [user]);
 
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
+  if (loading) {
+    return <ActivityIndicator size="large" />;
+  }
 
-  if (initializing) {
-    return null;
+  if (error) {
+    return <Text>Error!</Text>;
   }
 
   if (!user) {

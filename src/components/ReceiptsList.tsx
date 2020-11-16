@@ -1,12 +1,11 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
 import firebase from 'firebase/app';
 import {ActivityIndicator, View} from 'react-native';
 import {useAuthState} from 'react-firebase-hooks/auth';
-import {useCollectionData} from 'react-firebase-hooks/firestore';
 import LogOutButton from './LogOutButton';
 import {Avatar, ListItem} from 'react-native-elements';
-import {AuthContext, FirestoreContext} from '../../App.windows';
+import {auth} from '../global/firebase';
 
 type Receipt = DocumentReceipt & {id: string};
 
@@ -16,9 +15,6 @@ type DocumentReceipt = {
 };
 
 const ReceiptsList = () => {
-  const auth = useContext(AuthContext);
-  const firestore = useContext(FirestoreContext);
-
   const [user, loadingUser, errorUser] = useAuthState(auth);
   // const [
   //   receipts,

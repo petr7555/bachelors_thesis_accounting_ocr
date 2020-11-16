@@ -71,7 +71,7 @@ export const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Pay"
+        name="Scan"
         component={ScanComponent}
         options={{
           tabBarButton: () => <ScanButton />,
