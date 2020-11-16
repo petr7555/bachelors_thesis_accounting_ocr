@@ -19,9 +19,9 @@ if (!firebase.apps.length) {
   });
 }
 
-const auth = Platform.OS === 'android' ? androidAuth : firebase.auth();
+const auth = Platform.OS === 'android' ? androidAuth() : firebase.auth();
 const firestore =
-  Platform.OS === 'android' ? androidFirestore : firebase.firestore();
+  Platform.OS === 'android' ? androidFirestore() : firebase.firestore();
 if (Platform.OS !== 'android') {
   firestore.settings({experimentalForceLongPolling: true});
 } // otherwise fails with 'Could not reach Cloud Firestore backend. Backend didn't respond within 10 seconds.'

@@ -1,7 +1,7 @@
 import {GoogleSignin} from '@react-native-community/google-signin';
-import auth from '@react-native-firebase/auth';
 import {Button} from 'react-native';
 import React from 'react';
+import {auth} from '../global/firebase';
 
 GoogleSignin.configure({
   webClientId:
@@ -16,7 +16,7 @@ async function onGoogleButtonPress() {
   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
   // Sign-in the user with the credential
-  return auth().signInWithCredential(googleCredential);
+  return auth.signInWithCredential(googleCredential);
 }
 
 const GoogleSignIn = () => {

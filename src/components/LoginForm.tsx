@@ -1,12 +1,12 @@
 import React from 'react';
-import {Platform, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import {Controller, useForm} from 'react-hook-form';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {auth} from '../global/firebase';
 
 const GoogleSignIn = Platform.select({
-  android: () => require('./GoogleSignIn'),
+  android: () => require('./GoogleSignIn').default,
   default: () => () => null,
 })();
 
@@ -59,7 +59,7 @@ const LoginForm = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Controller
         control={control}
         render={({onChange, onBlur, value}) => (
@@ -67,8 +67,9 @@ const LoginForm = () => {
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
-            placeholder="Email addr"
+            placeholder="Email"
             keyboardType="email-address"
+            autoCapitalize="none"
             textContentType="emailAddress"
             leftIcon={<Icon name="at" size={24} color="black" />}
           />
@@ -116,5 +117,14 @@ const LoginForm = () => {
     </View>
   );
 };
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default LoginForm;
