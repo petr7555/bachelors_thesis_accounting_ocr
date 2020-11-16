@@ -10,8 +10,6 @@ const GoogleSignIn = Platform.select({
   default: () => () => null,
 })();
 
-console.log(GoogleSignIn);
-
 type FormData = {
   email: string;
   password: string;
