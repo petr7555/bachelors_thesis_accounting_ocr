@@ -1,9 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import firestore, {
-  FirebaseFirestoreTypes,
-} from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
-import {ActivityIndicator, FlatList, Image, Text, View} from 'react-native';
+import React, {useContext} from 'react';
+import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
+import firebase from 'firebase/app';
+import {ActivityIndicator, View} from 'react-native';
+import {useAuthState} from 'react-firebase-hooks/auth';
+import {useCollectionData} from 'react-firebase-hooks/firestore';
+import LogOutButton from './LogOutButton';
+import {Avatar, ListItem} from 'react-native-elements';
+import {AuthContext, FirestoreContext} from '../../App.windows';
 
 type Receipt = DocumentReceipt & {id: string};
 
@@ -13,67 +16,49 @@ type DocumentReceipt = {
 };
 
 const ReceiptsList = () => {
-  const [loading, setLoading] = useState(true); // Set loading to true on component mount
-  const [receipts, setReceipts] = useState<Receipt[]>([]); // Initial empty array of users
+  const auth = useContext(AuthContext);
+  const firestore = useContext(FirestoreContext);
 
-  useEffect(() => {
-    const user = auth().currentUser;
-    if (user != null) {
-      const subscriber = firestore()
-        .collection('Users')
-        .doc(user.uid)
-        .collection('receipts')
-        .onSnapshot((querySnapshot) => {
-          const receipts: Receipt[] = [];
+  const [user, loadingUser, errorUser] = useAuthState(auth);
+  // const [
+  //   receipts,
+  //   loadingReceipts,
+  //   errorReceipts,
+  // ] = useCollectionData(
+  //   firebase
+  //     .firestore()
+  //     .collection('Users')
+  //     .doc(user.uid)
+  //     .collection('receipts'),
+  //   {idField: 'id'},
+  // );
 
-          querySnapshot.forEach((documentSnapshot) => {
-            receipts.push({
-              ...(documentSnapshot.data() as Receipt),
-              id: documentSnapshot.id,
-            });
-          });
-
-          setReceipts(receipts);
-          setLoading(false);
-        });
-
-      // Unsubscribe from events when no longer in use
-      return () => subscriber();
-    }
-  }, []);
-
-  if (loading) {
+  const receipts = [
+    {
+      id: 1,
+      added: firebase.firestore.Timestamp.now(),
+      url:
+        'https://firebasestorage.googleapis.com/v0/b/bachelorsthesisaccountingocr.appspot.com/o/receipts%2F159a397f-e885-49ef-9df9-a02322c7cc21.jpg?alt=media&token=1df221f8-abc5-46db-9239-f00bfb8208a9',
+    },
+  ];
+  if (loadingUser) {
     return <ActivityIndicator />;
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 50,
-      }}>
-      <FlatList
-        data={receipts}
-        renderItem={({item}) => (
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Image
-              style={{
-                width: 100,
-                height: 100,
-              }}
-              source={{uri: item.url}}
-            />
-            <Text>Added: {item.added.toDate().toDateString()}</Text>
-          </View>
-        )}
-      />
+    <View>
+      <LogOutButton />
+      {receipts.map((receipt) => (
+        <ListItem key={receipt.id} bottomDivider>
+          <Avatar source={{uri: receipt.url}} />
+          <ListItem.Content>
+            <ListItem.Title>{receipt.url}</ListItem.Title>
+            <ListItem.Subtitle>
+              {receipt.added.toDate().toDateString()}
+            </ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+      ))}
     </View>
   );
 };

@@ -1,42 +1,26 @@
 import React from 'react';
-import {Text, View, TextInput, Button, StyleSheet} from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  Button,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {useTheme} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-community/google-signin';
+import firebase from 'firebase/app';
+
+const GoogleSignIn = Platform.select({
+  android: () => require('./GoogleSignIn'),
+  default: () => () => null,
+})();
+
+console.log(GoogleSignIn);
 
 type FormData = {
   email: string;
   password: string;
-};
-
-GoogleSignin.configure({
-  webClientId:
-    '729638290812-k2lom3dbvbgu84o4a7i33e7me05c0012.apps.googleusercontent.com',
-});
-
-async function onGoogleButtonPress() {
-  // Get the users ID token
-  const {idToken} = await GoogleSignin.signIn();
-
-  // Create a Google credential with the token
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-  // Sign-in the user with the credential
-  return auth().signInWithCredential(googleCredential);
-}
-
-const GoogleSignIn = () => {
-  return (
-    <Button
-      title="Google Sign-In"
-      onPress={() =>
-        onGoogleButtonPress()
-          .then(() => console.log('Signed in with Google!'))
-          .catch((error) => console.log(error))
-      }
-    />
-  );
 };
 
 const LoginForm = () => {
@@ -44,7 +28,8 @@ const LoginForm = () => {
   const {control, handleSubmit, errors, reset} = useForm<FormData>();
 
   const signUp = (data: FormData) => {
-    auth()
+    firebase
+      .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
       .then(() => {
         console.log('User account created & signed in!');
@@ -63,7 +48,8 @@ const LoginForm = () => {
   };
 
   const signIn = (data: FormData) => {
-    auth()
+    firebase
+      .auth()
       .signInWithEmailAndPassword(data.email, data.password)
       .then(() => {
         console.log('User account created & signed in!');
