@@ -18,6 +18,7 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="ReactPackageProvider.h" />
     <ClInclude Include="AutolinkedNativeModules.g.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -59,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="bachelors_thesis_accounting_ocr.rc" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\Ionicons.ttf">

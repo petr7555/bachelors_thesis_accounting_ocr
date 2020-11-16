@@ -115,6 +115,7 @@
     <ClInclude Include="App.h">
       <DependentUpon>App.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -172,16 +173,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\Ionicons.ttf">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <FileType>Document</FileType>
-      <DeploymentContent>true</DeploymentContent>
-    </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\node_modules\react-native-permissions\windows\RNPermissions\RNPermissions.vcxproj">
       <Project>{99677b9d-a27b-4239-930e-c36c8d339c54}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="bachelors_thesis_accounting_ocr.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\Ionicons.ttf">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Assets</DestinationFolders>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ReactNativeWindowsTargets">
