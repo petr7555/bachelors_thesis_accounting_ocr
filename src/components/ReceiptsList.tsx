@@ -1,11 +1,10 @@
 import React from 'react';
 import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
-import firebase from 'firebase/app';
 import {ActivityIndicator, View} from 'react-native';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import LogOutButton from './LogOutButton';
 import {Avatar, ListItem} from 'react-native-elements';
-import {auth} from '../global/firebase';
+import {authInstance, firestore} from '../global/firebase';
 
 type Receipt = DocumentReceipt & {id: string};
 
@@ -15,7 +14,7 @@ type DocumentReceipt = {
 };
 
 const ReceiptsList = () => {
-  const [user, loadingUser, errorUser] = useAuthState(auth);
+  const [user, loadingUser, errorUser] = useAuthState(authInstance);
   // const [
   //   receipts,
   //   loadingReceipts,
@@ -32,7 +31,7 @@ const ReceiptsList = () => {
   const receipts = [
     {
       id: 1,
-      added: firebase.firestore.Timestamp.now(),
+      added: firestore.Timestamp.now(),
       url:
         'https://firebasestorage.googleapis.com/v0/b/bachelorsthesisaccountingocr.appspot.com/o/receipts%2F159a397f-e885-49ef-9df9-a02322c7cc21.jpg?alt=media&token=1df221f8-abc5-46db-9239-f00bfb8208a9',
     },

@@ -5,8 +5,7 @@ import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 import vision from '@react-native-firebase/ml-vision';
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
+import {authInstance, firestore, firestoreInstance} from '../global/firebase';
 
 const processDocument = async (localPath: string) => {
   try {
@@ -137,9 +136,9 @@ const CameraScreen = () => {
       const downloadURL = await reference.getDownloadURL();
       console.log('Download url is', downloadURL);
 
-      const user = auth().currentUser;
+      const user = authInstance.currentUser;
       if (user != null) {
-        firestore()
+        firestoreInstance
           .collection('Users')
           .doc(user.uid)
           .collection('receipts')

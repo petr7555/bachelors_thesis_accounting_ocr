@@ -4,10 +4,10 @@ import {useAuthState} from 'react-firebase-hooks/auth';
 import LoginForm from './src/components/LoginForm';
 import {NavigationContainer} from '@react-navigation/native';
 import {DrawerNavigator} from './src/components/DrawerNavigator';
-import {auth} from './src/global/firebase';
+import {authInstance} from './src/global/firebase';
 
 const App = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(authInstance);
 
   if (loading) {
     return <ActivityIndicator />;

@@ -14,7 +14,7 @@ import {TabNavigator} from './src/components/TabNavigator';
 import LoginForm from './src/components/LoginForm';
 import Colors from './src/global/styles/colors';
 import {useAuthState} from 'react-firebase-hooks/auth';
-import {auth, firestore} from './src/global/firebase';
+import {authInstance, firestoreInstance} from './src/global/firebase';
 
 const MyDefaultTheme: Theme = {
   dark: false,
@@ -34,12 +34,12 @@ const MyDarkTheme: Theme = {
 
 const App = () => {
   const scheme = useColorScheme();
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(authInstance);
 
   useEffect(() => {
     if (user) {
       const userUid = user.uid;
-      firestore
+      firestoreInstance
         .collection('Users')
         .doc(userUid)
         .get()
@@ -48,7 +48,7 @@ const App = () => {
             console.log('User with uid', userUid, 'exists');
           } else {
             console.log('Creating User document with uid', userUid);
-            firestore
+            firestoreInstance
               .collection('Users')
               .doc(userUid)
               .set({
