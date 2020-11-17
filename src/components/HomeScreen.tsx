@@ -15,10 +15,7 @@ const HomeScreen = () => {
           <Text style={{color: colors.text}}>Engine: Hermes</Text>
         </View>
       )}
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{color: colors.text}}>Home!</Text>
-        <ReceiptsList />
-      </View>
+      <ReceiptsList />
     </>
   );
 };

@@ -1,17 +1,20 @@
-import {useTheme} from '@react-navigation/native';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import * as React from 'react';
-import LogOutButton from './LogOutButton';
+import SignOutButton from './SignOutButton';
 
 const SettingsScreen = () => {
-  const {colors} = useTheme();
-
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{color: colors.text}}>Settings!</Text>
-      <LogOutButton />
+    <View style={styles.container}>
+      <SignOutButton />
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 export default SettingsScreen;

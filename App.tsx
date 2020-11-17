@@ -11,7 +11,7 @@ import {
 } from '@react-navigation/native';
 import {Theme} from '@react-navigation/native/lib/typescript/src/types';
 import {TabNavigator} from './src/components/TabNavigator';
-import LoginForm from './src/components/LoginForm';
+import LoginScreen from './src/components/LoginScreen';
 import Colors from './src/global/styles/colors';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import {authInstance, firestoreInstance} from './src/global/firebase';
@@ -72,7 +72,7 @@ const App = () => {
   }
 
   if (!user) {
-    return <LoginForm />;
+    return <LoginScreen />;
   }
 
   return (

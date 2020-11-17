@@ -29,7 +29,7 @@ type FormData = {
 
 const {width: WIDTH} = Dimensions.get('window');
 
-const LoginForm = () => {
+const LoginScreen = () => {
   const {control, handleSubmit, errors} = useForm<FormData>();
   const [showPass, setShowPass] = useState(false);
 
@@ -240,4 +240,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginForm;
+export default LoginScreen;

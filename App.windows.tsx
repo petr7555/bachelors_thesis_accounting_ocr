@@ -1,7 +1,7 @@
 import React from 'react';
 import {ActivityIndicator, Text} from 'react-native';
 import {useAuthState} from 'react-firebase-hooks/auth';
-import LoginForm from './src/components/LoginForm';
+import LoginScreen from './src/components/LoginScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {DrawerNavigator} from './src/components/DrawerNavigator';
 import {authInstance} from './src/global/firebase';
@@ -21,7 +21,7 @@ const App = () => {
   }
 
   if (!user) {
-    return <LoginForm />;
+    return <LoginScreen />;
   }
 
   return (
