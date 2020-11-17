@@ -27,12 +27,17 @@ const signIn = async () => {
   }
 };
 
-const GoogleSignIn = () => {
+interface GoogleSignInProps {
+  disabled?: boolean;
+}
+
+const GoogleSignIn = ({disabled}: GoogleSignInProps) => {
   return (
     <GoogleSigninButton
       style={styles.btnGoogle}
       onPress={signIn}
       color={GoogleSigninButton.Color.Light}
+      disabled={disabled}
     />
   );
 };

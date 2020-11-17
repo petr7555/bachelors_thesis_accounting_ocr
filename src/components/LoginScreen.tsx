@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
+  Alert,
+  Dimensions,
+  ImageBackground,
   Platform,
+  Pressable,
   StyleSheet,
   Text,
   TextInput,
   View,
-  Pressable,
-  ImageBackground,
-  Dimensions,
-  TouchableOpacity,
-  Alert,
 } from 'react-native';
+import {Button} from 'react-native-elements';
+
 import {Controller, useForm} from 'react-hook-form';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -34,6 +35,8 @@ const {width: WIDTH} = Dimensions.get('window');
 const LoginScreen = () => {
   const {control, handleSubmit, errors} = useForm<FormData>();
   const [showPass, setShowPass] = useState(false);
+  const [signInInProgress, setSignInInProgress] = useState(false);
+  const [signUpInProgress, setSignUpInProgress] = useState(false);
 
   const handleAuthError = (error: FirebaseError) => {
     if (error.code === 'auth/email-already-in-use') {
@@ -50,15 +53,19 @@ const LoginScreen = () => {
   };
 
   const signIn = async (data: FormData) => {
+    setSignInInProgress(true);
     try {
       await authInstance.signInWithEmailAndPassword(data.email, data.password);
       console.log('User signed in.');
     } catch (error) {
       handleAuthError(error);
+    } finally {
+      setSignInInProgress(false);
     }
   };
 
   const signUp = async (data: FormData) => {
+    setSignUpInProgress(true);
     try {
       await authInstance.createUserWithEmailAndPassword(
         data.email,
@@ -67,8 +74,12 @@ const LoginScreen = () => {
       console.log('User account created & signed in!');
     } catch (error) {
       handleAuthError(error);
+    } finally {
+      setSignUpInProgress(false);
     }
   };
+
+  const passwordInput = useRef<TextInput>(null);
 
   return (
     <ImageBackground source={bgImage} style={styles.backgroundContainer}>
@@ -98,6 +109,11 @@ const LoginScreen = () => {
               autoCapitalize="none"
               autoCorrect={false}
               textContentType="emailAddress"
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                passwordInput.current && passwordInput.current.focus();
+              }}
+              blurOnSubmit={false}
             />
           </View>
         )}
@@ -109,7 +125,7 @@ const LoginScreen = () => {
         }}
       />
       {errors.email && (
-        <Text>
+        <Text style={styles.validationErrorText}>
           {errors.email.type === 'validate'
             ? 'Invalid email format.'
             : 'This field is required'}
@@ -137,6 +153,9 @@ const LoginScreen = () => {
               placeholder="Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               textContentType="password"
+              ref={passwordInput}
+              returnKeyType="done"
+              onSubmitEditing={handleSubmit(signIn)}
             />
             <Pressable
               style={styles.btnEye}
@@ -169,14 +188,23 @@ const LoginScreen = () => {
             : 'This field is required'}
         </Text>
       )}
-
-      <TouchableOpacity style={styles.btnSignIn} onPress={handleSubmit(signIn)}>
-        <Text style={styles.text}>Sign in</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.btnSignUp} onPress={handleSubmit(signUp)}>
-        <Text style={styles.text}>Sign up</Text>
-      </TouchableOpacity>
-      <GoogleSignIn />
+      <Button
+        containerStyle={styles.btnSignInContainer}
+        buttonStyle={styles.btnSignAction}
+        onPress={handleSubmit(signIn)}
+        loading={signInInProgress}
+        disabled={signUpInProgress}
+        title={'Sign in'}
+      />
+      <Button
+        containerStyle={styles.btnSignUpContainer}
+        buttonStyle={styles.btnSignAction}
+        onPress={handleSubmit(signUp)}
+        title={'Sign up'}
+        loading={signUpInProgress}
+        disabled={signInInProgress}
+      />
+      <GoogleSignIn disabled={signInInProgress || signUpInProgress} />
     </ImageBackground>
   );
 };
@@ -200,7 +228,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '500',
     marginTop: 10,
-    marginBottom: 50,
+    marginBottom: 45,
   },
   input: {
     flex: 1,
@@ -214,7 +242,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     borderRadius: 25,
-    marginVertical: 5,
+    marginTop: 10,
     height: 50,
   },
   inputIcon: {
@@ -225,26 +253,20 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 8,
   },
-  btnSignIn: {
+  btnSignAction: {
     width: WIDTH - 60,
     height: 50,
     borderRadius: 25,
     backgroundColor: Colors.secondary,
-    justifyContent: 'center',
+  },
+  btnSignInContainer: {
     marginTop: 20,
   },
-  btnSignUp: {
-    width: WIDTH - 60,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: Colors.secondary,
-    justifyContent: 'center',
+  btnSignUpContainer: {
     marginTop: 10,
   },
-  text: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 18,
+  validationErrorText: {
+    marginBottom: 5,
   },
 });
 
