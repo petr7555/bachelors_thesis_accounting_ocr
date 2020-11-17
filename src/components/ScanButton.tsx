@@ -1,0 +1,53 @@
+import React, {useState} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Modal from 'react-native-modal';
+import CameraScreen from './CameraScreen';
+import Colors from '../global/styles/colors';
+
+export const ScanComponent = () => {
+  return null;
+};
+
+const ScanButton = () => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={toggleModal} style={styles.roundButton}>
+        <Icon name={'scan'} color={'white'} size={50} />
+      </TouchableOpacity>
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={toggleModal}
+        onBackButtonPress={toggleModal}>
+        <CameraScreen />
+      </Modal>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  roundButton: {
+    width: 90,
+    height: 90,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+    borderRadius: 100,
+    borderWidth: 5,
+    borderColor: Colors.primary,
+    backgroundColor: Colors.secondary,
+  },
+});
+
+export default ScanButton;
