@@ -1,126 +1,76 @@
 import {Alert, Button, View} from 'react-native';
-import * as React from 'react';
-import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
+import React from 'react';
+import {RESULTS} from 'react-native-permissions';
 
-import vision from '@react-native-firebase/ml-vision';
 import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import {authInstance, firestore, firestoreInstance} from '../global/firebase';
-
-const processDocument = async (localPath: string) => {
-  try {
-    const processed = await vision().cloudDocumentTextRecognizerProcessImage(
-      localPath,
-    );
-
-    console.log('Found text in document: ', processed.text);
-
-    processed.blocks.forEach((block) => {
-      console.log('Found block with text: ', block.text);
-      console.log('Confidence in block: ', block.confidence);
-      console.log('Languages found in block: ', block.recognizedLanguages);
-    });
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-const requestCameraPermission = async () => {
-  console.log('Requesting permissions...');
-  const result = await request(PERMISSIONS.ANDROID.CAMERA);
-  switch (result) {
-    case RESULTS.UNAVAILABLE:
-      console.log(
-        'This feature is not available (on this device / in this context)',
-      );
-      break;
-    case RESULTS.DENIED:
-      console.log(
-        'The permission has not been requested / is denied but requestable',
-      );
-      Alert.alert(
-        'Camera permission must be granted.',
-        "Please allow this app to use your device's camera",
-      );
-      break;
-    case RESULTS.GRANTED:
-      console.log('The permission is granted');
-      break;
-    case RESULTS.BLOCKED:
-      console.log('The permission is denied and not requestable anymore');
-      Alert.alert(
-        'Camera permission must be granted.',
-        "Please go to system settings and allow this app to use your device's camera.",
-      );
-      break;
-  }
-  return result;
-};
-
-const requestStoragePermission = async () => {
-  console.log('Requesting permissions...');
-  const result = await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
-  switch (result) {
-    case RESULTS.UNAVAILABLE:
-      console.log(
-        'This feature is not available (on this device / in this context)',
-      );
-      break;
-    case RESULTS.DENIED:
-      console.log(
-        'The permission has not been requested / is denied but requestable',
-      );
-      Alert.alert(
-        'Storage must be enabled',
-        "Please allow this app to use your device's storage",
-      );
-      break;
-    case RESULTS.GRANTED:
-      console.log('The permission is granted');
-      break;
-    case RESULTS.BLOCKED:
-      console.log('The permission is denied and not requestable anymore');
-      Alert.alert(
-        'Storage must be enabled.',
-        "Please allow this app to use your device's storage in the system settings.",
-      );
-      break;
-  }
-  return result;
-};
+import {
+  requestCameraPermission,
+  requestStoragePermission,
+} from '../global/permissions';
+import {getTextFromImage} from '../global/ocr';
 
 const CameraScreen = () => {
+  const addNewImage = async () => {
+    const image = await takeAnImage();
+    if (image) {
+      await processImage(image);
+    }
+  };
+
+  const addExistingImage = async () => {
+    const image = await selectImageFromGallery();
+    if (image) {
+      await processImage(image);
+    }
+  };
+
+  const processImage = async (image: Image) => {
+    await getTextFromImage(image.path);
+    await uploadImage(image);
+  };
+
   const takeAnImage = async () => {
     const cameraPermissionResult = await requestCameraPermission();
     if (cameraPermissionResult === RESULTS.GRANTED) {
       const storagePermissionResult = await requestStoragePermission();
       if (storagePermissionResult === RESULTS.GRANTED) {
-        ImagePicker.openCamera({
-          cropping: true,
-          freeStyleCropEnabled: true,
-          hideBottomControls: true,
-        }).then((image) => {
+        try {
+          const image = await ImagePicker.openCamera({
+            cropping: true,
+            freeStyleCropEnabled: true,
+            hideBottomControls: true,
+          });
           console.log(image);
-          // processDocument(image.path);
-          uploadImage(image);
-        });
+
+          return image;
+        } catch (error) {
+          console.log(error);
+          Alert.alert("Couldn't take a new image.");
+        }
       }
     }
   };
 
-  const selectImage = async () => {
+  const selectImageFromGallery = async () => {
     const storagePermissionResult = await requestStoragePermission();
     if (storagePermissionResult === RESULTS.GRANTED) {
-      ImagePicker.openPicker({
-        cropping: true,
-        freeStyleCropEnabled: true,
-        hideBottomControls: true,
-        compressImageMaxWidth: 720,
-      }).then((image) => {
+      try {
+        const image = await ImagePicker.openPicker({
+          cropping: true,
+          freeStyleCropEnabled: true,
+          hideBottomControls: true,
+          compressImageMaxWidth: 720,
+        });
+        console.log('Got image from gallery:');
         console.log(image);
-        // processDocument(image.path);
-        uploadImage(image);
-      });
+
+        return image;
+      } catch (error) {
+        console.log(error);
+        Alert.alert("Couldn't select an image from gallery.");
+      }
     }
   };
 
@@ -131,36 +81,44 @@ const CameraScreen = () => {
   const uploadImage = async (image: Image) => {
     try {
       const reference = storage().ref('/receipts/' + getFilename(image));
+
       const task = await reference.putFile(image.path);
-      console.log('Image uploaded to the bucket!');
+      console.log('Image uploaded to firebase storage.');
+
       const downloadURL = await reference.getDownloadURL();
       console.log('Download url is', downloadURL);
 
-      const user = authInstance.currentUser;
-      if (user != null) {
-        firestoreInstance
+      await addImageToUsersReceipts(downloadURL);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addImageToUsersReceipts = async (downloadURL: string) => {
+    const user = authInstance.currentUser;
+    if (user != null) {
+      try {
+        await firestoreInstance
           .collection('Users')
           .doc(user.uid)
           .collection('receipts')
           .add({
             url: downloadURL,
+            // @ts-ignore
             added: firestore.Timestamp.now(),
-          })
-          .then(() => {
-            console.log('Receipt added!');
           });
+        console.log('Receipt added!');
+      } catch (error) {
+        console.log(error);
       }
-    } catch (e) {
-      console.log(e);
     }
   };
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Button title="Take an image" onPress={takeAnImage} />
-      <Button title="Select from gallery" onPress={selectImage} />
+      <Button title="Take an image" onPress={addNewImage} />
+      <Button title="Select from gallery" onPress={addExistingImage} />
     </View>
   );
 };
-
 export default CameraScreen;

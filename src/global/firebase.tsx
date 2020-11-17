@@ -42,6 +42,7 @@ let firestoreInstance:
 if (Platform.OS === 'android') {
   auth = androidAuth;
   authInstance = androidAuth();
+  firestore = androidFirestore;
   firestoreInstance = androidFirestore();
 } else {
   auth = firebase.auth;
