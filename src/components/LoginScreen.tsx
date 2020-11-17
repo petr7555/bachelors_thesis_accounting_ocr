@@ -9,11 +9,13 @@ import {
   ImageBackground,
   Dimensions,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {authInstance} from '../global/firebase';
+import firebase from 'firebase';
 import Colors from '../global/styles/colors';
 import bgImage from '../../images/background.png';
 
@@ -33,42 +35,39 @@ const LoginScreen = () => {
   const {control, handleSubmit, errors} = useForm<FormData>();
   const [showPass, setShowPass] = useState(false);
 
-  const signUp = (data: FormData) => {
-    authInstance
-      .createUserWithEmailAndPassword(data.email, data.password)
-      .then(() => {
-        console.log('User account created & signed in!');
-      })
-      .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
+  const handleAuthError = (error: firebase.auth.Error) => {
+    if (error.code === 'auth/email-already-in-use') {
+      console.log('This email address is already in use.');
+      Alert.alert('This email address is already in use.');
+    }
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
+    if (error.code === 'auth/invalid-email') {
+      console.log('Invalid email address.');
+      Alert.alert('Invalid email address.');
+    }
 
-        console.error(error);
-      });
+    console.error(error);
   };
 
-  const login = (data: FormData) => {
-    authInstance
-      .signInWithEmailAndPassword(data.email, data.password)
-      .then(() => {
-        console.log('User account created & signed in!');
-      })
-      .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
+  const signIn = async (data: FormData) => {
+    try {
+      await authInstance.signInWithEmailAndPassword(data.email, data.password);
+      console.log('User signed in.');
+    } catch (error) {
+      handleAuthError(error);
+    }
+  };
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-
-        console.error(error);
-      });
+  const signUp = async (data: FormData) => {
+    try {
+      await authInstance.createUserWithEmailAndPassword(
+        data.email,
+        data.password,
+      );
+      console.log('User account created & signed in!');
+    } catch (error) {
+      handleAuthError(error);
+    }
   };
 
   return (
@@ -162,7 +161,7 @@ const LoginScreen = () => {
         </Text>
       )}
 
-      <TouchableOpacity style={styles.btnLogin} onPress={handleSubmit(login)}>
+      <TouchableOpacity style={styles.btnLogin} onPress={handleSubmit(signIn)}>
         <Text style={styles.text}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.btnSignUp} onPress={handleSubmit(signUp)}>

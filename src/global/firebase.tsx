@@ -2,8 +2,11 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import {Platform} from 'react-native';
-import androidAuth from '@react-native-firebase/auth';
-import androidFirestore from '@react-native-firebase/firestore';
+import androidAuth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {ReactNativeFirebase} from '@react-native-firebase/app';
+import androidFirestore, {
+  FirebaseFirestoreTypes,
+} from '@react-native-firebase/firestore';
 
 // to avoid error 'Firebase App named '[DEFAULT]' already exists'
 if (!firebase.apps.length) {
@@ -19,19 +22,38 @@ if (!firebase.apps.length) {
   });
 }
 
-const authInstance =
-  Platform.OS === 'android' ? androidAuth() : firebase.auth();
+let auth:
+  | ReactNativeFirebase.FirebaseModuleWithStaticsAndApp<
+      FirebaseAuthTypes.Module,
+      FirebaseAuthTypes.Statics
+    >
+  | ((app?: firebase.app.App) => firebase.auth.Auth);
+let authInstance: FirebaseAuthTypes.Module | firebase.auth.Auth;
+let firestore:
+  | ReactNativeFirebase.FirebaseModuleWithStaticsAndApp<
+      FirebaseFirestoreTypes.Module,
+      FirebaseFirestoreTypes.Statics
+    >
+  | ((app?: firebase.app.App) => firebase.firestore.Firestore);
+let firestoreInstance:
+  | FirebaseFirestoreTypes.Module
+  | firebase.firestore.Firestore;
 
-const auth = Platform.OS === 'android' ? androidAuth : firebase.auth;
+if (Platform.OS === 'android') {
+  auth = androidAuth;
+  authInstance = androidAuth();
+  firestoreInstance = androidFirestore();
+} else {
+  auth = firebase.auth;
+  authInstance = firebase.auth();
+  firestore = firebase.firestore;
 
-const firestoreInstance =
-  Platform.OS === 'android' ? androidFirestore() : firebase.firestore();
-
-const firestore =
-  Platform.OS === 'android' ? androidFirestore : firebase.firestore;
-
-if (Platform.OS !== 'android') {
-  firestoreInstance.settings({experimentalForceLongPolling: true});
-} // otherwise fails with 'Could not reach Cloud Firestore backend. Backend didn't respond within 10 seconds.'
+  firestoreInstance = firebase.firestore();
+  firestoreInstance.settings({experimentalForceLongPolling: true}); // otherwise fails with 'Could not reach Cloud Firestore backend. Backend didn't respond within 10 seconds.'
+}
 
 export {auth, firestore, authInstance, firestoreInstance};
+
+export type FirebaseError =
+  | ReactNativeFirebase.NativeFirebaseError
+  | firebase.FirebaseError;
