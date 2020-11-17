@@ -15,7 +15,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {authInstance} from '../global/firebase';
 import Colors from '../global/styles/colors';
-import bgImage from '../../images/background.jpg';
+import bgImage from '../../images/background.png';
 
 const GoogleSignIn = Platform.select({
   android: () => require('./GoogleSignIn').default,
