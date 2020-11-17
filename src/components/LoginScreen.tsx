@@ -40,13 +40,19 @@ const LoginScreen = () => {
 
   const handleAuthError = (error: FirebaseError) => {
     if (error.code === 'auth/email-already-in-use') {
-      console.log('This email address is already in use.');
       Alert.alert('This email address is already in use.');
     }
 
     if (error.code === 'auth/invalid-email') {
-      console.log('Invalid email address.');
       Alert.alert('Invalid email address.');
+    }
+
+    if (error.code === 'auth/user-not-found') {
+      Alert.alert('The entered email address does not belong to any account.');
+    }
+
+    if (error.code === 'auth/wrong-password') {
+      Alert.alert('You entered wrong password.');
     }
 
     console.error(error);
