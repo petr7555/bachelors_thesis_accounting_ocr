@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '500',
     marginTop: 10,
-    marginBottom: 45,
+    marginBottom: 40,
   },
   input: {
     flex: 1,
