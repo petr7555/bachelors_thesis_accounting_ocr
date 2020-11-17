@@ -14,10 +14,10 @@ import {
 import {Controller, useForm} from 'react-hook-form';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {authInstance} from '../global/firebase';
-import firebase from 'firebase';
+import {authInstance, FirebaseError} from '../global/firebase';
 import Colors from '../global/styles/colors';
 import bgImage from '../../images/background.png';
+import EmailValidator from 'email-validator';
 
 const GoogleSignIn = Platform.select({
   android: () => require('./GoogleSignIn').default,
@@ -35,7 +35,7 @@ const LoginScreen = () => {
   const {control, handleSubmit, errors} = useForm<FormData>();
   const [showPass, setShowPass] = useState(false);
 
-  const handleAuthError = (error: firebase.auth.Error) => {
+  const handleAuthError = (error: FirebaseError) => {
     if (error.code === 'auth/email-already-in-use') {
       console.log('This email address is already in use.');
       Alert.alert('This email address is already in use.');
@@ -102,10 +102,19 @@ const LoginScreen = () => {
           </View>
         )}
         name="email"
-        rules={{required: true}}
         defaultValue=""
+        rules={{
+          required: true,
+          validate: (input) => EmailValidator.validate(input),
+        }}
       />
-      {errors.email && <Text>This field is required.</Text>}
+      {errors.email && (
+        <Text>
+          {errors.email.type === 'validate'
+            ? 'Invalid email format.'
+            : 'This field is required'}
+        </Text>
+      )}
 
       <Controller
         control={control}
@@ -144,6 +153,7 @@ const LoginScreen = () => {
           </View>
         )}
         name="password"
+        defaultValue=""
         rules={{
           required: true,
           pattern: {
@@ -151,7 +161,6 @@ const LoginScreen = () => {
             message: 'Password must be at least 8 characters long',
           },
         }}
-        defaultValue=""
       />
       {errors.password && (
         <Text>
@@ -161,8 +170,8 @@ const LoginScreen = () => {
         </Text>
       )}
 
-      <TouchableOpacity style={styles.btnLogin} onPress={handleSubmit(signIn)}>
-        <Text style={styles.text}>Login</Text>
+      <TouchableOpacity style={styles.btnSignIn} onPress={handleSubmit(signIn)}>
+        <Text style={styles.text}>Sign in</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.btnSignUp} onPress={handleSubmit(signUp)}>
         <Text style={styles.text}>Sign up</Text>
@@ -216,7 +225,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingLeft: 8,
   },
-  btnLogin: {
+  btnSignIn: {
     width: WIDTH - 60,
     height: 50,
     borderRadius: 25,
