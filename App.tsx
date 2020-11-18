@@ -3,7 +3,12 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import {useEffect} from 'react';
-import {ActivityIndicator, Text, useColorScheme} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  Text,
+  useColorScheme,
+} from 'react-native';
 import {
   DarkTheme,
   DefaultTheme,
@@ -15,6 +20,7 @@ import LoginScreen from './src/components/LoginScreen';
 import Colors from './src/global/styles/colors';
 import {useAuthState} from 'react-firebase-hooks/auth';
 import {authInstance, firestoreInstance} from './src/global/firebase';
+import {ThemeProvider} from 'react-native-elements';
 
 const MyDefaultTheme: Theme = {
   dark: false,
@@ -29,6 +35,19 @@ const MyDarkTheme: Theme = {
   colors: {
     ...DarkTheme.colors,
     primary: Colors.primary,
+  },
+};
+
+const {width: WIDTH} = Dimensions.get('window');
+
+const theme = {
+  Button: {
+    buttonStyle: {
+      width: WIDTH - 60,
+      height: 50,
+      borderRadius: 25,
+      backgroundColor: Colors.secondary,
+    },
   },
 };
 
@@ -71,15 +90,13 @@ const App = () => {
     return <Text>Error!</Text>;
   }
 
-  if (!user) {
-    return <LoginScreen />;
-  }
-
   return (
-    <NavigationContainer
-      theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
-      <TabNavigator />
-    </NavigationContainer>
+    <ThemeProvider theme={theme}>
+      <NavigationContainer
+        theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
+        {user ? <TabNavigator /> : <LoginScreen />}
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 export default App;

@@ -12,19 +12,24 @@ export const ScanComponent = () => {
 const ScanButton = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+  const showModal = () => {
+    setModalVisible(true);
+  };
+
+  const hideModal = () => {
+    setModalVisible(false);
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={toggleModal} style={styles.roundButton}>
+      <TouchableOpacity onPress={showModal} style={styles.roundButton}>
         <Icon name={'scan'} color={'white'} size={50} />
       </TouchableOpacity>
       <Modal
+        style={styles.modalView}
         isVisible={isModalVisible}
-        onBackdropPress={toggleModal}
-        onBackButtonPress={toggleModal}>
+        onBackdropPress={hideModal}
+        onBackButtonPress={hideModal}>
         <CameraScreen />
       </Modal>
     </View>
@@ -36,6 +41,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  modalView: {
+    justifyContent: 'flex-end',
+    margin: 0,
+    marginBottom: 100,
   },
   roundButton: {
     width: 90,

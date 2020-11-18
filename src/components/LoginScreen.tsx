@@ -16,7 +16,6 @@ import {Controller, useForm} from 'react-hook-form';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {authInstance, FirebaseError} from '../global/firebase';
-import Colors from '../global/styles/colors';
 import bgImage from '../../images/background.png';
 import EmailValidator from 'email-validator';
 
@@ -196,7 +195,6 @@ const LoginScreen = () => {
       )}
       <Button
         containerStyle={styles.btnSignInContainer}
-        buttonStyle={styles.btnSignAction}
         onPress={handleSubmit(signIn)}
         loading={signInInProgress}
         disabled={signUpInProgress}
@@ -204,7 +202,6 @@ const LoginScreen = () => {
       />
       <Button
         containerStyle={styles.btnSignUpContainer}
-        buttonStyle={styles.btnSignAction}
         onPress={handleSubmit(signUp)}
         title={'Sign up'}
         loading={signUpInProgress}
@@ -258,12 +255,6 @@ const styles = StyleSheet.create({
   btnEye: {
     paddingRight: 20,
     paddingLeft: 8,
-  },
-  btnSignAction: {
-    width: WIDTH - 60,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: Colors.secondary,
   },
   btnSignInContainer: {
     marginTop: 20,

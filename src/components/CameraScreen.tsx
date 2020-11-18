@@ -1,8 +1,12 @@
-import {Alert, Button, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
+import {Button} from 'react-native-elements';
 import React from 'react';
 import {RESULTS} from 'react-native-permissions';
 
-import ImagePicker, {Image} from 'react-native-image-crop-picker';
+import ImagePicker, {
+  Image,
+  PickerErrorCode,
+} from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import {authInstance, firestore, firestoreInstance} from '../global/firebase';
 import {
@@ -10,6 +14,8 @@ import {
   requestStoragePermission,
 } from '../global/permissions';
 import {getTextFromImage} from '../global/ocr';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Colors from '../global/styles/colors';
 
 const CameraScreen = () => {
   const addNewImage = async () => {
@@ -47,7 +53,9 @@ const CameraScreen = () => {
           return image;
         } catch (error) {
           console.log(error);
-          Alert.alert("Couldn't take a new image.");
+          if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
+            Alert.alert("Couldn't take a new image.");
+          }
         }
       }
     }
@@ -69,7 +77,9 @@ const CameraScreen = () => {
         return image;
       } catch (error) {
         console.log(error);
-        Alert.alert("Couldn't select an image from gallery.");
+        if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
+          Alert.alert("Couldn't select an image from gallery.");
+        }
       }
     }
   };
@@ -115,10 +125,53 @@ const CameraScreen = () => {
   };
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Button title="Take an image" onPress={addNewImage} />
-      <Button title="Select from gallery" onPress={addExistingImage} />
+    <View style={styles.content}>
+      <Button
+        containerStyle={styles.buttonContainer}
+        title="Take an image"
+        onPress={addNewImage}
+        icon={
+          <Icon
+            style={styles.icon}
+            name="camera-outline"
+            size={28}
+            color="white"
+          />
+        }
+      />
+      <Button
+        containerStyle={styles.buttonContainer}
+        title="Select from gallery"
+        onPress={addExistingImage}
+        icon={
+          <Icon
+            style={styles.icon}
+            name="images-outline"
+            size={28}
+            color="white"
+          />
+        }
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  content: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: Colors.primary,
+  },
+  buttonContainer: {
+    marginVertical: 5,
+  },
+  icon: {
+    position: 'absolute',
+    left: 40, // Keep some space between your left border and Image
+  },
+});
+
 export default CameraScreen;
