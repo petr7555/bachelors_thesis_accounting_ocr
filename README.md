@@ -11,3 +11,5 @@ Run on Android:
 ```bash
 npm run android
 ```
+
+This command starts Metro bundler and Android emulator automatically.
