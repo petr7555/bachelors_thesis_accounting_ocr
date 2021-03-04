@@ -48,6 +48,7 @@
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@testing-library/react-native": "^7.2.0",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
     "@types/react-native-vector-icons": "^6.4.6",
@@ -72,9 +73,10 @@
       "node"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-(native|universal|navigation)-(.*)|@react-native-community/(.*)|@react-navigation/(.*)|some-custom-package)"
+      "node_modules/(?!(jest-)?react-native|react-(native|universal|navigation)-(.*)|@react-native-community/(.*)|@react-navigation/(.*)|@react-native-firebase/(.*)|some-custom-package)"
     ],
     "setupFiles": [
+      "<rootDir>/tests/setupJest.js",
       "./node_modules/react-native-gesture-handler/jestSetup.js"
     ]
   }
