@@ -8,7 +8,7 @@
     "windows": "react-native run-windows",
     "windows:release": "react-native run-windows --release",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --config jest.config.js",
     "e2e:test": "detox test -c android.emu.debug",
     "e2e:build": "detox build -c android.emu.debug",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -65,23 +65,5 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1",
     "typescript": "^3.8.3"
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-(native|universal|navigation)-(.*)|@react-native-community/(.*)|@react-navigation/(.*)|@react-native-firebase/(.*)|some-custom-package)"
-    ],
-    "setupFiles": [
-      "<rootDir>/tests/setupJest.js",
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
-    ]
   }
 }
