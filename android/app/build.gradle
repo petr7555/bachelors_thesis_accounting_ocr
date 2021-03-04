@@ -135,8 +135,13 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
         // https://rnfirebase.io/enabling-multidex
         multiDexEnabled true
+
+        // Detox e2e tests
+        testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     splits {
         abi {
@@ -163,7 +168,10 @@ android {
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
+            // Typical pro-guard definitions
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            // Detox-specific additions to pro-guard
+            proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
         }
     }
 
@@ -184,6 +192,9 @@ android {
 }
 
 dependencies {
+	// Detox e2e tests
+    androidTestImplementation('com.wix:detox:18.7.0')
+
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.0.0')
 
