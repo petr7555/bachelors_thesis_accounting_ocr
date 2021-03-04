@@ -1,10 +1,15 @@
 import React from 'react';
-import {FirebaseFirestoreTypes} from '@react-native-firebase/firestore';
-import {ActivityIndicator, Alert, FlatList, ListRenderItem} from 'react-native';
-import {useAuthState} from 'react-firebase-hooks/auth';
-import {Avatar, ListItem} from 'react-native-elements';
-import {authInstance, firestoreInstance} from '../global/firebase';
-import {useCollectionData} from 'react-firebase-hooks/firestore';
+import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  ListRenderItem,
+} from 'react-native';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Avatar, ListItem } from 'react-native-elements';
+import { authInstance, firestoreInstance } from '../global/firebase';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 type Receipt = {
   id: string;
@@ -14,11 +19,13 @@ type Receipt = {
 
 const ReceiptsList = () => {
   const [user, loadingUser, errorUser] = useAuthState(authInstance);
-  const [receipts = [], loadingReceipts, errorReceipts] = useCollectionData<
-    Receipt
-  >(
+  const [
+    receipts = [],
+    loadingReceipts,
+    errorReceipts,
+  ] = useCollectionData<Receipt>(
     firestoreInstance.collection('Users').doc(user?.uid).collection('receipts'),
-    {idField: 'id'},
+    { idField: 'id' },
   );
 
   if (loadingUser || loadingReceipts) {
@@ -35,10 +42,10 @@ const ReceiptsList = () => {
     Alert.alert('Cannot load receipts.');
   }
 
-  const renderItem: ListRenderItem<Receipt> = ({item}) => {
+  const renderItem: ListRenderItem<Receipt> = ({ item }) => {
     return (
       <ListItem bottomDivider>
-        <Avatar source={{uri: item.url}} />
+        <Avatar source={{ uri: item.url }} />
         <ListItem.Content>
           <ListItem.Title>{item.url}</ListItem.Title>
           <ListItem.Subtitle>

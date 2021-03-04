@@ -1,9 +1,9 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import {Platform} from 'react-native';
-import androidAuth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {ReactNativeFirebase} from '@react-native-firebase/app';
+import { Platform } from 'react-native';
+import androidAuth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { ReactNativeFirebase } from '@react-native-firebase/app';
 import androidFirestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
@@ -50,10 +50,10 @@ if (Platform.OS === 'android') {
   firestore = firebase.firestore;
 
   firestoreInstance = firebase.firestore();
-  firestoreInstance.settings({experimentalForceLongPolling: true}); // otherwise fails with 'Could not reach Cloud Firestore backend. Backend didn't respond within 10 seconds.'
+  firestoreInstance.settings({ experimentalForceLongPolling: true }); // otherwise fails with 'Could not reach Cloud Firestore backend. Backend didn't respond within 10 seconds.'
 }
 
-export {auth, firestore, authInstance, firestoreInstance};
+export { auth, firestore, authInstance, firestoreInstance };
 
 export type FirebaseError =
   | ReactNativeFirebase.NativeFirebaseError

@@ -2,7 +2,7 @@ import {
   GoogleSignin,
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
-import {Dimensions, StyleSheet} from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import React from 'react';
 import auth from '@react-native-firebase/auth'; // specific import, because GoogleSignin is available only for android yet
 
@@ -14,7 +14,7 @@ GoogleSignin.configure({
 const signIn = async () => {
   try {
     // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
+    const { idToken } = await GoogleSignin.signIn();
 
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
@@ -31,7 +31,7 @@ interface GoogleSignInProps {
   disabled?: boolean;
 }
 
-const GoogleSignIn = ({disabled}: GoogleSignInProps) => {
+const GoogleSignIn = ({ disabled }: GoogleSignInProps) => {
   return (
     <GoogleSigninButton
       style={styles.btnGoogle}
@@ -42,7 +42,7 @@ const GoogleSignIn = ({disabled}: GoogleSignInProps) => {
   );
 };
 
-const {width: WIDTH} = Dimensions.get('window');
+const { width: WIDTH } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   btnGoogle: {

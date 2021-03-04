@@ -1,9 +1,9 @@
 import React from 'react';
 import HomeScreen from './HomeScreen';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SettingsScreen from './SettingsScreen';
-import ScanButton, {ScanComponent} from './ScanButton';
-import {getNavigationIcon} from '../global/navigation';
+import ScanButton, { ScanComponent } from './ScanButton';
+import { getNavigationIcon } from '../global/navigation';
 
 const Tab = createBottomTabNavigator();
 

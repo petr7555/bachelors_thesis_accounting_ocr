@@ -1,19 +1,19 @@
-import {Alert, StyleSheet, View} from 'react-native';
-import {Button} from 'react-native-elements';
+import { Alert, StyleSheet, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import React from 'react';
-import {RESULTS} from 'react-native-permissions';
+import { RESULTS } from 'react-native-permissions';
 
 import ImagePicker, {
   Image,
   PickerErrorCode,
 } from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
-import {authInstance, firestore, firestoreInstance} from '../global/firebase';
+import { authInstance, firestore, firestoreInstance } from '../global/firebase';
 import {
   requestCameraPermission,
   requestStoragePermission,
 } from '../global/permissions';
-import {getTextFromImage} from '../global/ocr';
+import { getTextFromImage } from '../global/ocr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../global/styles/colors';
 

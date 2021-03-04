@@ -1,5 +1,5 @@
-import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
-import {Alert} from 'react-native';
+import { PERMISSIONS, request, RESULTS } from 'react-native-permissions';
+import { Alert } from 'react-native';
 
 export const requestCameraPermission = async () => {
   console.log('Requesting permissions...');

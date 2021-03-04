@@ -1,7 +1,7 @@
 import React from 'react';
-import {Text, View, TextInput, Button, StyleSheet} from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
-import {useTheme} from '@react-navigation/native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Controller, useForm } from 'react-hook-form';
+import { useTheme } from '@react-navigation/native';
 
 type FormData = {
   description: string;
@@ -10,7 +10,7 @@ type FormData = {
 
 const Form = () => {
   const theme = useTheme();
-  const {control, handleSubmit, errors, reset} = useForm<FormData>();
+  const { control, handleSubmit, errors, reset } = useForm<FormData>();
   const onSubmit = (data: FormData) => {
     reset();
     console.log(data);
@@ -20,9 +20,9 @@ const Form = () => {
     <View>
       <Controller
         control={control}
-        render={({onChange, onBlur, value}) => (
+        render={({ onChange, onBlur, value }) => (
           <TextInput
-            style={{...styles.input, color: theme.colors.text}}
+            style={{ ...styles.input, color: theme.colors.text }}
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}
@@ -30,16 +30,16 @@ const Form = () => {
           />
         )}
         name="description"
-        rules={{required: true}}
+        rules={{ required: true }}
         defaultValue=""
       />
       {errors.description && <Text>This field is required.</Text>}
 
       <Controller
         control={control}
-        render={({onChange, onBlur, value}) => (
+        render={({ onChange, onBlur, value }) => (
           <TextInput
-            style={{...styles.input, color: theme.colors.text}}
+            style={{ ...styles.input, color: theme.colors.text }}
             onBlur={onBlur}
             onChangeText={(inputValue) => onChange(inputValue)}
             value={value}

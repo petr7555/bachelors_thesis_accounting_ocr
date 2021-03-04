@@ -1,7 +1,7 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {fireEvent, render} from '@testing-library/react-native';
-import {TabNavigator} from '../../App';
+import { NavigationContainer } from '@react-navigation/native';
+import { fireEvent, render } from '@testing-library/react-native';
+import { TabNavigator } from '../components/TabNavigator';
 
 // TODO is this needed?
 // Silence the warning https://github.com/facebook/react-native/issues/11094#issuecomment-263240420
@@ -15,7 +15,7 @@ describe('Testing TabNavigator', () => {
       </NavigationContainer>
     );
 
-    const {findByText} = render(component);
+    const { findByText } = render(component);
 
     const header = await findByText('Settings');
 
@@ -29,7 +29,7 @@ describe('Testing TabNavigator', () => {
       </NavigationContainer>
     );
 
-    const {findByText} = render(component);
+    const { findByText } = render(component);
     const toClick = await findByText('Settings');
 
     fireEvent.press(toClick);

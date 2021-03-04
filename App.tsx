@@ -2,7 +2,7 @@
 // https://reactnative.dev/docs/navigation#react-navigation
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import {
   ActivityIndicator,
   Dimensions,
@@ -14,13 +14,13 @@ import {
   DefaultTheme,
   NavigationContainer,
 } from '@react-navigation/native';
-import {Theme} from '@react-navigation/native/lib/typescript/src/types';
-import {TabNavigator} from './src/components/TabNavigator';
+import { Theme } from '@react-navigation/native/lib/typescript/src/types';
+import { TabNavigator } from './src/components/TabNavigator';
 import LoginScreen from './src/components/LoginScreen';
 import Colors from './src/global/styles/colors';
-import {useAuthState} from 'react-firebase-hooks/auth';
-import {authInstance, firestoreInstance} from './src/global/firebase';
-import {ThemeProvider} from 'react-native-elements';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { authInstance, firestoreInstance } from './src/global/firebase';
+import { ThemeProvider } from 'react-native-elements';
 
 const MyDefaultTheme: Theme = {
   dark: false,
@@ -38,7 +38,7 @@ const MyDarkTheme: Theme = {
   },
 };
 
-const {width: WIDTH} = Dimensions.get('window');
+const { width: WIDTH } = Dimensions.get('window');
 
 const theme = {
   Button: {

@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import * as React from 'react';
 import SignOutButton from './SignOutButton';
 

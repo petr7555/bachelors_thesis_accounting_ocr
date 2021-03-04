@@ -1,7 +1,7 @@
-import {Platform} from 'react-native';
+import { Platform } from 'react-native';
 import React from 'react';
-import {authInstance} from '../global/firebase';
-import {Button} from 'react-native-elements';
+import { authInstance } from '../global/firebase';
+import { Button } from 'react-native-elements';
 
 const googleSignin =
   Platform.OS === 'android'

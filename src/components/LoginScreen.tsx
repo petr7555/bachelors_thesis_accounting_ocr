@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Alert,
   Dimensions,
@@ -10,12 +10,12 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {Button} from 'react-native-elements';
+import { Button } from 'react-native-elements';
 
-import {Controller, useForm} from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {authInstance, FirebaseError} from '../global/firebase';
+import { authInstance, FirebaseError } from '../global/firebase';
 import bgImage from '../../images/background.png';
 import EmailValidator from 'email-validator';
 
@@ -29,10 +29,10 @@ type FormData = {
   password: string;
 };
 
-const {width: WIDTH} = Dimensions.get('window');
+const { width: WIDTH } = Dimensions.get('window');
 
 const LoginScreen = () => {
-  const {control, handleSubmit, errors} = useForm<FormData>();
+  const { control, handleSubmit, errors } = useForm<FormData>();
   const [showPass, setShowPass] = useState(false);
   const [signInInProgress, setSignInInProgress] = useState(false);
   const [signUpInProgress, setSignUpInProgress] = useState(false);
@@ -95,7 +95,7 @@ const LoginScreen = () => {
 
       <Controller
         control={control}
-        render={({onChange, onBlur, value}) => (
+        render={({ onChange, onBlur, value }) => (
           <View style={styles.inputSection}>
             <IonIcon
               style={styles.inputIcon}
@@ -139,7 +139,7 @@ const LoginScreen = () => {
 
       <Controller
         control={control}
-        render={({onChange, onBlur, value}) => (
+        render={({ onChange, onBlur, value }) => (
           <View style={styles.inputSection}>
             <MaterialIcon
               style={styles.inputIcon}
@@ -166,7 +166,7 @@ const LoginScreen = () => {
               style={styles.btnEye}
               onPressIn={() => setShowPass(true)}
               onPressOut={() => setShowPass(false)}>
-              {({pressed}) => (
+              {({ pressed }) => (
                 <MaterialIcon
                   name="eye"
                   size={24}
