@@ -1,4 +1,4 @@
-import vision from '@react-native-firebase/ml-vision';
+import vision from '@react-native-firebase/ml';
 
 export const getTextFromImage = async (localPath: string) => {
   try {
