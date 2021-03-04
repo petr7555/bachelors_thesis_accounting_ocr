@@ -5,7 +5,7 @@ import {Button} from 'react-native-elements';
 
 const googleSignin =
   Platform.OS === 'android'
-    ? require('@react-native-community/google-signin').GoogleSignin
+    ? require('@react-native-google-signin/google-signin').GoogleSignin
     : null;
 
 const SignOutButton = () => {

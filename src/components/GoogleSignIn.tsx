@@ -1,7 +1,7 @@
 import {
   GoogleSignin,
   GoogleSigninButton,
-} from '@react-native-community/google-signin';
+} from '@react-native-google-signin/google-signin';
 import {Dimensions, StyleSheet} from 'react-native';
 import React from 'react';
 import auth from '@react-native-firebase/auth'; // specific import, because GoogleSignin is available only for android yet
