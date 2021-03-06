@@ -7,7 +7,7 @@
     <working-dir value="$PROJECT_DIR$" />
     <envs />
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/src/__tests__/storybook.test.ts" />
+    <test-file value="$PROJECT_DIR$/tests/snapshot/storyshots.test.ts" />
     <method v="2" />
   </configuration>
 </component>

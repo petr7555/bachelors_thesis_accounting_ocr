@@ -1,2 +1,2 @@
-require('../src/components/Button/Button.stories');
-require('../src/components/ScanButton/ScanButton.stories');
+import '../src/components/Button/Button.stories';
+import '../src/components/ScanButton/ScanButton.stories';

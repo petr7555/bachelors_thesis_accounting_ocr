@@ -1,3 +1,5 @@
+import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
+
 // Silence the warning https://github.com/facebook/react-native/issues/11094#issuecomment-263240420
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
@@ -8,6 +10,8 @@ jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 jest.mock('react-native-permissions', () => {
   return require('react-native-permissions/mock.js');
 });
+
+jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 
 // https://github.com/facebook/jest/issues/6434#issuecomment-525576660
 jest.useFakeTimers();
