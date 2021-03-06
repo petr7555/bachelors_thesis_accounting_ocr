@@ -15,7 +15,8 @@
     "clean:windows": "del %appdata%\\Temp\\react-native-* & cd android & gradlew clean & cd .. & del node_modules/ & npm cache clean --force & npm install & npm start -- --reset-cache",
     "clean:linux": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
     "postinstall": "patch-package",
-    "storybook": "start-storybook -p 9001 -c storybook-rn",
+    "storybook:rn": "start-storybook -p 9001 -c storybook-rn",
+    "storybook": "start-storybook -p 6006 -c .storybook",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
@@ -59,8 +60,12 @@
     "@storybook/addon-ondevice-actions": "^5.3.23",
     "@storybook/addon-ondevice-knobs": "^5.3.25",
     "@storybook/addon-storyshots": "^5.3.21",
+    "@storybook/addon-viewport": "^6.1.21",
+    "@storybook/addons": "^5.3.21",
+    "@storybook/react": "^6.1.21",
     "@storybook/react-native": "^5.3.25",
     "@storybook/react-native-server": "^5.3.23",
+    "@storybook/theming": "^5.3.21",
     "@testing-library/react-native": "^7.2.0",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
@@ -70,6 +75,7 @@
     "@typescript-eslint/parser": "^2.27.0",
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.2.2",
+    "babel-preset-expo": "^8.3.0",
     "detox": "^18.7.0",
     "eslint": "^6.5.1",
     "jest": "^25.1.0",
@@ -77,6 +83,7 @@
     "loki": "^0.28.1",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-dom": "^16.13.1",
+    "react-native-web": "^0.15.0",
     "react-test-renderer": "16.13.1",
     "reactotron-react-native": "^5.0.0",
     "typescript": "^3.8.3"
