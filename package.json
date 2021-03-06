@@ -16,11 +16,12 @@
     "clean:linux": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
     "postinstall": "echo patch-package",
     "storybook:rn": "npm run adb && node_modules/@storybook/react-native-server/bin/index.js -p 9001 -c storybook-rn",
-    "storybook": "node_modules/@storybook/react/bin/index.js -p 6006 -c .storybook",
-    "build-storybook": "build-storybook",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
     "loki:update": "loki update --port 9001",
-    "loki:test": "loki test --port 9001"
+    "loki:test": "loki test --port 9001",
+    "storybook": "node_modules/@storybook/react/bin/index.js -p 6006 -c .storybook",
+    "build-storybook": "node_modules/@storybook/react/bin/build.js",
+    "storycap:all": "rm -rf ./__screenshots__ && storycap http://localhost:6006 --serverCmd 'npm run storybook' --viewport '414x736' --serverTimeout '200000'"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
@@ -89,6 +90,7 @@
     "react-native-web": "^0.15.0",
     "react-test-renderer": "16.13.1",
     "reactotron-react-native": "^5.0.0",
+    "storycap": "^3.0.3",
     "typescript": "^3.8.3"
   },
   "loki": {
