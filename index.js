@@ -1,12 +1,13 @@
-import { AppRegistry } from 'react-native';
+import { AppRegistry, LogBox } from 'react-native';
 import App from './App';
 import { name as appName } from './app.json';
 
-// change to true to show Storybook
-// const showStorybook = true;
-// AppRegistry.registerComponent(appName, () =>
-//   showStorybook ? StorybookUIRoot : App,
-// );
+// Ignore log notification by message start
+LogBox.ignoreLogs(['AsyncStorage has been extracted']);
+// Emitted by running Loki visual tests
+LogBox.ignoreLogs(['console.disableYellowBox']);
+//Ignore all log notifications
+// LogBox.ignoreAllLogs();
 
 // Should we show storybook instead of our app?
 // ⚠️ Leave this as `false` when checking into git.
