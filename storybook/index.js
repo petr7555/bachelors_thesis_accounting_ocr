@@ -10,13 +10,14 @@ import './rn-addons';
 // enables knobs for all stories
 addDecorator(withKnobs);
 
-// import stories
+// Unfortunately React Native does not support dynamic imports
+// so we have to list all stories in 'stories/index.js'.
 configure(() => {
   require('./stories');
 }, module);
 
-// Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
-// To find allowed options for getStorybookUI
+// Refer to https://www.npmjs.com/package/@storybook/react-native
+// to find allowed options for getStorybookUI.
 const StorybookUIRoot = getStorybookUI({ asyncStorage: null });
 
 export default StorybookUIRoot;

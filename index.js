@@ -3,7 +3,8 @@ import App from './App';
 import StorybookUIRoot from './storybook';
 import { name as appName } from './app.json';
 
-const showStorybook = false;
+// change to true to show Storybook
+const showStorybook = true;
 AppRegistry.registerComponent(appName, () =>
   showStorybook ? StorybookUIRoot : App,
 );

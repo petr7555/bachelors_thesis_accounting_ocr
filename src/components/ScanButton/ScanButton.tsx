@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from 'react-native-modal';
-import CameraScreen from './CameraScreen';
-import Colors from '../global/styles/colors';
+import CameraScreen from '../CameraScreen';
+import Colors from '../../global/styles/colors';
 
 export const ScanComponent = () => {
   return null;

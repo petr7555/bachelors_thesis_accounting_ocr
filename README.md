@@ -13,3 +13,8 @@ npm run android
 ```
 
 This command starts Metro bundler and Android emulator automatically.
+
+
+## Troubleshooting
+1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
+    - solution: `npm start -- --reset-cache`
