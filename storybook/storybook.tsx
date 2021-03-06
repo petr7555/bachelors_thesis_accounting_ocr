@@ -5,7 +5,7 @@ configure(() => {
   require('./storybook-registry');
 }, module);
 
-export const StorybookUI = getStorybookUI({
+export const StorybookUIRoot = getStorybookUI({
   port: 9001,
   host: 'localhost',
   onDeviceUI: true,
