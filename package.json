@@ -14,10 +14,13 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "clean:windows": "del %appdata%\\Temp\\react-native-* & cd android & gradlew clean & cd .. & del node_modules/ & npm cache clean --force & npm install & npm start -- --reset-cache",
     "clean:linux": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
-    "postinstall": "patch-package",
-    "storybook:rn": "start-storybook -p 9001 -c storybook-rn",
-    "storybook": "start-storybook -p 6006 -c .storybook",
-    "build-storybook": "build-storybook"
+    "postinstall": "echo patch-package",
+    "storybook:rn": "npm run adb && node_modules/@storybook/react-native-server/bin/index.js -p 9001 -c storybook-rn",
+    "storybook": "node_modules/@storybook/react/bin/index.js -p 6006 -c .storybook",
+    "build-storybook": "build-storybook",
+    "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
+    "loki:update": "loki update --port 9001",
+    "loki:test": "loki test --port 9001"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
