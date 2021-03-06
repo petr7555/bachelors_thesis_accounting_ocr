@@ -65,3 +65,5 @@ buck-out/
 # MS Build logs
 *.binlog
 msbuild*
+
+storybook-static
