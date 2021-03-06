@@ -16,7 +16,7 @@ const VISUAL_TESTS = false;
 let RootComponent = App;
 // Only include Storybook if we're in dev mode
 if (__DEV__ && SWITCH_STORYBOOK_FROM_REACTOTRON) {
-  const { StorybookUIRoot } = require('./storybook');
+  const { StorybookUIRoot } = require('./storybook-rn');
   const Reactotron = require('./src/services/reactotron');
   const reactotron = new Reactotron.Reactotron();
   reactotron.setup();
@@ -24,7 +24,7 @@ if (__DEV__ && SWITCH_STORYBOOK_FROM_REACTOTRON) {
 }
 
 if (__DEV__ && VISUAL_TESTS) {
-  const { StorybookUIRoot } = require('./storybook');
+  const { StorybookUIRoot } = require('./storybook-rn');
   RootComponent = StorybookUIRoot;
 }
 
