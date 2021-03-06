@@ -5,14 +5,22 @@ import React from 'react';
 import { Text } from 'react-native';
 import Button from './Button';
 
+export const withText = () => (
+  <Button onPress={action('clicked-text')}>
+    <Text>{text('Button text', 'Hello Button')}</Text>
+  </Button>
+);
+
+export const withEmoji = () => (
+  <Button onPress={action('clicked-emoji')}>
+    <Text>😀 😎 👍 💯</Text>
+  </Button>
+);
+
 storiesOf('Button', module)
-  .add('with text', () => (
-    <Button onPress={action('clicked-text')}>
-      <Text>{text('Button text', 'Hello Button')}</Text>
-    </Button>
-  ))
-  .add('with some emoji', () => (
-    <Button onPress={action('clicked-emoji')}>
-      <Text>😀 😎 👍 💯</Text>
-    </Button>
-  ));
+  .add('with text', withText)
+  .add('with emoji', withEmoji);
+
+export default {
+  title: 'Buttons/BaseButtons',
+};
