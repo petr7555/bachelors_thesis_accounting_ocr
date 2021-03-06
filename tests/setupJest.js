@@ -8,3 +8,6 @@ jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 jest.mock('react-native-permissions', () => {
   return require('react-native-permissions/mock.js');
 });
+
+// https://github.com/facebook/jest/issues/6434#issuecomment-525576660
+jest.useFakeTimers();
