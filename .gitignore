@@ -67,4 +67,10 @@ buck-out/
 msbuild*
 
 storybook-static
+
+# visual tests
 .reg
+__screenshots__
+
+# Ignore Google Application Credentials
+g_app_cred.json
