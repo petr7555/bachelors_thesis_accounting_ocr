@@ -100,6 +100,7 @@
     "reg-keygen-git-hash-plugin": "^0.10.14",
     "reg-notify-github-plugin": "^0.10.14",
     "reg-publish-gcs-plugin": "^0.10.10",
+    "reg-suit": "^0.10.14",
     "storycap": "^3.0.3",
     "typescript": "^3.8.3",
     "vercel": "^21.3.2"
