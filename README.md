@@ -22,15 +22,31 @@ This command starts Metro bundler and Android emulator automatically.
 - it is only possible to navigate through them in the browser, the component itself is shown on a mobile device /
   emulator
 
-## Run visual regression Loki tests:
+## Run visual regression Loki tests for React Native:
 
 - `npm run android`
 - `npm run storybook:rn`
 - refresh app in metro bundler, components should be now visible in a browser in the sidebar
-- `npm run loki:update` to create reference images
-- `npm run loki:test` to create new images and compare to reference images
+- `npm run loki:update:rn` to create reference images
+- `npm run loki:test:rn` to create new images and compare to reference images
 - ⚠️ set `const VISUAL_TESTS = true;` in `index.js`, this reduces flakiness
 - ⚠️ there is still a lot of flakiness, many elements interfere the snapshots
+
+## Run visual regression Loki tests for React Native Web:
+
+- `npm run storybook:web`
+- `npm run loki:update:web` to create reference images
+- `npm run loki:test:web` to create new images and compare to reference images
+
+## Run visual regression Storycap / Reg suit tests for React Native Web:
+
+- `npm run storycap:web` takes screenshots and saves them to `__screenshots__`
+- `npm run reg-suit:web` 
+
+## Serve Storybook from static files
+
+- build: `npm run build-storybook:web`
+- serve: `npm run serve-storybook:web`
 
 ## Troubleshooting
 

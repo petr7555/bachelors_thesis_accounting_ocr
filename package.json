@@ -17,11 +17,16 @@
     "postinstall": "echo patch-package",
     "storybook:rn": "npm run adb && node_modules/@storybook/react-native-server/bin/index.js -p 9001 -c storybook-rn",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
-    "loki:update": "loki update --port 9001",
-    "loki:test": "loki test --port 9001",
-    "storybook": "node_modules/@storybook/react/bin/index.js -p 6006 -c .storybook",
-    "build-storybook": "node_modules/@storybook/react/bin/build.js",
-    "storycap:all": "rm -rf ./__screenshots__ && storycap http://localhost:6006 --serverCmd 'npm run storybook' --viewport '414x736' --serverTimeout '200000'"
+    "loki:update:rn": "loki update --port 9001 --configurationFilter android",
+    "loki:test:rn": "loki test --port 9001 --configurationFilter android",
+    "loki:update:web": "loki update --port 6006 --configurationFilter chrome",
+    "loki:test:web": "loki test --port 6006 --configurationFilter chrome",
+    "storybook:web": "node_modules/@storybook/react/bin/index.js -p 6006 -c .storybook",
+    "storycap:web": "rm -rf ./__screenshots__ && storycap http://localhost:6006 --serverCmd 'npm run storybook:web' --viewport '414x736' --serverTimeout '200000'",
+    "storycap:static:web": "rm -rf ./__screenshots__ && storycap http://localhost:6006 --serverCmd 'npx http-server storybook-static -p 6006' --viewport '414x736' --serverTimeout '200000'",
+    "reg-suit:web": "reg-suit run",
+    "build-storybook:web": "node_modules/@storybook/react/bin/build.js -o storybook-static",
+    "serve-storybook:web": "npx http-server storybook-static -p 6006"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
@@ -90,14 +95,10 @@
     "react-native-web": "^0.15.0",
     "react-test-renderer": "16.13.1",
     "reactotron-react-native": "^5.0.0",
+    "reg-keygen-git-hash-plugin": "^0.10.14",
+    "reg-notify-github-plugin": "^0.10.14",
+    "reg-publish-gcs-plugin": "^0.10.10",
     "storycap": "^3.0.3",
     "typescript": "^3.8.3"
-  },
-  "loki": {
-    "configurations": {
-      "android": {
-        "target": "android.emulator"
-      }
-    }
   }
 }

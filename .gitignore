@@ -67,3 +67,4 @@ buck-out/
 msbuild*
 
 storybook-static
+.reg
