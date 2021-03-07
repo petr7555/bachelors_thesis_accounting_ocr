@@ -1,6 +1,6 @@
 name: Android E2E tests
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build-and-test:
