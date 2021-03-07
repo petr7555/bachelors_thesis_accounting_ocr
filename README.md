@@ -1,6 +1,7 @@
 ![react-native-android-build-apk](https://github.com/petr7555/bachelors_thesis_accounting_ocr/workflows/react-native-android-build-apk/badge.svg)
 
-Web version of Storybook is deployed on https://bachelors-thesis-accounting-ocr.vercel.app/.
+Web version of Storybook is deployed to https://bachelors-thesis-accounting-ocr.vercel.app/ with each push to GitHub.
+This is not part of GitHub Actions but Vercel's own repository hook.
 
 Run on Windows:
 
@@ -43,7 +44,7 @@ This command starts Metro bundler and Android emulator automatically.
 ## Run visual regression Storycap / Reg suit tests for React Native Web:
 
 - `npm run storycap:web` takes screenshots and saves them to `__screenshots__`
-- `npm run reg-suit:web` 
+- `npm run reg-suit:web`
 
 ## Serve Storybook from static files
 
@@ -51,6 +52,7 @@ This command starts Metro bundler and Android emulator automatically.
 - serve: `npm run serve-storybook:web`
 
 Project uses Google Cloud Platform
+
 - https://console.cloud.google.com/home/dashboard?folder=&organizationId=&project=bachelorsthesisaccountingocr
 
 ## Troubleshooting
