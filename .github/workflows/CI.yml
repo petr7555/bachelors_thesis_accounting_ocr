@@ -6,7 +6,7 @@ on:
 jobs:
   lint-and-test:
     timeout-minutes: 10
-    runs-on: mac-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
 
@@ -19,11 +19,14 @@ jobs:
           npm run prettier:check
 #          TODO lint and test
 
-
+      - name: Check ESLint
+        run: |
+          npm run prettier:check
+#          TODO lint and test
 
   visual-regression:
     timeout-minutes: 10
-    runs-on: mac-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -50,7 +53,7 @@ jobs:
 #  build-android:
 #    timeout-minutes: 10
 #    needs: lint-and-test
-#    runs-on: mac-latest
+#    runs-on: macos-latest
 #    steps:
 #      - uses: actions/checkout@v2
 #
