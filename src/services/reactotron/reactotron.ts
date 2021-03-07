@@ -6,12 +6,15 @@ import {
 } from './reactotron-config';
 
 // Teach TypeScript about the bad things we want to do.
+
+type TronType = typeof Tron;
+
 declare global {
   interface Console {
     /**
      * Hey, it's Reactotron if we're in dev, and no-ops if we're in prod.
      */
-    tron: typeof Tron;
+    tron: TronType;
   }
 }
 
