@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
       - name: Install npm dependencies
         run: |
-          npm i
+          npm install
       - name: Workaround for detached HEAD
         run: |
           git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
