@@ -193,7 +193,7 @@ android {
 
 dependencies {
 	// Detox e2e tests
-    androidTestImplementation('com.wix:detox:18.7.0')
+    androidTestImplementation('com.wix:detox:+')
 
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.0.0')
