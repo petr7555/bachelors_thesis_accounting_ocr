@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   lint-and-test:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,6 +16,7 @@ jobs:
 #          TODO lint and test
 
   visual-regression:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -40,6 +42,7 @@ jobs:
           npm run reg-suit:web:ci
 
 #  build-android:
+#    timeout-minutes: 10
 #    needs: lint-and-test
 #    runs-on: ubuntu-latest
 #    steps:
@@ -63,6 +66,7 @@ jobs:
 #          path: android/app/build/outputs/apk/release/
 
 #  build-windows:
+#    timeout-minutes: 10
 #    needs: lint-and-test
 #    runs-on: windows-latest
 #    steps:
