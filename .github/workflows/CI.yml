@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  lint-and-test:
+  lint:
     timeout-minutes: 10
     runs-on: macos-latest
     steps:
@@ -17,12 +17,28 @@ jobs:
       - name: Check formatting
         run: |
           npm run prettier:check
-#      - name: Check ESLint
-#        run: |
-#          npm run lint
+
+      - name: Check ESLint
+        run: |
+          npm run lint
+
 #      - name: Check TypeScript
 #        run: |
 #          npm run lint:typescript
+
+  test:
+    timeout-minutes: 10
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install npm dependencies
+        run: |
+          npm install
+
+      - name: Run unit and snapshot tests
+        run: |
+          npm run test
 
   visual-regression:
     timeout-minutes: 10
@@ -52,7 +68,7 @@ jobs:
 
 #  build-android:
 #    timeout-minutes: 10
-#    needs: lint-and-test
+#    needs: [lint, test]
 #    runs-on: macos-latest
 #    steps:
 #      - uses: actions/checkout@v2
@@ -76,7 +92,7 @@ jobs:
 
 #  build-windows:
 #    timeout-minutes: 10
-#    needs: lint-and-test
+#    needs: [lint, test]
 #    runs-on: windows-latest
 #    steps:
 #      - uses: actions/checkout@v2
