@@ -39,45 +39,45 @@ jobs:
         run: |
           npm run reg-suit:web
 
-  build-android:
-    needs: lint-and-test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
+#  build-android:
+#    needs: lint-and-test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Install npm dependencies
+#        run: |
+#          npm install
+#
+#      - name: Install NDK
+#        run: echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
+#
+#      - name: Build Android Release
+#        run: |
+#          cd android && chmod +x ./gradlew && ./gradlew assembleRelease
+#
+#      - name: Upload Artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: app-release.apk
+#          path: android/app/build/outputs/apk/release/
 
-      - name: Install npm dependencies
-        run: |
-          npm install
-
-      - name: Install NDK
-        run: echo "y" | sudo /usr/local/lib/android/sdk/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
-
-      - name: Build Android Release
-        run: |
-          cd android && chmod +x ./gradlew && ./gradlew assembleRelease
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: app-release.apk
-          path: android/app/build/outputs/apk/release/
-
-  build-windows:
-    needs: lint-and-test
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install npm dependencies
-        run: |
-          npm install
-
-      - name: Build Windows Release
-        run: |
-          npx react-native run-windows --release --arch x64
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: bachelors_thesis_accounting_ocr_windows
-          path: windows/x64/Release/bachelors_thesis_accounting_ocr/
+#  build-windows:
+#    needs: lint-and-test
+#    runs-on: windows-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Install npm dependencies
+#        run: |
+#          npm install
+#
+#      - name: Build Windows Release
+#        run: |
+#          npx react-native run-windows --release --arch x64
+#
+#      - name: Upload Artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: bachelors_thesis_accounting_ocr_windows
+#          path: windows/x64/Release/bachelors_thesis_accounting_ocr/
