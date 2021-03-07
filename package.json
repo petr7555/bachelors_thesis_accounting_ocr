@@ -24,10 +24,11 @@
     "storybook:web": "node_modules/@storybook/react/bin/index.js -p 6006 -c .storybook",
     "storycap:web": "rm -rf ./__screenshots__ && storycap http://localhost:6006 --serverCmd 'npm run storybook:web' --viewport '414x736' --serverTimeout '200000'",
     "storycap:static:web": "rm -rf ./__screenshots__ && storycap http://localhost:6006 --serverCmd 'npx http-server storybook-static -p 6006' --viewport '414x736' --serverTimeout '200000'",
-    "reg-suit:web": "export GOOGLE_APPLICATION_CREDENTIALS=g_app_cred.json && reg-suit run",
+    "reg-suit:web:ci": "reg-suit run",
+    "reg-suit:web:dev": "export GOOGLE_APPLICATION_CREDENTIALS=g_app_cred.json && reg-suit run",
     "build-storybook:web": "node_modules/@storybook/react/bin/build.js -o storybook-static",
     "serve-storybook:web": "npx http-server storybook-static -p 6006",
-    "visual-test:web": "npm run storycap:web && npm run reg-suit:web",
+    "visual-test:web:dev": "npm run storycap:web && npm run reg-suit:web:dev",
     "deploy": "vercel"
   },
   "dependencies": {

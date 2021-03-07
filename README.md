@@ -44,7 +44,8 @@ This command starts Metro bundler and Android emulator automatically.
 ## Run visual regression Storycap / Reg suit tests for React Native Web:
 
 - `npm run storycap:web` takes screenshots and saves them to `__screenshots__`
-- `npm run reg-suit:web`
+- `npm run reg-suit:web:dev` **dev**, as opposed to **ci**, exports path to Google application credentials file
+- `visual-test:web:dev` is a shortcut for the two commands above
 
 ## Serve Storybook from static files
 

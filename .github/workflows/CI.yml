@@ -37,7 +37,7 @@ jobs:
           export_default_credentials: true
       - name: Run visual-regression test
         run: |
-          npm run reg-suit:web
+          npm run reg-suit:web:ci
 
 #  build-android:
 #    needs: lint-and-test
