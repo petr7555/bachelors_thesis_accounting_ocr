@@ -2,7 +2,8 @@
   "testEnvironment": "./environment",
   "testRunner": "jest-circus/runner",
   "testTimeout": 120000,
-  "testRegex": "\\.e2e\\.js$",
+  "testRegex": "\\.e2e\\.ts$",
   "reporters": ["detox/runners/jest/streamlineReporter"],
-  "verbose": true
+  "verbose": true,
+  "preset": "ts-jest"
 }

@@ -24,8 +24,8 @@ This command starts Metro bundler and Android emulator automatically.
 - `npm run e2e:build`
 - `npm run e2e:test`
 - troubleshooting:
-  - `npm run start --reset-cache`
-  - make sure the **App** is visible and not Storybook
+    - `npm run start --reset-cache`
+    - make sure the **App** is visible and not Storybook
 
 On CI, a release version of the app is built, so the Metro bundler is not needed.
 
@@ -68,8 +68,19 @@ Project uses Google Cloud Platform
 
 - https://console.cloud.google.com/home/dashboard?folder=&organizationId=&project=bachelorsthesisaccountingocr
 
+## Linting and typechecking
+
+- TSLint is deprecated in favor of ESLint with TS plugins
+- ESLint performs automated scans for common syntax and style errors
+- Prettier scans your files for style issues and automatically reformats your code to ensure consistent rules are being
+  followed for indentation, spacing, semicolons, single quotes vs double quotes, etc.
+- ESLint and Prettier might clash. This solves `eslint-config-prettier` configuration, which turns off
+  formatting-related rules that might conflict with Prettier.
+- `eslint-plugin-prettier` is a plugin that integrate Prettier to ESLint, so that ESLint reports Prettier errors
+- ESLint can also catch type errors. But using TS compiler itself is probably better - `tsc --noEmit`.
+
 ## Troubleshooting
 
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
-   - solution: `npm start -- --reset-cache`
+    - solution: `npm start -- --reset-cache`
 2. If you have multiple connections in Reactotron, switch to the right one to be able to control Storybook
