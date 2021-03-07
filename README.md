@@ -50,6 +50,9 @@ This command starts Metro bundler and Android emulator automatically.
 - build: `npm run build-storybook:web`
 - serve: `npm run serve-storybook:web`
 
+Project uses Google Cloud Platform
+- https://console.cloud.google.com/home/dashboard?folder=&organizationId=&project=bachelorsthesisaccountingocr
+
 ## Troubleshooting
 
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
