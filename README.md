@@ -18,6 +18,7 @@ npm run android
 This command starts Metro bundler and Android emulator automatically.
 
 ## Run E2E tests locally
+
 - `npm run start` start Metro bundler. We need it because debug version of app is run.
 - `npm run e2e:build`
 - `npm run e2e:test`
@@ -25,7 +26,7 @@ This command starts Metro bundler and Android emulator automatically.
   - `npm run start --reset-cache`
   - make sure the **App** is visible and not Storybook
 
-On CI, a release version of the app is built, so the Metro bundler is not needed. 
+On CI, a release version of the app is built, so the Metro bundler is not needed.
 
 ## Run Storybook for React Native
 
@@ -69,5 +70,5 @@ Project uses Google Cloud Platform
 ## Troubleshooting
 
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
-    - solution: `npm start -- --reset-cache`
+   - solution: `npm start -- --reset-cache`
 2. If you have multiple connections in Reactotron, switch to the right one to be able to control Storybook

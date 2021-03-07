@@ -14,6 +14,8 @@
     "e2e:build:ci": "detox build -c android.emu.release",
     "e2e:test:ci": "detox test -c android.emu.release --cleanup",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
+    "prettier:format": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "clean:windows": "del %appdata%\\Temp\\react-native-* & cd android & gradlew clean & cd .. & del node_modules/ & npm cache clean --force & npm install & npm start -- --reset-cache",
     "clean:linux": "watchman watch-del-all && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
     "postinstall": "echo patch-package",
