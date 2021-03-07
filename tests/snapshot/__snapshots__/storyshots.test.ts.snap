@@ -18,24 +18,6 @@ exports[`Storyshots Button with emoji 1`] = `
 </View>
 `;
 
-exports[`Storyshots Button with some emoji 1`] = `
-<View
-  accessible={true}
-  focusable={true}
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
->
-  <Text>
-    😀 😎 👍 💯
-  </Text>
-</View>
-`;
-
 exports[`Storyshots Button with text 1`] = `
 <View
   accessible={true}
