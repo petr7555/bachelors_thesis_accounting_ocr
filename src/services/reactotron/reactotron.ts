@@ -67,11 +67,6 @@ export class Reactotron {
       host: 'localhost',
       useAsyncStorage: true,
       ...config,
-      // state: {
-      //   initial: false,
-      //   snapshots: false,
-      //   ...(config && config.state),
-      // },
     };
   }
 
