@@ -17,7 +17,7 @@
     "postinstall": "echo patch-package",
     "storybook:rn": "npm run adb && node_modules/@storybook/react-native-server/bin/index.js -p 9001 -c storybook-rn",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
-    "loki:update:rn": "loki update --port 9001 --configurationFilter android",
+    "loki:update:rn": "loki update --port: 9001 --configurationFilter android",
     "loki:test:rn": "loki test --port 9001 --configurationFilter android",
     "loki:update:web": "loki update --port 6006 --configurationFilter chrome",
     "loki:test:web": "loki test --port 6006 --configurationFilter chrome",
@@ -27,7 +27,8 @@
     "reg-suit:web": "export GOOGLE_APPLICATION_CREDENTIALS=g_app_cred.json && reg-suit run",
     "build-storybook:web": "node_modules/@storybook/react/bin/build.js -o storybook-static",
     "serve-storybook:web": "npx http-server storybook-static -p 6006",
-    "visual-test:web": "npm run storycap:web && npm run reg-suit:web"
+    "visual-test:web": "npm run storycap:web && npm run reg-suit:web",
+    "deploy": "vercel"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
@@ -100,6 +101,7 @@
     "reg-notify-github-plugin": "^0.10.14",
     "reg-publish-gcs-plugin": "^0.10.10",
     "storycap": "^3.0.3",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "vercel": "^21.3.2"
   }
 }

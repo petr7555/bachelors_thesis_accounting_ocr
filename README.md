@@ -1,5 +1,7 @@
 ![react-native-android-build-apk](https://github.com/petr7555/bachelors_thesis_accounting_ocr/workflows/react-native-android-build-apk/badge.svg)
 
+Web version of Storybook is deployed on https://bachelors-thesis-accounting-ocr.vercel.app/.
+
 Run on Windows:
 
 ```bash
