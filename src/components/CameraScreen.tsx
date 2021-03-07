@@ -92,7 +92,7 @@ const CameraScreen = () => {
     try {
       const reference = storage().ref('/receipts/' + getFilename(image));
 
-      const task = await reference.putFile(image.path);
+      await reference.putFile(image.path);
       console.log('Image uploaded to firebase storage.');
 
       const downloadURL = await reference.getDownloadURL();
