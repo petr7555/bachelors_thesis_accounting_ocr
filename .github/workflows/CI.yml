@@ -17,12 +17,12 @@ jobs:
       - name: Check formatting
         run: |
           npm run prettier:check
-#          TODO lint and test
-
-      - name: Check ESLint
-        run: |
-          npm run prettier:check
-#          TODO lint and test
+#      - name: Check ESLint
+#        run: |
+#          npm run lint
+#      - name: Check TypeScript
+#        run: |
+#          npm run lint:typescript
 
   visual-regression:
     timeout-minutes: 10
