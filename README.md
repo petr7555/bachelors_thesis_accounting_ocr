@@ -84,3 +84,5 @@ Project uses Google Cloud Platform
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
     - solution: `npm start -- --reset-cache`
 2. If you have multiple connections in Reactotron, switch to the right one to be able to control Storybook
+
+
