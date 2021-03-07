@@ -17,6 +17,16 @@ npm run android
 
 This command starts Metro bundler and Android emulator automatically.
 
+## Run E2E tests locally
+- `npm run start` start Metro bundler. We need it because debug version of app is run.
+- `npm run e2e:build`
+- `npm run e2e:test`
+- troubleshooting:
+  - `npm run start --reset-cache`
+  - make sure the **App** is visible and not Storybook
+
+On CI, a release version of the app is built, so the Metro bundler is not needed. 
+
 ## Run Storybook for React Native
 
 - `npm run android`

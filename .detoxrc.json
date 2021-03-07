@@ -5,7 +5,7 @@
     "emulator": {
       "type": "android.emulator",
       "device": {
-        "avdName": "Pixel_3a_API_29_x86"
+        "avdName": "Pixel_3a_API_29"
       }
     }
   },
