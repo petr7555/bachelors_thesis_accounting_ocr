@@ -4,6 +4,16 @@ on:
     branches:
       - master
 jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install npm dependencies
+        run: |
+          npm install
+#          TODO lint and test
+
   visual-regression:
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +40,7 @@ jobs:
           npm run reg-suit:web
 
   build-android:
-    needs: install-and-test
+    needs: lint-and-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -53,7 +63,7 @@ jobs:
           path: android/app/build/outputs/apk/release/
 
   build-windows:
-    needs: install-and-test
+    needs: lint-and-test
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
