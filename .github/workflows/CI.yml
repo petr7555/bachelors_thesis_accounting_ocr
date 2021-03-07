@@ -6,7 +6,7 @@ on:
 jobs:
   lint:
     timeout-minutes: 10
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
 
@@ -28,7 +28,7 @@ jobs:
 
   test:
     timeout-minutes: 10
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
 
@@ -42,7 +42,7 @@ jobs:
 
   visual-regression:
     timeout-minutes: 20
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -69,7 +69,7 @@ jobs:
 #  build-android:
 #    timeout-minutes: 10
 #    needs: [lint, test]
-#    runs-on: ubuntu-latest
+#    runs-on: macos-latest
 #    steps:
 #      - uses: actions/checkout@v2
 #
