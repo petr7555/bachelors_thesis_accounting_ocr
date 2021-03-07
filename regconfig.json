@@ -14,6 +14,9 @@
       "prComment": true,
       "prCommentBehavior": "default",
       "clientId": "BcEBDoAgCADAJ5Emka9hxli6NWlI/+9u37CWXPMJV5Ouj/ni6LrG4iZi34wxbzZxSJioHEjwajgh4g8="
+    },
+    "reg-publish-gcs-plugin": {
+      "bucketName": "reg-publish-bucket-0772791c-bab9-441e-8b69-1e496c635760"
     }
   }
 }
