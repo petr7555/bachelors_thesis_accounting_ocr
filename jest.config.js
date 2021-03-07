@@ -5,7 +5,7 @@ module.exports = {
     'node_modules/(?!(jest-)?react-native|react-(native|universal|navigation)-(.*)|@react-native-community/(.*)|@react-navigation/(.*)|@react-native-firebase/(.*)|@loki|some-custom-package)',
   ],
   setupFiles: [
-    '<rootDir>/tests/setupJest.js',
+    '<rootDir>/tests/setupJest.ts',
     './node_modules/react-native-gesture-handler/jestSetup.js',
   ],
 };
