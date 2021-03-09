@@ -75,6 +75,11 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 - `reg-suit publish` uses the last commit hash to create a new folder in Google Cloud and uploads new images there.
 - in CI, `reg-suit publish -n` is run with the `-n` parameter to create a PR comment on GitHub.
 
+## Chromatic
+- Chromatic is used for visual testing and for storybook deployment.
+- During each push, the stories are compared for visual changes and the storybook is deployed. 
+- To run it locally, run `npm run chromatic`.
+
 ## Serve Storybook from static files
 
 - build: `npm run build-storybook:web`
