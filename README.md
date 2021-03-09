@@ -76,8 +76,9 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 - in CI, `reg-suit publish -n` is run with the `-n` parameter to create a PR comment on GitHub.
 
 ## Chromatic
+
 - Chromatic is used for visual testing and for storybook deployment.
-- During each push, the stories are compared for visual changes, and the storybook is deployed. 
+- During each push, the stories are compared for visual changes, and the storybook is deployed.
 - To run it locally, run `npm run chromatic`.
 - [Web GUI](https://www.chromatic.com/apps?accountId=60432da9354dbd00232dedc4)
 
@@ -101,6 +102,11 @@ Project uses Google Cloud Platform
 - `eslint-plugin-prettier` is a plugin that integrate Prettier to ESLint, so that ESLint reports Prettier errors
 - ESLint can also catch type errors. But using TS compiler itself is probably better - `tsc --noEmit`.
 
+# Tools
+
+- [Reactotron](https://github.com/infinitered/reactotron)
+    - if the device is not connected, refresh (`r`) in metro bundler
+  
 ## Troubleshooting
 
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
