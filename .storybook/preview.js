@@ -1,14 +1,14 @@
-import { addDecorator, addParameters } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+// import { addDecorator } from '@storybook/react';
+// import { withKnobs } from '@storybook/addon-knobs';
+//
+// addDecorator(
+//     withKnobs({
+//         escapeHTML: false,
+//     }),
+// );
 
-addDecorator(
-  withKnobs({
-    escapeHTML: false,
-  }),
-);
-
-addParameters({
+export const parameters = {
   layout: 'fullscreen',
   options: {
     panelPosition: 'right',
@@ -17,4 +17,4 @@ addParameters({
     viewports: INITIAL_VIEWPORTS,
     defaultViewport: 'iphone6',
   },
-});
+};
