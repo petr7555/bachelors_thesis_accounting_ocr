@@ -13,7 +13,7 @@ export const withText = () => (
 
 export const withEmoji = () => (
   <Button onPress={action('clicked-emoji')}>
-    <Text>😀 😎 👍 💯</Text>
+    <Text>😀 😎 👍 💯 🚀 </Text>
   </Button>
 );
 
