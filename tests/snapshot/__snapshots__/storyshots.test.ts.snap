@@ -13,7 +13,7 @@ exports[`Storyshots Button with emoji 1`] = `
   onStartShouldSetResponder={[Function]}
 >
   <Text>
-    😀 😎 👍 💯
+    😀 😎 👍 💯 🚀 
   </Text>
 </View>
 `;
