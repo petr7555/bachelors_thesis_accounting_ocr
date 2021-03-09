@@ -10,7 +10,7 @@ on:
 
 jobs:
   lint:
-    timeout-minutes: 10
+    timeout-minutes: 20
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -32,7 +32,7 @@ jobs:
 #          npm run lint:typescript
 
   test:
-    timeout-minutes: 10
+    timeout-minutes: 20
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -46,7 +46,7 @@ jobs:
           npm run test
 
   visual-regression:
-    timeout-minutes: 20
+    timeout-minutes: 30
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -72,7 +72,7 @@ jobs:
           npm run reg-suit:web:ci
 
   chromatic-deployment:
-    timeout-minutes: 10
+    timeout-minutes: 20
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
