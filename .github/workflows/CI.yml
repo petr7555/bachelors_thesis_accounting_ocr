@@ -71,6 +71,21 @@ jobs:
         run: |
           npm run reg-suit:web:ci
 
+  chromatic-deployment:
+    timeout-minutes: 10
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install npm dependencies
+        run: |
+          npm install
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
 #  build-android:
 #    timeout-minutes: 10
 #    needs: [lint, test]
