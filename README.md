@@ -59,6 +59,22 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 - `npm run reg-suit:web:dev` **dev**, as opposed to **ci**, exports path to Google application credentials file
 - `visual-test:web:dev` is a shortcut for the two commands above
 
+### How it works:
+
+- First note, that doing this makes sense when there are no uncommitted changes.
+- Reg-suit expects that this is run after you have committed all changes.
+- You take screenshots of the current state of the app by running `npm run storycap:web`. They are saved
+  into `__screenshots__`.
+- `reg-suit sync-expected` uses
+  the [keygen plugin](https://github.com/reg-viz/reg-suit/blob/master/packages/reg-keygen-git-hash-plugin/README.md)
+  to detect the previous commit when snapshots have been published. It downloads screenshots from Google Cloud for this
+  commit. The screenshots are stored in Google Cloud inside `reg-publish-bucket-...` in folder whose name is the
+  detected commit. From there they are downloaded and stored inside `.reg/expected` locally.
+- `reg-suit compare` copies new images from `__screenshots__` to `.reg/actual`, compares them with images
+  in `.reg/expected` and stores the difference in `.reg/diff`.
+- `reg-suit publish` uses the last commit hash to create a new folder in Google Cloud and uploads new images there.
+- in CI, `reg-suit publish -n` is run with the `-n` parameter to create a PR comment on GitHub.
+
 ## Serve Storybook from static files
 
 - build: `npm run build-storybook:web`
