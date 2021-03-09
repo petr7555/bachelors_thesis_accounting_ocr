@@ -77,8 +77,9 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 
 ## Chromatic
 - Chromatic is used for visual testing and for storybook deployment.
-- During each push, the stories are compared for visual changes and the storybook is deployed. 
+- During each push, the stories are compared for visual changes, and the storybook is deployed. 
 - To run it locally, run `npm run chromatic`.
+- [Web GUI](https://www.chromatic.com/apps?accountId=60432da9354dbd00232dedc4)
 
 ## Serve Storybook from static files
 
