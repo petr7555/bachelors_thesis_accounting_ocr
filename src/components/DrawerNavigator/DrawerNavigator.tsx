@@ -1,9 +1,9 @@
 import React from 'react';
-import HomeScreen from './HomeScreen';
-import SettingsScreen from './SettingsScreen';
+import HomeScreen from '../HomeScreen/HomeScreen';
+import SettingsScreen from '../SettingsScreen/SettingsScreen';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { getNavigationIcon } from '../global/navigation';
+import { getNavigationIcon } from '../../global/navigation';
 
 const Drawer = createDrawerNavigator();
 

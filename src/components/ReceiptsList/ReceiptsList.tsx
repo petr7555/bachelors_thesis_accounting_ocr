@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Avatar, ListItem } from 'react-native-elements';
-import { authInstance, firestoreInstance } from '../global/firebase';
+import { authInstance, firestoreInstance } from '../../global/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 type Receipt = {

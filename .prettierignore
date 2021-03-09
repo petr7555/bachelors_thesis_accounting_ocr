@@ -7,3 +7,4 @@ ios
 node_modules
 patches
 windows
+storybook-static

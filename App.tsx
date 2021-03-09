@@ -15,7 +15,7 @@ import {
 } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
 import { TabNavigator } from './src/components/TabNavigator/TabNavigator';
-import LoginScreen from './src/components/LoginScreen';
+import LoginScreen from './src/components/LoginScreen/LoginScreen';
 import Colors from './src/global/styles/colors';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance, firestoreInstance } from './src/global/firebase';

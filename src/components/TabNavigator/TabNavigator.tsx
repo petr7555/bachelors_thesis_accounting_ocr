@@ -1,7 +1,7 @@
 import React from 'react';
-import HomeScreen from '../HomeScreen';
+import HomeScreen from '../HomeScreen/HomeScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SettingsScreen from '../SettingsScreen';
+import SettingsScreen from '../SettingsScreen/SettingsScreen';
 import ScanButton, { ScanComponent } from '../ScanButton/ScanButton';
 import { getNavigationIcon } from '../../global/navigation';
 

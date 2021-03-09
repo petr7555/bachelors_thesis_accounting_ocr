@@ -1,7 +1,7 @@
 import { useTheme } from '@react-navigation/native';
 import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
-import ReceiptsList from './ReceiptsList';
+import ReceiptsList from '../ReceiptsList/ReceiptsList';
 
 declare const global: { HermesInternal: null | {} };
 

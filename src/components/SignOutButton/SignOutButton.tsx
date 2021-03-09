@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import React from 'react';
-import { authInstance } from '../global/firebase';
+import { authInstance } from '../../global/firebase';
 import { Button } from 'react-native-elements';
 
 const googleSignin =

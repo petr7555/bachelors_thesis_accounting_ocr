@@ -15,12 +15,12 @@ import { Button } from 'react-native-elements';
 import { Controller, useForm } from 'react-hook-form';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { authInstance, FirebaseError } from '../global/firebase';
-import bgImage from '../../images/background.png';
+import { authInstance, FirebaseError } from '../../global/firebase';
+import bgImage from '../../../images/background.png';
 import EmailValidator from 'email-validator';
 
 const GoogleSignIn = Platform.select({
-  android: () => require('./GoogleSignIn').default,
+  android: () => require('../GoogleSignIn/GoogleSignIn').default,
   default: () => () => null,
 })();
 

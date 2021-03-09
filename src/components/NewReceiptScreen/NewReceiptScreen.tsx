@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { StyleSheet, Text, View } from 'react-native';
-import Form from './Form';
+import Form from '../Form/Form';
 
 const NewReceiptScreen = () => {
   const { colors } = useTheme();

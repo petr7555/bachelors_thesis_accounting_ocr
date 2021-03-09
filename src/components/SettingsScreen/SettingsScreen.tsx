@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import * as React from 'react';
-import SignOutButton from './SignOutButton';
+import SignOutButton from '../SignOutButton/SignOutButton';
 
 const SettingsScreen = () => {
   return (

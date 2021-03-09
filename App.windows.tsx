@@ -1,9 +1,9 @@
 import React from 'react';
 import { ActivityIndicator, Text } from 'react-native';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import LoginScreen from './src/components/LoginScreen';
+import LoginScreen from './src/components/LoginScreen/LoginScreen';
 import { NavigationContainer } from '@react-navigation/native';
-import { DrawerNavigator } from './src/components/DrawerNavigator';
+import { DrawerNavigator } from './src/components/DrawerNavigator/DrawerNavigator';
 import { authInstance } from './src/global/firebase';
 
 const App = () => {

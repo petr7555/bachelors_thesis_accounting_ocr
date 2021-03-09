@@ -8,14 +8,18 @@ import ImagePicker, {
   PickerErrorCode,
 } from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
-import { authInstance, firestore, firestoreInstance } from '../global/firebase';
+import {
+  authInstance,
+  firestore,
+  firestoreInstance,
+} from '../../global/firebase';
 import {
   requestCameraPermission,
   requestStoragePermission,
-} from '../global/permissions';
-import { getTextFromImage } from '../global/ocr';
+} from '../../global/permissions';
+import { getTextFromImage } from '../../global/ocr';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Colors from '../global/styles/colors';
+import Colors from '../../global/styles/colors';
 
 const CameraScreen = () => {
   const addNewImage = async () => {
