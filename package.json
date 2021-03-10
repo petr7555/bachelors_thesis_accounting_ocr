@@ -35,7 +35,7 @@
     "serve-storybook:web": "npx http-server storybook-static -p 6006",
     "visual-test:web:dev": "npm run storycap:web && npm run reg-suit:web:dev",
     "deploy": "vercel",
-    "chromatic": "npm run build-storybook:web && npx chromatic --project-token=e90ee438f63d --storybook-build-dir=storybook-static"
+    "chromatic": "chromatic --build-script-name=build-storybook:web --project-token=e90ee438f63d"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
@@ -95,6 +95,7 @@
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.2.2",
     "babel-preset-expo": "^8.3.0",
+    "chromatic": "^5.6.3",
     "detox": "^18.7.0",
     "eslint": "^6.5.1",
     "jest": "^26.6.3",
