@@ -5,8 +5,8 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "windows": "react-native run-windows",
-    "windows:release": "react-native run-windows --release",
+    "windows": "react-native run-windows --arch \"x64\"",
+    "windows:release": "npm run windows -- --release",
     "start": "react-native start",
     "test": "jest --config jest.config.js",
     "e2e:build": "detox build -c android.emu.debug",
