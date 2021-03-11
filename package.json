@@ -57,7 +57,7 @@
     "react-firebase-hooks": "^2.2.0",
     "react-hook-form": "^6.10.1",
     "react-native": "0.63.4",
-    "react-native-elements": "^3.0.0-alpha.1",
+    "react-native-elements": "^3.3.0",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-image-crop-picker": "^0.35.1",
     "react-native-modal": "^11.5.6",
