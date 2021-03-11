@@ -181,16 +181,8 @@
     <ResourceCompile Include="bachelors_thesis_accounting_ocr.rc" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\Ionicons.ttf">
-      <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Assets</DestinationFolders>
-    </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
-    <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\MaterialCommunityIcons.ttf">
-      <FileType>CUR</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Assets</DestinationFolders>
-    </CopyFileToFolders>
+    <Font Include="Assets\Ionicons.ttf" />
+    <Font Include="Assets\MaterialCommunityIcons.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ReactNativeWindowsTargets">

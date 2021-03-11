@@ -65,11 +65,11 @@
     <ResourceCompile Include="bachelors_thesis_accounting_ocr.rc" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\Ionicons.ttf">
+    <Font Include="Assets\Ionicons.ttf">
       <Filter>Assets</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="..\..\node_modules\react-native-vector-icons\Fonts\MaterialCommunityIcons.ttf">
+    </Font>
+    <Font Include="Assets\MaterialCommunityIcons.ttf">
       <Filter>Assets</Filter>
-    </CopyFileToFolders>
+    </Font>
   </ItemGroup>
 </Project>
