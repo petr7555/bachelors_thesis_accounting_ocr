@@ -112,3 +112,7 @@ Project uses Google Cloud Platform
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
     - solution: `npm start -- --reset-cache`
 2. If you have multiple connections in Reactotron, switch to the right one to be able to control Storybook
+3. DO NOT DELETE `package-lock.json`! Dependencies will resolve badly and something like this will show up:
+    ```
+    error: Error: Unable to resolve module ./prebuilt.rn-99b47b70.js from /Users/petr.janik/Documents/Projects/bachelors_thesis_accounting_ocr/node_modules/@firebase/firestore/dist/rn/index.js: ./prebuilt.rn-99b47b70.js could not be found within the project.
+    ```
