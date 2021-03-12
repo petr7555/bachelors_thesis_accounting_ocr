@@ -29,9 +29,7 @@ jobs:
           echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name Pixel_3a_API_29 --device "pixel" -k "system-images;android-29;google_apis;x86"
           $ANDROID_HOME/emulator/emulator -list-avds
 
-      - name: Install node_modules
-        run: |
-          npm install
+      - uses: bahmutov/npm-install@v1
 
       - name: Build for Detox
         run: |
