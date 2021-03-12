@@ -191,11 +191,19 @@ exports[`Storyshots ScanButton default 1`] = `
       >
         <View
           style={
-            Object {
-              "borderRadius": 3,
-              "marginVertical": 5,
-              "overflow": "hidden",
-            }
+            Array [
+              Object {
+                "borderRadius": 3,
+                "overflow": "hidden",
+              },
+              Object {
+                "borderRadius": 3,
+              },
+              Object {
+                "marginVertical": 5,
+              },
+              false,
+            ]
           }
         >
           <View
@@ -275,11 +283,19 @@ exports[`Storyshots ScanButton default 1`] = `
         </View>
         <View
           style={
-            Object {
-              "borderRadius": 3,
-              "marginVertical": 5,
-              "overflow": "hidden",
-            }
+            Array [
+              Object {
+                "borderRadius": 3,
+                "overflow": "hidden",
+              },
+              Object {
+                "borderRadius": 3,
+              },
+              Object {
+                "marginVertical": 5,
+              },
+              false,
+            ]
           }
         >
           <View
