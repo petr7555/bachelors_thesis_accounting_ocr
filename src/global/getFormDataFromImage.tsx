@@ -35,8 +35,8 @@ class Poller {
         }
         await this.sleep(this.pollInterval);
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   }
 }
@@ -64,8 +64,8 @@ class FormRecognizerClient {
         return new Poller(response.headers['operation-location'], this.apiKey);
       }
       Alert.alert('Image does not contain base64 data.');
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   }
 }

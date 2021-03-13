@@ -21,8 +21,8 @@ const SignOutButton = () => {
           console.log('User signed out from Google.');
         }
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.error(error);
     }
   };
 

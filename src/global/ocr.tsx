@@ -17,6 +17,6 @@ export const getTextFromImage = async (localPath: string) => {
 
     return processed;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };

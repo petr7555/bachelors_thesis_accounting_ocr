@@ -22,8 +22,8 @@ const signIn = async () => {
     await auth().signInWithCredential(googleCredential);
 
     console.log('Signed in with Google!');
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.error(error);
   }
 };
 

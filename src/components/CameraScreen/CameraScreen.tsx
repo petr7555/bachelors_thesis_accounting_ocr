@@ -58,7 +58,7 @@ const CameraScreen = () => {
 
           return image;
         } catch (error) {
-          console.log(error);
+          console.error(error);
           if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
             Alert.alert("Couldn't take a new image.");
           }
@@ -83,7 +83,7 @@ const CameraScreen = () => {
 
         return image;
       } catch (error) {
-        console.log(error);
+        console.error(error);
         if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
           Alert.alert("Couldn't select an image from gallery.");
         }
@@ -107,7 +107,7 @@ const CameraScreen = () => {
 
       await addImageToUsersReceipts(downloadURL);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -126,7 +126,7 @@ const CameraScreen = () => {
           });
         console.log('Receipt added!');
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };
