@@ -18,6 +18,18 @@ npm run android
 
 This command starts Metro bundler and Android emulator automatically.
 
+## Debugging
+
+### Webstorm:
+
+- Run `RN Debug` configuration in debug mode.
+- Press `⌘M` to toggle In-App Developer Menu. Click Debug (second option from top).
+- Reload the application (in browser debug `http://localhost:8081/debugger-ui/` or in In-App Developer Menu).
+
+### Links:
+
+- https://reactnative.dev/docs/debugging
+
 ## Run E2E tests locally
 
 - `npm run start` start Metro bundler. We need it because debug version of app is run.
@@ -106,7 +118,12 @@ Project uses Google Cloud Platform
 
 - [Reactotron](https://github.com/infinitered/reactotron)
     - if the device is not connected, refresh (`r`) in metro bundler
-  
+
+## Clean emulator data
+
+- `emulator -list-avds`
+- `emulator -avd Pixel_3a_API_29 -wipe-data`
+
 ## Troubleshooting
 
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
