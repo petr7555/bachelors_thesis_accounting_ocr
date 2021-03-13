@@ -118,6 +118,8 @@ Project uses Google Cloud Platform
 
 - [Reactotron](https://github.com/infinitered/reactotron)
     - if the device is not connected, refresh (`r`) in metro bundler
+- [patch-package](https://www.npmjs.com/package/patch-package) can be used to fix third-party dependencies
+  in `node_modules`. `postinstall` script is run automatically both after `npm install` and `npm ci`.
 
 ## Clean emulator data
 
