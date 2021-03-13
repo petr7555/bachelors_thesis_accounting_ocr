@@ -20,6 +20,7 @@ import {
 import { getTextFromImage } from '../../global/ocr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../global/styles/colors';
+import { getFormDataFromImage } from '../../global/getFormDataFromImage';
 
 const CameraScreen = () => {
   const addNewImage = async () => {
@@ -38,6 +39,7 @@ const CameraScreen = () => {
 
   const processImage = async (image: Image) => {
     await getTextFromImage(image.path);
+    await getFormDataFromImage(image);
     await uploadImage(image);
   };
 
@@ -51,8 +53,8 @@ const CameraScreen = () => {
             cropping: true,
             freeStyleCropEnabled: true,
             hideBottomControls: true,
+            includeBase64: true,
           });
-          console.log(image);
 
           return image;
         } catch (error) {
@@ -74,6 +76,7 @@ const CameraScreen = () => {
           freeStyleCropEnabled: true,
           hideBottomControls: true,
           compressImageMaxWidth: 720,
+          includeBase64: true,
         });
         console.log('Got image from gallery:');
         console.log(image);
