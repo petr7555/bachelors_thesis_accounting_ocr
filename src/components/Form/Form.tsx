@@ -8,7 +8,11 @@ type FormData = {
   total: number;
 };
 
-const Form = () => {
+type Props = {
+  initialData: any;
+};
+
+const Form = ({ initialData }: Props) => {
   const theme = useTheme();
   const { control, handleSubmit, errors, reset } = useForm<FormData>();
   const onSubmit = (data: FormData) => {

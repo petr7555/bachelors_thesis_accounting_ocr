@@ -1,6 +1,6 @@
 import { Alert, StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import React from 'react';
+import React, { useState } from 'react';
 import { RESULTS } from 'react-native-permissions';
 
 import ImagePicker, {
@@ -21,26 +21,34 @@ import { getTextFromImage } from '../../global/ocr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../global/styles/colors';
 import { getFormDataFromImage } from '../../global/getFormDataFromImage';
+import { useNavigation } from '@react-navigation/native';
 
 const CameraScreen = () => {
+  const navigation = useNavigation();
+
+  const prefillForm = async (image: Image) => {
+    const data = await processImage(image);
+    navigation.navigate('Scan', { screen: 'Form' });
+  };
+
   const addNewImage = async () => {
     const image = await takeAnImage();
     if (image) {
-      await processImage(image);
+      await prefillForm(image);
     }
   };
 
   const addExistingImage = async () => {
     const image = await selectImageFromGallery();
     if (image) {
-      await processImage(image);
+      await prefillForm(image);
     }
   };
 
   const processImage = async (image: Image) => {
     await getTextFromImage(image.path);
-    await getFormDataFromImage(image);
     await uploadImage(image);
+    return getFormDataFromImage(image);
   };
 
   const takeAnImage = async () => {
