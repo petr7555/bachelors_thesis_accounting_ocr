@@ -15,6 +15,8 @@ export type ReceiptData = {
   items: Item[];
 };
 
+export type ReceiptDataMember = keyof ReceiptData;
+
 type Item = {
   name: string;
   quantity: number;

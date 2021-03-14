@@ -10,6 +10,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Avatar, ListItem } from 'react-native-elements';
 import { authInstance, firestoreInstance } from '../../global/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
+
+type HomeScreenNavigationProp = StackNavigationProp<
+  HomeStackParamList,
+  'HomeScreen'
+>;
 
 type Receipt = {
   id: string;
@@ -28,6 +36,8 @@ const ReceiptsList = () => {
     { idField: 'id' },
   );
 
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
   if (loadingUser || loadingReceipts) {
     return <ActivityIndicator />;
   }
@@ -44,7 +54,8 @@ const ReceiptsList = () => {
 
   const renderItem: ListRenderItem<Receipt> = ({ item }) => {
     return (
-      <ListItem bottomDivider>
+      //TODO pass receipt data
+      <ListItem bottomDivider onPress={() => navigation.navigate('Form')}>
         <Avatar source={{ uri: item.url }} />
         <ListItem.Content>
           <ListItem.Title>{item.url}</ListItem.Title>

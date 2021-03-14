@@ -7,7 +7,6 @@ declare const global: { HermesInternal: null | {} };
 
 const HomeScreen = () => {
   const { colors } = useTheme();
-
   return (
     <>
       {__DEV__ && global.HermesInternal && (

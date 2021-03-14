@@ -29,8 +29,6 @@ type FormData = {
   password: string;
 };
 
-const { width: WIDTH } = Dimensions.get('window');
-
 const LoginScreen = () => {
   const { control, handleSubmit, errors } = useForm<FormData>();
   const [showPass, setShowPass] = useState(false);
@@ -211,6 +209,8 @@ const LoginScreen = () => {
     </ImageBackground>
   );
 };
+
+const { width: WIDTH } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   backgroundContainer: {

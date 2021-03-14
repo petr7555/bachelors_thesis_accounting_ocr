@@ -26,14 +26,14 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 
-type FormScreenNavigationProp = StackNavigationProp<RootTabParamList, 'Scan'>;
+type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
 type Props = {
   setModalVisible: Dispatch<SetStateAction<boolean>>;
 };
 
 const CameraScreen = ({ setModalVisible }: Props) => {
-  const navigation = useNavigation<FormScreenNavigationProp>();
+  const navigation = useNavigation<HomeNavigationProp>();
 
   const prefillForm = async (image: Image) => {
     const receiptData = await processImage(image);
@@ -42,9 +42,9 @@ const CameraScreen = ({ setModalVisible }: Props) => {
       return;
     }
     setModalVisible(false);
-    navigation.navigate('Scan', {
+    navigation.navigate('Home', {
       screen: 'Form',
-      params: { formData: receiptData },
+      params: { receiptData },
     });
   };
 

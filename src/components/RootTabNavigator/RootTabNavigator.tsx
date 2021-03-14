@@ -1,37 +1,38 @@
 import React from 'react';
-import HomeScreen from '../HomeScreen/HomeScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SettingsScreen from '../SettingsScreen/SettingsScreen';
 import ScanButton from '../ScanButton/ScanButton';
 import { getNavigationIcon } from '../../global/navigation';
-import {
-  ScanStackNavigator,
-  ScanStackParamList,
-} from '../ScanStackNavigator/ScanStackNavigator';
 import { NavigatorScreenParams } from '@react-navigation/native';
+import {
+  HomeStackNavigator,
+  HomeStackParamList,
+} from '../HomeStackNavigator/HomeStackNavigator';
 
 export type RootTabParamList = {
-  Home: undefined;
-  Scan: NavigatorScreenParams<ScanStackParamList>;
+  Home: NavigatorScreenParams<HomeStackParamList>;
+  Scan: undefined;
   Settings: undefined;
 };
 
 const RootTab = createBottomTabNavigator<RootTabParamList>();
+
+const NullComponent = () => null;
 
 export const RootTabNavigator = () => {
   return (
     <RootTab.Navigator>
       <RootTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: getNavigationIcon('home-outline'),
         }}
       />
-      {/* button to go to ScanScreen is hidden under the tabBarButton, so it cannot be clicked */}
+      {/* button to go to NullComponent is hidden under the tabBarButton, so it cannot be clicked */}
       <RootTab.Screen
         name="Scan"
-        component={ScanStackNavigator}
+        component={NullComponent}
         options={{
           tabBarButton: () => <ScanButton />,
         }}
