@@ -24,6 +24,7 @@ import { getReceiptDataFromImage } from '../../services/FormRecognizerClient/get
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
+import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 
 type FormScreenNavigationProp = StackNavigationProp<RootTabParamList, 'Scan'>;
 

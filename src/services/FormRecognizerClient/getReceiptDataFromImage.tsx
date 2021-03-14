@@ -1,5 +1,8 @@
 import { Image } from 'react-native-image-crop-picker';
 import { FormRecognizerClient } from './FormRecognizerClient';
+import convertReceiptResponseToReceiptData, {
+  ReceiptData,
+} from './convertReceiptResponseToReceiptData';
 
 export const getReceiptDataFromImage = async (
   image: Image,
@@ -12,6 +15,6 @@ export const getReceiptDataFromImage = async (
   if (poller) {
     const response = await poller.pollUntilDone();
     console.log(JSON.stringify(response, null, 2));
-    return response;
+    return convertReceiptResponseToReceiptData(response);
   }
 };
