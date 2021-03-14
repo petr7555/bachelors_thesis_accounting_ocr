@@ -1,6 +1,6 @@
 import { Alert, StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import React, { useState } from 'react';
+import React from 'react';
 import { RESULTS } from 'react-native-permissions';
 
 import ImagePicker, {
@@ -22,13 +22,20 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../global/styles/colors';
 import { getFormDataFromImage } from '../../global/getFormDataFromImage';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
+
+type FormScreenNavigationProp = StackNavigationProp<RootTabParamList, 'Scan'>;
 
 const CameraScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<FormScreenNavigationProp>();
 
   const prefillForm = async (image: Image) => {
     const data = await processImage(image);
-    navigation.navigate('Scan', { screen: 'Form' });
+    navigation.navigate('Scan', {
+      screen: 'Form',
+      params: { formData: data },
+    });
   };
 
   const addNewImage = async () => {

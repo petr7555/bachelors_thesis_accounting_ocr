@@ -14,7 +14,7 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
-import { TabNavigator } from './src/components/TabNavigator/TabNavigator';
+import { RootTabNavigator } from './src/components/RootTabNavigator/RootTabNavigator';
 import LoginScreen from './src/components/LoginScreen/LoginScreen';
 import Colors from './src/global/styles/colors';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -93,7 +93,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <NavigationContainer
         theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
-        {user ? <TabNavigator /> : <LoginScreen />}
+        {user ? <RootTabNavigator /> : <LoginScreen />}
       </NavigationContainer>
     </ThemeProvider>
   );

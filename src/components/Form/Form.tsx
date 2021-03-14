@@ -1,18 +1,22 @@
 import React from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
-import { useTheme } from '@react-navigation/native';
+import { RouteProp, useTheme } from '@react-navigation/native';
+import { ScanStackParamList } from '../RootTabNavigator/RootTabNavigator';
 
 type FormData = {
   description: string;
   total: number;
 };
 
+type FormScreenRouteProp = RouteProp<ScanStackParamList, 'Form'>;
+
 type Props = {
-  initialData: any;
+  route: FormScreenRouteProp;
 };
 
-const Form = ({ initialData }: Props) => {
+const Form = ({ route }: Props) => {
+  console.log('route data', route.params.formData);
   const theme = useTheme();
   const { control, handleSubmit, errors, reset } = useForm<FormData>();
   const onSubmit = (data: FormData) => {

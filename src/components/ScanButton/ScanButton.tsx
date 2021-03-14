@@ -5,10 +5,6 @@ import Modal from 'react-native-modal';
 import Camera from '../CameraScreen/CameraScreen';
 import Colors from '../../global/styles/colors';
 
-export const ScanComponent = () => {
-  return null;
-};
-
 const ScanButton = () => {
   const [isModalVisible, setModalVisible] = useState(false);
 
