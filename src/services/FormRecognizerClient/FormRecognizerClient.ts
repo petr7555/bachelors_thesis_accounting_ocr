@@ -3,9 +3,7 @@ import base64ToArrayBuffer from 'base64-arraybuffer';
 import axios from 'axios';
 import { Alert } from 'react-native';
 
-type AnalyzeReceiptStatus = 'notStarted' | 'running' | 'failed' | 'succeeded';
-
-class Poller {
+export class Poller {
   private readonly pollUrl: string;
   private readonly apiKey: string;
   private readonly pollInterval: number;
@@ -41,7 +39,7 @@ class Poller {
   }
 }
 
-class FormRecognizerClient {
+export class FormRecognizerClient {
   endpoint: string;
   apiKey: string;
 
@@ -70,7 +68,38 @@ class FormRecognizerClient {
   }
 }
 
-export type ReceiptData = {
+type AnalyzeReceiptStatus = 'notStarted' | 'running' | 'failed' | 'succeeded';
+
+type FieldBasics = {
+  text: string;
+  boundingBox: [number, number, number, number, number, number, number, number];
+  page: number;
+  confidence: number;
+};
+
+type Item = {
+  type: 'object';
+  valueObject: {
+    Name?: {
+      type: 'string';
+      valueString?: string;
+    } & FieldBasics;
+    Quantity?: {
+      type: 'number';
+      valueNumber?: number;
+    } & FieldBasics;
+    Price?: {
+      type: 'number';
+      valueNumber?: number;
+    } & FieldBasics;
+    TotalPrice?: {
+      type: 'number';
+      valueNumber?: number;
+    } & FieldBasics;
+  };
+};
+
+export type ReceiptResponse = {
   status: AnalyzeReceiptStatus;
   createdDateTime: string;
   lastUpdatedDateTime: string;
@@ -78,35 +107,66 @@ export type ReceiptData = {
     version: string;
     readResults: [
       {
-        page: number;
+        page: 1;
         angle: number;
         width: number;
         height: number;
-        unit: string;
-        language: string;
+        unit: 'pixel';
+        language?: string;
       },
     ];
     documentResults: [
       {
         docType: string;
-        pageRange: [number];
-        fields: any;
+        pageRange: [number, number];
+        fields: {
+          ReceiptType?: {
+            type: 'string';
+            valueString?: string;
+            confidence: number;
+          };
+          MerchantName?: {
+            type: 'string';
+            valueString?: string;
+          } & FieldBasics;
+          MerchantPhoneNumber?: {
+            type: 'phoneNumber';
+            valuePhoneNumber?: string;
+          } & FieldBasics;
+          MerchantAddress?: {
+            type: 'string';
+            valueString?: string;
+          } & FieldBasics;
+          TransactionDate?: {
+            type: 'date';
+            valueDate?: string;
+          } & FieldBasics;
+          TransactionTime?: {
+            type: 'time';
+            valueTime?: string;
+          } & FieldBasics;
+          Total?: {
+            type: 'number';
+            valueNumber?: number;
+          } & FieldBasics;
+          Subtotal?: {
+            type: 'number';
+            valueNumber?: number;
+          } & FieldBasics;
+          Tax?: {
+            type: 'number';
+            valueNumber?: number;
+          } & FieldBasics;
+          Tip?: {
+            type: 'number';
+            valueNumber?: number;
+          } & FieldBasics;
+          Items?: {
+            type: 'array';
+            valueArray?: Item[];
+          };
+        };
       },
     ];
   };
-};
-
-export const getReceiptDataFromImage = async (
-  image: Image,
-): Promise<ReceiptData | undefined> => {
-  const endpoint = 'westeurope.api.cognitive.microsoft.com';
-  const apiKey = 'f100cd7fa2ed413697fb5f2f0a87524f';
-
-  const client = new FormRecognizerClient(endpoint, apiKey);
-  const poller = await client.beginRecognizeContent(image);
-  if (poller) {
-    const response = await poller.pollUntilDone();
-    console.log(JSON.stringify(response, null, 2));
-    return response;
-  }
 };

@@ -20,10 +20,7 @@ import {
 import { getTextFromImage } from '../../global/ocr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../global/styles/colors';
-import {
-  getReceiptDataFromImage,
-  ReceiptData,
-} from '../../global/getReceiptDataFromImage';
+import { getReceiptDataFromImage } from '../../services/FormRecognizerClient/getReceiptDataFromImage';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
