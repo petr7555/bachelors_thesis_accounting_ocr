@@ -20,7 +20,10 @@ import {
 import { getTextFromImage } from '../../global/ocr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../global/styles/colors';
-import { getFormDataFromImage } from '../../global/getFormDataFromImage';
+import {
+  getReceiptDataFromImage,
+  ReceiptData,
+} from '../../global/getReceiptDataFromImage';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
@@ -35,11 +38,15 @@ const CameraScreen = ({ setModalVisible }: Props) => {
   const navigation = useNavigation<FormScreenNavigationProp>();
 
   const prefillForm = async (image: Image) => {
-    const data = await processImage(image);
+    const receiptData = await processImage(image);
+    if (!receiptData) {
+      Alert.alert('Could not process the image.');
+      return;
+    }
     setModalVisible(false);
     navigation.navigate('Scan', {
       screen: 'Form',
-      params: { formData: data },
+      params: { formData: receiptData },
     });
   };
 
@@ -57,10 +64,12 @@ const CameraScreen = ({ setModalVisible }: Props) => {
     }
   };
 
-  const processImage = async (image: Image) => {
+  const processImage = async (
+    image: Image,
+  ): Promise<ReceiptData | undefined> => {
     await getTextFromImage(image.path);
     await uploadImage(image);
-    return getFormDataFromImage(image);
+    return getReceiptDataFromImage(image);
   };
 
   const takeAnImage = async () => {

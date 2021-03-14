@@ -16,7 +16,8 @@ type Props = {
 };
 
 const Form = ({ route }: Props) => {
-  console.log('route data', route.params.formData);
+  console.log('route data');
+  console.log(JSON.stringify(route.params.formData, null, 2));
   const theme = useTheme();
   const { control, handleSubmit, errors, reset } = useForm<FormData>();
   const onSubmit = (data: FormData) => {
