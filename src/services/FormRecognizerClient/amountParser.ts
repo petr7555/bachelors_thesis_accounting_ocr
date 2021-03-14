@@ -11,7 +11,7 @@ export const getCurrencyFromString = (price: string | undefined) => {
   if (!matched) {
     return undefined;
   }
-  return (matched[1] || matched[3]).trim();
+  return (matched[1] || matched[3])?.trim();
 };
 
 export const getAmountFromString = (price: string | undefined) => {

@@ -32,6 +32,10 @@ it('returns undefined currency if the price string is invalid', () => {
   expect(getCurrencyFromString('$ 35 a 000')).toEqual(undefined);
 });
 
+it('returns undefined currency if the price does not contain currency', () => {
+  expect(getCurrencyFromString('35.00')).toEqual(undefined);
+});
+
 it('extracts price from short number', () => {
   expect(getAmountFromString('$35')).toEqual(35);
 });
