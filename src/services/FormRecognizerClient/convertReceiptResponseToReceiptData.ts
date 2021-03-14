@@ -1,4 +1,5 @@
 import { ReceiptResponse } from './FormRecognizerClient';
+import { getAmountFromString, getCurrencyFromString } from './amountParser';
 
 export type ReceiptData = {
   merchantName: string;
@@ -10,6 +11,7 @@ export type ReceiptData = {
   subtotal: number;
   tax: number;
   tip: number;
+  currency: string;
   items: Item[];
 };
 
@@ -18,7 +20,7 @@ type Item = {
   quantity: number;
   price: number;
   totalPrice: number;
-  // TODO currency
+  currency: string;
 };
 
 export default function convertReceiptResponseToReceiptData(
@@ -34,6 +36,7 @@ export default function convertReceiptResponseToReceiptData(
     subtotal: 0,
     tax: 0,
     tip: 0,
+    currency: '',
     items: [],
   };
 
@@ -64,10 +67,28 @@ export default function convertReceiptResponseToReceiptData(
     fields.TransactionTime?.text ||
     result.transactionTime;
 
-  result.total = fields.Total?.valueNumber || result.total;
-  result.subtotal = fields.Subtotal?.valueNumber || result.subtotal;
-  result.tax = fields.Tax?.valueNumber || result.tax;
-  result.tip = fields.Tip?.valueNumber || result.tip;
+  result.total =
+    fields.Total?.valueNumber ||
+    getAmountFromString(fields.Total?.text) ||
+    result.total;
+
+  result.subtotal =
+    fields.Subtotal?.valueNumber ||
+    getAmountFromString(fields.Subtotal?.text) ||
+    result.subtotal;
+
+  result.tax =
+    fields.Tax?.valueNumber ||
+    getAmountFromString(fields.Tax?.text) ||
+    result.tax;
+
+  result.tip =
+    fields.Tip?.valueNumber ||
+    getAmountFromString(fields.Tip?.text) ||
+    result.tip;
+
+  result.currency =
+    getCurrencyFromString(fields.Total?.text) || result.currency;
 
   if (fields.Items?.valueArray) {
     for (const item of fields.Items.valueArray) {
@@ -76,6 +97,7 @@ export default function convertReceiptResponseToReceiptData(
         quantity: 0,
         price: 0,
         totalPrice: 0,
+        currency: '',
       };
 
       resultItem.name =
@@ -87,10 +109,19 @@ export default function convertReceiptResponseToReceiptData(
         item.valueObject.Quantity?.valueNumber || resultItem.quantity;
 
       resultItem.price =
-        item.valueObject.Price?.valueNumber || resultItem.price;
+        item.valueObject.Price?.valueNumber ||
+        getAmountFromString(item.valueObject.Price?.text) ||
+        resultItem.price;
 
       resultItem.totalPrice =
-        item.valueObject.TotalPrice?.valueNumber || resultItem.totalPrice;
+        item.valueObject.TotalPrice?.valueNumber ||
+        getAmountFromString(item.valueObject.TotalPrice?.text) ||
+        resultItem.totalPrice;
+
+      resultItem.currency =
+        getCurrencyFromString(item.valueObject.TotalPrice?.text) ||
+        getCurrencyFromString(item.valueObject.Price?.text) ||
+        resultItem.currency;
 
       result.items.push(resultItem);
     }

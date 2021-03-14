@@ -68,7 +68,11 @@ export class FormRecognizerClient {
   }
 }
 
-type AnalyzeReceiptStatus = 'notStarted' | 'running' | 'failed' | 'succeeded';
+export type AnalyzeReceiptStatus =
+  | 'notStarted'
+  | 'running'
+  | 'failed'
+  | 'succeeded';
 
 type FieldBasics = {
   text: string;
@@ -99,6 +103,54 @@ type Item = {
   };
 };
 
+export type Fields = {
+  ReceiptType?: {
+    type: 'string';
+    valueString?: string;
+    confidence: number;
+  };
+  MerchantName?: {
+    type: 'string';
+    valueString?: string;
+  } & FieldBasics;
+  MerchantPhoneNumber?: {
+    type: 'phoneNumber';
+    valuePhoneNumber?: string;
+  } & FieldBasics;
+  MerchantAddress?: {
+    type: 'string';
+    valueString?: string;
+  } & FieldBasics;
+  TransactionDate?: {
+    type: 'date';
+    valueDate?: string;
+  } & FieldBasics;
+  TransactionTime?: {
+    type: 'time';
+    valueTime?: string;
+  } & FieldBasics;
+  Total?: {
+    type: 'number';
+    valueNumber?: number;
+  } & FieldBasics;
+  Subtotal?: {
+    type: 'number';
+    valueNumber?: number;
+  } & FieldBasics;
+  Tax?: {
+    type: 'number';
+    valueNumber?: number;
+  } & FieldBasics;
+  Tip?: {
+    type: 'number';
+    valueNumber?: number;
+  } & FieldBasics;
+  Items?: {
+    type: 'array';
+    valueArray?: Item[];
+  };
+};
+
 export type ReceiptResponse = {
   status: AnalyzeReceiptStatus;
   createdDateTime: string;
@@ -119,53 +171,7 @@ export type ReceiptResponse = {
       {
         docType: string;
         pageRange: [number, number];
-        fields: {
-          ReceiptType?: {
-            type: 'string';
-            valueString?: string;
-            confidence: number;
-          };
-          MerchantName?: {
-            type: 'string';
-            valueString?: string;
-          } & FieldBasics;
-          MerchantPhoneNumber?: {
-            type: 'phoneNumber';
-            valuePhoneNumber?: string;
-          } & FieldBasics;
-          MerchantAddress?: {
-            type: 'string';
-            valueString?: string;
-          } & FieldBasics;
-          TransactionDate?: {
-            type: 'date';
-            valueDate?: string;
-          } & FieldBasics;
-          TransactionTime?: {
-            type: 'time';
-            valueTime?: string;
-          } & FieldBasics;
-          Total?: {
-            type: 'number';
-            valueNumber?: number;
-          } & FieldBasics;
-          Subtotal?: {
-            type: 'number';
-            valueNumber?: number;
-          } & FieldBasics;
-          Tax?: {
-            type: 'number';
-            valueNumber?: number;
-          } & FieldBasics;
-          Tip?: {
-            type: 'number';
-            valueNumber?: number;
-          } & FieldBasics;
-          Items?: {
-            type: 'array';
-            valueArray?: Item[];
-          };
-        };
+        fields: Fields;
       },
     ];
   };

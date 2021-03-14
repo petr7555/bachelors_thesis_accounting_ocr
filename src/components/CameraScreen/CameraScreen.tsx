@@ -76,14 +76,12 @@ const CameraScreen = ({ setModalVisible }: Props) => {
       const storagePermissionResult = await requestStoragePermission();
       if (storagePermissionResult === RESULTS.GRANTED) {
         try {
-          const image = await ImagePicker.openCamera({
+          return await ImagePicker.openCamera({
             cropping: true,
             freeStyleCropEnabled: true,
             hideBottomControls: true,
             includeBase64: true,
           });
-
-          return image;
         } catch (error) {
           console.error(error);
           if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
@@ -98,17 +96,13 @@ const CameraScreen = ({ setModalVisible }: Props) => {
     const storagePermissionResult = await requestStoragePermission();
     if (storagePermissionResult === RESULTS.GRANTED) {
       try {
-        const image = await ImagePicker.openPicker({
+        return await ImagePicker.openPicker({
           cropping: true,
           freeStyleCropEnabled: true,
           hideBottomControls: true,
           compressImageMaxWidth: 720,
           includeBase64: true,
         });
-        console.log('Got image from gallery:');
-        console.log(image);
-
-        return image;
       } catch (error) {
         console.error(error);
         if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
