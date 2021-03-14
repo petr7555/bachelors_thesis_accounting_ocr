@@ -26,7 +26,7 @@ const ScanButton = () => {
         isVisible={isModalVisible}
         onBackdropPress={hideModal}
         onBackButtonPress={hideModal}>
-        <Camera />
+        <Camera setModalVisible={setModalVisible} />
       </Modal>
     </View>
   );

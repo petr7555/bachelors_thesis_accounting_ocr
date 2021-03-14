@@ -1,6 +1,6 @@
 import { Alert, StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { RESULTS } from 'react-native-permissions';
 
 import ImagePicker, {
@@ -27,11 +27,16 @@ import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
 
 type FormScreenNavigationProp = StackNavigationProp<RootTabParamList, 'Scan'>;
 
-const CameraScreen = () => {
+type Props = {
+  setModalVisible: Dispatch<SetStateAction<boolean>>;
+};
+
+const CameraScreen = ({ setModalVisible }: Props) => {
   const navigation = useNavigation<FormScreenNavigationProp>();
 
   const prefillForm = async (image: Image) => {
     const data = await processImage(image);
+    setModalVisible(false);
     navigation.navigate('Scan', {
       screen: 'Form',
       params: { formData: data },
