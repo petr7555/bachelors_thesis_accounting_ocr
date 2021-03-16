@@ -107,6 +107,7 @@ const LoginScreen = () => {
               onChangeText={(inputValue) => onChange(inputValue)}
               value={value}
               placeholder="Email"
+              accessibilityLabel="Email"
               placeholderTextColor="rgba(255,255,255,0.7)"
               keyboardType="email-address"
               autoCapitalize="none"
@@ -154,6 +155,7 @@ const LoginScreen = () => {
               autoCapitalize="none"
               autoCorrect={false}
               placeholder="Password"
+              accessibilityLabel="Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               textContentType="password"
               ref={passwordInput}
