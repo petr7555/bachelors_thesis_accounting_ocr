@@ -2,11 +2,10 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../HomeScreen/HomeScreen';
 import Form from '../Form/Form';
-import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  Form: { receiptData: ReceiptData };
+  Form: { id: string };
 };
 
 const HomeStack = createStackNavigator<HomeStackParamList>();

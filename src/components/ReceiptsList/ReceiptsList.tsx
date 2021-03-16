@@ -13,17 +13,18 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
+import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 
 type HomeScreenNavigationProp = StackNavigationProp<
   HomeStackParamList,
   'HomeScreen'
 >;
 
-type Receipt = {
+export type Receipt = {
   id: string;
   url: string;
   added: FirebaseFirestoreTypes.Timestamp;
-};
+} & ReceiptData;
 
 const ReceiptsList = () => {
   const [user, loadingUser, errorUser] = useAuthState(authInstance);
@@ -54,11 +55,16 @@ const ReceiptsList = () => {
 
   const renderItem: ListRenderItem<Receipt> = ({ item }) => {
     return (
-      //TODO pass receipt data
-      <ListItem bottomDivider onPress={() => navigation.navigate('Form')}>
+      <ListItem
+        bottomDivider
+        onPress={() => navigation.navigate('Form', { id: item.id })}>
         <Avatar source={{ uri: item.url }} />
         <ListItem.Content>
-          <ListItem.Title>{item.url}</ListItem.Title>
+          <ListItem.Title>
+            {`${item.merchantName || item.merchantAddress} on ${
+              item.transactionDate || item.transactionTime
+            }`}
+          </ListItem.Title>
           <ListItem.Subtitle>
             {item.added.toDate().toDateString()}
           </ListItem.Subtitle>

@@ -9,6 +9,10 @@ import {
   ReceiptData,
   ReceiptDataMember,
 } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { authInstance, firestoreInstance } from '../../global/firebase';
+import { Receipt } from '../ReceiptsList/ReceiptsList';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
 
@@ -17,16 +21,28 @@ type Props = {
 };
 
 const Form = ({ route }: Props) => {
-  const receiptData = route.params?.receiptData;
-  console.log('Route data:');
-  console.log(JSON.stringify(receiptData, null, 2));
+  const id = route.params?.id;
+  console.log('Route data:', id);
 
   const { control, handleSubmit, errors, setValue } = useForm<ReceiptData>();
 
+  const [user, loadingUser, errorUser] = useAuthState(authInstance);
+
+  const [receiptData, loadingReceipt, errorReceipt] = useDocumentData<Receipt>(
+    firestoreInstance
+      .collection('Users')
+      .doc(user?.uid)
+      .collection('receipts')
+      .doc(id),
+  );
+
   useEffect(() => {
-    Object.entries(receiptData).forEach(([key, value]) =>
-      setValue(key as ReceiptDataMember, value),
-    );
+    if (receiptData) {
+      console.log(receiptData, null, 2);
+      Object.entries(receiptData).forEach(([key, value]) =>
+        setValue(key as ReceiptDataMember, value),
+      );
+    }
   }, [receiptData, setValue]);
 
   const onSubmit = (data: ReceiptData) => {

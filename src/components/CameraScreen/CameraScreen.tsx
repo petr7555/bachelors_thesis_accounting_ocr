@@ -36,15 +36,15 @@ const CameraScreen = ({ setModalVisible }: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
 
   const prefillForm = async (image: Image) => {
-    const receiptData = await processImage(image);
-    if (!receiptData) {
+    const newReceiptId = await processImage(image);
+    if (!newReceiptId) {
       Alert.alert('Could not process the image.');
       return;
     }
     setModalVisible(false);
     navigation.navigate('Home', {
       screen: 'Form',
-      params: { receiptData },
+      params: { id: newReceiptId },
     });
   };
 
@@ -62,12 +62,12 @@ const CameraScreen = ({ setModalVisible }: Props) => {
     }
   };
 
-  const processImage = async (
-    image: Image,
-  ): Promise<ReceiptData | undefined> => {
+  const processImage = async (image: Image): Promise<string | undefined> => {
     await getTextFromImage(image.path);
-    await uploadImage(image);
-    return getReceiptDataFromImage(image);
+    const receiptData = await getReceiptDataFromImage(image);
+    if (receiptData) {
+      return uploadImage(image, receiptData);
+    }
   };
 
   const takeAnImage = async () => {
@@ -116,7 +116,10 @@ const CameraScreen = ({ setModalVisible }: Props) => {
     return image.path.split('/').slice(-1)[0];
   };
 
-  const uploadImage = async (image: Image) => {
+  const uploadImage = async (
+    image: Image,
+    receiptData: ReceiptData,
+  ): Promise<string | undefined> => {
     try {
       const reference = storage().ref('/receipts/' + getFilename(image));
 
@@ -126,17 +129,20 @@ const CameraScreen = ({ setModalVisible }: Props) => {
       const downloadURL = await reference.getDownloadURL();
       console.log('Download url is', downloadURL);
 
-      await addImageToUsersReceipts(downloadURL);
+      return addImageToUsersReceipts(downloadURL, receiptData);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const addImageToUsersReceipts = async (downloadURL: string) => {
+  const addImageToUsersReceipts = async (
+    downloadURL: string,
+    receiptData: ReceiptData,
+  ): Promise<string | undefined> => {
     const user = authInstance.currentUser;
     if (user != null) {
       try {
-        await firestoreInstance
+        const result = await firestoreInstance
           .collection('Users')
           .doc(user.uid)
           .collection('receipts')
@@ -144,8 +150,10 @@ const CameraScreen = ({ setModalVisible }: Props) => {
             url: downloadURL,
             // @ts-ignore
             added: firestore.Timestamp.now(),
+            ...receiptData,
           });
         console.log('Receipt added!');
+        return result.id;
       } catch (error) {
         console.error(error);
       }
