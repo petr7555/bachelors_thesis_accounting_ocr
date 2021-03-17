@@ -1,7 +1,10 @@
 import React, { MutableRefObject, useEffect, useRef } from 'react';
 import {
   Button,
+  FlatList,
+  KeyboardType,
   KeyboardTypeOptions,
+  ListRenderItem,
   StyleSheet,
   TextInput,
   View,
@@ -54,10 +57,20 @@ const Form = ({ route }: Props) => {
     console.log(data);
   };
 
+  let flatListRef: FlatList | null;
+
   const merchantAddressInput = useRef<TextInput>(null);
   const merchantPhoneNumberInput = useRef<TextInput>(null);
+  const transactionDateInput = useRef<TextInput>(null);
+  const transactionTimeInput = useRef<TextInput>(null);
+  const totalInput = useRef<TextInput>(null);
+  const subtotalInput = useRef<TextInput>(null);
+  const taxInput = useRef<TextInput>(null);
+  const tipInput = useRef<TextInput>(null);
+  const currencyInput = useRef<TextInput>(null);
 
   type Field = {
+    id: number;
     name: string;
     keyboardType?: KeyboardTypeOptions;
     ref?: MutableRefObject<TextInput | null>;
@@ -74,14 +87,37 @@ const Form = ({ route }: Props) => {
     {
       name: 'merchantPhoneNumber',
       ref: merchantPhoneNumberInput,
-      keyboardType: 'phone-pad',
+      keyboardType: 'phone-pad' as KeyboardType,
     },
     {
       name: 'transactionDate',
-      ref: merchantPhoneNumberInput,
-      keyboardType: 'phone-pad',
+      ref: transactionDateInput,
     },
-  ];
+    {
+      name: 'transactionTime',
+      ref: transactionTimeInput,
+    },
+    {
+      name: 'total',
+      ref: totalInput,
+    },
+    {
+      name: 'subtotal',
+      ref: subtotalInput,
+    },
+    {
+      name: 'tax',
+      ref: taxInput,
+    },
+    {
+      name: 'tip',
+      ref: tipInput,
+    },
+    {
+      name: 'currency',
+      ref: currencyInput,
+    },
+  ].map((field, index) => ({ ...field, id: index }));
 
   const isLastField = (index: number) => index === fields.length - 1;
 
@@ -90,43 +126,71 @@ const Form = ({ route }: Props) => {
     return result.charAt(0).toUpperCase() + result.slice(1);
   };
 
+  const renderField: ListRenderItem<Field> = ({ item: field, index }) => (
+    <Controller
+      control={control}
+      render={({ onChange, onBlur, value }) => (
+        <Input
+          inputStyle={styles.input}
+          onBlur={onBlur}
+          onChangeText={(inputValue) => onChange(inputValue)}
+          value={value}
+          placeholder={toSentenceCase(field.name)}
+          accessibilityLabel={toSentenceCase(field.name)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType={isLastField(index) ? 'done' : 'next'}
+          autoFocus={index === 0}
+          keyboardType={field.keyboardType || 'default'}
+          // @ts-ignore
+          ref={field.ref}
+          blurOnSubmit={false}
+          onSubmitEditing={
+            isLastField(index)
+              ? handleSubmit(onSubmit)
+              : () => {
+                  scrollToIndex(index + 1);
+                  fields[index + 1].ref?.current?.focus();
+                }
+          }
+        />
+      )}
+      name={field.name}
+      defaultValue=""
+      key={index}
+    />
+  );
+
+  const getItemLayout = (data: any, index: number) => {
+    return {
+      length: ITEM_HEIGHT,
+      offset: ITEM_HEIGHT * index - 10,
+      index,
+    };
+  };
+
+  const scrollToIndex = (index: number) => {
+    flatListRef?.scrollToIndex({ animated: true, index });
+  };
+
   return (
     <View>
-      {fields.map((field, index) => (
-        <Controller
-          control={control}
-          render={({ onChange, onBlur, value }) => (
-            <Input
-              inputStyle={styles.input}
-              onBlur={onBlur}
-              onChangeText={(inputValue) => onChange(inputValue)}
-              value={value}
-              placeholder={toSentenceCase(field.name)}
-              accessibilityLabel={toSentenceCase(field.name)}
-              autoCapitalize="none"
-              autoCorrect={false}
-              returnKeyType={isLastField(index) ? 'done' : 'next'}
-              autoFocus={index === 0}
-              keyboardType={field.keyboardType || 'default'}
-              // @ts-ignore
-              ref={field.ref}
-              blurOnSubmit={false}
-              onSubmitEditing={
-                isLastField(index)
-                  ? handleSubmit(onSubmit)
-                  : () => fields[index + 1].ref?.current?.focus()
-              }
-            />
-          )}
-          name={field.name}
-          defaultValue=""
-          key={index}
-        />
-      ))}
+      <FlatList
+        data={fields}
+        renderItem={renderField}
+        ref={(ref) => {
+          flatListRef = ref;
+        }}
+        getItemLayout={getItemLayout}
+        // prevents keyboard disappearing when it would hide input field
+        removeClippedSubviews={false}
+      />
       <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 };
+
+const ITEM_HEIGHT = 40 + 16 + 5 + 6;
 
 const styles = StyleSheet.create({
   input: {
