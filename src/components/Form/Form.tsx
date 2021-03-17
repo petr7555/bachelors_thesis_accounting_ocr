@@ -18,7 +18,6 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { authInstance, firestoreInstance } from '../../global/firebase';
 import { Receipt } from '../ReceiptsList/ReceiptsList';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { TextContentType } from './TextContentType';
 
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
 
@@ -60,7 +59,6 @@ const Form = ({ route }: Props) => {
 
   type Field = {
     name: string;
-    textContentType: TextContentType;
     keyboardType?: KeyboardTypeOptions;
     ref?: MutableRefObject<TextInput | null>;
   };
@@ -68,22 +66,18 @@ const Form = ({ route }: Props) => {
   const fields: Field[] = [
     {
       name: 'merchantName',
-      textContentType: 'organizationName',
     },
     {
       name: 'merchantAddress',
-      textContentType: 'addressCityAndState',
       ref: merchantAddressInput,
     },
     {
       name: 'merchantPhoneNumber',
-      textContentType: 'telephoneNumber',
       ref: merchantPhoneNumberInput,
       keyboardType: 'phone-pad',
     },
     {
       name: 'transactionDate',
-      textContentType: 'telephoneNumber',
       ref: merchantPhoneNumberInput,
       keyboardType: 'phone-pad',
     },
@@ -111,7 +105,6 @@ const Form = ({ route }: Props) => {
               accessibilityLabel={toSentenceCase(field.name)}
               autoCapitalize="none"
               autoCorrect={false}
-              textContentType={field.textContentType}
               returnKeyType={isLastField(index) ? 'done' : 'next'}
               autoFocus={index === 0}
               keyboardType={field.keyboardType || 'default'}

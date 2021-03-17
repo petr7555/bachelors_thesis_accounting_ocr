@@ -114,7 +114,6 @@ const LoginScreen = () => {
               keyboardType="email-address"
               autoCapitalize="none"
               autoCorrect={false}
-              textContentType="emailAddress"
               returnKeyType="next"
               blurOnSubmit={false}
               onSubmitEditing={() => {
@@ -159,7 +158,6 @@ const LoginScreen = () => {
               placeholder="Password"
               accessibilityLabel="Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
-              textContentType="password"
               ref={passwordInput}
               returnKeyType="done"
               onSubmitEditing={handleSubmit(signIn)}
