@@ -100,18 +100,22 @@ const Form = ({ route }: Props) => {
     {
       name: 'total',
       ref: totalInput,
+      keyboardType: 'numeric' as KeyboardType,
     },
     {
       name: 'subtotal',
       ref: subtotalInput,
+      keyboardType: 'numeric' as KeyboardType,
     },
     {
       name: 'tax',
       ref: taxInput,
+      keyboardType: 'numeric' as KeyboardType,
     },
     {
       name: 'tip',
       ref: tipInput,
+      keyboardType: 'numeric' as KeyboardType,
     },
     {
       name: 'currency',
