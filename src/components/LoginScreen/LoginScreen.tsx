@@ -30,7 +30,9 @@ type FormData = {
 };
 
 const LoginScreen = () => {
-  const { control, handleSubmit, errors } = useForm<FormData>();
+  const { control, handleSubmit, errors } = useForm<FormData>({
+    mode: 'onBlur',
+  });
   const [showPass, setShowPass] = useState(false);
   const [signInInProgress, setSignInInProgress] = useState(false);
   const [signUpInProgress, setSignUpInProgress] = useState(false);
@@ -114,10 +116,10 @@ const LoginScreen = () => {
               autoCorrect={false}
               textContentType="emailAddress"
               returnKeyType="next"
+              blurOnSubmit={false}
               onSubmitEditing={() => {
                 passwordInput.current && passwordInput.current.focus();
               }}
-              blurOnSubmit={false}
             />
           </View>
         )}

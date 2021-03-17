@@ -1,8 +1,13 @@
-import React, { useEffect, useRef } from 'react';
-import { Button, Dimensions, StyleSheet, TextInput, View } from 'react-native';
+import React, { MutableRefObject, useEffect, useRef } from 'react';
+import {
+  Button,
+  KeyboardTypeOptions,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { RouteProp } from '@react-navigation/native';
-import EmailValidator from 'email-validator';
 import { Input } from 'react-native-elements';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import {
@@ -13,6 +18,7 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { authInstance, firestoreInstance } from '../../global/firebase';
 import { Receipt } from '../ReceiptsList/ReceiptsList';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { TextContentType } from './TextContentType';
 
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
 
@@ -49,120 +55,89 @@ const Form = ({ route }: Props) => {
     console.log(data);
   };
 
-  const passwordInput = useRef<TextInput>(null);
-  console.log(errors.merchantName);
+  const merchantAddressInput = useRef<TextInput>(null);
+  const merchantPhoneNumberInput = useRef<TextInput>(null);
+
+  type Field = {
+    name: string;
+    textContentType: TextContentType;
+    keyboardType?: KeyboardTypeOptions;
+    ref?: MutableRefObject<TextInput | null>;
+  };
+
+  const fields: Field[] = [
+    {
+      name: 'merchantName',
+      textContentType: 'organizationName',
+    },
+    {
+      name: 'merchantAddress',
+      textContentType: 'addressCityAndState',
+      ref: merchantAddressInput,
+    },
+    {
+      name: 'merchantPhoneNumber',
+      textContentType: 'telephoneNumber',
+      ref: merchantPhoneNumberInput,
+      keyboardType: 'phone-pad',
+    },
+    {
+      name: 'transactionDate',
+      textContentType: 'telephoneNumber',
+      ref: merchantPhoneNumberInput,
+      keyboardType: 'phone-pad',
+    },
+  ];
+
+  const isLastField = (index: number) => index === fields.length - 1;
+
+  const toSentenceCase = (text: string) => {
+    const result = text.replace(/([A-Z])/g, ' $1');
+    return result.charAt(0).toUpperCase() + result.slice(1);
+  };
+
   return (
     <View>
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            inputStyle={styles.input}
-            onBlur={onBlur}
-            onChangeText={(inputValue) => onChange(inputValue)}
-            value={value}
-            placeholder="Merchant Name"
-            keyboardType="default"
-            autoCapitalize="none"
-            autoCorrect={false}
-            textContentType="organizationName"
-            returnKeyType="next"
-            onSubmitEditing={() => {
-              passwordInput.current && passwordInput.current.focus();
-            }}
-            blurOnSubmit={false}
-            errorMessage={errors.merchantName && 'This field is required'}
-          />
-        )}
-        name="merchantName"
-        defaultValue=""
-        rules={{
-          required: true,
-          validate: (input) => EmailValidator.validate(input),
-        }}
-      />
-      <Controller
-        control={control}
-        render={({ onChange, onBlur, value }) => (
-          <Input
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={(inputValue) => onChange(inputValue)}
-            value={value}
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Merchant Address"
-            textContentType="addressCityAndState"
-            // @ts-ignore
-            ref={passwordInput}
-            returnKeyType="done"
-            errorMessage={errors.merchantAddress && 'This field is required'}
-          />
-        )}
-        name="merchantAddress"
-        defaultValue=""
-        rules={{
-          required: true,
-          pattern: {
-            value: /.{8,}/,
-            message: 'Password must be at least 8 characters long',
-          },
-        }}
-      />
+      {fields.map((field, index) => (
+        <Controller
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <Input
+              inputStyle={styles.input}
+              onBlur={onBlur}
+              onChangeText={(inputValue) => onChange(inputValue)}
+              value={value}
+              placeholder={toSentenceCase(field.name)}
+              accessibilityLabel={toSentenceCase(field.name)}
+              autoCapitalize="none"
+              autoCorrect={false}
+              textContentType={field.textContentType}
+              returnKeyType={isLastField(index) ? 'done' : 'next'}
+              autoFocus={index === 0}
+              keyboardType={field.keyboardType || 'default'}
+              // @ts-ignore
+              ref={field.ref}
+              blurOnSubmit={false}
+              onSubmitEditing={
+                isLastField(index)
+                  ? handleSubmit(onSubmit)
+                  : () => fields[index + 1].ref?.current?.focus()
+              }
+            />
+          )}
+          name={field.name}
+          defaultValue=""
+          key={index}
+        />
+      ))}
       <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 };
 
-const { width: WIDTH } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
-  backgroundContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoContainer: {
-    alignItems: 'center',
-  },
-  logoText: {
-    color: 'white',
-    fontSize: 30,
-    fontWeight: '500',
-    marginTop: 10,
-    marginBottom: 40,
-  },
   input: {
     paddingBottom: 0,
-  },
-  inputContainer: {},
-  inputSection: {
-    width: WIDTH - 60,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    borderRadius: 25,
-    marginTop: 10,
-    height: 50,
-  },
-  inputIcon: {
-    paddingLeft: 12,
-    paddingRight: 8,
-  },
-  btnEye: {
-    paddingRight: 20,
-    paddingLeft: 8,
-  },
-  btnSignInContainer: {
-    marginTop: 20,
-  },
-  btnSignUpContainer: {
-    marginTop: 10,
-  },
-  validationErrorText: {
-    marginBottom: 5,
   },
 });
 
