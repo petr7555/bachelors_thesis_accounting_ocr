@@ -117,15 +117,7 @@ const Form = ({ route }: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: 'normal',
-            fontFamily: 'sans-serif-medium',
-            color: Colors.primary,
-            marginRight: 20,
-          }}
-          onPress={handleSubmit(onSubmit)}>
+        <Text style={styles.headerText} onPress={handleSubmit(onSubmit)}>
           Save
         </Text>
       ),
@@ -252,7 +244,7 @@ const Form = ({ route }: Props) => {
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <FlatList
         data={fields}
         renderItem={renderField}
@@ -268,6 +260,16 @@ const Form = ({ route }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'normal',
+    fontFamily: 'sans-serif-medium',
+    color: Colors.primary,
+    marginRight: 20,
+  },
   input: {
     paddingBottom: 0,
   },
