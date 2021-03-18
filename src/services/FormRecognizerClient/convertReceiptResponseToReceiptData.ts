@@ -1,6 +1,7 @@
 import { ReceiptResponse } from './FormRecognizerClient';
 import { getAmountFromString, getCurrencyFromString } from './amountParser';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import { getTodaysDateAtNoon } from '../../global/utils';
 
 type ReceiptDataBase = {
   merchantName: string;
@@ -39,7 +40,7 @@ export default function convertReceiptResponseToReceiptData(
     merchantName: '',
     merchantPhoneNumber: '',
     merchantAddress: '',
-    transactionDate: new Date(),
+    transactionDate: getTodaysDateAtNoon(),
     total: 0,
     subtotal: 0,
     tax: 0,
@@ -66,10 +67,11 @@ export default function convertReceiptResponseToReceiptData(
     result.merchantAddress;
 
   const transactionDate =
-    fields.TransactionDate?.valueDate || fields.TransactionDate?.text || '';
+    fields.TransactionDate?.valueDate || fields.TransactionDate?.text;
 
-  result.transactionDate = new Date(transactionDate.toString());
-  console.log(result.transactionDate);
+  result.transactionDate = transactionDate
+    ? new Date(transactionDate.toString())
+    : result.transactionDate;
 
   result.total =
     fields.Total?.valueNumber ||

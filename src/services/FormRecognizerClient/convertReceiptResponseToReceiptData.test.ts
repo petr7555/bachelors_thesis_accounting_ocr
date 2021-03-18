@@ -2,6 +2,7 @@ import { Fields, ReceiptResponse } from './FormRecognizerClient';
 import convertReceiptResponseToReceiptData, {
   ReceiptData,
 } from './convertReceiptResponseToReceiptData';
+import { getTodaysDateAtNoon } from '../../global/utils';
 
 const getTestResponseWithFields = (fields: Fields): ReceiptResponse => {
   return {
@@ -62,8 +63,7 @@ it('converts response that does not contain any fields and uses default values i
     merchantName: '',
     merchantPhoneNumber: '',
     merchantAddress: '',
-    transactionDate: '',
-    transactionTime: '',
+    transactionDate: getTodaysDateAtNoon(),
     total: 0,
     subtotal: 0,
     tax: 0,
@@ -256,8 +256,7 @@ it('converts response with fields', () => {
     merchantName: '',
     merchantPhoneNumber: '+18025494617',
     merchantAddress: '67 Merchants Row Suite 301 Rutland VT 05701',
-    transactionDate: '2020-02-10',
-    transactionTime: '',
+    transactionDate: new Date('2020-02-10'),
     total: 36.93,
     subtotal: 35,
     tax: 1.93,
@@ -410,7 +409,7 @@ it('uses TransactionDate valueDate if available', () => {
 
   expect(convertReceiptResponseToReceiptData(response)).toHaveProperty(
     'transactionDate',
-    valueDate,
+    new Date(valueDate),
   );
 });
 
@@ -428,44 +427,7 @@ it('uses TransactionDate text if valueDate not available', () => {
 
   expect(convertReceiptResponseToReceiptData(response)).toHaveProperty(
     'transactionDate',
-    text,
-  );
-});
-
-it('uses TransactionTime valueTime if available', () => {
-  const valueTime = '13:59:00';
-  const response: ReceiptResponse = getTestResponseWithFields({
-    TransactionTime: {
-      type: 'time',
-      valueTime,
-      text: '13:59',
-      boundingBox: [216, 521, 269, 521, 269, 550, 216, 551],
-      page: 1,
-      confidence: 0.995,
-    },
-  });
-
-  expect(convertReceiptResponseToReceiptData(response)).toHaveProperty(
-    'transactionTime',
-    valueTime,
-  );
-});
-
-it('uses TransactionTime text if valueTime not available', () => {
-  const text = '13:59';
-  const response: ReceiptResponse = getTestResponseWithFields({
-    TransactionTime: {
-      type: 'time',
-      text,
-      boundingBox: [216, 521, 269, 521, 269, 550, 216, 551],
-      page: 1,
-      confidence: 0.995,
-    },
-  });
-
-  expect(convertReceiptResponseToReceiptData(response)).toHaveProperty(
-    'transactionTime',
-    text,
+    new Date(text),
   );
 });
 

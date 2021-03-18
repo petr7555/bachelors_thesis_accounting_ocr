@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { RootTabNavigator } from './RootTabNavigator';
 
 describe('RootTabNavigator', () => {
-  test('Default screen is HomeScreen', async () => {
+  test('Default screen is My receipts', async () => {
     const component = (
       <NavigationContainer>
         <RootTabNavigator />
@@ -14,6 +14,6 @@ describe('RootTabNavigator', () => {
 
     const inst = create(component);
     const textInst = inst.root.findAllByType(Text)[0];
-    expect(textInst.props.children).toBe('HomeScreen');
+    expect(textInst.props.children).toBe('My receipts');
   });
 });

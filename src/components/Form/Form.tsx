@@ -31,6 +31,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { getTodaysDateAtNoon } from '../../global/utils';
 
 // Helper functions
 const toSentenceCase = (text: string) => {
@@ -146,9 +147,9 @@ const Form = ({ route }: Props) => {
     {
       name: 'transactionDate',
       ref: transactionDateInput,
-      defaultValue: new Date(),
+      defaultValue: getTodaysDateAtNoon(),
       render: (onChange: any, onBlur: any, value: ValueType) => {
-        const date = value instanceof Date ? value : new Date();
+        const date = value instanceof Date ? value : getTodaysDateAtNoon();
         return (
           <>
             <ListItem bottomDivider onPress={() => setShow(true)}>
