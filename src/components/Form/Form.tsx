@@ -1,5 +1,6 @@
 import React, {
   MutableRefObject,
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -62,11 +63,27 @@ type Props = {
 const Form = ({ route }: Props) => {
   const id = route.params?.id;
   const { control, handleSubmit, setValue } = useForm<ReceiptData>();
-  const onSubmit = (data: ReceiptData) => {
-    console.log(data);
-  };
 
   const [user] = useAuthState(authInstance);
+
+  const updateReceipt = useCallback(
+    async (receiptData: ReceiptData) => {
+      console.log(receiptData);
+      try {
+        await firestoreInstance
+          .collection('Users')
+          .doc(user.uid)
+          .collection('receipts')
+          .doc(id)
+          .update(receiptData);
+        console.log('Receipt updated!');
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [id, user.uid],
+  );
+
   const [receiptData] = useDocumentData<FirebaseReceipt>(
     firestoreInstance
       .collection('Users')
@@ -118,12 +135,12 @@ const Form = ({ route }: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Text style={styles.headerText} onPress={handleSubmit(onSubmit)}>
+        <Text style={styles.headerText} onPress={handleSubmit(updateReceipt)}>
           Save
         </Text>
       ),
     });
-  }, [navigation, handleSubmit]);
+  }, [navigation, handleSubmit, updateReceipt]);
 
   const fields: Field[] = [
     {
@@ -231,7 +248,7 @@ const Form = ({ route }: Props) => {
             blurOnSubmit={false}
             onSubmitEditing={
               isLastField(index)
-                ? handleSubmit(onSubmit)
+                ? handleSubmit(updateReceipt)
                 : () => {
                     scrollToIndex(index + 1);
                     fields[index + 1].ref?.current?.focus();
