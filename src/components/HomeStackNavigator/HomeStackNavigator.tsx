@@ -13,8 +13,16 @@ const HomeStack = createStackNavigator<HomeStackParamList>();
 export const HomeStackNavigator = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <HomeStack.Screen name="Form" component={Form} />
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ title: 'My receipts' }}
+      />
+      <HomeStack.Screen
+        name="Form"
+        component={Form}
+        options={{ title: 'Edit receipt' }}
+      />
     </HomeStack.Navigator>
   );
 };

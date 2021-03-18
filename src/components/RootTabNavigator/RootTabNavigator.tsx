@@ -26,7 +26,8 @@ export const RootTabNavigator = () => {
         name="Home"
         component={HomeStackNavigator}
         options={{
-          tabBarIcon: getNavigationIcon('home-outline'),
+          title: 'My Receipts',
+          tabBarIcon: getNavigationIcon('receipt-outline'),
         }}
       />
       {/* button to go to NullComponent is hidden under the tabBarButton, so it cannot be clicked */}

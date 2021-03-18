@@ -127,21 +127,6 @@ const Form = ({ route }: Props) => {
 
   const fields: Field[] = [
     {
-      name: 'merchantName',
-      defaultValue: '',
-    },
-    {
-      name: 'merchantAddress',
-      ref: merchantAddressInput,
-      defaultValue: '',
-    },
-    {
-      name: 'merchantPhoneNumber',
-      ref: merchantPhoneNumberInput,
-      defaultValue: '',
-      keyboardType: 'phone-pad' as KeyboardType,
-    },
-    {
       name: 'transactionDate',
       ref: transactionDateInput,
       defaultValue: new Date(),
@@ -172,6 +157,21 @@ const Form = ({ route }: Props) => {
           </>
         );
       },
+    },
+    {
+      name: 'merchantName',
+      defaultValue: '',
+    },
+    {
+      name: 'merchantAddress',
+      ref: merchantAddressInput,
+      defaultValue: '',
+    },
+    {
+      name: 'merchantPhoneNumber',
+      ref: merchantPhoneNumberInput,
+      defaultValue: '',
+      keyboardType: 'phone-pad' as KeyboardType,
     },
     {
       name: 'total',
@@ -220,6 +220,7 @@ const Form = ({ route }: Props) => {
             value={value.toString()}
             placeholder={toSentenceCase(field.name)}
             accessibilityLabel={toSentenceCase(field.name)}
+            label={toSentenceCase(field.name)}
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType={isLastField(index) ? 'done' : 'next'}
