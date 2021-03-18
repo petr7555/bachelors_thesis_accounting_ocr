@@ -32,6 +32,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { getTodaysDateAtNoon } from '../../global/utils';
+import { RECEIPTS, USERS } from '../../api/constants';
+import updateReceipt from '../../api/udpateReceipt';
 
 // Helper functions
 const toSentenceCase = (text: string) => {
@@ -62,36 +64,19 @@ type Props = {
 };
 
 const Form = ({ route }: Props) => {
-  const id = route.params?.id;
+  const receiptId = route.params?.id;
   const { control, handleSubmit, setValue } = useForm<ReceiptData>();
 
   const [user] = useAuthState(authInstance);
 
-  const updateReceipt = useCallback(
-    async (receiptData: ReceiptData) => {
-      console.log(receiptData);
-      try {
-        await firestoreInstance
-          .collection('Users')
-          .doc(user.uid)
-          .collection('receipts')
-          .doc(id)
-          .update(receiptData);
-        console.log('Receipt updated!');
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [id, user.uid],
-  );
-
   const [receiptData] = useDocumentData<FirebaseReceipt>(
     firestoreInstance
-      .collection('Users')
-      .doc(user?.uid)
-      .collection('receipts')
-      .doc(id),
+      .collection(USERS)
+      .doc(user.uid)
+      .collection(RECEIPTS)
+      .doc(receiptId),
   );
+
   useEffect(() => {
     if (receiptData) {
       console.log(receiptData, null, 2);
@@ -133,15 +118,23 @@ const Form = ({ route }: Props) => {
 
   const navigation = useNavigation();
 
+  const onSubmit = useCallback(
+    async (data: ReceiptData) => {
+      await updateReceipt(user.uid, receiptId, data);
+      navigation.navigate('HomeScreen');
+    },
+    [navigation, receiptId, user.uid],
+  );
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Text style={styles.headerText} onPress={handleSubmit(updateReceipt)}>
+        <Text style={styles.headerText} onPress={handleSubmit(onSubmit)}>
           Save
         </Text>
       ),
     });
-  }, [navigation, handleSubmit, updateReceipt]);
+  }, [handleSubmit, navigation, onSubmit]);
 
   const fields: Field[] = [
     {
@@ -249,7 +242,7 @@ const Form = ({ route }: Props) => {
             blurOnSubmit={false}
             onSubmitEditing={
               isLastField(index)
-                ? handleSubmit(updateReceipt)
+                ? handleSubmit(onSubmit)
                 : () => {
                     scrollToIndex(index + 1);
                     fields[index + 1].ref?.current?.focus();

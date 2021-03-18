@@ -25,6 +25,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
+import { RECEIPTS, USERS } from '../../api/constants';
 
 type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
@@ -143,9 +144,9 @@ const CameraScreen = ({ setModalVisible }: Props) => {
     if (user != null) {
       try {
         const result = await firestoreInstance
-          .collection('Users')
+          .collection(USERS)
           .doc(user.uid)
-          .collection('receipts')
+          .collection(RECEIPTS)
           .add({
             url: downloadURL,
             // @ts-ignore

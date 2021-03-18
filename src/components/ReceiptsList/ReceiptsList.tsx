@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { FirebaseReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
+import { RECEIPTS, USERS } from '../../api/constants';
 
 type HomeScreenNavigationProp = StackNavigationProp<
   HomeStackParamList,
@@ -33,7 +34,7 @@ const ReceiptsList = () => {
     loadingReceipts,
     errorReceipts,
   ] = useCollectionData<FirebaseReceipt>(
-    firestoreInstance.collection('Users').doc(user?.uid).collection('receipts'),
+    firestoreInstance.collection(USERS).doc(user?.uid).collection(RECEIPTS),
     { idField: 'id' },
   );
 
