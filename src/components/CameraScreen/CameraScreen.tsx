@@ -26,36 +26,37 @@ type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
 type Props = {
   setModalVisible: Dispatch<SetStateAction<boolean>>;
+  setProcessing: Dispatch<SetStateAction<boolean>>;
 };
 
-const CameraScreen = ({ setModalVisible }: Props) => {
+const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
 
-  const prefillForm = async (image: Image) => {
-    const newReceiptId = await processImage(image);
-    if (!newReceiptId) {
-      Alert.alert('Could not process the image.');
-      return;
+  const prefillForm = async (image?: Image) => {
+    if (image) {
+      setModalVisible(false);
+      setProcessing(true);
+      const newReceiptId = await processImage(image);
+      if (!newReceiptId) {
+        Alert.alert('Could not process the image.');
+        return;
+      }
+      setProcessing(false);
+      navigation.navigate('Home', {
+        screen: 'Form',
+        params: { id: newReceiptId },
+      });
     }
-    setModalVisible(false);
-    navigation.navigate('Home', {
-      screen: 'Form',
-      params: { id: newReceiptId },
-    });
   };
 
   const addNewImage = async () => {
     const image = await takeAnImage();
-    if (image) {
-      await prefillForm(image);
-    }
+    await prefillForm(image);
   };
 
   const addExistingImage = async () => {
     const image = await selectImageFromGallery();
-    if (image) {
-      await prefillForm(image);
-    }
+    await prefillForm(image);
   };
 
   const processImage = async (image: Image): Promise<string | undefined> => {
@@ -162,7 +163,6 @@ const CameraScreen = ({ setModalVisible }: Props) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   content: {
     backgroundColor: 'white',
