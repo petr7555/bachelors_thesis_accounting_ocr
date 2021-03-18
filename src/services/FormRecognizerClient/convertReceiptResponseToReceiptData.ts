@@ -15,11 +15,11 @@ type ReceiptDataBase = {
 };
 
 export type ReceiptData = ReceiptDataBase & {
-  transactionDateTime: Date;
+  transactionDate: Date;
 };
 
 export type FirebaseReceiptData = ReceiptDataBase & {
-  transactionDateTime: FirebaseFirestoreTypes.Timestamp;
+  transactionDate: FirebaseFirestoreTypes.Timestamp;
 };
 
 export type ReceiptDataMember = keyof ReceiptData;
@@ -39,7 +39,7 @@ export default function convertReceiptResponseToReceiptData(
     merchantName: '',
     merchantPhoneNumber: '',
     merchantAddress: '',
-    transactionDateTime: new Date(),
+    transactionDate: new Date(),
     total: 0,
     subtotal: 0,
     tax: 0,
@@ -68,13 +68,8 @@ export default function convertReceiptResponseToReceiptData(
   const transactionDate =
     fields.TransactionDate?.valueDate || fields.TransactionDate?.text || '';
 
-  const transactionTime =
-    fields.TransactionTime?.valueTime || fields.TransactionTime?.text || '';
-
-  result.transactionDateTime = new Date(
-    `${transactionDate} ${transactionTime}`.trim(),
-  );
-  console.log(result.transactionDateTime);
+  result.transactionDate = new Date(transactionDate.toString());
+  console.log(result.transactionDate);
 
   result.total =
     fields.Total?.valueNumber ||

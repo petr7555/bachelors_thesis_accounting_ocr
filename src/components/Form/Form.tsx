@@ -40,14 +40,17 @@ const toSentenceCase = (text: string) => {
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
 
 type ValueType = string | number | Date;
-type DateTimePickerMode = 'date' | 'time';
 
 type Field = {
   id: string;
   name: string;
   keyboardType?: KeyboardTypeOptions;
   ref?: MutableRefObject<TextInput | null>;
-  render?: (onChange, onBlur, value: ValueType) => React.ReactElement;
+  render?: (
+    onChange: any,
+    onBlur: any,
+    value: string | number | Date,
+  ) => React.ReactElement;
   defaultValue?: ValueType;
 };
 
@@ -74,7 +77,7 @@ const Form = ({ route }: Props) => {
     if (receiptData) {
       console.log(receiptData, null, 2);
       Object.entries(receiptData).forEach(([key, value]) => {
-        if (key === 'transactionDateTime') {
+        if (key === 'transactionDate') {
           // @ts-ignore
           value = value.toDate();
         }
@@ -83,16 +86,13 @@ const Form = ({ route }: Props) => {
     }
   }, [receiptData, setValue]);
 
-  // const [mode, setMode] = useState<DateTimePickerMode>('date');
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [show, setShow] = useState(false);
 
   let flatListRef: FlatList | null;
 
   const merchantAddressInput = useRef<TextInput>(null);
   const merchantPhoneNumberInput = useRef<TextInput>(null);
   const transactionDateInput = useRef<TextInput>(null);
-  const transactionTimeInput = useRef<TextInput>(null);
   const totalInput = useRef<TextInput>(null);
   const subtotalInput = useRef<TextInput>(null);
   const taxInput = useRef<TextInput>(null);
@@ -132,29 +132,6 @@ const Form = ({ route }: Props) => {
     });
   }, [navigation, handleSubmit]);
 
-  // const onDateTimePickerChange = (event, selectedDate, date) => {
-  //   console.log('date', date);
-  //
-  //   if (selectedDate) {
-  //     console.log(selectedDate);
-  //     // setDate(selectedDate);
-  //   }
-  //   setShow(false);
-  // };
-  //
-  // const showMode = (currentMode: DateTimePickerMode) => {
-  //   setShow(true);
-  //   setMode(currentMode);
-  // };
-  //
-  // const showDatePicker = () => {
-  //   showMode('date');
-  // };
-  //
-  // const showTimePicker = () => {
-  //   showMode('time');
-  // };
-
   const fields: Field[] = [
     {
       name: 'merchantName',
@@ -172,64 +149,26 @@ const Form = ({ route }: Props) => {
       keyboardType: 'phone-pad' as KeyboardType,
     },
     {
-      name: 'transactionDateTime',
+      name: 'transactionDate',
       ref: transactionDateInput,
       defaultValue: new Date(),
-      render: (onChange, onBlur, value: Date) => {
+      render: (onChange: any, onBlur: any, value: ValueType) => {
+        const date = value instanceof Date ? value : new Date();
         return (
           <>
-            <ListItem bottomDivider onPress={() => setShowDatePicker(true)}>
+            <ListItem bottomDivider onPress={() => setShow(true)}>
               <ListItem.Content>
-                <ListItem.Title>{value.toDateString()}</ListItem.Title>
+                <ListItem.Title>{date.toLocaleDateString()}</ListItem.Title>
               </ListItem.Content>
             </ListItem>
-            {showDatePicker && (
+            {show && (
               <DateTimePicker
-                value={value}
+                value={date}
                 mode="date"
                 is24Hour={true}
                 display="default"
                 onChange={(event, selectedDate) => {
-                  setShowDatePicker(false);
-                  console.log(selectedDate);
-                  if (selectedDate) {
-                    const utc = selectedDate.toUTCString();
-                    console.log('utc', utc);
-                    const d = selectedDate.getDate();
-                    const m = selectedDate.getMonth();
-                    const y = selectedDate.getFullYear();
-                    const newDate = new Date(`${d}/${m}/${y}`);
-                    console.log(newDate);
-                    onChange(newDate);
-                  }
-                }}
-              />
-            )}
-          </>
-        );
-      },
-    },
-    {
-      name: 'transactionDateTime',
-      ref: transactionTimeInput,
-      defaultValue: new Date(),
-      render: (onChange, onBlur, value: Date) => {
-        return (
-          <>
-            <ListItem bottomDivider onPress={() => setShowTimePicker(true)}>
-              <ListItem.Content>
-                <ListItem.Title>{value.toTimeString()}</ListItem.Title>
-              </ListItem.Content>
-            </ListItem>
-            {showTimePicker && (
-              <DateTimePicker
-                value={value}
-                mode="time"
-                is24Hour={true}
-                display="default"
-                onChange={(event, selectedDate) => {
-                  setShowTimePicker(false);
-                  console.log(selectedDate);
+                  setShow(false);
                   if (selectedDate) {
                     onChange(selectedDate);
                   }

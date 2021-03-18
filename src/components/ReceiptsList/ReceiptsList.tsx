@@ -63,7 +63,7 @@ const ReceiptsList = () => {
           <ListItem.Title>
             {`${
               item.merchantName || item.merchantAddress
-            } on ${item.transactionDateTime.toDate().toLocaleString()}`}
+            } on ${item.transactionDate.toDate().toDateString()}`}
           </ListItem.Title>
           <ListItem.Subtitle>
             {item.added.toDate().toDateString()}
