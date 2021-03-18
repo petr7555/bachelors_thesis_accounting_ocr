@@ -198,12 +198,12 @@ const LoginScreen = () => {
         onPress={handleSubmit(signIn)}
         loading={signInInProgress}
         disabled={signUpInProgress}
-        title={'Sign in'}
+        title="Sign in"
       />
       <Button
         containerStyle={styles.btnSignUpContainer}
         onPress={handleSubmit(signUp)}
-        title={'Sign up'}
+        title="Sign up"
         loading={signUpInProgress}
         disabled={signInInProgress}
       />

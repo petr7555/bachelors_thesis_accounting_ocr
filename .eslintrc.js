@@ -14,4 +14,10 @@ module.exports = {
     jest: false,
     it: false,
   },
+  rules: {
+    'react/jsx-curly-brace-presence': [
+      2,
+      { props: 'never', children: 'never' },
+    ],
+  },
 };
