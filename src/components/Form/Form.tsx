@@ -29,6 +29,7 @@ import { FirebaseReceipt } from '../ReceiptsList/ReceiptsList';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 // Helper functions
 const toSentenceCase = (text: string) => {
@@ -149,6 +150,7 @@ const Form = ({ route }: Props) => {
         return (
           <>
             <ListItem bottomDivider onPress={() => setShow(true)}>
+              <Icon name="calendar" size={20} />
               <ListItem.Content>
                 <ListItem.Title>{date.toLocaleDateString()}</ListItem.Title>
               </ListItem.Content>
