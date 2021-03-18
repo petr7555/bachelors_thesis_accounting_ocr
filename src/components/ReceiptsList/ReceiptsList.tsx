@@ -13,18 +13,18 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
-import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
+import { FirebaseReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 
 type HomeScreenNavigationProp = StackNavigationProp<
   HomeStackParamList,
   'HomeScreen'
 >;
 
-export type Receipt = {
+export type FirebaseReceipt = {
   id: string;
   url: string;
   added: FirebaseFirestoreTypes.Timestamp;
-} & ReceiptData;
+} & FirebaseReceiptData;
 
 const ReceiptsList = () => {
   const [user, loadingUser, errorUser] = useAuthState(authInstance);
@@ -32,7 +32,7 @@ const ReceiptsList = () => {
     receipts = [],
     loadingReceipts,
     errorReceipts,
-  ] = useCollectionData<Receipt>(
+  ] = useCollectionData<FirebaseReceipt>(
     firestoreInstance.collection('Users').doc(user?.uid).collection('receipts'),
     { idField: 'id' },
   );
@@ -53,7 +53,7 @@ const ReceiptsList = () => {
     Alert.alert('Cannot load receipts.');
   }
 
-  const renderItem: ListRenderItem<Receipt> = ({ item }) => {
+  const renderItem: ListRenderItem<FirebaseReceipt> = ({ item }) => {
     return (
       <ListItem
         bottomDivider
@@ -61,9 +61,9 @@ const ReceiptsList = () => {
         <Avatar source={{ uri: item.url }} />
         <ListItem.Content>
           <ListItem.Title>
-            {`${item.merchantName || item.merchantAddress} on ${
-              item.transactionDate || item.transactionTime
-            }`}
+            {`${
+              item.merchantName || item.merchantAddress
+            } on ${item.transactionDateTime.toDate().toLocaleString()}`}
           </ListItem.Title>
           <ListItem.Subtitle>
             {item.added.toDate().toDateString()}

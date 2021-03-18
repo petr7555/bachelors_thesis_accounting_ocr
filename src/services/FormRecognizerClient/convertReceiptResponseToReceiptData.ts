@@ -1,18 +1,25 @@
 import { ReceiptResponse } from './FormRecognizerClient';
 import { getAmountFromString, getCurrencyFromString } from './amountParser';
+import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 
-export type ReceiptData = {
+type ReceiptDataBase = {
   merchantName: string;
   merchantPhoneNumber: string;
   merchantAddress: string;
-  transactionDate: string;
-  transactionTime: string;
   total: number;
   subtotal: number;
   tax: number;
   tip: number;
   currency: string;
   items: Item[];
+};
+
+export type ReceiptData = ReceiptDataBase & {
+  transactionDateTime: Date;
+};
+
+export type FirebaseReceiptData = ReceiptDataBase & {
+  transactionDateTime: FirebaseFirestoreTypes.Timestamp;
 };
 
 export type ReceiptDataMember = keyof ReceiptData;
@@ -32,8 +39,7 @@ export default function convertReceiptResponseToReceiptData(
     merchantName: '',
     merchantPhoneNumber: '',
     merchantAddress: '',
-    transactionDate: '',
-    transactionTime: '',
+    transactionDateTime: new Date(),
     total: 0,
     subtotal: 0,
     tax: 0,
@@ -59,15 +65,16 @@ export default function convertReceiptResponseToReceiptData(
     fields.MerchantAddress?.text ||
     result.merchantAddress;
 
-  result.transactionDate =
-    fields.TransactionDate?.valueDate ||
-    fields.TransactionDate?.text ||
-    result.transactionDate;
+  const transactionDate =
+    fields.TransactionDate?.valueDate || fields.TransactionDate?.text || '';
 
-  result.transactionTime =
-    fields.TransactionTime?.valueTime ||
-    fields.TransactionTime?.text ||
-    result.transactionTime;
+  const transactionTime =
+    fields.TransactionTime?.valueTime || fields.TransactionTime?.text || '';
+
+  result.transactionDateTime = new Date(
+    `${transactionDate} ${transactionTime}`.trim(),
+  );
+  console.log(result.transactionDateTime);
 
   result.total =
     fields.Total?.valueNumber ||
