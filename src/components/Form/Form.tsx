@@ -34,6 +34,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { getTodaysDateAtNoon } from '../../global/utils';
 import updateReceipt from '../../api/udpateReceipt';
 import getReceiptForUser from '../../api/getReceiptForUser';
+import EmailValidator from 'email-validator';
 
 // Helper functions
 const toSentenceCase = (text: string) => {
@@ -65,7 +66,16 @@ type Props = {
 
 const Form = ({ route }: Props) => {
   const receiptId = route.params?.id;
-  const { control, handleSubmit, setValue } = useForm<ReceiptData>();
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    errors,
+    setError,
+    trigger,
+  } = useForm<ReceiptData>({
+    mode: 'all',
+  });
 
   const [user] = useAuthState(authInstance);
 
@@ -185,6 +195,13 @@ const Form = ({ route }: Props) => {
       ref: totalInput,
       defaultValue: 0,
       keyboardType: 'numeric' as KeyboardType,
+      rules: {
+        required: true,
+        validate: (input) => {
+          console.log(input);
+          return isNaN(input) ? 'Must be a number' : undefined;
+        },
+      },
     },
     {
       name: 'subtotal',
@@ -223,11 +240,16 @@ const Form = ({ route }: Props) => {
           <Input
             inputStyle={styles.input}
             onBlur={onBlur}
-            onChangeText={(inputValue) => onChange(inputValue)}
+            onChangeText={(inputValue) => {
+              // without this, error is rendered only one character after the actual error happened
+              setError('dummy', {});
+              onChange(inputValue);
+            }}
             value={value.toString()}
             placeholder={toSentenceCase(field.name)}
             accessibilityLabel={toSentenceCase(field.name)}
             label={toSentenceCase(field.name)}
+            errorMessage={errors[field.name]?.message}
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType={isLastField(index) ? 'done' : 'next'}
@@ -236,6 +258,7 @@ const Form = ({ route }: Props) => {
             // @ts-ignore
             ref={field.ref}
             blurOnSubmit={false}
+            selectTextOnFocus={true}
             onSubmitEditing={
               isLastField(index)
                 ? handleSubmit(onSubmit)
@@ -250,6 +273,7 @@ const Form = ({ route }: Props) => {
       name={field.name}
       defaultValue={field.defaultValue}
       key={index}
+      rules={field.rules}
     />
   );
 

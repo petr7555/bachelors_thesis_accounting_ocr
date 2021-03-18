@@ -31,7 +31,7 @@ type FormData = {
 
 const LoginScreen = () => {
   const { control, handleSubmit, errors } = useForm<FormData>({
-    mode: 'onBlur',
+    mode: 'all',
   });
   const [showPass, setShowPass] = useState(false);
   const [signInInProgress, setSignInInProgress] = useState(false);
@@ -126,14 +126,13 @@ const LoginScreen = () => {
         defaultValue=""
         rules={{
           required: true,
-          validate: (input) => EmailValidator.validate(input),
+          validate: (input) =>
+            EmailValidator.validate(input) ? undefined : 'Invalid email format',
         }}
       />
       {errors.email && (
         <Text style={styles.validationErrorText}>
-          {errors.email.type === 'validate'
-            ? 'Invalid email format.'
-            : 'This field is required'}
+          {errors.email.message || 'This field is required'}
         </Text>
       )}
 
@@ -180,18 +179,14 @@ const LoginScreen = () => {
         defaultValue=""
         rules={{
           required: true,
-          pattern: {
-            value: /.{8,}/,
+          minLength: {
+            value: 8,
             message: 'Password must be at least 8 characters long',
           },
         }}
       />
       {errors.password && (
-        <Text>
-          {errors.password.message
-            ? errors.password.message
-            : 'This field is required'}
-        </Text>
+        <Text>{errors.password.message || 'This field is required'}</Text>
       )}
       <Button
         containerStyle={styles.btnSignInContainer}
