@@ -13,7 +13,7 @@ import {
 import { Button } from 'react-native-elements';
 
 import { Controller, useForm } from 'react-hook-form';
-import IonIcon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { authInstance, FirebaseError } from '../../global/firebase';
 import bgImage from '../../../images/background.png';
@@ -89,7 +89,7 @@ const LoginScreen = () => {
   return (
     <ImageBackground source={bgImage} style={styles.backgroundContainer}>
       <View style={styles.logoContainer}>
-        <IonIcon style={styles.logo} name="scan" size={120} color="white" />
+        <Icon style={styles.logo} name="scan" size={120} color="white" />
         <Text style={styles.logoText}>Receipts scanner</Text>
       </View>
 
@@ -97,7 +97,7 @@ const LoginScreen = () => {
         control={control}
         render={({ onChange, onBlur, value }) => (
           <View style={styles.inputSection}>
-            <IonIcon
+            <Icon
               style={styles.inputIcon}
               name="person-circle"
               size={24}
