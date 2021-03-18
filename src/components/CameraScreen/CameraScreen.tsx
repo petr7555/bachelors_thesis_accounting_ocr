@@ -9,11 +9,6 @@ import ImagePicker, {
 } from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import {
-  authInstance,
-  firestore,
-  firestoreInstance,
-} from '../../global/firebase';
-import {
   requestCameraPermission,
   requestStoragePermission,
 } from '../../global/permissions';
@@ -25,7 +20,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
-import { RECEIPTS, USERS } from '../../api/constants';
+import addImageToUsersReceipts from '../../api/addImageToUsersReceipts';
 
 type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
@@ -133,31 +128,6 @@ const CameraScreen = ({ setModalVisible }: Props) => {
       return addImageToUsersReceipts(downloadURL, receiptData);
     } catch (error) {
       console.error(error);
-    }
-  };
-
-  const addImageToUsersReceipts = async (
-    downloadURL: string,
-    receiptData: ReceiptData,
-  ): Promise<string | undefined> => {
-    const user = authInstance.currentUser;
-    if (user != null) {
-      try {
-        const result = await firestoreInstance
-          .collection(USERS)
-          .doc(user.uid)
-          .collection(RECEIPTS)
-          .add({
-            url: downloadURL,
-            // @ts-ignore
-            added: firestore.Timestamp.now(),
-            ...receiptData,
-          });
-        console.log('Receipt added!');
-        return result.id;
-      } catch (error) {
-        console.error(error);
-      }
     }
   };
 

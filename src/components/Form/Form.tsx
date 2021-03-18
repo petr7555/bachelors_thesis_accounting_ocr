@@ -25,15 +25,15 @@ import {
   ReceiptDataMember,
 } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { authInstance, firestoreInstance } from '../../global/firebase';
+import { authInstance } from '../../global/firebase';
 import { FirebaseReceipt } from '../ReceiptsList/ReceiptsList';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { getTodaysDateAtNoon } from '../../global/utils';
-import { RECEIPTS, USERS } from '../../api/constants';
 import updateReceipt from '../../api/udpateReceipt';
+import getReceiptForUser from '../../api/getReceiptForUser';
 
 // Helper functions
 const toSentenceCase = (text: string) => {
@@ -70,11 +70,7 @@ const Form = ({ route }: Props) => {
   const [user] = useAuthState(authInstance);
 
   const [receiptData] = useDocumentData<FirebaseReceipt>(
-    firestoreInstance
-      .collection(USERS)
-      .doc(user.uid)
-      .collection(RECEIPTS)
-      .doc(receiptId),
+    getReceiptForUser(user.uid, receiptId),
   );
 
   useEffect(() => {

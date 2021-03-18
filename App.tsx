@@ -18,9 +18,9 @@ import { RootTabNavigator } from './src/components/RootTabNavigator/RootTabNavig
 import LoginScreen from './src/components/LoginScreen/LoginScreen';
 import Colors from './src/global/styles/colors';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { authInstance, firestoreInstance } from './src/global/firebase';
+import { authInstance } from './src/global/firebase';
 import { ThemeProvider } from 'react-native-elements';
-import { USERS } from './src/api/constants';
+import createUser from './src/api/createUser';
 
 const MyDefaultTheme: Theme = {
   dark: false,
@@ -56,30 +56,7 @@ const App = () => {
   const [user, loading, error] = useAuthState(authInstance);
 
   useEffect(() => {
-    if (user) {
-      const userUid = user.uid;
-      firestoreInstance
-        .collection(USERS)
-        .doc(userUid)
-        .get()
-        .then((documentSnapshot) => {
-          if (documentSnapshot.exists) {
-            console.log('User with uid', userUid, 'exists');
-          } else {
-            console.log('Creating User document with uid', userUid);
-            firestoreInstance
-              .collection(USERS)
-              .doc(userUid)
-              .set({
-                name: user.displayName,
-                email: user.email,
-              })
-              .then(() => {
-                console.log('User added!');
-              });
-          }
-        });
-    }
+    createUser(user);
   }, [user]);
 
   if (loading) {
