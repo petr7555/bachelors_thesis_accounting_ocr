@@ -1,4 +1,10 @@
-import React, { MutableRefObject, useEffect, useRef } from 'react';
+import React, {
+  MutableRefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Button,
   FlatList,
@@ -6,11 +12,12 @@ import {
   KeyboardTypeOptions,
   ListRenderItem,
   StyleSheet,
+  Text,
   TextInput,
   View,
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 import { Input } from 'react-native-elements';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import {
@@ -21,6 +28,8 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { authInstance, firestoreInstance } from '../../global/firebase';
 import { Receipt } from '../ReceiptsList/ReceiptsList';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import Colors from '../../global/styles/colors';
 
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
 
@@ -177,8 +186,37 @@ const Form = ({ route }: Props) => {
     flatListRef?.scrollToIndex({ animated: true, index });
   };
 
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setDate(currentDate);
+  };
+
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: 'normal',
+            fontFamily: 'sans-serif-medium',
+            color: Colors.primary,
+            marginRight: 20,
+          }}
+          onPress={handleSubmit(onSubmit)}>
+          Save
+        </Text>
+      ),
+    });
+  }, [navigation]);
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <FlatList
         data={fields}
         renderItem={renderField}
@@ -189,7 +227,16 @@ const Form = ({ route }: Props) => {
         // prevents keyboard disappearing when it would hide input field
         removeClippedSubviews={false}
       />
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
     </View>
   );
 };
