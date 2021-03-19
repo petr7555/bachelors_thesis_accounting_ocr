@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import React from 'react';
 import { authInstance } from '../../global/firebase';
 import { Button } from 'react-native-elements';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 const googleSignin =
   Platform.OS === 'android'
@@ -9,7 +10,15 @@ const googleSignin =
     : null;
 
 const SignOutButton = () => {
+  const navigation = useNavigation();
+
   const signOut = async () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'Home' }],
+      }),
+    );
     try {
       await authInstance.signOut();
       console.log('User signed out from firebase auth.');
