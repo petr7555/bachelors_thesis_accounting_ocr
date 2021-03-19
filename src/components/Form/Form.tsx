@@ -203,18 +203,30 @@ const Form = ({ route }: Props) => {
       ref: subtotalInput,
       defaultValue: 0,
       keyboardType: 'numeric' as KeyboardType,
+      rules: {
+        required: true,
+        validate: (input) => (isNaN(input) ? 'Must be a number' : undefined),
+      },
     },
     {
       name: 'tax',
       ref: taxInput,
       defaultValue: 0,
       keyboardType: 'numeric' as KeyboardType,
+      rules: {
+        required: true,
+        validate: (input) => (isNaN(input) ? 'Must be a number' : undefined),
+      },
     },
     {
       name: 'tip',
       ref: tipInput,
       defaultValue: 0,
       keyboardType: 'numeric' as KeyboardType,
+      rules: {
+        required: true,
+        validate: (input) => (isNaN(input) ? 'Must be a number' : undefined),
+      },
     },
     {
       name: 'currency',
