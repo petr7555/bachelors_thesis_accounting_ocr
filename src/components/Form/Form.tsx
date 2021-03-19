@@ -34,7 +34,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { getTodaysDateAtNoon } from '../../global/utils';
 import updateReceipt from '../../api/udpateReceipt';
 import getReceiptForUser from '../../api/getReceiptForUser';
-import EmailValidator from 'email-validator';
 
 // Helper functions
 const toSentenceCase = (text: string) => {
@@ -71,7 +70,6 @@ const Form = ({ route }: Props) => {
     handleSubmit,
     setValue,
     errors,
-    setError,
     trigger,
   } = useForm<ReceiptData>({
     mode: 'all',
@@ -197,10 +195,7 @@ const Form = ({ route }: Props) => {
       keyboardType: 'numeric' as KeyboardType,
       rules: {
         required: true,
-        validate: (input) => {
-          console.log(input);
-          return isNaN(input) ? 'Must be a number' : undefined;
-        },
+        validate: (input) => (isNaN(input) ? 'Must be a number' : undefined),
       },
     },
     {
@@ -239,17 +234,24 @@ const Form = ({ route }: Props) => {
         ) : (
           <Input
             inputStyle={styles.input}
-            onBlur={onBlur}
+            onBlur={() => {
+              if (value === '') {
+                setValue(field.name, field.defaultValue);
+                trigger(field.name);
+              }
+              onBlur();
+            }}
             onChangeText={(inputValue) => {
-              // without this, error is rendered only one character after the actual error happened
-              setError('dummy', {});
               onChange(inputValue);
             }}
             value={value.toString()}
             placeholder={toSentenceCase(field.name)}
             accessibilityLabel={toSentenceCase(field.name)}
             label={toSentenceCase(field.name)}
-            errorMessage={errors[field.name]?.message}
+            errorMessage={
+              errors[field.name] &&
+              (errors[field.name]?.message || 'This field is required')
+            }
             autoCapitalize="none"
             autoCorrect={false}
             returnKeyType={isLastField(index) ? 'done' : 'next'}
