@@ -26,7 +26,10 @@ import {
 } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { authInstance } from '../../global/firebase';
-import { FirebaseReceipt } from '../ReceiptsList/ReceiptsList';
+import {
+  FirebaseReceipt,
+  HomeScreenNavigationProp,
+} from '../ReceiptsList/ReceiptsList';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
@@ -120,7 +123,7 @@ const Form = ({ route }: Props) => {
     flatListRef?.scrollToIndex({ animated: true, index });
   };
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const onSubmit = useCallback(
     async (data: ReceiptData) => {

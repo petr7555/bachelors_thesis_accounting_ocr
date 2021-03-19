@@ -16,7 +16,7 @@ import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { FirebaseReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import getAllReceiptsForUser from '../../api/getAllReceiptsForUser';
 
-type HomeScreenNavigationProp = StackNavigationProp<
+export type HomeScreenNavigationProp = StackNavigationProp<
   HomeStackParamList,
   'HomeScreen'
 >;
