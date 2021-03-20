@@ -360,10 +360,13 @@ exports[`Storyshots ScanButton default 1`] = `
                           style={
                             Array [
                               Object {
+                                "color": undefined,
+                                "fontSize": 12,
+                              },
+                              Object {
                                 "color": "white",
                                 "fontSize": 50,
                               },
-                              undefined,
                               Object {
                                 "fontFamily": "Ionicons",
                                 "fontStyle": "normal",
@@ -532,10 +535,12 @@ exports[`Storyshots ScanButton default 1`] = `
                                     style={
                                       Array [
                                         Object {
-                                          "color": "white",
-                                          "fontSize": 28,
+                                          "color": undefined,
+                                          "fontSize": 12,
                                         },
                                         Object {
+                                          "color": "white",
+                                          "fontSize": 28,
                                           "left": 40,
                                           "position": "absolute",
                                         },
@@ -624,10 +629,12 @@ exports[`Storyshots ScanButton default 1`] = `
                                     style={
                                       Array [
                                         Object {
-                                          "color": "white",
-                                          "fontSize": 28,
+                                          "color": undefined,
+                                          "fontSize": 12,
                                         },
                                         Object {
+                                          "color": "white",
+                                          "fontSize": 28,
                                           "left": 40,
                                           "position": "absolute",
                                         },
