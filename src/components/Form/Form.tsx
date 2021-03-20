@@ -35,13 +35,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { getTodaysDateAtNoon, toSentenceCase } from '../../global/utils';
+import {
+  getTodaysDateAtNoon,
+  toSentenceCase,
+  validateNumber,
+} from '../../global/utils';
 import updateReceipt from '../../api/updateReceipt';
 import getReceiptForUser from '../../api/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
-
-const validateNumber = (input: string) =>
-  isNaN(Number(input)) ? 'Must be a number' : undefined;
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
@@ -89,7 +90,7 @@ const Form = ({ route }: Props) => {
 
   useEffect(() => {
     if (receiptData) {
-      console.log(receiptData, null, 2);
+      console.log(JSON.stringify(receiptData, null, 2));
       Object.entries(receiptData).forEach(([key, value]) => {
         if (key === 'transactionDate') {
           // @ts-ignore
