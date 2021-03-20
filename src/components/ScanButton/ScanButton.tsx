@@ -11,13 +11,12 @@ import Camera from '../CameraScreen/CameraScreen';
 import Colors from '../../global/styles/colors';
 
 const ScanButton = () => {
-  const [isModalVisible, setModalVisible] = useState(false);
   const [processing, setProcessing] = useState(false);
 
+  const [isModalVisible, setModalVisible] = useState(false);
   const showModal = () => {
     setModalVisible(true);
   };
-
   const hideModal = () => {
     setModalVisible(false);
   };

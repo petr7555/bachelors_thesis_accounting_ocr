@@ -6,8 +6,6 @@ import { toSentenceCase, validateNumber } from '../../global/utils';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
-import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
-import Modal from 'react-native-modal';
 import ConfirmationModal from '../ConfirmDelete/ConfirmationModal';
 
 export type ItemFormData = {
@@ -46,13 +44,12 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
     });
   }, [item, setValue]);
 
-  const [modalVisible, setModalVisible] = useState(false);
   const [editing, setEditing] = useState(false);
 
+  const [isModalVisible, setModalVisible] = useState(false);
   const showModal = () => {
     setModalVisible(true);
   };
-
   const hideModal = () => {
     setModalVisible(false);
   };
@@ -188,7 +185,7 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
         }}
       />
       <ConfirmationModal
-        isVisible={modalVisible}
+        isVisible={isModalVisible}
         id={item.id}
         onConfirm={deleteItem}
         onCancel={hideModal}

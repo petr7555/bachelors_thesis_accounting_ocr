@@ -7,14 +7,13 @@ import {
   ListRenderItem,
 } from 'react-native';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Avatar, ListItem } from 'react-native-elements';
 import { authInstance } from '../../global/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { FirebaseReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import getAllReceiptsForUser from '../../api/getAllReceiptsForUser';
+import Receipt from './Receipt';
 
 export type HomeScreenNavigationProp = StackNavigationProp<
   HomeStackParamList,
@@ -37,8 +36,6 @@ const ReceiptsList = () => {
     idField: 'id',
   });
 
-  const navigation = useNavigation<HomeScreenNavigationProp>();
-
   if (loadingUser || loadingReceipts) {
     return <ActivityIndicator />;
   }
@@ -54,23 +51,7 @@ const ReceiptsList = () => {
   }
 
   const renderItem: ListRenderItem<FirebaseReceipt> = ({ item }) => {
-    return (
-      <ListItem
-        bottomDivider
-        onPress={() => navigation.navigate('Form', { id: item.id })}>
-        <Avatar source={{ uri: item.url }} />
-        <ListItem.Content>
-          <ListItem.Title>
-            {`${
-              item.merchantName || item.merchantAddress
-            } on ${item.transactionDate.toDate().toDateString()}`}
-          </ListItem.Title>
-          <ListItem.Subtitle>
-            {item.added.toDate().toDateString()}
-          </ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-    );
+    return <Receipt userId={user.uid} receipt={item} />;
   };
 
   return (

@@ -12,7 +12,7 @@ type Props = {
 const ConfirmDelete = ({ onDelete, onCancel }: Props) => {
   return (
     <View style={styles.content}>
-      <Text>Remove this item?</Text>
+      <Text style={styles.confirmationText}>Remove this item?</Text>
       <Button
         containerStyle={styles.buttonContainer}
         title="Remove"
@@ -37,6 +37,10 @@ const ConfirmDelete = ({ onDelete, onCancel }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  confirmationText: {
+    fontSize: 20,
+    paddingBottom: 15,
+  },
   content: {
     backgroundColor: 'white',
     padding: 22,

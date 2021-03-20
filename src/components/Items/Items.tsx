@@ -49,7 +49,6 @@ const Items = ({ route }: Props) => {
   };
 
   const addItem = useCallback(async () => {
-    console.log('creatingNewitem');
     const newItem = {
       id: uuidv4(),
       name: 'New item',
