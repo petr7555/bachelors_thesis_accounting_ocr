@@ -7,7 +7,6 @@ const updateItems = async (
   receiptId: string,
   items: Item[],
 ) => {
-  console.log(items);
   try {
     await firestoreInstance
       .collection(USERS)

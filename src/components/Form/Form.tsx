@@ -89,7 +89,6 @@ const Form = ({ route }: Props) => {
 
   useEffect(() => {
     if (receiptData) {
-      console.log(JSON.stringify(receiptData, null, 2));
       Object.entries(receiptData).forEach(([key, value]) => {
         if (key === 'transactionDate') {
           // @ts-ignore
