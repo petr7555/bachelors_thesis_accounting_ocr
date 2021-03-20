@@ -1,18 +1,20 @@
-import { RouteProp } from '@react-navigation/native';
-import React from 'react';
-import { FlatList, ListRenderItem, StyleSheet, View } from 'react-native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
+import React, { useCallback, useLayoutEffect } from 'react';
+import { FlatList, ListRenderItem, StyleSheet, Text } from 'react-native';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
-import { Button } from 'react-native-elements';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { FirebaseReceipt } from '../ReceiptsList/ReceiptsList';
+import {
+  FirebaseReceipt,
+  HomeScreenNavigationProp,
+} from '../ReceiptsList/ReceiptsList';
 import getReceiptForUser from '../../api/getReceiptForUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import updateItems from '../../api/updateItems';
 import ReceiptItem, { ItemFormData } from './ReceiptItem';
 import { v4 as uuidv4 } from 'uuid';
+import Colors from '../../global/styles/colors';
 
 type ItemsScreenRouteProp = RouteProp<HomeStackParamList, 'Items'>;
 
@@ -46,49 +48,66 @@ const Items = ({ route }: Props) => {
     }
   };
 
-  const addItem = async () => {
+  const addItem = useCallback(async () => {
     console.log('creatingNewitem');
     const newItem = {
       id: uuidv4(),
-      name: 'new item',
+      name: 'New item',
       quantity: 1,
       price: 0,
       totalPrice: 0,
     };
     await updateItems(user.uid, receiptId, [...(items || []), newItem]);
-  };
+  }, [items, receiptId, user.uid]);
+
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Text style={styles.headerText} onPress={addItem}>
+          Add
+        </Text>
+      ),
+    });
+  }, [addItem, navigation]);
 
   const renderItem: ListRenderItem<Item> = ({ item }) => (
     <ReceiptItem item={item} deleteItem={deleteItem} updateItem={updateItem} />
   );
 
   return (
-    <View>
-      <FlatList
-        data={items}
-        renderItem={renderItem}
-        // prevents keyboard disappearing when it would hide input field
-        removeClippedSubviews={false}
-      />
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Add item"
-          icon={
-            <MaterialIcon
-              name="cart-plus"
-              color="white"
-              size={20}
-              style={styles.icon}
-            />
-          }
-          onPress={addItem}
-        />
-      </View>
-    </View>
+    <FlatList
+      data={items}
+      renderItem={renderItem}
+      // prevents keyboard disappearing when it would hide input field
+      removeClippedSubviews={false}
+    />
+    // <View style={styles.buttonContainer}>
+    //   <Button
+    //     title="Add item"
+    //     icon={
+    //       <MaterialIcon
+    //         name="cart-plus"
+    //         color="white"
+    //         size={20}
+    //         style={styles.icon}
+    //       />
+    //     }
+    //     onPress={addItem}
+    //   />
+    // </View>
   );
 };
 
 const styles = StyleSheet.create({
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'normal',
+    fontFamily: 'sans-serif-medium',
+    color: Colors.secondary,
+    marginRight: 20,
+  },
   buttonContainer: {
     marginTop: 15,
     alignItems: 'center',
