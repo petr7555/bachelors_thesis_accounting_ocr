@@ -282,7 +282,6 @@ it('converts response with fields', () => {
         quantity: 1,
         price: 6,
         totalPrice: 6,
-        currency: '$',
       },
       {
         id: '1',
@@ -290,7 +289,6 @@ it('converts response with fields', () => {
         quantity: 0,
         price: 11,
         totalPrice: 9,
-        currency: '$',
       },
     ],
   };
@@ -628,7 +626,6 @@ it("uses default values of Item's fields", () => {
   const expected = [
     {
       id: '0',
-      currency: '',
       name: '',
       price: 0,
       quantity: 0,
@@ -869,11 +866,24 @@ it('parses TotalPrice text if valueNumber not available', () => {
   );
 });
 
-it("parses item's currency from TotalPrice", () => {
+it("parses currency from first item's TotalPrice that has it", () => {
   const response: ReceiptResponse = getTestResponseWithFields({
     Items: {
       type: 'array',
       valueArray: [
+        {
+          type: 'object',
+          valueObject: {
+            TotalPrice: {
+              type: 'number',
+              valueNumber: 999,
+              text: '999.00',
+              boundingBox: [398, 762.7, 482, 764.5, 481.4, 791.8, 397.4, 790],
+              page: 1,
+              confidence: 0.984,
+            },
+          },
+        },
         {
           type: 'object',
           valueObject: {
@@ -887,21 +897,46 @@ it("parses item's currency from TotalPrice", () => {
             },
           },
         },
+        {
+          type: 'object',
+          valueObject: {
+            TotalPrice: {
+              type: 'number',
+              valueNumber: 999,
+              text: '€999.00',
+              boundingBox: [398, 762.7, 482, 764.5, 481.4, 791.8, 397.4, 790],
+              page: 1,
+              confidence: 0.984,
+            },
+          },
+        },
       ],
     },
   });
 
-  expect(convertReceiptResponseToReceiptData(response).items[0]).toHaveProperty(
+  expect(convertReceiptResponseToReceiptData(response)).toHaveProperty(
     'currency',
     '$',
   );
 });
 
-it('parses currency from Price', () => {
+it("parses currency from first item's Price that has it", () => {
   const response: ReceiptResponse = getTestResponseWithFields({
     Items: {
       type: 'array',
       valueArray: [
+        {
+          type: 'object',
+          valueObject: {
+            Price: {
+              type: 'number',
+              text: '6.00,',
+              boundingBox: [75, 322, 119, 322, 119, 337, 75, 337],
+              page: 1,
+              confidence: 0.637,
+            },
+          },
+        },
         {
           type: 'object',
           valueObject: {
@@ -914,11 +949,23 @@ it('parses currency from Price', () => {
             },
           },
         },
+        {
+          type: 'object',
+          valueObject: {
+            Price: {
+              type: 'number',
+              text: '€6.00,',
+              boundingBox: [75, 322, 119, 322, 119, 337, 75, 337],
+              page: 1,
+              confidence: 0.637,
+            },
+          },
+        },
       ],
     },
   });
 
-  expect(convertReceiptResponseToReceiptData(response).items[0]).toHaveProperty(
+  expect(convertReceiptResponseToReceiptData(response)).toHaveProperty(
     'currency',
     '$',
   );

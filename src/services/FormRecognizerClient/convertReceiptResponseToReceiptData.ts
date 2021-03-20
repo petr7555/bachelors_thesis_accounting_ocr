@@ -32,7 +32,6 @@ export type Item = {
   quantity: number;
   price: number;
   totalPrice: number;
-  currency: string;
 };
 
 export default function convertReceiptResponseToReceiptData(
@@ -95,9 +94,6 @@ export default function convertReceiptResponseToReceiptData(
     getAmountFromString(fields.Tip?.text) ||
     result.tip;
 
-  result.currency =
-    getCurrencyFromString(fields.Total?.text) || result.currency;
-
   if (fields.Items?.valueArray) {
     for (const item of fields.Items.valueArray) {
       const resultItem: Item = {
@@ -106,7 +102,6 @@ export default function convertReceiptResponseToReceiptData(
         quantity: 0,
         price: 0,
         totalPrice: 0,
-        currency: '',
       };
 
       resultItem.name =
@@ -127,12 +122,25 @@ export default function convertReceiptResponseToReceiptData(
         getAmountFromString(item.valueObject.TotalPrice?.text) ||
         resultItem.totalPrice;
 
-      resultItem.currency =
-        getCurrencyFromString(item.valueObject.TotalPrice?.text) ||
-        getCurrencyFromString(item.valueObject.Price?.text) ||
-        resultItem.currency;
-
       result.items.push(resultItem);
+    }
+  }
+
+  // get currency either of whole receipt or based on first item that has the currency
+  result.currency =
+    getCurrencyFromString(fields.Total?.text) || result.currency;
+
+  if (!result.currency) {
+    if (fields.Items?.valueArray) {
+      for (const item of fields.Items.valueArray) {
+        const itemCurrency =
+          getCurrencyFromString(item.valueObject.TotalPrice?.text) ||
+          getCurrencyFromString(item.valueObject.Price?.text);
+        if (itemCurrency) {
+          result.currency = itemCurrency;
+          break;
+        }
+      }
     }
   }
 
