@@ -35,16 +35,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { getTodaysDateAtNoon } from '../../global/utils';
+import { getTodaysDateAtNoon, toSentenceCase } from '../../global/utils';
 import updateReceipt from '../../api/updateReceipt';
 import getReceiptForUser from '../../api/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
-
-// Helper functions
-const toSentenceCase = (text: string) => {
-  const result = text.replace(/([A-Z])/g, ' $1');
-  return result.charAt(0).toUpperCase() + result.slice(1);
-};
 
 const validateNumber = (input: string) =>
   isNaN(Number(input)) ? 'Must be a number' : undefined;
