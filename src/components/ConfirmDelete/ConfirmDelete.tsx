@@ -39,14 +39,14 @@ const styles = StyleSheet.create({
   },
   content: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     borderColor: Colors.primary,
     borderRadius: 4,
     justifyContent: 'center',
     padding: 22,
   },
   icon: {
-    color: 'white',
+    color: Colors.white,
     fontSize: 25,
     left: 40, // Keep some space between your left border and Image
     position: 'absolute',

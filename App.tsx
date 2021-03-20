@@ -41,6 +41,7 @@ const MyDarkTheme: Theme = {
 const { width: WIDTH } = Dimensions.get('window');
 
 const theme = {
+  // you can override react-native-elements' components' styles here
   Button: {
     buttonStyle: {
       width: WIDTH - 60,
@@ -68,7 +69,7 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} useDark={scheme === 'dark'}>
       <NavigationContainer
         theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
         {user ? <RootTabNavigator /> : <LoginScreen />}

@@ -6,6 +6,7 @@ import { FirebaseReceipt, HomeScreenNavigationProp } from './ReceiptsList';
 import { useNavigation } from '@react-navigation/native';
 import deleteReceipt from '../../api/deleteReceipt';
 import { StyleSheet, Text } from 'react-native';
+import Colors from '../../global/styles/colors';
 
 type Props = {
   userId: string;
@@ -59,7 +60,7 @@ const Receipt = ({ userId, receipt }: Props) => {
 
 const styles = StyleSheet.create({
   icon: {
-    color: '#e00000',
+    color: Colors.red,
     fontSize: 25,
   },
 });

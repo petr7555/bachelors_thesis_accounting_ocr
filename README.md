@@ -126,6 +126,18 @@ Project uses Google Cloud Platform
 - `emulator -list-avds`
 - `emulator -avd Pixel_3a_API_29 -wipe-data`
 
+## Theming
+
+- use constants in `~/src/global/styles/colors.ts` for colors that do not change based on light / dark mode
+- use `useTheme` hook to obtain a theme that changes according to whether dark mode is enabled or not
+
+```tsx
+import {useTheme} from 'react-native-elements';
+
+const {theme} = useTheme();
+return <Component color={theme.colors?.black}/>;
+```
+
 ## Troubleshooting
 
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)

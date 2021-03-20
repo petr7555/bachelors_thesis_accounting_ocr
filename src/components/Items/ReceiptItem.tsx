@@ -7,6 +7,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import ConfirmationModal from '../ConfirmDelete/ConfirmationModal';
+import Colors from '../../global/styles/colors';
 
 export type ItemFormData = {
   name: string;
@@ -160,7 +161,7 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
         <IonIcon
           style={styles.icon}
           name="checkmark-circle-outline"
-          color="green"
+          color={Colors.green}
           onPress={() => {
             setEditing(false);
             handleSubmit(onSubmit)();
@@ -170,7 +171,7 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
         <MaterialIcon
           style={styles.icon}
           name="square-edit-outline"
-          color="green"
+          color={Colors.green}
           onPress={() => {
             setEditing(true);
           }}
@@ -179,7 +180,7 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
       <IonIcon
         style={styles.icon}
         name="remove-circle"
-        color="#e00000"
+        color={Colors.red}
         onPress={() => {
           showModal();
         }}

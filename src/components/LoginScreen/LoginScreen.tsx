@@ -19,6 +19,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { authInstance, FirebaseError } from '../../global/firebase';
 import bgImage from '../../../images/background.png';
 import EmailValidator from 'email-validator';
+import Colors from '../../global/styles/colors';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,
@@ -160,7 +161,7 @@ const LoginScreen = () => {
                 <MaterialIcon
                   style={styles.eyeIcon}
                   name="eye"
-                  color={pressed ? 'rgba(255,255,255,0.7)' : 'white'}
+                  color={pressed ? 'rgba(255,255,255,0.7)' : Colors.white}
                 />
               )}
             </Pressable>
@@ -221,19 +222,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   input: {
-    color: 'white',
+    color: Colors.white,
     flex: 1,
     fontSize: 18,
   },
   inputIcon: {
-    color: 'white',
+    color: Colors.white,
     fontSize: 24,
     paddingLeft: 12,
     paddingRight: 8,
   },
   inputSection: {
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: Colors.transparentBlack,
     borderRadius: 25,
     flexDirection: 'row',
     height: 50,
@@ -244,14 +245,14 @@ const styles = StyleSheet.create({
   logo: {
     // width: 120,
     // height: 120,
-    color: 'white',
+    color: Colors.white,
     fontSize: 120,
   },
   logoContainer: {
     alignItems: 'center',
   },
   logoText: {
-    color: 'white',
+    color: Colors.white,
     fontSize: 30,
     fontWeight: '500',
     marginBottom: 40,

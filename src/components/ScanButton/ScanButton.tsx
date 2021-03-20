@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   icon: {
-    color: 'white',
+    color: Colors.white,
     fontSize: 50,
   },
   modalView: {

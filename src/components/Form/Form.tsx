@@ -12,13 +12,12 @@ import {
   KeyboardTypeOptions,
   ListRenderItem,
   StyleSheet,
-  Text,
   TextInput,
   View,
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { RouteProp, useNavigation } from '@react-navigation/native';
-import { Input, ListItem } from 'react-native-elements';
+import { Input, ListItem, Text } from 'react-native-elements';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import {
   Item,
@@ -34,7 +33,6 @@ import {
 import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {
   getTodaysDateAtNoon,
   toSentenceCase,
@@ -43,6 +41,7 @@ import {
 import updateReceipt from '../../api/updateReceipt';
 import getReceiptForUser from '../../api/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+import Icon from '../ThemedIcon/ThemedIonIcon';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
