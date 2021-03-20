@@ -21,6 +21,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from './src/global/firebase';
 import { ThemeProvider } from 'react-native-elements';
 import createUser from './src/api/createUser';
+import SplashScreen from 'react-native-splash-screen';
 
 const MyDefaultTheme: Theme = {
   dark: false,
@@ -58,6 +59,7 @@ const App = () => {
 
   useEffect(() => {
     createUser(user);
+    SplashScreen.hide();
   }, [user]);
 
   if (loading) {
