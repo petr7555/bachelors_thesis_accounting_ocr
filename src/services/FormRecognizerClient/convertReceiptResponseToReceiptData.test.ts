@@ -286,7 +286,7 @@ it('converts response with fields', () => {
       {
         id: '1',
         name: 'HIONS, I# 541524,',
-        quantity: 0,
+        quantity: 1,
         price: 11,
         totalPrice: 9,
       },
@@ -628,7 +628,7 @@ it("uses default values of Item's fields", () => {
       id: '0',
       name: '',
       price: 0,
-      quantity: 0,
+      quantity: 1,
       totalPrice: 0,
     },
   ];
@@ -748,7 +748,7 @@ it('uses default value is Quantity valueNumber not available', () => {
 
   expect(convertReceiptResponseToReceiptData(response).items[0]).toHaveProperty(
     'quantity',
-    0,
+    1,
   );
 });
 

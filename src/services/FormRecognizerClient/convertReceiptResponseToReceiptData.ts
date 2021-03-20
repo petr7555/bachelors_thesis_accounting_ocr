@@ -99,7 +99,7 @@ export default function convertReceiptResponseToReceiptData(
       const resultItem: Item = {
         id: uuidv4(),
         name: '',
-        quantity: 0,
+        quantity: 1,
         price: 0,
         totalPrice: 0,
       };
