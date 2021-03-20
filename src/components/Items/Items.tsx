@@ -87,18 +87,11 @@ const Items = ({ route }: Props) => {
 
 const styles = StyleSheet.create({
   headerText: {
+    color: Colors.secondary,
+    fontFamily: 'sans-serif-medium',
     fontSize: 20,
     fontWeight: 'normal',
-    fontFamily: 'sans-serif-medium',
-    color: Colors.secondary,
     marginRight: 20,
-  },
-  buttonContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  icon: {
-    paddingRight: 8,
   },
 });
 

@@ -46,9 +46,9 @@ const { width: WIDTH } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   btnGoogle: {
-    width: WIDTH - 60,
     height: 50,
     marginTop: 20,
+    width: WIDTH - 60,
   },
 });
 

@@ -30,26 +30,26 @@ const ConfirmDelete = ({ onDelete, onCancel }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  buttonContainer: {
+    marginVertical: 5,
+  },
   confirmationText: {
     fontSize: 20,
     paddingBottom: 15,
   },
   content: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 4,
+    backgroundColor: 'white',
     borderColor: Colors.primary,
-  },
-  buttonContainer: {
-    marginVertical: 5,
+    borderRadius: 4,
+    justifyContent: 'center',
+    padding: 22,
   },
   icon: {
-    position: 'absolute',
-    left: 40, // Keep some space between your left border and Image
     color: 'white',
     fontSize: 25,
+    left: 40, // Keep some space between your left border and Image
+    position: 'absolute',
   },
 });
 

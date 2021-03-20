@@ -193,7 +193,9 @@ const Form = ({ route }: Props) => {
             }}>
             <Icon style={styles.icon} name="cart" />
             <ListItem.Content>
-              <ListItem.Title>Items</ListItem.Title>
+              <ListItem.Title>
+                <Text>Items</Text>
+              </ListItem.Title>
             </ListItem.Content>
           </ListItem>
         );
@@ -337,17 +339,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerText: {
+    color: Colors.primary,
+    fontFamily: 'sans-serif-medium',
     fontSize: 20,
     fontWeight: 'normal',
-    fontFamily: 'sans-serif-medium',
-    color: Colors.primary,
     marginRight: 20,
-  },
-  input: {
-    paddingBottom: 0,
   },
   icon: {
     fontSize: 20,
+  },
+  input: {
+    paddingBottom: 0,
   },
 });
 

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { FirebaseReceipt, HomeScreenNavigationProp } from './ReceiptsList';
 import { useNavigation } from '@react-navigation/native';
 import deleteReceipt from '../../api/deleteReceipt';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 type Props = {
   userId: string;
@@ -30,9 +30,11 @@ const Receipt = ({ userId, receipt }: Props) => {
       <Avatar source={{ uri: receipt.url }} />
       <ListItem.Content>
         <ListItem.Title>
-          {`${
-            receipt.merchantName || receipt.merchantAddress
-          } on ${receipt.transactionDate.toDate().toDateString()}`}
+          <Text>
+            {`${
+              receipt.merchantName || receipt.merchantAddress
+            } on ${receipt.transactionDate.toDate().toDateString()}`}
+          </Text>
         </ListItem.Title>
         <ListItem.Subtitle>
           {receipt.added.toDate().toDateString()}

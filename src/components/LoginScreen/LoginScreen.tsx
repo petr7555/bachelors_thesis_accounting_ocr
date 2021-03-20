@@ -207,54 +207,54 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  logoContainer: {
-    alignItems: 'center',
-  },
-  logo: {
-    // width: 120,
-    // height: 120,
-    fontSize: 120,
-    color: 'white',
-  },
-  logoText: {
-    color: 'white',
-    fontSize: 30,
-    fontWeight: '500',
-    marginTop: 10,
-    marginBottom: 40,
-  },
-  input: {
-    flex: 1,
-    color: 'white',
-    fontSize: 18,
-  },
-  inputSection: {
-    width: WIDTH - 60,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    borderRadius: 25,
-    marginTop: 10,
-    height: 50,
-  },
-  inputIcon: {
-    paddingLeft: 12,
-    paddingRight: 8,
-    fontSize: 24,
-    color: 'white',
-  },
-  eyeIcon: {
-    fontSize: 24,
-  },
   btnEye: {
-    paddingRight: 20,
     paddingLeft: 8,
+    paddingRight: 20,
   },
   btnSignInContainer: {
     marginTop: 20,
   },
   btnSignUpContainer: {
+    marginTop: 10,
+  },
+  eyeIcon: {
+    fontSize: 24,
+  },
+  input: {
+    color: 'white',
+    flex: 1,
+    fontSize: 18,
+  },
+  inputIcon: {
+    color: 'white',
+    fontSize: 24,
+    paddingLeft: 12,
+    paddingRight: 8,
+  },
+  inputSection: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 25,
+    flexDirection: 'row',
+    height: 50,
+    justifyContent: 'center',
+    marginTop: 10,
+    width: WIDTH - 60,
+  },
+  logo: {
+    // width: 120,
+    // height: 120,
+    color: 'white',
+    fontSize: 120,
+  },
+  logoContainer: {
+    alignItems: 'center',
+  },
+  logoText: {
+    color: 'white',
+    fontSize: 30,
+    fontWeight: '500',
+    marginBottom: 40,
     marginTop: 10,
   },
   validationErrorText: {

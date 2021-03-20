@@ -150,22 +150,22 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
   );
 };
 const styles = StyleSheet.create({
-  content: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderColor: Colors.primary,
-  },
   buttonContainer: {
     marginVertical: 5,
   },
+  content: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderColor: Colors.primary,
+    borderRadius: 4,
+    justifyContent: 'center',
+    padding: 22,
+  },
   icon: {
-    position: 'absolute',
-    left: 40, // Keep some space between your left border and Image
-    fontSize: 28,
     color: 'white',
+    fontSize: 28,
+    left: 40, // Keep some space between your left border and Image
+    position: 'absolute',
   },
 });
 

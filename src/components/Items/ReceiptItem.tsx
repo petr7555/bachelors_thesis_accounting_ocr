@@ -195,23 +195,23 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  inputFields: {
+  icon: {
+    fontSize: 25,
+  },
+  input: {
+    paddingBottom: 0,
+  },
+  inputFieldContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  inputFieldContainer: {
+  inputFields: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
   item: {
     height: 200,
     paddingLeft: 5,
-  },
-  input: {
-    paddingBottom: 0,
-  },
-  icon: {
-    fontSize: 25,
   },
 });
 

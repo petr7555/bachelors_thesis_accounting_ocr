@@ -49,9 +49,13 @@ const ScanButton = () => {
 
 const styles = StyleSheet.create({
   container: {
+    alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+  },
+  icon: {
+    color: 'white',
+    fontSize: 50,
   },
   modalView: {
     justifyContent: 'flex-end',
@@ -59,19 +63,15 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   roundButton: {
-    width: 90,
-    height: 90,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    backgroundColor: Colors.secondary,
+    borderColor: Colors.primary,
     borderRadius: 100,
     borderWidth: 5,
-    borderColor: Colors.primary,
-    backgroundColor: Colors.secondary,
-  },
-  icon: {
-    color: 'white',
-    fontSize: 50,
+    height: 90,
+    justifyContent: 'center',
+    marginBottom: 10,
+    width: 90,
   },
 });
 
