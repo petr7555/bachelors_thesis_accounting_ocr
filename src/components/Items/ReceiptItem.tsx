@@ -8,6 +8,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
 import Modal from 'react-native-modal';
+import ConfirmationModal from '../ConfirmDelete/ConfirmationModal';
 
 export type ItemFormData = {
   name: string;
@@ -186,19 +187,12 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
           showModal();
         }}
       />
-      <Modal
-        // style={styles.modalView}
+      <ConfirmationModal
         isVisible={modalVisible}
-        onBackdropPress={hideModal}
-        onBackButtonPress={hideModal}>
-        <ConfirmDelete
-          onDelete={() => {
-            hideModal();
-            deleteItem(item.id);
-          }}
-          onCancel={hideModal}
-        />
-      </Modal>
+        id={item.id}
+        onConfirm={deleteItem}
+        onCancel={hideModal}
+      />
     </ListItem>
   );
 };
