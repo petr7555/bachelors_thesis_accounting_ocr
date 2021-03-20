@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { FirebaseReceipt, HomeScreenNavigationProp } from './ReceiptsList';
 import { useNavigation } from '@react-navigation/native';
 import deleteReceipt from '../../api/deleteReceipt';
+import { StyleSheet } from 'react-native';
 
 type Props = {
   userId: string;
@@ -38,9 +39,8 @@ const Receipt = ({ userId, receipt }: Props) => {
         </ListItem.Subtitle>
       </ListItem.Content>
       <IonIcon
+        style={styles.icon}
         name="remove-circle"
-        color="#e00000"
-        size={25}
         onPress={() => {
           showModal();
         }}
@@ -54,5 +54,12 @@ const Receipt = ({ userId, receipt }: Props) => {
     </ListItem>
   );
 };
+
+const styles = StyleSheet.create({
+  icon: {
+    color: '#e00000',
+    fontSize: 25,
+  },
+});
 
 export default Receipt;

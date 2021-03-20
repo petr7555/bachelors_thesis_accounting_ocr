@@ -157,7 +157,7 @@ const Form = ({ route }: Props) => {
         return (
           <>
             <ListItem bottomDivider onPress={() => setShow(true)}>
-              <Icon name="calendar" size={20} />
+              <Icon style={styles.icon} name="calendar" />
               <ListItem.Content>
                 <ListItem.Title>{date.toLocaleDateString()}</ListItem.Title>
               </ListItem.Content>
@@ -191,7 +191,7 @@ const Form = ({ route }: Props) => {
             onPress={() => {
               navigation.navigate('Items', { id: receiptId });
             }}>
-            <Icon name="cart" size={20} />
+            <Icon style={styles.icon} name="cart" />
             <ListItem.Content>
               <ListItem.Title>Items</ListItem.Title>
             </ListItem.Content>
@@ -345,6 +345,9 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingBottom: 0,
+  },
+  icon: {
+    fontSize: 20,
   },
 });
 

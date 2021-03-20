@@ -5,6 +5,7 @@ import {
   ImageBackground,
   Platform,
   Pressable,
+  PressableStateCallbackType,
   StyleSheet,
   Text,
   TextInput,
@@ -89,7 +90,7 @@ const LoginScreen = () => {
   return (
     <ImageBackground source={bgImage} style={styles.backgroundContainer}>
       <View style={styles.logoContainer}>
-        <Icon style={styles.logo} name="scan" size={120} color="white" />
+        <Icon style={styles.logo} name="scan" />
         <Text style={styles.logoText}>Receipts scanner</Text>
       </View>
 
@@ -97,12 +98,7 @@ const LoginScreen = () => {
         control={control}
         render={({ onChange, onBlur, value }) => (
           <View style={styles.inputSection}>
-            <Icon
-              style={styles.inputIcon}
-              name="person-circle"
-              size={24}
-              color="white"
-            />
+            <Icon style={styles.inputIcon} name="person-circle" />
             <TextInput
               style={styles.input}
               onBlur={onBlur}
@@ -140,12 +136,7 @@ const LoginScreen = () => {
         control={control}
         render={({ onChange, onBlur, value }) => (
           <View style={styles.inputSection}>
-            <MaterialIcon
-              style={styles.inputIcon}
-              name="lock"
-              size={24}
-              color="white"
-            />
+            <MaterialIcon style={styles.inputIcon} name="lock" />
             <TextInput
               style={styles.input}
               onBlur={onBlur}
@@ -165,10 +156,10 @@ const LoginScreen = () => {
               style={styles.btnEye}
               onPressIn={() => setShowPass(true)}
               onPressOut={() => setShowPass(false)}>
-              {({ pressed }) => (
+              {({ pressed }: PressableStateCallbackType) => (
                 <MaterialIcon
+                  style={styles.eyeIcon}
                   name="eye"
-                  size={24}
                   color={pressed ? 'rgba(255,255,255,0.7)' : 'white'}
                 />
               )}
@@ -222,6 +213,8 @@ const styles = StyleSheet.create({
   logo: {
     // width: 120,
     // height: 120,
+    fontSize: 120,
+    color: 'white',
   },
   logoText: {
     color: 'white',
@@ -248,6 +241,11 @@ const styles = StyleSheet.create({
   inputIcon: {
     paddingLeft: 12,
     paddingRight: 8,
+    fontSize: 24,
+    color: 'white',
+  },
+  eyeIcon: {
+    fontSize: 24,
   },
   btnEye: {
     paddingRight: 20,

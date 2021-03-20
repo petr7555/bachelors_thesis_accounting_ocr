@@ -138,27 +138,13 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
         containerStyle={styles.buttonContainer}
         title="Take an image"
         onPress={addNewImage}
-        icon={
-          <Icon
-            style={styles.icon}
-            name="camera-outline"
-            size={28}
-            color="white"
-          />
-        }
+        icon={<Icon style={styles.icon} name="camera-outline" />}
       />
       <Button
         containerStyle={styles.buttonContainer}
         title="Select from gallery"
         onPress={addExistingImage}
-        icon={
-          <Icon
-            style={styles.icon}
-            name="images-outline"
-            size={28}
-            color="white"
-          />
-        }
+        icon={<Icon style={styles.icon} name="images-outline" />}
       />
     </View>
   );
@@ -178,6 +164,8 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     left: 40, // Keep some space between your left border and Image
+    fontSize: 28,
+    color: 'white',
   },
 });
 

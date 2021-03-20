@@ -30,7 +30,7 @@ const ScanButton = () => {
         {processing ? (
           <ActivityIndicator size="large" color="white" />
         ) : (
-          <Icon name="scan" color="white" size={50} />
+          <Icon style={styles.icon} name="scan" />
         )}
       </TouchableOpacity>
       <Modal
@@ -68,6 +68,10 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderColor: Colors.primary,
     backgroundColor: Colors.secondary,
+  },
+  icon: {
+    color: 'white',
+    fontSize: 50,
   },
 });
 

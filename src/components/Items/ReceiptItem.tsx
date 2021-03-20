@@ -158,9 +158,9 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
       </ListItem.Content>
       {editing ? (
         <IonIcon
+          style={styles.icon}
           name="checkmark-circle-outline"
           color="green"
-          size={25}
           onPress={() => {
             setEditing(false);
             handleSubmit(onSubmit)();
@@ -168,18 +168,18 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
         />
       ) : (
         <MaterialIcon
+          style={styles.icon}
           name="square-edit-outline"
           color="green"
-          size={25}
           onPress={() => {
             setEditing(true);
           }}
         />
       )}
       <IonIcon
+        style={styles.icon}
         name="remove-circle"
         color="#e00000"
-        size={25}
         onPress={() => {
           showModal();
         }}
@@ -209,6 +209,9 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingBottom: 0,
+  },
+  icon: {
+    fontSize: 25,
   },
 });
 

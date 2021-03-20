@@ -17,20 +17,13 @@ const ConfirmDelete = ({ onDelete, onCancel }: Props) => {
         containerStyle={styles.buttonContainer}
         title="Remove"
         onPress={onDelete}
-        icon={<Icon style={styles.icon} name="trash" size={25} color="white" />}
+        icon={<Icon style={styles.icon} name="trash" />}
       />
       <Button
         containerStyle={styles.buttonContainer}
         title="Cancel"
         onPress={onCancel}
-        icon={
-          <Icon
-            style={styles.icon}
-            name="return-up-back"
-            size={25}
-            color="white"
-          />
-        }
+        icon={<Icon style={styles.icon} name="return-up-back" />}
       />
     </View>
   );
@@ -55,6 +48,8 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     left: 40, // Keep some space between your left border and Image
+    color: 'white',
+    fontSize: 25,
   },
 });
 
