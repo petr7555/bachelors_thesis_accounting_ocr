@@ -12,6 +12,7 @@ import { authInstance } from '../../global/firebase';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import updateItems from '../../api/updateItems';
 import ReceiptItem, { ItemFormData } from './ReceiptItem';
+import { v4 as uuidv4 } from 'uuid';
 
 type ItemsScreenRouteProp = RouteProp<HomeStackParamList, 'Items'>;
 
@@ -37,13 +38,24 @@ const Items = ({ route }: Props) => {
   };
 
   const updateItem = async (itemId: string, itemFormData: ItemFormData) => {
-    console.log('updating item');
     if (items) {
       const newItems = items.map((item) => {
         return item.id === itemId ? { ...item, ...itemFormData } : item;
       });
       await updateItems(user.uid, receiptId, newItems);
     }
+  };
+
+  const addItem = async () => {
+    console.log('creatingNewitem');
+    const newItem = {
+      id: uuidv4(),
+      name: 'new item',
+      quantity: 1,
+      price: 0,
+      totalPrice: 0,
+    };
+    await updateItems(user.uid, receiptId, [...(items || []), newItem]);
   };
 
   const renderItem: ListRenderItem<Item> = ({ item }) => (
@@ -69,9 +81,7 @@ const Items = ({ route }: Props) => {
               style={styles.icon}
             />
           }
-          onPress={() => {
-            console.log('add');
-          }}
+          onPress={addItem}
         />
       </View>
     </View>
