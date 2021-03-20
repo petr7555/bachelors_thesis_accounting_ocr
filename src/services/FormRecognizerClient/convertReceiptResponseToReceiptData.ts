@@ -2,6 +2,7 @@ import { ReceiptResponse } from './FormRecognizerClient';
 import { getAmountFromString, getCurrencyFromString } from './amountParser';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import { getTodaysDateAtNoon } from '../../global/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 type ReceiptDataBase = {
   merchantName: string;
@@ -25,7 +26,8 @@ export type FirebaseReceiptData = ReceiptDataBase & {
 
 export type ReceiptDataMember = keyof ReceiptData;
 
-type Item = {
+export type Item = {
+  id: string;
   name: string;
   quantity: number;
   price: number;
@@ -99,6 +101,7 @@ export default function convertReceiptResponseToReceiptData(
   if (fields.Items?.valueArray) {
     for (const item of fields.Items.valueArray) {
       const resultItem: Item = {
+        id: uuidv4(),
         name: '',
         quantity: 0,
         price: 0,

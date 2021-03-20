@@ -21,6 +21,7 @@ import { RouteProp, useNavigation } from '@react-navigation/native';
 import { Input, ListItem } from 'react-native-elements';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import {
+  Item,
   ReceiptData,
   ReceiptDataMember,
 } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
@@ -35,8 +36,9 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { getTodaysDateAtNoon } from '../../global/utils';
-import updateReceipt from '../../api/udpateReceipt';
+import updateReceipt from '../../api/updateReceipt';
 import getReceiptForUser from '../../api/getReceiptForUser';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
 // Helper functions
 const toSentenceCase = (text: string) => {
@@ -44,10 +46,13 @@ const toSentenceCase = (text: string) => {
   return result.charAt(0).toUpperCase() + result.slice(1);
 };
 
+const validateNumber = (input: string) =>
+  isNaN(Number(input)) ? 'Must be a number' : undefined;
+
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
 
-type ValueType = string | number | Date;
+type ValueType = string | number | Date | Item[];
 
 type Field = {
   id: string;
@@ -60,6 +65,10 @@ type Field = {
     value: string | number | Date,
   ) => React.ReactElement;
   defaultValue?: ValueType;
+  rules?: Exclude<
+    RegisterOptions,
+    'valueAsNumber' | 'valueAsDate' | 'setValueAs'
+  >;
 };
 
 type Props = {
@@ -177,6 +186,25 @@ const Form = ({ route }: Props) => {
       },
     },
     {
+      name: 'items',
+      defaultValue: [],
+      // ref: itemsInput,
+      render: () => {
+        return (
+          <ListItem
+            bottomDivider
+            onPress={() => {
+              navigation.navigate('Items', { id: receiptId });
+            }}>
+            <Icon name="cart" size={20} />
+            <ListItem.Content>
+              <ListItem.Title>Items</ListItem.Title>
+            </ListItem.Content>
+          </ListItem>
+        );
+      },
+    },
+    {
       name: 'merchantName',
       defaultValue: '',
     },
@@ -198,7 +226,7 @@ const Form = ({ route }: Props) => {
       keyboardType: 'numeric' as KeyboardType,
       rules: {
         required: true,
-        validate: (input) => (isNaN(input) ? 'Must be a number' : undefined),
+        validate: validateNumber,
       },
     },
     {
@@ -208,7 +236,7 @@ const Form = ({ route }: Props) => {
       keyboardType: 'numeric' as KeyboardType,
       rules: {
         required: true,
-        validate: (input) => (isNaN(input) ? 'Must be a number' : undefined),
+        validate: validateNumber,
       },
     },
     {
@@ -218,7 +246,7 @@ const Form = ({ route }: Props) => {
       keyboardType: 'numeric' as KeyboardType,
       rules: {
         required: true,
-        validate: (input) => (isNaN(input) ? 'Must be a number' : undefined),
+        validate: validateNumber,
       },
     },
     {
@@ -228,7 +256,7 @@ const Form = ({ route }: Props) => {
       keyboardType: 'numeric' as KeyboardType,
       rules: {
         required: true,
-        validate: (input) => (isNaN(input) ? 'Must be a number' : undefined),
+        validate: validateNumber,
       },
     },
     {
@@ -289,7 +317,6 @@ const Form = ({ route }: Props) => {
       }}
       name={field.name}
       defaultValue={field.defaultValue}
-      key={index}
       rules={field.rules}
     />
   );

@@ -3,6 +3,19 @@ import convertReceiptResponseToReceiptData, {
   ReceiptData,
 } from './convertReceiptResponseToReceiptData';
 import { getTodaysDateAtNoon } from '../../global/utils';
+import uuid from 'uuid';
+
+jest.mock('uuid', () => {
+  const v4 = jest.fn();
+  return {
+    v4,
+  };
+});
+
+beforeEach(() => {
+  let value = 0;
+  uuid.v4.mockImplementation(() => `${value++}`);
+});
 
 const getTestResponseWithFields = (fields: Fields): ReceiptResponse => {
   return {
@@ -264,6 +277,7 @@ it('converts response with fields', () => {
     currency: '$',
     items: [
       {
+        id: '0',
         name: 'back extender - 1 pack (S#',
         quantity: 1,
         price: 6,
@@ -271,6 +285,7 @@ it('converts response with fields', () => {
         currency: '$',
       },
       {
+        id: '1',
         name: 'HIONS, I# 541524,',
         quantity: 0,
         price: 11,
@@ -612,6 +627,7 @@ it("uses default values of Item's fields", () => {
 
   const expected = [
     {
+      id: '0',
       currency: '',
       name: '',
       price: 0,
