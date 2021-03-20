@@ -83,20 +83,6 @@ const Items = ({ route }: Props) => {
       // prevents keyboard disappearing when it would hide input field
       removeClippedSubviews={false}
     />
-    // <View style={styles.buttonContainer}>
-    //   <Button
-    //     title="Add item"
-    //     icon={
-    //       <MaterialIcon
-    //         name="cart-plus"
-    //         color="white"
-    //         size={20}
-    //         style={styles.icon}
-    //       />
-    //     }
-    //     onPress={addItem}
-    //   />
-    // </View>
   );
 };
 
