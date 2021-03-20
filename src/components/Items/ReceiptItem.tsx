@@ -133,13 +133,11 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
                       }}
                       disabled={!editing}
                       value={value.toString()}
-                      placeholder={toSentenceCase(field.name)}
                       accessibilityLabel={toSentenceCase(field.name)}
                       label={toSentenceCase(field.name)}
                       errorMessage={
                         errors[field.name] &&
-                        (errors[field.name]?.message ||
-                          'This field is required')
+                        (errors[field.name]?.message || 'Required')
                       }
                       autoCapitalize="none"
                       autoCorrect={false}
