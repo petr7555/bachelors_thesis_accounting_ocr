@@ -27,7 +27,7 @@ export class Poller {
           },
         });
         const status: AnalyzeReceiptStatus = response.data.status;
-        console.log(status);
+        console.log(`Status: ${status}`);
         if (status === 'succeeded' || status === 'failed') {
           return response.data;
         }

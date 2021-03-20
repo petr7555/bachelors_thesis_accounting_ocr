@@ -124,7 +124,7 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
       console.log('Image uploaded to firebase storage.');
 
       const downloadURL = await reference.getDownloadURL();
-      console.log('Download url is', downloadURL);
+      console.log(`Download url is ${downloadURL}`);
 
       return addImageToUsersReceipts(downloadURL, receiptData);
     } catch (error) {
