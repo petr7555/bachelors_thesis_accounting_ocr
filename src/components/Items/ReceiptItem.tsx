@@ -100,22 +100,14 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
   ];
 
   return (
-    <ListItem bottomDivider containerStyle={{ height: 200, paddingLeft: 5 }}>
+    <ListItem bottomDivider containerStyle={styles.item}>
       <ListItem.Content>
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}>
+        <View style={styles.inputFields}>
           {fields.map((field, index) => {
             return (
               <View
                 key={index}
-                style={{
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  width: field.width,
-                }}>
+                style={[styles.inputFieldContainer, { width: field.width }]}>
                 <Controller
                   control={control}
                   render={({ onChange, onBlur, value }) => (
@@ -212,6 +204,18 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  inputFields: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  inputFieldContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  item: {
+    height: 200,
+    paddingLeft: 5,
+  },
   input: {
     paddingBottom: 0,
   },
