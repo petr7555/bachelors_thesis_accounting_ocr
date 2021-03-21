@@ -5,14 +5,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../global/styles/colors';
 
 type Props = {
+  text: string;
   onDelete: () => void;
   onCancel: () => void;
 };
 
-const ConfirmDelete = ({ onDelete, onCancel }: Props) => {
+const ConfirmDelete = ({ text, onDelete, onCancel }: Props) => {
   return (
     <View style={styles.content}>
-      <Text style={styles.confirmationText}>Remove this item?</Text>
+      <Text style={styles.confirmationText}>{text}</Text>
       <Button
         containerStyle={styles.buttonContainer}
         title="Remove"

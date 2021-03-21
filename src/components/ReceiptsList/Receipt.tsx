@@ -51,6 +51,7 @@ const Receipt = ({ userId, receipt }: Props) => {
       <ConfirmationModal
         isVisible={isModalVisible}
         id={receipt.id}
+        text="Remove this receipt?"
         onConfirm={() => deleteReceipt(userId, receipt.id)}
         onCancel={hideModal}
       />
