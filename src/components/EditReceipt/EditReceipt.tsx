@@ -8,9 +8,11 @@ import React, {
 } from 'react';
 import {
   FlatList,
+  Image,
   KeyboardType,
   KeyboardTypeOptions,
   ListRenderItem,
+  Pressable,
   StyleSheet,
   TextInput,
   View,
@@ -43,6 +45,7 @@ import getReceiptForUser from '../../api/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import ImageThumbnail from './ImageThumbnail';
+import Modal from 'react-native-modal';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
@@ -318,11 +321,22 @@ const EditReceipt = ({ route }: Props) => {
   );
 
   const showOriginal = () => {
-    console.log('showOriginal');
+    setPreviewUri(receiptData?.url);
+    showModal();
   };
 
   const showProcessed = () => {
-    console.log('showProcessed');
+    setPreviewUri(receiptData?.url);
+    showModal();
+  };
+
+  const [previewUri, setPreviewUri] = useState();
+  const [isModalVisible, setModalVisible] = useState(false);
+  const showModal = () => {
+    setModalVisible(true);
+  };
+  const hideModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -339,6 +353,16 @@ const EditReceipt = ({ route }: Props) => {
           text="View processed"
         />
       </View>
+      <Modal
+        isVisible={isModalVisible}
+        onBackdropPress={hideModal}
+        onBackButtonPress={hideModal}>
+        <Pressable onPress={hideModal}>
+          <View style={styles.modalContent}>
+            <Image style={styles.largeImg} source={{ uri: previewUri }} />
+          </View>
+        </Pressable>
+      </Modal>
       <FlatList
         data={fields}
         renderItem={renderField}
@@ -375,6 +399,17 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingBottom: 0,
+  },
+  largeImg: {
+    height: '100%',
+    width: '100%',
+  },
+  modalContent: {
+    alignItems: 'center',
+    backgroundColor: Colors.white,
+    borderRadius: 4,
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
 });
 

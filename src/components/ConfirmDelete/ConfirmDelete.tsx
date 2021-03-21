@@ -12,7 +12,7 @@ type Props = {
 
 const ConfirmDelete = ({ text, onDelete, onCancel }: Props) => {
   return (
-    <View style={styles.content}>
+    <View style={styles.modalContent}>
       <Text style={styles.confirmationText}>{text}</Text>
       <Button
         containerStyle={styles.buttonContainer}
@@ -38,18 +38,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingBottom: 15,
   },
-  content: {
-    alignItems: 'center',
-    backgroundColor: Colors.white,
-    borderRadius: 4,
-    justifyContent: 'center',
-    padding: 22,
-  },
   icon: {
     color: Colors.white,
     fontSize: 25,
     left: 40, // Keep some space between your left border and Image
     position: 'absolute',
+  },
+  modalContent: {
+    alignItems: 'center',
+    backgroundColor: Colors.white,
+    borderRadius: 4,
+    justifyContent: 'center',
+    padding: 22,
   },
 });
 
