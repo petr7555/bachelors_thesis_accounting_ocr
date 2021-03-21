@@ -8,10 +8,10 @@ import React, {
 } from 'react';
 import {
   FlatList,
-  Image,
   KeyboardTypeOptions,
   ListRenderItem,
   Pressable,
+  ScrollView,
   StyleSheet,
   TextInput,
   View,
@@ -45,6 +45,7 @@ import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import ImageThumbnail from './ImageThumbnail';
 import Modal from 'react-native-modal';
+import FullWidthImage from './FullWidthImage';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
@@ -367,11 +368,13 @@ const EditReceipt = ({ route }: Props) => {
         isVisible={isModalVisible}
         onBackdropPress={hideModal}
         onBackButtonPress={hideModal}>
-        <Pressable onPress={hideModal}>
-          <View style={styles.modalContent}>
-            <Image style={styles.largeImg} source={{ uri: previewUri }} />
-          </View>
-        </Pressable>
+        <View>
+          <ScrollView>
+            <Pressable onPress={hideModal}>
+              <FullWidthImage uri={previewUri} />
+            </Pressable>
+          </ScrollView>
+        </View>
       </Modal>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
@@ -410,17 +413,6 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingBottom: 0,
-  },
-  largeImg: {
-    height: '100%',
-    width: '100%',
-  },
-  modalContent: {
-    alignItems: 'center',
-    backgroundColor: Colors.white,
-    borderRadius: 4,
-    justifyContent: 'center',
-    overflow: 'hidden',
   },
 });
 
