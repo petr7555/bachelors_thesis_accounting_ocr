@@ -9,7 +9,6 @@ import React, {
 import {
   FlatList,
   Image,
-  KeyboardType,
   KeyboardTypeOptions,
   ListRenderItem,
   Pressable,
@@ -52,9 +51,20 @@ type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
 
 type ValueType = string | number | Date | Item[];
 
+type FieldName =
+  | 'transactionDate'
+  | 'items'
+  | 'merchantName'
+  | 'merchantAddress'
+  | 'merchantPhoneNumber'
+  | 'total'
+  | 'subtotal'
+  | 'tax'
+  | 'tip'
+  | 'currency';
+
 type Field = {
-  id: string;
-  name: string;
+  name: FieldName;
   keyboardType?: KeyboardTypeOptions;
   ref?: MutableRefObject<TextInput | null>;
   render?: (
@@ -216,13 +226,13 @@ const EditReceipt = ({ route }: Props) => {
       name: 'merchantPhoneNumber',
       ref: merchantPhoneNumberInput,
       defaultValue: '',
-      keyboardType: 'phone-pad' as KeyboardType,
+      keyboardType: 'phone-pad',
     },
     {
       name: 'total',
       ref: totalInput,
       defaultValue: 0,
-      keyboardType: 'numeric' as KeyboardType,
+      keyboardType: 'numeric',
       rules: {
         required: true,
         validate: validateNumber,
@@ -232,7 +242,7 @@ const EditReceipt = ({ route }: Props) => {
       name: 'subtotal',
       ref: subtotalInput,
       defaultValue: 0,
-      keyboardType: 'numeric' as KeyboardType,
+      keyboardType: 'numeric',
       rules: {
         required: true,
         validate: validateNumber,
@@ -242,7 +252,7 @@ const EditReceipt = ({ route }: Props) => {
       name: 'tax',
       ref: taxInput,
       defaultValue: 0,
-      keyboardType: 'numeric' as KeyboardType,
+      keyboardType: 'numeric',
       rules: {
         required: true,
         validate: validateNumber,
@@ -252,7 +262,7 @@ const EditReceipt = ({ route }: Props) => {
       name: 'tip',
       ref: tipInput,
       defaultValue: 0,
-      keyboardType: 'numeric' as KeyboardType,
+      keyboardType: 'numeric',
       rules: {
         required: true,
         validate: validateNumber,
@@ -263,7 +273,7 @@ const EditReceipt = ({ route }: Props) => {
       defaultValue: '',
       ref: currencyInput,
     },
-  ].map((field, index) => ({ ...field, id: index.toString() }));
+  ];
 
   const isLastField = (index: number) => index === fields.length - 1;
 
@@ -330,7 +340,7 @@ const EditReceipt = ({ route }: Props) => {
     showModal();
   };
 
-  const [previewUri, setPreviewUri] = useState();
+  const [previewUri, setPreviewUri] = useState<string | undefined>();
   const [isModalVisible, setModalVisible] = useState(false);
   const showModal = () => {
     setModalVisible(true);
@@ -364,6 +374,7 @@ const EditReceipt = ({ route }: Props) => {
         </Pressable>
       </Modal>
       <FlatList
+        keyExtractor={(item, index) => index.toString()}
         data={fields}
         renderItem={renderField}
         ref={(ref) => {

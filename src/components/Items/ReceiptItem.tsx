@@ -1,13 +1,20 @@
 import { Controller, useForm } from 'react-hook-form';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { Input, ListItem } from 'react-native-elements';
-import { KeyboardType, StyleSheet, TextInput, View } from 'react-native';
+import {
+  KeyboardType,
+  KeyboardTypeOptions,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
 import { toSentenceCase, validateNumber } from '../../global/utils';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import ConfirmationModal from '../ConfirmDelete/ConfirmationModal';
 import Colors from '../../global/styles/colors';
+import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 
 export type ItemFormData = {
   name: string;
@@ -15,6 +22,24 @@ export type ItemFormData = {
   price: number;
   totalPrice: number;
 };
+
+type ValueType = string | number | Date | Item[];
+
+type FieldName = 'name' | 'quantity' | 'price' | 'totalPrice';
+
+type Field = {
+  name: FieldName;
+  keyboardType?: KeyboardTypeOptions;
+  ref?: MutableRefObject<TextInput | null>;
+  defaultValue?: ValueType;
+  rules?: Exclude<
+    RegisterOptions,
+    'valueAsNumber' | 'valueAsDate' | 'setValueAs'
+  >;
+  width: string;
+};
+
+type ItemFormDataMember = keyof ItemFormData;
 
 type Props = {
   item: Item;
@@ -41,7 +66,7 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
 
   useEffect(() => {
     Object.entries(item).forEach(([key, value]) => {
-      setValue(key, value);
+      setValue(key as ItemFormDataMember, value);
     });
   }, [item, setValue]);
 
@@ -57,7 +82,7 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
 
   const isLastField = (index: number) => index === fields.length - 1;
 
-  const fields = [
+  const fields: Field[] = [
     {
       name: 'name',
       defaultValue: '',
