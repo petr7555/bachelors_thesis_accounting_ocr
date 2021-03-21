@@ -11,7 +11,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import Button from '../PrimaryButton/PrimaryButton';
 
 import { Controller, useForm } from 'react-hook-form';
 import Icon from 'react-native-vector-icons/Ionicons';

@@ -2,12 +2,7 @@
 // https://reactnative.dev/docs/navigation#react-navigation
 import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
-import {
-  ActivityIndicator,
-  Dimensions,
-  Text,
-  useColorScheme,
-} from 'react-native';
+import { ActivityIndicator, Text, useColorScheme } from 'react-native';
 import {
   DarkTheme,
   DefaultTheme,
@@ -63,21 +58,8 @@ const MyDarkTheme: MixedTheme = {
   },
 };
 
-const { width: WIDTH } = Dimensions.get('window');
-
 const theme = {
   // you can override react-native-elements' components' styles here
-  Button: {
-    buttonStyle: {
-      width: WIDTH - 60,
-      height: 50,
-      borderRadius: 25,
-      backgroundColor: Colors.secondary,
-    },
-    containerStyle: {
-      borderRadius: 25,
-    },
-  },
 };
 
 const App = () => {
