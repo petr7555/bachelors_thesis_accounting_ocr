@@ -8,6 +8,7 @@ const Colors = {
   transparentBlack: 'rgba(0, 0, 0, 0.5)',
   white: 'white',
   secondaryDarkMode: '#7425ff',
+  statusBar: '#6d6d6d',
 };
 
 export default Colors;

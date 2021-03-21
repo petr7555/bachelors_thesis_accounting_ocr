@@ -23,19 +23,33 @@ import { ThemeProvider } from 'react-native-elements';
 import createUser from './src/api/createUser';
 import SplashScreen from 'react-native-splash-screen';
 
+type CommonTheme = {
+  colors: {
+    primary: string;
+    statusBar: string;
+  };
+};
+
 type CustomTheme = {
   colors: {
     secondary: string;
   };
 };
 
-type MixedTheme = Theme & CustomTheme;
+export type MixedTheme = Theme & CommonTheme & CustomTheme;
+
+const commonTheme: CommonTheme = {
+  colors: {
+    primary: Colors.primary,
+    statusBar: Colors.statusBar,
+  },
+};
 
 const MyDefaultTheme: MixedTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: Colors.primary,
+    ...commonTheme.colors,
     secondary: Colors.secondary,
   },
 };
@@ -44,7 +58,7 @@ const MyDarkTheme: MixedTheme = {
   dark: true,
   colors: {
     ...DarkTheme.colors,
-    primary: Colors.primary,
+    ...commonTheme.colors,
     secondary: Colors.secondaryDarkMode,
   },
 };

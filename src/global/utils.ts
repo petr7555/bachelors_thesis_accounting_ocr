@@ -9,3 +9,13 @@ export const toSentenceCase = (text: string) => {
 
 export const validateNumber = (input: string) =>
   isNaN(Number(input)) ? 'Must be a number' : undefined;
+
+export const rgbToHex = (rgb: string) => {
+  const cleaned = rgb.split('(')[1].split(')')[0];
+  const numbers = cleaned.split(',');
+  const nums = numbers.map((num) => {
+    num = parseInt(num, 10).toString(16);
+    return num.length === 1 ? '0' + num : num;
+  });
+  return '#' + nums.join('');
+};

@@ -16,6 +16,7 @@ import ReceiptItem, { ItemFormData } from './ReceiptItem';
 import { v4 as uuidv4 } from 'uuid';
 import Colors from '../../global/styles/colors';
 import { useTheme } from '@react-navigation/native';
+import { MixedTheme } from '../../../App';
 
 type ItemsScreenRouteProp = RouteProp<HomeStackParamList, 'Items'>;
 
@@ -62,7 +63,7 @@ const Items = ({ route }: Props) => {
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
-  const { colors } = useTheme();
+  const { colors } = useTheme() as MixedTheme;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -74,7 +75,7 @@ const Items = ({ route }: Props) => {
         </Text>
       ),
     });
-  }, [addItem, navigation]);
+  }, [addItem, colors.secondary, navigation]);
 
   const renderItem: ListRenderItem<Item> = ({ item }) => (
     <ReceiptItem item={item} deleteItem={deleteItem} updateItem={updateItem} />

@@ -2,7 +2,6 @@ import { Alert, StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import React, { Dispatch, SetStateAction } from 'react';
 import { RESULTS } from 'react-native-permissions';
-
 import ImagePicker, {
   Image,
   PickerErrorCode,
@@ -16,11 +15,13 @@ import { getTextFromImage } from '../../global/ocr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../global/styles/colors';
 import { getReceiptDataFromImage } from '../../services/FormRecognizerClient/getReceiptDataFromImage';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import addImageToUsersReceipts from '../../api/addImageToUsersReceipts';
+import { MixedTheme } from '../../../App';
+import { rgbToHex } from '../../global/utils';
 
 type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
@@ -67,18 +68,27 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     }
   };
 
+  const { colors } = useTheme() as MixedTheme;
+
+  const pickerOptions = {
+    cropping: true,
+    freeStyleCropEnabled: true,
+    hideBottomControls: true,
+    compressImageMaxWidth: 720,
+    includeBase64: true,
+    cropperToolbarTitle: 'Edit photo',
+    cropperStatusBarColor: colors.statusBar,
+    cropperToolbarColor: rgbToHex(colors.card),
+    cropperToolbarWidgetColor: rgbToHex(colors.text),
+  };
+
   const takeAnImage = async () => {
     const cameraPermissionResult = await requestCameraPermission();
     if (cameraPermissionResult === RESULTS.GRANTED) {
       const storagePermissionResult = await requestStoragePermission();
       if (storagePermissionResult === RESULTS.GRANTED) {
         try {
-          return await ImagePicker.openCamera({
-            cropping: true,
-            freeStyleCropEnabled: true,
-            hideBottomControls: true,
-            includeBase64: true,
-          });
+          return await ImagePicker.openCamera(pickerOptions);
         } catch (error) {
           console.error(error);
           if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
@@ -93,13 +103,7 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     const storagePermissionResult = await requestStoragePermission();
     if (storagePermissionResult === RESULTS.GRANTED) {
       try {
-        return await ImagePicker.openPicker({
-          cropping: true,
-          freeStyleCropEnabled: true,
-          hideBottomControls: true,
-          compressImageMaxWidth: 720,
-          includeBase64: true,
-        });
+        return await ImagePicker.openPicker(pickerOptions);
       } catch (error) {
         console.error(error);
         if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
