@@ -74,6 +74,9 @@ const theme = {
       borderRadius: 25,
       backgroundColor: Colors.secondary,
     },
+    containerStyle: {
+      borderRadius: 25,
+    },
   },
 };
 
