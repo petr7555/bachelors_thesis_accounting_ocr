@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
   receiptImg: {
     height: 50,
+    margin: 1,
     width: 50,
   },
   showImageText: {
