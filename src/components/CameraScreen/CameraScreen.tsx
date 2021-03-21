@@ -1,5 +1,4 @@
 import { Alert, StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-elements';
 import React, { Dispatch, SetStateAction } from 'react';
 import { RESULTS } from 'react-native-permissions';
 import ImagePicker, {
@@ -22,6 +21,7 @@ import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptR
 import addImageToUsersReceipts from '../../api/addImageToUsersReceipts';
 import { MixedTheme } from '../../../App';
 import { rgbToHex } from '../../global/utils';
+import Button from '../PrimaryButton/PrimaryButton';
 
 type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
