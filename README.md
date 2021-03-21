@@ -129,13 +129,24 @@ Project uses Google Cloud Platform
 ## Theming
 
 - use constants in `~/src/global/styles/colors.ts` for colors that do not change based on light / dark mode
-- use `useTheme` hook to obtain a theme that changes according to whether dark mode is enabled or not
+- use `useTheme` hook from `react-native-elements` to obtain a theme that changes according to whether dark mode is
+  enabled or not (for black and white colors)
 
 ```tsx
 import {useTheme} from 'react-native-elements';
 
 const {theme} = useTheme();
 return <Component color={theme.colors?.black}/>;
+```
+
+- use `useTheme` hook from `@react-navigation/native` to obtain a theme that changes according to whether dark mode is
+  enabled or not for any colors. These colors have to be defined in `App.tsx` for `MyDefaultTheme` and `MyDarkTheme`.
+
+```tsx
+import {useTheme} from '@react-navigation/native';
+
+const {colors} = useTheme();
+return <Component style={{ color: colors.secondary }}/>;
 ```
 
 ## Troubleshooting

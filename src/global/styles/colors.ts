@@ -7,6 +7,7 @@ const Colors = {
   green: 'green',
   transparentBlack: 'rgba(0, 0, 0, 0.5)',
   white: 'white',
+  secondaryDarkMode: '#7425ff',
 };
 
 export default Colors;

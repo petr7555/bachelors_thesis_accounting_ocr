@@ -23,19 +23,29 @@ import { ThemeProvider } from 'react-native-elements';
 import createUser from './src/api/createUser';
 import SplashScreen from 'react-native-splash-screen';
 
-const MyDefaultTheme: Theme = {
+type CustomTheme = {
+  colors: {
+    secondary: string;
+  };
+};
+
+type MixedTheme = Theme & CustomTheme;
+
+const MyDefaultTheme: MixedTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
     primary: Colors.primary,
+    secondary: Colors.secondary,
   },
 };
 
-const MyDarkTheme: Theme = {
+const MyDarkTheme: MixedTheme = {
   dark: true,
   colors: {
     ...DarkTheme.colors,
     primary: Colors.primary,
+    secondary: Colors.secondaryDarkMode,
   },
 };
 

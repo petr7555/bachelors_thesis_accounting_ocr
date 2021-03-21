@@ -15,6 +15,7 @@ import updateItems from '../../api/updateItems';
 import ReceiptItem, { ItemFormData } from './ReceiptItem';
 import { v4 as uuidv4 } from 'uuid';
 import Colors from '../../global/styles/colors';
+import { useTheme } from '@react-navigation/native';
 
 type ItemsScreenRouteProp = RouteProp<HomeStackParamList, 'Items'>;
 
@@ -61,10 +62,14 @@ const Items = ({ route }: Props) => {
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
+  const { colors } = useTheme();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Text style={styles.headerText} onPress={addItem}>
+        <Text
+          style={[styles.headerText, { color: colors.secondary }]}
+          onPress={addItem}>
           Add
         </Text>
       ),
