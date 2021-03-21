@@ -44,7 +44,7 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
       }
       setProcessing(false);
       navigation.navigate('Home', {
-        screen: 'Form',
+        screen: 'EditReceipt',
         params: { id: newReceiptId },
       });
     }

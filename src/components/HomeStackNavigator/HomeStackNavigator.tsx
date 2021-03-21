@@ -1,12 +1,12 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../HomeScreen/HomeScreen';
-import Form from '../Form/Form';
+import EditReceipt from '../EditReceipt/EditReceipt';
 import Items from '../Items/Items';
 
 export type HomeStackParamList = {
   HomeScreen: undefined;
-  Form: { id: string };
+  EditReceipt: { id: string };
   Items: { id: string };
 };
 
@@ -21,8 +21,8 @@ export const HomeStackNavigator = () => {
         options={{ title: 'My receipts' }}
       />
       <HomeStack.Screen
-        name="Form"
-        component={Form}
+        name="EditReceipt"
+        component={EditReceipt}
         options={{ title: 'Edit receipt' }}
       />
       <HomeStack.Screen

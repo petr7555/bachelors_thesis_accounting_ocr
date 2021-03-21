@@ -27,7 +27,7 @@ const Receipt = ({ userId, receipt }: Props) => {
   return (
     <ListItem
       bottomDivider
-      onPress={() => navigation.navigate('Form', { id: receipt.id })}>
+      onPress={() => navigation.navigate('EditReceipt', { id: receipt.id })}>
       <Avatar source={{ uri: receipt.url }} />
       <ListItem.Content>
         <ListItem.Title>

@@ -44,7 +44,7 @@ import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 
 // Types
-type FormScreenRouteProp = RouteProp<HomeStackParamList, 'Form'>;
+type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
 
 type ValueType = string | number | Date | Item[];
 
@@ -69,7 +69,7 @@ type Props = {
   route: FormScreenRouteProp;
 };
 
-const Form = ({ route }: Props) => {
+const EditReceipt = ({ route }: Props) => {
   const receiptId = route.params?.id;
   const {
     control,
@@ -351,4 +351,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form;
+export default EditReceipt;
