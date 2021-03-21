@@ -42,6 +42,7 @@ import updateReceipt from '../../api/updateReceipt';
 import getReceiptForUser from '../../api/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import Icon from '../ThemedIcon/ThemedIonIcon';
+import ImageThumbnail from './ImageThumbnail';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
@@ -316,8 +317,28 @@ const EditReceipt = ({ route }: Props) => {
     />
   );
 
+  const showOriginal = () => {
+    console.log('showOriginal');
+  };
+
+  const showProcessed = () => {
+    console.log('showProcessed');
+  };
+
   return (
     <View style={styles.container}>
+      <View style={styles.imagesPreview}>
+        <ImageThumbnail
+          onPress={showOriginal}
+          uri={receiptData?.url}
+          text="View original"
+        />
+        <ImageThumbnail
+          onPress={showProcessed}
+          uri={receiptData?.url}
+          text="View processed"
+        />
+      </View>
       <FlatList
         data={fields}
         renderItem={renderField}
@@ -345,6 +366,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 20,
+  },
+  imagesPreview: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   input: {
     paddingBottom: 0,
