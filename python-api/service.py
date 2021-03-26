@@ -13,10 +13,10 @@ def similarity_route():
     word2 = request.args.get("word2")
     return str(similarity(word1, word2))
 
-@app.route("/category", methods=['GET'])
+@app.route("/category", methods=['POST'])
 def category_route():
-    word = request.args.get("word")
-    return category(word)
+    request_data = request.get_json()
+    return category(request_data["sentence"])
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
