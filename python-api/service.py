@@ -1,5 +1,5 @@
 from flask import Flask, request
-from model import similarity
+from model import similarity, category
 
 app = Flask(__name__)
 
