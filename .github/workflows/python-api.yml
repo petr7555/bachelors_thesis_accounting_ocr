@@ -1,5 +1,9 @@
-on: [ push ]
-name: Linux_Container_Workflow
+name: Python API deployment
+
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build-and-deploy:
