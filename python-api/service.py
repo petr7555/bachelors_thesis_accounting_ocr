@@ -13,6 +13,11 @@ def similarity_route():
     word2 = request.args.get("word2")
     return str(similarity(word1, word2))
 
+@app.route("/category", methods=['GET'])
+def category_route():
+    word = request.args.get("word")
+    return str(similarity(word1, word2))
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 
