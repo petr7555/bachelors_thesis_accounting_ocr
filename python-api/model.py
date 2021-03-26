@@ -7,11 +7,10 @@ def similarity(word1, word2):
 def category(word):
     most_similar = vectors.most_similar_to_given(word, list(categories.keys()))
     emoji = categories[most_similar]
-    response = {
+    return {
         "category": most_similar,
         "emoji": emoji,
     }
-    return response
 
 categories = {
     "television" : "📺",
