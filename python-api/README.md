@@ -20,8 +20,9 @@ Logs are available at Azure Portal -> aci-python-api -> Containers -> Logs.
 
 ### Tests
 
-The `postman_collection_tests.json` contains Postman tests that are run during the pipeline and can be run manually
-with `npx -y newman run postman_collection_tests.json`.
+The `tests/python-api.postman_collection.json` contains Postman tests that are run during the pipeline
+with `cd python-api/tests/ && npx -y newman run python-api.postman_collection.json -e production.postman_environment.json`.
+To run them locally, run `cd python-api/tests/ && npx -y newman run python-api.postman_collection.json -e local.postman_environment.json && cd ../../`
 
 ### Resources:
 
