@@ -22,6 +22,7 @@ import addImageToUsersReceipts from '../../api/addImageToUsersReceipts';
 import { MixedTheme } from '../../../App';
 import { rgbToHex } from '../../global/utils';
 import Button from '../PrimaryButton/PrimaryButton';
+import addItemCategories from '../../api/addItemCategories';
 
 type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
@@ -64,7 +65,8 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     await getTextFromImage(image.path);
     const receiptData = await getReceiptDataFromImage(image);
     if (receiptData) {
-      return uploadImage(image, receiptData);
+      const receiptDataWithCategories = await addItemCategories(receiptData);
+      return uploadImage(image, receiptDataWithCategories);
     }
   };
 
