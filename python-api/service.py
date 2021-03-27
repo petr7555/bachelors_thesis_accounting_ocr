@@ -20,11 +20,9 @@ def category_route():
 
 @app.route("/process-image", methods=['POST'])
 def process_image_route():
-    print(request.form)
-    print(request.files)
     # get image from form data as base64, read to bytes
     file = request.files['image'].read()
-    img_arr = np.fromstring(file, np.uint8)
+    img_arr = np.frombuffer(file, np.uint8)
     img = cv2.imdecode(img_arr, cv2.IMREAD_COLOR)
     # do the processing
 
@@ -35,7 +33,7 @@ def process_image_route():
     rawBytes.seek(0)
     img_base64 = base64.b64encode(rawBytes.read())
     return {
-        "image": str(img_base64).split("'")[1],
+        "image": str(img_base64).split("'")[1], # removes 'b from the beginning
         "mime": "image/jpeg"
     }
 
