@@ -6,7 +6,7 @@ const theme = create({
   brandTitle: 'Receipts Scanner',
   brandUrl: 'https://github.com/petr7555/bachelors_thesis_accounting_ocr',
   brandImage:
-    'https://storage.googleapis.com/images_bachelorsthesisaccountingocr/receipt-icon.png',
+    'https://storage.googleapis.com/images_bachelorsthesisaccountingocr/ic_launcher.png',
 });
 
 addons.setConfig({
