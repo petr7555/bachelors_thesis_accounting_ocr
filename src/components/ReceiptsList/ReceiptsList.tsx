@@ -22,7 +22,8 @@ export type HomeScreenNavigationProp = StackNavigationProp<
 
 export type FirebaseReceipt = {
   id: string;
-  url: string;
+  urlOriginal: string;
+  urlProcessed: string;
   added: FirebaseFirestoreTypes.Timestamp;
 } & FirebaseReceiptData;
 

@@ -2,8 +2,9 @@ import { ReceiptData } from '../services/FormRecognizerClient/convertReceiptResp
 import { authInstance, firestore, firestoreInstance } from '../global/firebase';
 import { RECEIPTS, USERS } from './constants';
 
-const addImageToUsersReceipts = async (
-  downloadURL: string,
+const addReceiptToUsersReceipts = async (
+  urlOriginal: string,
+  urlProcessed: string,
   receiptData: ReceiptData,
 ): Promise<string | undefined> => {
   const user = authInstance.currentUser;
@@ -14,7 +15,8 @@ const addImageToUsersReceipts = async (
         .doc(user.uid)
         .collection(RECEIPTS)
         .add({
-          url: downloadURL,
+          urlOriginal,
+          urlProcessed,
           // @ts-ignore
           added: firestore.Timestamp.now(),
           ...receiptData,
@@ -27,4 +29,4 @@ const addImageToUsersReceipts = async (
   }
 };
 
-export default addImageToUsersReceipts;
+export default addReceiptToUsersReceipts;

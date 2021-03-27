@@ -4,7 +4,8 @@ WORKDIR /
 ADD requirements.txt /
 RUN pip install -r requirements.txt
 
-ADD model.py /
+ADD nlp_model.py /
+ADD image_model.py /
 ADD service.py /
 
 RUN apt install -y wget

@@ -1,3 +1,5 @@
+import { Image } from 'react-native-image-crop-picker';
+
 export const getTodaysDateAtNoon = () => {
   return new Date(new Date().setHours(12, 0, 0, 0));
 };
@@ -18,4 +20,8 @@ export const rgbToHex = (rgb: string) => {
     return num.length === 1 ? '0' + num : num;
   });
   return '#' + nums.join('');
+};
+
+export const getFilename = (image: Image) => {
+  return image.path.split('/').slice(-1)[0];
 };

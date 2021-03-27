@@ -332,12 +332,12 @@ const EditReceipt = ({ route }: Props) => {
   );
 
   const showOriginal = () => {
-    setPreviewUri(receiptData?.url);
+    setPreviewUri(receiptData?.urlOriginal);
     showModal();
   };
 
   const showProcessed = () => {
-    setPreviewUri(receiptData?.url);
+    setPreviewUri(receiptData?.urlProcessed);
     showModal();
   };
 
@@ -355,12 +355,12 @@ const EditReceipt = ({ route }: Props) => {
       <View style={styles.imagesPreview}>
         <ImageThumbnail
           onPress={showOriginal}
-          uri={receiptData?.url}
+          uri={receiptData?.urlOriginal}
           text="View original"
         />
         <ImageThumbnail
           onPress={showProcessed}
-          uri={receiptData?.url}
+          uri={receiptData?.urlProcessed}
           text="View processed"
         />
       </View>

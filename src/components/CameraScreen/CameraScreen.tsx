@@ -5,7 +5,6 @@ import ImagePicker, {
   Image,
   PickerErrorCode,
 } from 'react-native-image-crop-picker';
-import storage from '@react-native-firebase/storage';
 import {
   requestCameraPermission,
   requestStoragePermission,
@@ -18,11 +17,16 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
-import addImageToUsersReceipts from '../../api/addImageToUsersReceipts';
+import addReceiptToUsersReceipts from '../../api/addReceiptToUsersReceipts';
 import { MixedTheme } from '../../../App';
-import { rgbToHex } from '../../global/utils';
+import { getFilename, rgbToHex } from '../../global/utils';
 import Button from '../PrimaryButton/PrimaryButton';
 import addItemCategories from '../../api/addItemCategories';
+import {
+  uploadBase64ToFirebaseStorage,
+  uploadImageToFirebaseStorage,
+} from '../../api/uploadImageToFirebaseStorage';
+import transformImage from '../../api/transformImage';
 
 type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 
@@ -39,15 +43,15 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
       setModalVisible(false);
       setProcessing(true);
       const newReceiptId = await processImage(image);
+      setProcessing(false);
       if (!newReceiptId) {
         Alert.alert('Could not process the image.');
-        return;
+      } else {
+        navigation.navigate('Home', {
+          screen: 'EditReceipt',
+          params: { id: newReceiptId },
+        });
       }
-      setProcessing(false);
-      navigation.navigate('Home', {
-        screen: 'EditReceipt',
-        params: { id: newReceiptId },
-      });
     }
   };
 
@@ -66,7 +70,7 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     const receiptData = await getReceiptDataFromImage(image);
     if (receiptData) {
       const receiptDataWithCategories = await addItemCategories(receiptData);
-      return uploadImage(image, receiptDataWithCategories);
+      return addReceipt(image, receiptDataWithCategories);
     }
   };
 
@@ -115,24 +119,29 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     }
   };
 
-  const getFilename = (image: Image) => {
-    return image.path.split('/').slice(-1)[0];
-  };
-
-  const uploadImage = async (
+  const addReceipt = async (
     image: Image,
     receiptData: ReceiptData,
   ): Promise<string | undefined> => {
     try {
-      const reference = storage().ref('/receipts/' + getFilename(image));
+      const urlOriginal = await uploadImageToFirebaseStorage(image);
 
-      await reference.putFile(image.path);
-      console.log('Image uploaded to firebase storage.');
+      const transformedImage = await transformImage(image);
+      if (transformedImage) {
+        const urlProcessed = await uploadBase64ToFirebaseStorage(
+          transformedImage.image,
+          `processed_${getFilename(image)}`,
+          transformedImage.mime,
+        );
 
-      const downloadURL = await reference.getDownloadURL();
-      console.log(`Download url is ${downloadURL}`);
-
-      return addImageToUsersReceipts(downloadURL, receiptData);
+        if (urlOriginal && urlProcessed) {
+          return addReceiptToUsersReceipts(
+            urlOriginal,
+            urlProcessed,
+            receiptData,
+          );
+        }
+      }
     } catch (error) {
       console.error(error);
     }

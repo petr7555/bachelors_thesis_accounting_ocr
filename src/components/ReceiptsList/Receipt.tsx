@@ -28,7 +28,7 @@ const Receipt = ({ userId, receipt }: Props) => {
     <ListItem
       bottomDivider
       onPress={() => navigation.navigate('EditReceipt', { id: receipt.id })}>
-      <Avatar source={{ uri: receipt.url }} />
+      <Avatar source={{ uri: receipt.urlProcessed }} />
       <ListItem.Content>
         <ListItem.Title>
           <Text>
