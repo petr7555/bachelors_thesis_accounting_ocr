@@ -1,5 +1,6 @@
 from pymagnitude import Magnitude
 from sklearn.feature_extraction.text import CountVectorizer
+import numpy as np
 
 vectors = Magnitude('GoogleNews-vectors-negative300.magnitude')
 vectorizer = CountVectorizer(stop_words="english")
