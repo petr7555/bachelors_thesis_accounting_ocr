@@ -11,7 +11,10 @@ const transformImage = async (
   image: Image,
 ): Promise<ResponseData | undefined> => {
   try {
+    // local
     const endpoint = 'http://10.0.2.2/process-image';
+    // production
+    // const endpoint = 'http://pythonapi.westeurope.azurecontainer.io/process-image';
 
     const photo = {
       uri: image.path,
