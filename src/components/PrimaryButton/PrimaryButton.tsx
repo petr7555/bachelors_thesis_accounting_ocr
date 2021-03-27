@@ -4,11 +4,12 @@ import Colors from '../../global/styles/colors';
 import { Dimensions, StyleSheet } from 'react-native';
 import { ButtonProps } from 'react-native-elements/dist/buttons/Button';
 
-const PrimaryButton = (props: ButtonProps) => {
+const PrimaryButton = (props: ButtonProps | null) => {
   return (
     <Button
-      buttonStyle={styles.buttonStyle}
       containerStyle={styles.containerStyle}
+      buttonStyle={styles.buttonStyle}
+      titleStyle={styles.titleStyle}
       {...props}
     />
   );
@@ -25,6 +26,9 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     borderRadius: 25,
+  },
+  titleStyle: {
+    color: Colors.white,
   },
 });
 
