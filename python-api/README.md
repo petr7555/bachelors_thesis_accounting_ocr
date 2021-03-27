@@ -29,3 +29,4 @@ with `npx -y newman run postman_collection_tests.json`.
 - https://www.alibabacloud.com/blog/how-to-create-and-deploy-a-pre-trained-word2vec-deep-learning-rest-api_594064
 - https://docs.microsoft.com/cs-cz/azure/container-instances/container-instances-github-action
 - https://flask.palletsprojects.com/en/1.1.x/testing/
+- https://medium.com/weekly-webtips/using-github-actions-for-integration-testing-on-a-rest-api-358991d54a20
