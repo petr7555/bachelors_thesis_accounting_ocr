@@ -23,9 +23,9 @@ def process_image_route():
     # get image from form data as base64, read to bytes
     file = request.files['image'].read()
     img_arr = np.frombuffer(file, np.uint8)
-    img = cv2.imdecode(img_arr, cv2.IMREAD_COLOR)
+    img = cv2.imdecode(img_arr, cv2.IMREAD_GRAYSCALE)
     # do the processing
-
+    img = process_image(img)
     # end of processing
     img = Image.fromarray(img.astype("uint8"))
     rawBytes = io.BytesIO()
