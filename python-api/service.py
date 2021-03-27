@@ -1,17 +1,11 @@
 from flask import Flask, request
-from model import similarity, category
+from model import category
 
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def welcome():
     return "Welcome to our Machine Learning REST API!"
-
-@app.route("/similarity", methods=['GET'])
-def similarity_route():
-    word1 = request.args.get("word1")
-    word2 = request.args.get("word2")
-    return str(similarity(word1, word2))
 
 @app.route("/category", methods=['POST'])
 def category_route():

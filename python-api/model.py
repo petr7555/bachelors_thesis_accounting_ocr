@@ -7,9 +7,6 @@ vectorizer = CountVectorizer(stop_words="english")
 # removes punctuation, removes stopwords, splits to words, makes all words lowercase
 tokenize = vectorizer.build_analyzer()
 
-def similarity(word1, word2):
-    return vectors.similarity(word1, word2)
-
 def category(sentence):
     tokens = tokenize(sentence)
     mean_vec = np.mean(vectors.query(tokens), axis=0)
