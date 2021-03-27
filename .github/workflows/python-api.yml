@@ -13,33 +13,37 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@v2
 
-      - name: 'Login via Azure CLI'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: 'Build and push image'
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-      - run: |
-          docker build python-api -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-api:${{ github.sha }}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-api:${{ github.sha }}
-
-      - name: 'Deploy to Azure Container Instances'
-        uses: 'azure/aci-deploy@v1'
-        with:
-          resource-group: ${{ secrets.RESOURCE_GROUP }}
-          dns-name-label: pythonapi
-          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-api:${{ github.sha }}
-          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          registry-username: ${{ secrets.REGISTRY_USERNAME }}
-          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-          name: aci-python-api
-          location: 'westeurope'
+#      - name: 'Login via Azure CLI'
+#        uses: azure/login@v1
+#        with:
+#          creds: ${{ secrets.AZURE_CREDENTIALS }}
+#
+#      - name: 'Build and push image'
+#        uses: azure/docker-login@v1
+#        with:
+#          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+#          username: ${{ secrets.REGISTRY_USERNAME }}
+#          password: ${{ secrets.REGISTRY_PASSWORD }}
+#      - run: |
+#          docker build python-api -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-api:${{ github.sha }}
+#          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-api:${{ github.sha }}
+#
+#      - name: 'Deploy to Azure Container Instances'
+#        uses: 'azure/aci-deploy@v1'
+#        with:
+#          resource-group: ${{ secrets.RESOURCE_GROUP }}
+#          dns-name-label: pythonapi
+#          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-api:${{ github.sha }}
+#          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+#          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+#          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+#          name: aci-python-api
+#          location: 'westeurope'
 
       - name: 'Run Postman tests'
         run: |
-          cd python-api/tests/ && npx -y newman run python-api.postman_collection.json -e production.postman_environment.json
+          cd python-api/tests/
+          npx -v
+          node -v
+          npm i -g newman
+          newman run python-api.postman_collection.json -e production.postman_environment.json
