@@ -41,4 +41,4 @@ jobs:
 
       - name: 'Run Postman tests'
         run: |
-          npx -y newman run postman_collection_tests.json
+          npx -y newman run python-api/postman_collection_tests.json
