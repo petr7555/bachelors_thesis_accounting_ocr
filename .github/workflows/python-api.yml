@@ -40,10 +40,10 @@ jobs:
 #          name: aci-python-api
 #          location: 'westeurope'
 
+      - name: 'Install Newman dependency'
+        run: npm install --prefix python-api/tests/
+
       - name: 'Run Postman tests'
         run: |
           cd python-api/tests/
-          npx -v
-          node -v
-          npm i -g newman
-          newman run python-api.postman_collection.json -e production.postman_environment.json
+          ./node_modules/newman/bin/newman.js run python-api.postman_collection.json -e production.postman_environment.json
