@@ -120,12 +120,7 @@ Project uses Google Cloud Platform
     - if the device is not connected, refresh (`r`) in metro bundler
 - [patch-package](https://www.npmjs.com/package/patch-package) can be used to fix third-party dependencies
   in `node_modules`. `postinstall` script is run automatically both after `npm install` and `npm ci`.
-
-## Clean emulator data
-
-- `emulator -list-avds`
-- `emulator -avd Pixel_3a_API_29 -wipe-data`
-
+  
 ## Theming
 
 - use constants in `~/src/global/styles/colors.ts` for colors that do not change based on light / dark mode
@@ -148,6 +143,11 @@ import {useTheme} from '@react-navigation/native';
 const {colors} = useTheme();
 return <Component style={{ color: colors.secondary }}/>;
 ```
+
+## Clean emulator data
+
+- `emulator -list-avds`
+- `emulator -avd Pixel_3a_API_29 -wipe-data`
 
 ## Troubleshooting
 
