@@ -76,3 +76,6 @@ __screenshots__
 g_app_cred.json
 
 .vercel
+
+# python
+.ipynb_checkpoints
