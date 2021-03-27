@@ -38,3 +38,7 @@ jobs:
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           name: aci-python-api
           location: 'westeurope'
+
+      - name: 'Run Postman tests'
+        run: |
+          npx -y newman run postman_collection_tests.json

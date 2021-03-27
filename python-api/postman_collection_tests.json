@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "74b705c4-7cd8-43b0-b2fb-a427ebe6a416",
+		"name": "Bachelors thesis accounting OCR - Python API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Python API Hello ML",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is text/html with utf-8 charset\", () => {",
+							"    pm.response.to.be.header(\"Content-Type\", \"text/html; charset=utf-8\");",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 200 ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"})",
+							"",
+							"pm.test(\"Response is text 'Welcome to our Machine Learning REST API!'\", () => {",
+							"    pm.expect(pm.response.text()).to.be.equal(\"Welcome to our Machine Learning REST API!\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://pythonapi.westeurope.azurecontainer.io",
+					"protocol": "http",
+					"host": [
+						"pythonapi",
+						"westeurope",
+						"azurecontainer",
+						"io"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://pythonapi.westeurope.azurecontainer.io",
+							"protocol": "http",
+							"host": [
+								"pythonapi",
+								"westeurope",
+								"azurecontainer",
+								"io"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/1.0.1 Python/3.8.8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 27 Mar 2021 08:24:26 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "Welcome to our Machine Learning REST API!"
+				}
+			]
+		},
+		{
+			"name": "Python API get category of smartphone",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is application json\", () => {",
+							"    pm.response.to.be.header(\"Content-Type\", \"application/json\");",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 200 ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"})",
+							"",
+							"pm.test(\"Category of smartphone is mobile\", () => {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.category).to.be.equal(\"mobile\");",
+							"});",
+							"",
+							"pm.test(\"Emoji of smartphone is mobile emoji\", () => {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.emoji).to.be.equal(\"📱\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sentence\": \"smartphone\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://pythonapi.westeurope.azurecontainer.io/category",
+					"protocol": "http",
+					"host": [
+						"pythonapi",
+						"westeurope",
+						"azurecontainer",
+						"io"
+					],
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Python API get category of smartphone",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sentence\": \"smartphone\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://pythonapi.westeurope.azurecontainer.io/category",
+							"protocol": "http",
+							"host": [
+								"pythonapi",
+								"westeurope",
+								"azurecontainer",
+								"io"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/1.0.1 Python/3.8.8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 27 Mar 2021 08:22:48 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"category\": \"mobile\",\n    \"emoji\": \"📱\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Python API get category of sentence",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is application json\", () => {",
+							"    pm.response.to.be.header(\"Content-Type\", \"application/json\");",
+							"})",
+							"",
+							"pm.test(\"Response time is less than 200 ms\", () => {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"})",
+							"",
+							"pm.test(\"Category of sentence is pencil\", () => {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.category).to.be.equal(\"pencil\");",
+							"});",
+							"",
+							"pm.test(\"Emoji of sentence is pencil emoji\", () => {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.emoji).to.be.equal(\"✏️\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sentence\": \"ginger carrot soup\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://pythonapi.westeurope.azurecontainer.io/category",
+					"protocol": "http",
+					"host": [
+						"pythonapi",
+						"westeurope",
+						"azurecontainer",
+						"io"
+					],
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Python API get category of sentence",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sentence\": \"ginger carrot soup\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://pythonapi.westeurope.azurecontainer.io/category",
+							"protocol": "http",
+							"host": [
+								"pythonapi",
+								"westeurope",
+								"azurecontainer",
+								"io"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/1.0.1 Python/3.8.8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 27 Mar 2021 08:23:56 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"category\": \"pencil\",\n    \"emoji\": \"✏️\"\n}"
+				}
+			]
+		}
+	]
+}
