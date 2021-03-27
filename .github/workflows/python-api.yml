@@ -46,4 +46,4 @@ jobs:
       - name: 'Run Postman tests'
         run: |
           cd python-api/tests/
-          ./node_modules/newman/bin/newman.js run python-api.postman_collection.json -e production.postman_environment.json
+          npm run test
