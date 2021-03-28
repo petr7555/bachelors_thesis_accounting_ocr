@@ -40,9 +40,7 @@
         "header": [],
         "url": {
           "raw": "{{IP}}",
-          "host": [
-            "{{IP}}"
-          ]
+          "host": ["{{IP}}"]
         }
       },
       "response": [
@@ -54,12 +52,7 @@
             "url": {
               "raw": "http://pythonapi.westeurope.azurecontainer.io",
               "protocol": "http",
-              "host": [
-                "pythonapi",
-                "westeurope",
-                "azurecontainer",
-                "io"
-              ]
+              "host": ["pythonapi", "westeurope", "azurecontainer", "io"]
             }
           },
           "status": "OK",
@@ -140,12 +133,8 @@
         },
         "url": {
           "raw": "{{IP}}/category",
-          "host": [
-            "{{IP}}"
-          ],
-          "path": [
-            "category"
-          ]
+          "host": ["{{IP}}"],
+          "path": ["category"]
         }
       },
       "response": [
@@ -166,15 +155,8 @@
             "url": {
               "raw": "http://pythonapi.westeurope.azurecontainer.io/category",
               "protocol": "http",
-              "host": [
-                "pythonapi",
-                "westeurope",
-                "azurecontainer",
-                "io"
-              ],
-              "path": [
-                "category"
-              ]
+              "host": ["pythonapi", "westeurope", "azurecontainer", "io"],
+              "path": ["category"]
             }
           },
           "status": "OK",
@@ -252,12 +234,8 @@
         },
         "url": {
           "raw": "{{IP}}/category",
-          "host": [
-            "{{IP}}"
-          ],
-          "path": [
-            "category"
-          ]
+          "host": ["{{IP}}"],
+          "path": ["category"]
         }
       },
       "response": [
@@ -278,15 +256,8 @@
             "url": {
               "raw": "http://pythonapi.westeurope.azurecontainer.io/category",
               "protocol": "http",
-              "host": [
-                "pythonapi",
-                "westeurope",
-                "azurecontainer",
-                "io"
-              ],
-              "path": [
-                "category"
-              ]
+              "host": ["pythonapi", "westeurope", "azurecontainer", "io"],
+              "path": ["category"]
             }
           },
           "status": "OK",
@@ -369,12 +340,8 @@
         },
         "url": {
           "raw": "{{IP}}/process-image",
-          "host": [
-            "{{IP}}"
-          ],
-          "path": [
-            "process-image"
-          ]
+          "host": ["{{IP}}"],
+          "path": ["process-image"]
         }
       },
       "response": [
@@ -396,15 +363,8 @@
             "url": {
               "raw": "http://pythonapi.westeurope.azurecontainer.io/process-image",
               "protocol": "http",
-              "host": [
-                "pythonapi",
-                "westeurope",
-                "azurecontainer",
-                "io"
-              ],
-              "path": [
-                "process-image"
-              ]
+              "host": ["pythonapi", "westeurope", "azurecontainer", "io"],
+              "path": ["process-image"]
             }
           },
           "status": "OK",
@@ -439,18 +399,14 @@
       "listen": "prerequest",
       "script": {
         "type": "text/javascript",
-        "exec": [
-          ""
-        ]
+        "exec": [""]
       }
     },
     {
       "listen": "test",
       "script": {
         "type": "text/javascript",
-        "exec": [
-          ""
-        ]
+        "exec": [""]
       }
     }
   ]
