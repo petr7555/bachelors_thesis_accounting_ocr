@@ -14,6 +14,7 @@ jest.mock('uuid', () => {
 
 beforeEach(() => {
   let value = 0;
+  // @ts-ignore
   uuid.v4.mockImplementation(() => `${value++}`);
 });
 
@@ -441,6 +442,24 @@ it('uses TransactionDate text if valueDate not available', () => {
   expect(convertReceiptResponseToReceiptData(response)).toHaveProperty(
     'transactionDate',
     new Date(text),
+  );
+});
+
+it('uses default value for TransactionDate if text cannot be parsed', () => {
+  const text = '2007/invalid13:29:17';
+  const response: ReceiptResponse = getTestResponseWithFields({
+    TransactionDate: {
+      type: 'date',
+      text,
+      boundingBox: [128, 520, 210, 521, 210, 551, 128, 550],
+      page: 1,
+      confidence: 0.995,
+    },
+  });
+
+  expect(convertReceiptResponseToReceiptData(response)).toHaveProperty(
+    'transactionDate',
+    getTodaysDateAtNoon(),
   );
 });
 

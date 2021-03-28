@@ -70,9 +70,10 @@ export default function convertReceiptResponseToReceiptData(
   const transactionDate =
     fields.TransactionDate?.valueDate || fields.TransactionDate?.text;
 
-  result.transactionDate = transactionDate
-    ? new Date(transactionDate.toString())
-    : result.transactionDate;
+  result.transactionDate =
+    transactionDate && Date.parse(transactionDate)
+      ? new Date(transactionDate)
+      : result.transactionDate;
 
   result.total =
     fields.Total?.valueNumber ||
@@ -144,5 +145,6 @@ export default function convertReceiptResponseToReceiptData(
     }
   }
 
+  console.log(JSON.stringify(result, null, 2));
   return result;
 }
