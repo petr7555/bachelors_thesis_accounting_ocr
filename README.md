@@ -120,7 +120,7 @@ Project uses Google Cloud Platform
     - if the device is not connected, refresh (`r`) in metro bundler
 - [patch-package](https://www.npmjs.com/package/patch-package) can be used to fix third-party dependencies
   in `node_modules`. `postinstall` script is run automatically both after `npm install` and `npm ci`.
-  
+
 ## Theming
 
 - use constants in `~/src/global/styles/colors.ts` for colors that do not change based on light / dark mode
@@ -141,7 +141,7 @@ return <Component color={theme.colors?.black}/>;
 import {useTheme} from '@react-navigation/native';
 
 const {colors} = useTheme();
-return <Component style={{ color: colors.secondary }}/>;
+return <Component style={{color: colors.secondary}}/>;
 ```
 
 ## Clean emulator data
@@ -158,3 +158,7 @@ return <Component style={{ color: colors.secondary }}/>;
     ```
     error: Error: Unable to resolve module ./prebuilt.rn-99b47b70.js from /Users/petr.janik/Documents/Projects/bachelors_thesis_accounting_ocr/node_modules/@firebase/firestore/dist/rn/index.js: ./prebuilt.rn-99b47b70.js could not be found within the project.
     ```
+4. new Date() behaves differently in RN and in the browser. The browser implementation is used when Debug is enabled.
+   Whereas new Date("2007/13:29:17") fails without debug mode, with debug mode and in browser console it returns correct
+   date.
+    
