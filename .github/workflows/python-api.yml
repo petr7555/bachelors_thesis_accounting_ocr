@@ -46,6 +46,5 @@ jobs:
       - name: 'Run Postman tests'
         run: |
           cd python-api/tests/
-#         give some time to the api to spin up
           sleep 300
           npm run test
