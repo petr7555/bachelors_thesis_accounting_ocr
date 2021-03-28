@@ -32,12 +32,15 @@
           }
         }
       ],
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
       "request": {
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{HOST}}",
-          "host": ["{{HOST}}"]
+          "raw": "{{IP}}",
+          "host": ["{{IP}}"]
         }
       },
       "response": [
@@ -113,6 +116,9 @@
           }
         }
       ],
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
       "request": {
         "method": "POST",
         "header": [],
@@ -126,8 +132,8 @@
           }
         },
         "url": {
-          "raw": "{{HOST}}/category",
-          "host": ["{{HOST}}"],
+          "raw": "{{IP}}/category",
+          "host": ["{{IP}}"],
           "path": ["category"]
         }
       },
@@ -227,8 +233,8 @@
           }
         },
         "url": {
-          "raw": "{{HOST}}/category",
-          "host": ["{{HOST}}"],
+          "raw": "{{IP}}/category",
+          "host": ["{{IP}}"],
           "path": ["category"]
         }
       },
@@ -333,8 +339,8 @@
           ]
         },
         "url": {
-          "raw": "{{HOST}}/process-image",
-          "host": ["{{HOST}}"],
+          "raw": "{{IP}}/process-image",
+          "host": ["{{IP}}"],
           "path": ["process-image"]
         }
       },
@@ -401,12 +407,6 @@
         "type": "text/javascript",
         "exec": [""]
       }
-    }
-  ],
-  "variable": [
-    {
-      "key": "HOST",
-      "value": "http://0.0.0.0"
     }
   ]
 }
