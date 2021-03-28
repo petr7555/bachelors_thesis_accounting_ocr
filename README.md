@@ -1,5 +1,6 @@
 [![CI](https://github.com/petr7555/bachelors_thesis_accounting_ocr/actions/workflows/CI.yml/badge.svg)](https://github.com/petr7555/bachelors_thesis_accounting_ocr/actions/workflows/CI.yml)
 [![Android E2E tests](https://github.com/petr7555/bachelors_thesis_accounting_ocr/actions/workflows/e2e-android.yml/badge.svg)](https://github.com/petr7555/bachelors_thesis_accounting_ocr/actions/workflows/e2e-android.yml)
+[![Python API deployment](https://github.com/petr7555/bachelors_thesis_accounting_ocr/actions/workflows/python-api.yml/badge.svg)](https://github.com/petr7555/bachelors_thesis_accounting_ocr/actions/workflows/python-api.yml)
 
 Web version of Storybook is deployed to https://bachelors-thesis-accounting-ocr.vercel.app/ with each push to GitHub.
 This is not part of GitHub Actions but Vercel's own repository hook.
