@@ -12,9 +12,10 @@ const transformImage = async (
 ): Promise<ResponseData | undefined> => {
   try {
     // local
-    const endpoint = 'http://10.0.2.2/process-image';
+    // const endpoint = 'http://10.0.2.2/process-image';
     // production
-    // const endpoint = 'http://pythonapi.westeurope.azurecontainer.io/process-image';
+    const endpoint =
+      'http://pythonapi.westeurope.azurecontainer.io/process-image';
 
     const photo = {
       uri: image.path,
@@ -25,7 +26,6 @@ const transformImage = async (
     const formData = new FormData();
     formData.append('image', photo);
 
-    console.log(image.mime);
     const { data } = await axios.post(endpoint, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
