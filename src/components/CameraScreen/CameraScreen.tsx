@@ -9,7 +9,6 @@ import {
   requestCameraPermission,
   requestStoragePermission,
 } from '../../global/permissions';
-import { getTextFromImage } from '../../global/ocr';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../../global/styles/colors';
 import { getReceiptDataFromImage } from '../../services/FormRecognizerClient/getReceiptDataFromImage';
@@ -66,7 +65,6 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
   };
 
   const processImage = async (image: Image): Promise<string | undefined> => {
-    await getTextFromImage(image.path);
     const receiptData = await getReceiptDataFromImage(image);
     if (receiptData) {
       const receiptDataWithCategories = await addItemCategories(receiptData);

@@ -1,6 +1,6 @@
 import vision from '@react-native-firebase/ml';
 
-export const getTextFromImage = async (localPath: string) => {
+const getTextFromImage = async (localPath: string) => {
   try {
     const processed = await vision().cloudDocumentTextRecognizerProcessImage(
       localPath,
@@ -20,3 +20,5 @@ export const getTextFromImage = async (localPath: string) => {
     console.error(error);
   }
 };
+
+export default getTextFromImage;
