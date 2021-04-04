@@ -7,6 +7,7 @@ const Colors = {
   green: 'green',
   transparentBlack: 'rgba(0, 0, 0, 0.5)',
   white: 'white',
+  black: 'black',
   secondaryDarkMode: '#7425ff',
   statusBar: '#6d6d6d',
 };

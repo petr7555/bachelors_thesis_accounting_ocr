@@ -1,12 +1,12 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { Platform } from 'react-native';
 import androidAuth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { ReactNativeFirebase } from '@react-native-firebase/app';
 import androidFirestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
+import { isAndroid } from './utils/platform';
 
 // to avoid error 'Firebase App named '[DEFAULT]' already exists'
 if (!firebase.apps.length) {
@@ -39,7 +39,7 @@ let firestoreInstance:
   | FirebaseFirestoreTypes.Module
   | firebase.firestore.Firestore;
 
-if (Platform.OS === 'android') {
+if (isAndroid) {
   auth = androidAuth;
   authInstance = androidAuth();
   firestore = androidFirestore;

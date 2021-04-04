@@ -20,6 +20,7 @@ import { authInstance, FirebaseError } from '../../global/firebase';
 import bgImage from '../../../images/background.png';
 import EmailValidator from 'email-validator';
 import Colors from '../../global/styles/colors';
+import { isAndroid } from '../../global/utils/platform';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   input: {
-    color: Colors.white,
+    color: isAndroid ? Colors.white : Colors.black,
     flex: 1,
     fontSize: 18,
   },
