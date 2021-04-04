@@ -35,5 +35,10 @@ categories = {
     "shirt": "👕",
     "jeans": "👖",
     "shoes": "👟",
+    "coffee": "☕",
+    "tea": "🍵",
+    "book": "📚",
+    "toy": "🧸",
+    "bed": "🛏",
 }
 # TODO get categories and emojis from https://www.walmart.com/
