@@ -2,8 +2,8 @@ import { Fields, ReceiptResponse } from './FormRecognizerClient';
 import convertReceiptResponseToReceiptData, {
   ReceiptData,
 } from './convertReceiptResponseToReceiptData';
-import { getTodaysDateAtNoon } from '../../global/utils';
 import uuid from 'uuid';
+import getTodaysDateAtNoon from '../../global/utils/getTodaysDateAtNoon';
 
 jest.mock('uuid', () => {
   const v4 = jest.fn();

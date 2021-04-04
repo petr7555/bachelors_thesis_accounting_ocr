@@ -1,6 +1,6 @@
 import { Image } from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
-import { getFilename } from '../global/utils';
+import getFilename from '../global/utils/getFilename';
 
 export const uploadImageToFirebaseStorage = async (
   image: Image,

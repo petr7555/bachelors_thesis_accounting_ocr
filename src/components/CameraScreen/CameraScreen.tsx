@@ -18,7 +18,6 @@ import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import addReceiptToUsersReceipts from '../../api/addReceiptToUsersReceipts';
 import { MixedTheme } from '../../../App';
-import { getFilename, rgbToHex } from '../../global/utils';
 import Button from '../PrimaryButton/PrimaryButton';
 import addItemCategories from '../../api/addItemCategories';
 import {
@@ -26,6 +25,8 @@ import {
   uploadImageToFirebaseStorage,
 } from '../../api/uploadImageToFirebaseStorage';
 import transformImage from '../../api/transformImage';
+import rgbToHex from '../../global/utils/rgbToHex';
+import getFilename from '../../global/utils/getFilename';
 
 type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
 

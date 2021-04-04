@@ -34,11 +34,6 @@ import {
 import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
-import {
-  getTodaysDateAtNoon,
-  toSentenceCase,
-  validateNumber,
-} from '../../global/utils';
 import updateReceipt from '../../api/updateReceipt';
 import getReceiptForUser from '../../api/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
@@ -46,6 +41,9 @@ import Icon from '../ThemedIcon/ThemedIonIcon';
 import ImageThumbnail from './ImageThumbnail';
 import Modal from 'react-native-modal';
 import FullWidthImage from './FullWidthImage';
+import validateNumber from '../../global/utils/validateNumber';
+import getTodaysDateAtNoon from '../../global/utils/getTodaysDateAtNoon';
+import toSentenceCase from '../../global/utils/toSentenceCase';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;

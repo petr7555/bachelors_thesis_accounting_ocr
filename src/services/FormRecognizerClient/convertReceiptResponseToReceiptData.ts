@@ -1,8 +1,8 @@
 import { ReceiptResponse } from './FormRecognizerClient';
 import { getAmountFromString, getCurrencyFromString } from './amountParser';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
-import { getTodaysDateAtNoon } from '../../global/utils';
-import { v4 as uuidv4 } from 'uuid';
+import getDefaultReceipt from '../../global/utils/getDefaultReceipts';
+import getDefaultItem from '../../global/utils/getDefaultItem';
 
 type ReceiptDataBase = {
   merchantName: string;
@@ -37,18 +37,7 @@ export type Item = {
 export default function convertReceiptResponseToReceiptData(
   receiptResponse: ReceiptResponse,
 ): ReceiptData {
-  const result: ReceiptData = {
-    merchantName: '',
-    merchantPhoneNumber: '',
-    merchantAddress: '',
-    transactionDate: getTodaysDateAtNoon(),
-    total: 0,
-    subtotal: 0,
-    tax: 0,
-    tip: 0,
-    currency: '',
-    items: [],
-  };
+  const result = getDefaultReceipt();
 
   const fields = receiptResponse.analyzeResult.documentResults[0].fields;
 
@@ -97,13 +86,7 @@ export default function convertReceiptResponseToReceiptData(
 
   if (fields.Items?.valueArray) {
     for (const item of fields.Items.valueArray) {
-      const resultItem: Item = {
-        id: uuidv4(),
-        name: '',
-        quantity: 1,
-        price: 0,
-        totalPrice: 0,
-      };
+      const resultItem: Item = getDefaultItem();
 
       resultItem.name =
         item.valueObject.Name?.valueString ||

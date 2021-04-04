@@ -1,6 +1,6 @@
 import { Image } from 'react-native-image-crop-picker';
 import axios from 'axios';
-import { getFilename } from '../global/utils';
+import getFilename from '../global/utils/getFilename';
 
 type ResponseData = {
   image: string;

@@ -8,13 +8,14 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { toSentenceCase, validateNumber } from '../../global/utils';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import ConfirmationModal from '../ConfirmDelete/ConfirmationModal';
 import Colors from '../../global/styles/colors';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
+import validateNumber from '../../global/utils/validateNumber';
+import toSentenceCase from '../../global/utils/toSentenceCase';
 
 export type ItemFormData = {
   name: string;
