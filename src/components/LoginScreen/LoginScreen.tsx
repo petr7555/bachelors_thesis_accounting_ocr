@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     marginTop: 10,
+    maxWidth: 400,
     width: WIDTH - 60,
   },
   logo: {

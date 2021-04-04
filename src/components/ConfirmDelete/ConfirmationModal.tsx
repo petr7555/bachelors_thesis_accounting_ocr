@@ -1,6 +1,6 @@
-import Modal from 'react-native-modal';
 import ConfirmDelete from './ConfirmDelete';
 import React from 'react';
+import { UniversalModal } from '../UniversalModal/UniversalModal';
 
 type Props = {
   isVisible: boolean;
@@ -18,7 +18,7 @@ const ConfirmationModal = ({
   onCancel,
 }: Props) => {
   return (
-    <Modal
+    <UniversalModal
       isVisible={isVisible}
       onBackdropPress={onCancel}
       onBackButtonPress={onCancel}>
@@ -30,7 +30,7 @@ const ConfirmationModal = ({
         }}
         onCancel={onCancel}
       />
-    </Modal>
+    </UniversalModal>
   );
 };
 

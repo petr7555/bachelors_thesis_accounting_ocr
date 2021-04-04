@@ -4,12 +4,13 @@ import SettingsScreen from '../SettingsScreen/SettingsScreen';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { getNavigationIcon } from '../../global/navigation';
+import { StyleSheet } from 'react-native';
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator drawerType="permanent">
+    <Drawer.Navigator drawerType="permanent" drawerStyle={styles.drawer}>
       <Drawer.Screen
         name="Home"
         component={HomeScreen}
@@ -23,3 +24,9 @@ export const DrawerNavigator = () => {
     </Drawer.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  drawer: {
+    width: 180,
+  },
+});

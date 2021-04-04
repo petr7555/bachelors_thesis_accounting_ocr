@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondary,
     borderRadius: 25,
     height: 50,
+    maxWidth: 400,
     width: WIDTH - 60,
   },
   containerStyle: {
