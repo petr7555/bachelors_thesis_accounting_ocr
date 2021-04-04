@@ -102,7 +102,7 @@ const LoginScreen = () => {
           <View style={styles.inputSection}>
             <Icon style={styles.inputIcon} name="person-circle" />
             <TextInput
-              style={styles.input}
+              style={[styles.input, styles.emailInput]}
               onBlur={onBlur}
               onChangeText={(inputValue) => onChange(inputValue)}
               value={value}
@@ -218,6 +218,9 @@ const styles = StyleSheet.create({
   },
   btnSignUpContainer: {
     marginTop: 10,
+  },
+  emailInput: {
+    marginRight: 50,
   },
   eyeIcon: {
     fontSize: 24,
