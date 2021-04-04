@@ -26,3 +26,4 @@
 #include <winrt/Microsoft.UI.Xaml.XamlTypeInfo.h>
 
 #include "winrt/RNPermissions.h"
+#include "winrt/DateTimePicker.h"

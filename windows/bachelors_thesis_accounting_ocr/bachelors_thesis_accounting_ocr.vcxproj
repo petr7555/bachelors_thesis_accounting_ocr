@@ -173,6 +173,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\node_modules\@react-native-community\datetimepicker\windows\DateTimePickerWindows\DateTimePickerWindows.vcxproj">
+      <Project>{0986a4db-8e72-4bb7-ae32-7d9df1758a9d}</Project>
+      <Name>DateTimePickerWindows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\node_modules\react-native-permissions\windows\RNPermissions\RNPermissions.vcxproj">
       <Project>{99677b9d-a27b-4239-930e-c36c8d339c54}</Project>
     </ProjectReference>
