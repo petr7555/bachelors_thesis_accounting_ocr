@@ -39,11 +39,12 @@ import getReceiptForUser from '../../api/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import ImageThumbnail from './ImageThumbnail';
-import Modal from 'react-native-modal';
 import FullWidthImage from './FullWidthImage';
 import validateNumber from '../../global/utils/validateNumber';
 import getTodaysDateAtNoon from '../../global/utils/getTodaysDateAtNoon';
 import toSentenceCase from '../../global/utils/toSentenceCase';
+import { UniversalModal } from '../UniversalModal/UniversalModal';
+import { isAndroid, isWindows } from '../../global/utils/platform';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
@@ -170,10 +171,26 @@ const EditReceipt = ({ route }: Props) => {
             <ListItem bottomDivider onPress={() => setShow(true)}>
               <Icon style={styles.icon} name="calendar" />
               <ListItem.Content>
-                <ListItem.Title>{date.toLocaleDateString()}</ListItem.Title>
+                {(show || isWindows) && (
+                  <DateTimePicker
+                    value={date}
+                    mode="date"
+                    is24Hour={true}
+                    display="default"
+                    onChange={(event, selectedDate) => {
+                      setShow(false);
+                      if (selectedDate) {
+                        onChange(selectedDate);
+                      }
+                    }}
+                  />
+                )}
+                {isAndroid && (
+                  <ListItem.Title>{date.toLocaleDateString()}</ListItem.Title>
+                )}
               </ListItem.Content>
             </ListItem>
-            {show && (
+            {show && isAndroid && (
               <DateTimePicker
                 value={date}
                 mode="date"
@@ -362,7 +379,7 @@ const EditReceipt = ({ route }: Props) => {
           text="View processed"
         />
       </View>
-      <Modal
+      <UniversalModal
         isVisible={isModalVisible}
         onBackdropPress={hideModal}
         onBackButtonPress={hideModal}>
@@ -373,7 +390,7 @@ const EditReceipt = ({ route }: Props) => {
             </Pressable>
           </ScrollView>
         </View>
-      </Modal>
+      </UniversalModal>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={fields}
@@ -404,8 +421,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   imagesPreview: {
-    borderBottomColor: Colors.primary,
     borderBottomWidth: 5,
+    borderColor: Colors.primary,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
