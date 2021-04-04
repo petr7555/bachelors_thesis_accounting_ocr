@@ -1,25 +1,30 @@
 import React from 'react';
-import HomeScreen from '../HomeScreen/HomeScreen';
 import SettingsScreen from '../SettingsScreen/SettingsScreen';
-
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { getNavigationIcon } from '../../global/navigation';
 import { StyleSheet } from 'react-native';
+import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
+import { HomeStackNavigator } from '../HomeStackNavigator/HomeStackNavigator';
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<RootTabParamList>();
 
 export const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerType="permanent" drawerStyle={styles.drawer}>
       <Drawer.Screen
         name="Home"
-        component={HomeScreen}
-        options={{ drawerIcon: getNavigationIcon('home-outline') }}
+        component={HomeStackNavigator}
+        options={{
+          title: 'My Receipts',
+          drawerIcon: getNavigationIcon('receipt-outline'),
+        }}
       />
       <Drawer.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{ drawerIcon: getNavigationIcon('settings-outline') }}
+        options={{
+          drawerIcon: getNavigationIcon('settings-outline'),
+        }}
       />
     </Drawer.Navigator>
   );
@@ -27,6 +32,6 @@ export const DrawerNavigator = () => {
 
 const styles = StyleSheet.create({
   drawer: {
-    width: 180,
+    width: 220,
   },
 });
