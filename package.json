@@ -20,7 +20,7 @@
     "clean:windows": "del %appdata%\\Temp\\react-native-* & del node_modules/ & npm ci & cd android & gradlew clean & cd .. & npm start -- --reset-cache",
     "clean:linux": "rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && watchman watch-del-all && rm -rf node_modules/ && rm -rf android/build && npm ci && (cd android && ./gradlew clean) && npm start -- --reset-cache",
     "postinstall": "patch-package",
-    "storybook:rn": "npm run adb && node_modules/@storybook/react-native-server/bin/index.js -p 9001 -c .storybook-rn",
+    "storybook:rn": "npm run adb && node_modules/@storybook/react-native-server/bin/index.js -p 9001 -c storybook-rn",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
     "loki:update:rn": "loki update --port: 9001 --configurationFilter android",
     "loki:test:rn": "loki test --port 9001 --configurationFilter android",
