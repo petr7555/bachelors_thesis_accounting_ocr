@@ -10,12 +10,11 @@ import {
   FlatList,
   KeyboardTypeOptions,
   ListRenderItem,
-  Pressable,
   ScrollView,
   StyleSheet,
   TextInput,
-  View,
   useWindowDimensions,
+  View,
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { RouteProp, useNavigation } from '@react-navigation/native';
@@ -368,6 +367,13 @@ const EditReceipt = ({ route }: Props) => {
 
   const { height } = useWindowDimensions();
 
+  const windowsModalContentStyle = StyleSheet.flatten({
+    maxHeight: height,
+    paddingTop: 70,
+    paddingBottom: 55,
+    paddingHorizontal: 50,
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.imagesPreview}>
@@ -386,19 +392,15 @@ const EditReceipt = ({ route }: Props) => {
         isVisible={isModalVisible}
         onBackdropPress={hideModal}
         onBackButtonPress={hideModal}>
-        <View
-          style={{
-            maxHeight: height,
-            // paddingTop: 70,
-            // paddingBottom: 55,
-            // paddingHorizontal: 50,
-          }}>
-          <Pressable onPress={hideModal}>
-            <Icon style={styles.closeIcon} name="close-circle" />
-            <ScrollView>
-              <FullWidthImage uri={previewUri} />
-            </ScrollView>
-          </Pressable>
+        <View style={isWindows && windowsModalContentStyle}>
+          <Icon
+            style={styles.closeIcon}
+            name="close-circle"
+            onPress={hideModal}
+          />
+          <ScrollView>
+            <FullWidthImage uri={previewUri} />
+          </ScrollView>
         </View>
       </UniversalModal>
       <FlatList
@@ -418,6 +420,7 @@ const EditReceipt = ({ route }: Props) => {
 
 const styles = StyleSheet.create({
   closeIcon: {
+    color: Colors.black,
     fontSize: 50,
     position: 'absolute',
     right: '3%',
