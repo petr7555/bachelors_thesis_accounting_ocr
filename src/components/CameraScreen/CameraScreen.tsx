@@ -14,7 +14,7 @@ import Colors from '../../global/styles/colors';
 import { getReceiptDataFromImage } from '../../services/FormRecognizerClient/getReceiptDataFromImage';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
+import { RootParamList } from '../RootNavigator/RootNavigator';
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import addReceiptToUsersReceipts from '../../api/addReceiptToUsersReceipts';
 import { MixedTheme } from '../../../App';
@@ -28,7 +28,7 @@ import transformImage from '../../api/transformImage';
 import rgbToHex from '../../global/utils/rgbToHex';
 import getFilename from '../../global/utils/getFilename';
 
-type HomeNavigationProp = StackNavigationProp<RootTabParamList, 'Home'>;
+type HomeNavigationProp = StackNavigationProp<RootParamList, 'Home'>;
 
 type Props = {
   setModalVisible: Dispatch<SetStateAction<boolean>>;

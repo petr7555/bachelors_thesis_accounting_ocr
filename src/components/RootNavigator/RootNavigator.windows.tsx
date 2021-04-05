@@ -3,12 +3,12 @@ import SettingsScreen from '../SettingsScreen/SettingsScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { getNavigationIcon } from '../../global/navigation';
 import { StyleSheet } from 'react-native';
-import { RootTabParamList } from '../RootTabNavigator/RootTabNavigator';
+import { RootParamList } from './RootNavigator';
 import { HomeStackNavigator } from '../HomeStackNavigator/HomeStackNavigator';
 
-const Drawer = createDrawerNavigator<RootTabParamList>();
+const Drawer = createDrawerNavigator<RootParamList>();
 
-export const DrawerNavigator = () => {
+const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerType="permanent" drawerStyle={styles.drawer}>
       <Drawer.Screen
@@ -35,3 +35,5 @@ const styles = StyleSheet.create({
     width: 220,
   },
 });
+
+export default DrawerNavigator;

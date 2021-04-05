@@ -9,20 +9,20 @@ import {
   HomeStackParamList,
 } from '../HomeStackNavigator/HomeStackNavigator';
 
-export type RootTabParamList = {
+export type RootParamList = {
   Home: NavigatorScreenParams<HomeStackParamList>;
   Scan: undefined;
   Settings: undefined;
 };
 
-const RootTab = createBottomTabNavigator<RootTabParamList>();
+const Tab = createBottomTabNavigator<RootParamList>();
 
 const NullComponent = () => null;
 
-export const RootTabNavigator = () => {
+const RootNavigator = () => {
   return (
-    <RootTab.Navigator>
-      <RootTab.Screen
+    <Tab.Navigator>
+      <Tab.Screen
         name="Home"
         component={HomeStackNavigator}
         options={{
@@ -31,20 +31,22 @@ export const RootTabNavigator = () => {
         }}
       />
       {/* button to go to NullComponent is hidden under the tabBarButton, so it cannot be clicked */}
-      <RootTab.Screen
+      <Tab.Screen
         name="Scan"
         component={NullComponent}
         options={{
           tabBarButton: () => <ScanButton />,
         }}
       />
-      <RootTab.Screen
+      <Tab.Screen
         name="Settings"
         component={SettingsScreen}
         options={{
           tabBarIcon: getNavigationIcon('settings-outline'),
         }}
       />
-    </RootTab.Navigator>
+    </Tab.Navigator>
   );
 };
+
+export default RootNavigator;
