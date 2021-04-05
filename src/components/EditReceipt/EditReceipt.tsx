@@ -44,7 +44,7 @@ import FullWidthImage from './FullWidthImage';
 import validateNumber from '../../global/utils/validateNumber';
 import getTodaysDateAtNoon from '../../global/utils/getTodaysDateAtNoon';
 import toSentenceCase from '../../global/utils/toSentenceCase';
-import { UniversalModal } from '../UniversalModal/UniversalModal';
+import UniversalModal from '../UniversalModal/UniversalModal';
 import { isAndroid, isWindows } from '../../global/utils/platform';
 
 // Types

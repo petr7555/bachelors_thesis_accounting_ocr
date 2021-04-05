@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Modal from 'react-native-modal';
+import UniversalModal from '../UniversalModal/UniversalModal';
 import Camera from '../CameraScreen/CameraScreen';
 import Colors from '../../global/styles/colors';
 
@@ -14,9 +14,7 @@ const ScanButton = () => {
   const [processing, setProcessing] = useState(false);
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const showModal = () => {
-    setModalVisible(true);
-  };
+
   const hideModal = () => {
     setModalVisible(false);
   };
@@ -24,7 +22,7 @@ const ScanButton = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={showModal}
+        onPress={() => setModalVisible((visible) => !visible)}
         style={styles.roundButton}
         disabled={processing}>
         {processing ? (
@@ -33,7 +31,7 @@ const ScanButton = () => {
           <Icon style={styles.icon} name="scan" />
         )}
       </TouchableOpacity>
-      <Modal
+      <UniversalModal
         style={styles.modalView}
         isVisible={isModalVisible}
         onBackdropPress={hideModal}
@@ -42,7 +40,7 @@ const ScanButton = () => {
           setModalVisible={setModalVisible}
           setProcessing={setProcessing}
         />
-      </Modal>
+      </UniversalModal>
     </View>
   );
 };
