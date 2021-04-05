@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Image } from 'react-native-elements';
 
 type Props = {
   uri?: string;

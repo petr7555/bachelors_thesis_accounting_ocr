@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {
   Alert,
-  Dimensions,
   ImageBackground,
   Platform,
   Pressable,
@@ -9,6 +8,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import Button from '../PrimaryButton/PrimaryButton';
@@ -20,7 +20,7 @@ import { authInstance, FirebaseError } from '../../global/firebase';
 import bgImage from '../../../images/background.png';
 import EmailValidator from 'email-validator';
 import Colors from '../../global/styles/colors';
-import { isAndroid } from '../../global/utils/platform';
+import { isWindows } from '../../global/utils/platform';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,
@@ -89,6 +89,13 @@ const LoginScreen = () => {
 
   const passwordInput = useRef<TextInput>(null);
 
+  const { width } = useWindowDimensions();
+
+  const inputSectionStyle = StyleSheet.flatten([
+    styles.inputSection,
+    { width: width - 60 },
+  ]);
+
   return (
     <ImageBackground source={bgImage} style={styles.backgroundContainer}>
       <View style={styles.logoContainer}>
@@ -99,7 +106,7 @@ const LoginScreen = () => {
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
-          <View style={styles.inputSection}>
+          <View style={inputSectionStyle}>
             <Icon style={styles.inputIcon} name="person-circle" />
             <TextInput
               style={[styles.input, styles.emailInput]}
@@ -137,7 +144,7 @@ const LoginScreen = () => {
       <Controller
         control={control}
         render={({ onChange, onBlur, value }) => (
-          <View style={styles.inputSection}>
+          <View style={inputSectionStyle}>
             <MaterialIcon style={styles.inputIcon} name="lock" />
             <TextInput
               style={styles.input}
@@ -200,8 +207,6 @@ const LoginScreen = () => {
   );
 };
 
-const { width: WIDTH } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
@@ -226,7 +231,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   input: {
-    color: isAndroid ? Colors.white : Colors.black,
+    color: isWindows ? Colors.black : Colors.white,
     flex: 1,
     fontSize: 18,
   },
@@ -244,8 +249,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     marginTop: 10,
-    maxWidth: 400,
-    width: WIDTH - 60,
   },
   logo: {
     // width: 120,

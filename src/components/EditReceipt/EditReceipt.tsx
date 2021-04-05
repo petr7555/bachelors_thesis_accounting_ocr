@@ -15,6 +15,7 @@ import {
   StyleSheet,
   TextInput,
   View,
+  useWindowDimensions,
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { RouteProp, useNavigation } from '@react-navigation/native';
@@ -365,6 +366,8 @@ const EditReceipt = ({ route }: Props) => {
     setModalVisible(false);
   };
 
+  const { height } = useWindowDimensions();
+
   return (
     <View style={styles.container}>
       <View style={styles.imagesPreview}>
@@ -383,7 +386,7 @@ const EditReceipt = ({ route }: Props) => {
         isVisible={isModalVisible}
         onBackdropPress={hideModal}
         onBackButtonPress={hideModal}>
-        <View>
+        <View style={{ maxHeight: height }}>
           <ScrollView>
             <Pressable onPress={hideModal}>
               <FullWidthImage uri={previewUri} />
