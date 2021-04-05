@@ -386,12 +386,19 @@ const EditReceipt = ({ route }: Props) => {
         isVisible={isModalVisible}
         onBackdropPress={hideModal}
         onBackButtonPress={hideModal}>
-        <View style={{ maxHeight: height }}>
-          <ScrollView>
-            <Pressable onPress={hideModal}>
+        <View
+          style={{
+            maxHeight: height,
+            // paddingTop: 70,
+            // paddingBottom: 55,
+            // paddingHorizontal: 50,
+          }}>
+          <Pressable onPress={hideModal}>
+            <Icon style={styles.closeIcon} name="close-circle" />
+            <ScrollView>
               <FullWidthImage uri={previewUri} />
-            </Pressable>
-          </ScrollView>
+            </ScrollView>
+          </Pressable>
         </View>
       </UniversalModal>
       <FlatList
@@ -410,6 +417,13 @@ const EditReceipt = ({ route }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  closeIcon: {
+    fontSize: 50,
+    position: 'absolute',
+    right: '3%',
+    top: '3%',
+    zIndex: 1,
+  },
   container: {
     flex: 1,
   },
