@@ -1,6 +1,6 @@
 // needs to be first import
 // https://reactnative.dev/docs/navigation#react-navigation
-import 'react-native-gesture-handler';
+// import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
 import { ActivityIndicator, Text, useColorScheme } from 'react-native';
 import {
@@ -9,7 +9,7 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import { Theme } from '@react-navigation/native/lib/typescript/src/types';
-import { RootTabNavigator } from './src/components/RootTabNavigator/RootTabNavigator';
+import RootNavigator from './src/components/RootNavigator/RootNavigator';
 import LoginScreen from './src/components/LoginScreen/LoginScreen';
 import Colors from './src/global/styles/colors';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -68,7 +68,7 @@ const App = () => {
 
   useEffect(() => {
     createUser(user);
-    SplashScreen.hide();
+    SplashScreen?.hide();
   }, [user]);
 
   if (loading) {
@@ -83,7 +83,7 @@ const App = () => {
     <ThemeProvider theme={theme} useDark={scheme === 'dark'}>
       <NavigationContainer
         theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
-        {user ? <RootTabNavigator /> : <LoginScreen />}
+        {user ? <RootNavigator /> : <LoginScreen />}
       </NavigationContainer>
     </ThemeProvider>
   );

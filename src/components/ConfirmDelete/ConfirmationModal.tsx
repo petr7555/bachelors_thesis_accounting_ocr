@@ -1,6 +1,6 @@
 import ConfirmDelete from './ConfirmDelete';
 import React from 'react';
-import { UniversalModal } from '../UniversalModal/UniversalModal';
+import UniversalModal from '../UniversalModal/UniversalModal';
 
 type Props = {
   isVisible: boolean;

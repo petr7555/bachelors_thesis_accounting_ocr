@@ -2,13 +2,13 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { RootTabNavigator } from './RootTabNavigator';
+import RootNavigator from './RootNavigator';
 
-describe('RootTabNavigator', () => {
+describe('RootNavigator', () => {
   test('Default screen is My receipts', async () => {
     const component = (
       <NavigationContainer>
-        <RootTabNavigator />
+        <RootNavigator />
       </NavigationContainer>
     );
 

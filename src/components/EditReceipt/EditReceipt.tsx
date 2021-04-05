@@ -15,6 +15,7 @@ import {
   StyleSheet,
   TextInput,
   View,
+  useWindowDimensions,
 } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { RouteProp, useNavigation } from '@react-navigation/native';
@@ -39,11 +40,12 @@ import getReceiptForUser from '../../api/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import ImageThumbnail from './ImageThumbnail';
-import Modal from 'react-native-modal';
 import FullWidthImage from './FullWidthImage';
 import validateNumber from '../../global/utils/validateNumber';
 import getTodaysDateAtNoon from '../../global/utils/getTodaysDateAtNoon';
 import toSentenceCase from '../../global/utils/toSentenceCase';
+import UniversalModal from '../UniversalModal/UniversalModal';
+import { isAndroid, isWindows } from '../../global/utils/platform';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
@@ -170,10 +172,26 @@ const EditReceipt = ({ route }: Props) => {
             <ListItem bottomDivider onPress={() => setShow(true)}>
               <Icon style={styles.icon} name="calendar" />
               <ListItem.Content>
-                <ListItem.Title>{date.toLocaleDateString()}</ListItem.Title>
+                {(show || isWindows) && (
+                  <DateTimePicker
+                    value={date}
+                    mode="date"
+                    is24Hour={true}
+                    display="default"
+                    onChange={(event, selectedDate) => {
+                      setShow(false);
+                      if (selectedDate) {
+                        onChange(selectedDate);
+                      }
+                    }}
+                  />
+                )}
+                {isAndroid && (
+                  <ListItem.Title>{date.toLocaleDateString()}</ListItem.Title>
+                )}
               </ListItem.Content>
             </ListItem>
-            {show && (
+            {show && isAndroid && (
               <DateTimePicker
                 value={date}
                 mode="date"
@@ -348,6 +366,8 @@ const EditReceipt = ({ route }: Props) => {
     setModalVisible(false);
   };
 
+  const { height } = useWindowDimensions();
+
   return (
     <View style={styles.container}>
       <View style={styles.imagesPreview}>
@@ -362,18 +382,25 @@ const EditReceipt = ({ route }: Props) => {
           text="View processed"
         />
       </View>
-      <Modal
+      <UniversalModal
         isVisible={isModalVisible}
         onBackdropPress={hideModal}
         onBackButtonPress={hideModal}>
-        <View>
-          <ScrollView>
-            <Pressable onPress={hideModal}>
+        <View
+          style={{
+            maxHeight: height,
+            // paddingTop: 70,
+            // paddingBottom: 55,
+            // paddingHorizontal: 50,
+          }}>
+          <Pressable onPress={hideModal}>
+            <Icon style={styles.closeIcon} name="close-circle" />
+            <ScrollView>
               <FullWidthImage uri={previewUri} />
-            </Pressable>
-          </ScrollView>
+            </ScrollView>
+          </Pressable>
         </View>
-      </Modal>
+      </UniversalModal>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={fields}
@@ -390,6 +417,13 @@ const EditReceipt = ({ route }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  closeIcon: {
+    fontSize: 50,
+    position: 'absolute',
+    right: '3%',
+    top: '3%',
+    zIndex: 1,
+  },
   container: {
     flex: 1,
   },
@@ -404,8 +438,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   imagesPreview: {
-    borderBottomColor: Colors.primary,
     borderBottomWidth: 5,
+    borderColor: Colors.primary,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
