@@ -12,7 +12,6 @@ import {
   ListRenderItem,
   ScrollView,
   StyleSheet,
-  TextInput,
   useWindowDimensions,
   View,
 } from 'react-native';
@@ -68,7 +67,7 @@ type FieldName =
 type Field = {
   name: FieldName;
   keyboardType?: KeyboardTypeOptions;
-  ref?: MutableRefObject<TextInput | null>;
+  ref?: MutableRefObject<Input | null>;
   render?: (
     onChange: any,
     onBlur: any,
@@ -119,14 +118,14 @@ const EditReceipt = ({ route }: Props) => {
 
   let flatListRef: FlatList | null;
 
-  const merchantAddressInput = useRef<TextInput>(null);
-  const merchantPhoneNumberInput = useRef<TextInput>(null);
-  const transactionDateInput = useRef<TextInput>(null);
-  const totalInput = useRef<TextInput>(null);
-  const subtotalInput = useRef<TextInput>(null);
-  const taxInput = useRef<TextInput>(null);
-  const tipInput = useRef<TextInput>(null);
-  const currencyInput = useRef<TextInput>(null);
+  const merchantAddressInput = useRef<Input>(null);
+  const merchantPhoneNumberInput = useRef<Input>(null);
+  const transactionDateInput = useRef<Input>(null);
+  const totalInput = useRef<Input>(null);
+  const subtotalInput = useRef<Input>(null);
+  const taxInput = useRef<Input>(null);
+  const tipInput = useRef<Input>(null);
+  const currencyInput = useRef<Input>(null);
 
   const ITEM_HEIGHT = 40 + 16 + 5 + 6;
   const getItemLayout = (data: any, index: number) => {
@@ -312,7 +311,6 @@ const EditReceipt = ({ route }: Props) => {
           field.render(onChange, onBlur, value)
         ) : (
           <Input
-            inputStyle={styles.input}
             onBlur={() => {
               if (value === '') {
                 setValue(field.name, field.defaultValue);
@@ -456,9 +454,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  input: {
-    paddingBottom: 0,
   },
 });
 

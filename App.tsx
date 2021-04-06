@@ -18,6 +18,7 @@ import { ThemeProvider } from 'react-native-elements';
 import createUser from './src/api/createUser';
 import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from 'react-native-fast-toast';
+import { isAndroid } from './src/global/utils/platform';
 
 type CommonTheme = {
   colors: {
@@ -61,6 +62,11 @@ const MyDarkTheme: MixedTheme = {
 
 const theme = {
   // you can override react-native-elements' components' styles here
+  Input: {
+    inputStyle: isAndroid && {
+      paddingBottom: 0,
+    },
+  },
 };
 
 const App = () => {

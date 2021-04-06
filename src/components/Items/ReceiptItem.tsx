@@ -137,7 +137,6 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
                   control={control}
                   render={({ onChange, onBlur, value }) => (
                     <Input
-                      inputStyle={styles.input}
                       onBlur={() => {
                         if (value === '') {
                           setValue(field.name, field.defaultValue);
@@ -224,9 +223,6 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
 const styles = StyleSheet.create({
   icon: {
     fontSize: 25,
-  },
-  input: {
-    paddingBottom: 0,
   },
   inputFieldContainer: {
     flexDirection: 'row',

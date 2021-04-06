@@ -113,7 +113,6 @@ const ReceiptsList = () => {
       {searchVisible && (
         <Input
           autoFocus={true}
-          style={styles.input}
           placeholder="Search"
           onChangeText={handleChangeText}
           value={searchTerm}
@@ -146,9 +145,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  input: {
-    paddingBottom: 0,
   },
   searchIcon: {
     fontSize: 25,
