@@ -17,6 +17,7 @@ import { authInstance } from './src/global/firebase';
 import { ThemeProvider } from 'react-native-elements';
 import createUser from './src/api/createUser';
 import SplashScreen from 'react-native-splash-screen';
+import { ToastProvider } from 'react-native-fast-toast';
 
 type CommonTheme = {
   colors: {
@@ -80,12 +81,14 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={theme} useDark={scheme === 'dark'}>
-      <NavigationContainer
-        theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
-        {user ? <RootNavigator /> : <LoginScreen />}
-      </NavigationContainer>
-    </ThemeProvider>
+    <ToastProvider placement="bottom" offset={75} successColor={Colors.primary}>
+      <ThemeProvider theme={theme} useDark={scheme === 'dark'}>
+        <NavigationContainer
+          theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
+          {user ? <RootNavigator /> : <LoginScreen />}
+        </NavigationContainer>
+      </ThemeProvider>
+    </ToastProvider>
   );
 };
 

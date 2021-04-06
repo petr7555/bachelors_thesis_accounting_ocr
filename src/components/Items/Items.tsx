@@ -1,5 +1,5 @@
 import { RouteProp, useNavigation, useTheme } from '@react-navigation/native';
-import React, { useCallback, useLayoutEffect, useRef } from 'react';
+import React, { useCallback, useLayoutEffect } from 'react';
 import { FlatList, ListRenderItem, StyleSheet, Text } from 'react-native';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
@@ -16,7 +16,7 @@ import ReceiptItem, { ItemFormData } from './ReceiptItem';
 import { v4 as uuidv4 } from 'uuid';
 import Colors from '../../global/styles/colors';
 import { MixedTheme } from '../../../App';
-import Toast from 'react-native-fast-toast';
+import { useToast } from 'react-native-fast-toast';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 type ItemsScreenRouteProp = RouteProp<HomeStackParamList, 'Items'>;
@@ -52,13 +52,17 @@ const Items = ({ route }: Props) => {
     }
   };
 
-  const showSuccessToast = useCallback((message: string, icon: string) => {
-    toast.current?.show(message, {
-      type: 'success',
-      successColor: Colors.primary,
-      successIcon: <Icon style={styles.checkmarkIcon} name={icon} />,
-    });
-  }, []);
+  const toast = useToast();
+
+  const showSuccessToast = useCallback(
+    (message: string, icon: string) => {
+      toast?.show(message, {
+        type: 'success',
+        successIcon: <Icon style={styles.toastIcon} name={icon} />,
+      });
+    },
+    [toast],
+  );
 
   const showAddedToast = useCallback(() => {
     showSuccessToast('Item has been added.', 'checkmark');
@@ -100,8 +104,6 @@ const Items = ({ route }: Props) => {
     <ReceiptItem item={item} deleteItem={deleteItem} updateItem={updateItem} />
   );
 
-  const toast = useRef<Toast>(null);
-
   return (
     <>
       <FlatList
@@ -110,22 +112,21 @@ const Items = ({ route }: Props) => {
         // prevents keyboard disappearing when it would hide input field
         removeClippedSubviews={false}
       />
-      <Toast ref={toast} />
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  checkmarkIcon: {
-    color: Colors.white,
-    fontSize: 20,
-  },
   headerText: {
     color: Colors.secondary,
     fontFamily: 'sans-serif-medium',
     fontSize: 20,
     fontWeight: 'normal',
     marginRight: 20,
+  },
+  toastIcon: {
+    color: Colors.white,
+    fontSize: 20,
   },
 });
 
