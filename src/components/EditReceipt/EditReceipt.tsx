@@ -403,7 +403,7 @@ const EditReceipt = ({ route }: Props) => {
         onBackButtonPress={hideModal}>
         <View style={isWindows && windowsModalContentStyle}>
           <Icon
-            style={styles.closeIcon}
+            style={[styles.closeIcon, isWindows && styles.closeIconWindows]}
             name="close-circle"
             onPress={hideModal}
           />
@@ -435,6 +435,10 @@ const styles = StyleSheet.create({
     right: '3%',
     top: '3%',
     zIndex: 1,
+  },
+  closeIconWindows: {
+    paddingHorizontal: 50,
+    paddingTop: 70,
   },
   container: {
     flex: 1,
