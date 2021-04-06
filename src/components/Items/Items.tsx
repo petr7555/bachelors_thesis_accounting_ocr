@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Colors from '../../global/styles/colors';
 import { MixedTheme } from '../../../App';
 import { useToast } from 'react-native-fast-toast';
-import Icon from 'react-native-vector-icons/Ionicons';
+import ToastIcon from '../ToastIcon/ToastIcon';
 
 type ItemsScreenRouteProp = RouteProp<HomeStackParamList, 'Items'>;
 
@@ -55,10 +55,10 @@ const Items = ({ route }: Props) => {
   const toast = useToast();
 
   const showSuccessToast = useCallback(
-    (message: string, icon: string) => {
+    (message: string, iconName: string) => {
       toast?.show(message, {
         type: 'success',
-        successIcon: <Icon style={styles.toastIcon} name={icon} />,
+        successIcon: <ToastIcon name={iconName} />,
       });
     },
     [toast],
@@ -123,10 +123,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'normal',
     marginRight: 20,
-  },
-  toastIcon: {
-    color: Colors.white,
-    fontSize: 20,
   },
 });
 

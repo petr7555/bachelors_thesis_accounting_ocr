@@ -45,6 +45,8 @@ import getTodaysDateAtNoon from '../../global/utils/getTodaysDateAtNoon';
 import toSentenceCase from '../../global/utils/toSentenceCase';
 import UniversalModal from '../UniversalModal/UniversalModal';
 import { isAndroid, isWindows } from '../../global/utils/platform';
+import { useToast } from 'react-native-fast-toast';
+import ToastIcon from '../ToastIcon/ToastIcon';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
@@ -141,12 +143,21 @@ const EditReceipt = ({ route }: Props) => {
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
+  const toast = useToast();
+  const showSavedToast = useCallback(() => {
+    toast?.show('Receipt has been saved.', {
+      type: 'success',
+      successIcon: <ToastIcon name="checkmark" />,
+    });
+  }, [toast]);
+
   const onSubmit = useCallback(
     async (data: ReceiptData) => {
       await updateReceipt(user.uid, receiptId, data);
+      showSavedToast();
       navigation.navigate('HomeScreen');
     },
-    [navigation, receiptId, user.uid],
+    [navigation, receiptId, showSavedToast, user.uid],
   );
 
   useLayoutEffect(() => {
