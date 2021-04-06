@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   input: {
-    color: isWindows ? Colors.black : Colors.white,
+    color: isWindows ? null : Colors.white,
     flex: 1,
     fontSize: 18,
   },

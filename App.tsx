@@ -60,16 +60,24 @@ const MyDarkTheme: MixedTheme = {
   },
 };
 
+const androidInputStyle = isAndroid && {
+  paddingBottom: 0,
+};
+
 const theme = {
   // you can override react-native-elements' components' styles here
   Input: {
-    inputStyle: isAndroid && {
-      paddingBottom: 0,
+    inputStyle: {
+      ...androidInputStyle,
+      color: null,
     },
   },
 };
 
 const App = () => {
+  // useColorScheme() will always return 'light' when remote debugging.
+  // set this to 'dark' or build using --release to test dark mode
+  // const scheme = 'dark';
   const scheme = useColorScheme();
   const [user, loading, error] = useAuthState(authInstance);
 
