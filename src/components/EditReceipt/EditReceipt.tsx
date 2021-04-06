@@ -429,7 +429,7 @@ const EditReceipt = ({ route }: Props) => {
 
 const styles = StyleSheet.create({
   closeIcon: {
-    color: Colors.black,
+    color: Colors.red,
     fontSize: 50,
     position: 'absolute',
     right: '3%',
