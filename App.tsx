@@ -18,7 +18,7 @@ import { ThemeProvider } from 'react-native-elements';
 import createUser from './src/api/createUser';
 import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from 'react-native-fast-toast';
-import { isAndroid } from './src/global/utils/platform';
+import { isAndroid, isWindows } from './src/global/utils/platform';
 
 type CommonTheme = {
   colors: {
@@ -64,12 +64,16 @@ const androidInputStyle = isAndroid && {
   paddingBottom: 0,
 };
 
+const windowsInputStyle = isWindows && {
+  color: null,
+};
+
 const theme = {
   // you can override react-native-elements' components' styles here
   Input: {
     inputStyle: {
       ...androidInputStyle,
-      color: null,
+      ...windowsInputStyle,
     },
   },
 };
