@@ -39,6 +39,7 @@ const Items = ({ route }: Props) => {
     if (items) {
       const newItems = items.filter(({ id }) => id !== itemId);
       await updateItems(user.uid, receiptId, newItems);
+      showRemovedToast();
     }
   };
 
@@ -51,17 +52,23 @@ const Items = ({ route }: Props) => {
     }
   };
 
-  const showToast = () => {
-    toast.current?.show('Item has been added.', {
+  const showSuccessToast = useCallback((message: string, icon: string) => {
+    toast.current?.show(message, {
       type: 'success',
       successColor: Colors.primary,
-      successIcon: <Icon style={styles.checkmarkIcon} name="checkmark" />,
+      successIcon: <Icon style={styles.checkmarkIcon} name={icon} />,
     });
-  };
+  }, []);
+
+  const showAddedToast = useCallback(() => {
+    showSuccessToast('Item has been added.', 'checkmark');
+  }, [showSuccessToast]);
+
+  const showRemovedToast = useCallback(() => {
+    showSuccessToast('Item has been removed.', 'trash');
+  }, [showSuccessToast]);
 
   const addItem = useCallback(async () => {
-    showToast();
-
     const newItem = {
       id: uuidv4(),
       name: 'New item',
@@ -70,7 +77,8 @@ const Items = ({ route }: Props) => {
       totalPrice: 0,
     };
     await updateItems(user.uid, receiptId, [...(items || []), newItem]);
-  }, [items, receiptId, user.uid]);
+    showAddedToast();
+  }, [items, receiptId, showAddedToast, user.uid]);
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
