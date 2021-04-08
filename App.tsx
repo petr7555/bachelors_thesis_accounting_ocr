@@ -2,7 +2,12 @@
 // https://reactnative.dev/docs/navigation#react-navigation
 // import 'react-native-gesture-handler';
 import React, { useEffect } from 'react';
-import { ActivityIndicator, Text, useColorScheme } from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  useColorScheme,
+} from 'react-native';
 import {
   DarkTheme,
   DefaultTheme,
@@ -99,7 +104,12 @@ const App = () => {
   }
 
   return (
-    <ToastProvider placement="bottom" offset={75} successColor={Colors.primary}>
+    <ToastProvider
+      placement="bottom"
+      offset={75}
+      successColor={Colors.primary}
+      textStyle={isWindows && styles.toastFixWindows}
+      iconContainerStyle={isWindows && styles.toastFixWindows}>
       <ThemeProvider theme={theme} useDark={scheme === 'dark'}>
         <NavigationContainer
           theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
@@ -109,5 +119,11 @@ const App = () => {
     </ToastProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  toastFixWindows: {
+    top: -19,
+  },
+});
 
 export default App;
