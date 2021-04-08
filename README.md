@@ -3,7 +3,9 @@
 [![Python API deployment](https://github.com/petr7555/bachelors_thesis_accounting_ocr/actions/workflows/python-api.yml/badge.svg)](https://github.com/petr7555/bachelors_thesis_accounting_ocr/actions/workflows/python-api.yml)
 
 Web version of Storybook is deployed to https://bachelors-thesis-accounting-ocr.vercel.app/ with each push to GitHub.
-This is not part of GitHub Actions but Vercel's own repository hook.
+This is not part of GitHub Actions but Vercel's own repository hook. Keep in mind, that in Storybook for
+web `Platform.OS === 'web'`, so both `isAndroid`
+and `isWindows` are `false`.
 
 Run on Windows:
 
@@ -162,9 +164,9 @@ return <Component style={{color: colors.secondary}}/>;
 4. new Date() behaves differently in RN and in the browser. The browser implementation is used when Debug is enabled.
    Whereas new Date("2007/13:29:17") fails without debug mode, with debug mode and in browser console it returns correct
    date.
-5. 
-    ```
-    Failed to restore the NuGet packages: Error: Errors in packages.config projects
-    The process cannot access the file 'C:\Users\User\Desktop\bachelors_thesis_accounting_ocr\windows\packages\Microsoft.SourceLink.GitHub.1.0.0\tools\net461\Microsoft.SourceLink.GitHub.dll' because it is being used by another process.
-    ```
-    Kill `MSBuild.exe` in Task Manager.
+5.
+ ```
+ Failed to restore the NuGet packages: Error: Errors in packages.config projects
+ The process cannot access the file 'C:\Users\User\Desktop\bachelors_thesis_accounting_ocr\windows\packages\Microsoft.SourceLink.GitHub.1.0.0\tools\net461\Microsoft.SourceLink.GitHub.dll' because it is being used by another process.
+ ```
+Solution: Kill `MSBuild.exe` in Task Manager.

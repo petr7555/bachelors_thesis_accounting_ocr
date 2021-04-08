@@ -31,6 +31,8 @@ module.exports = ({ config }) => {
   config.resolve.alias = {
     // replace `react-native` imports with `react-native-web`
     'react-native$': require.resolve('react-native-web'),
+    // "remove" react-native-windows import, because it is not possible to build a storybook with it
+    'react-native-windows$': require.resolve('react-native-web'),
   };
 
   config.resolve.extensions.push('.ts', '.tsx', '.web.js', '.web.tsx');

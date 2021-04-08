@@ -1,8 +1,11 @@
-import Modal from 'react-native-modal';
-import { Popup } from 'react-native-windows';
 import React from 'react';
 import { isWindows } from '../../global/utils/platform';
-import { StyleProp, ViewStyle } from 'react-native';
+import { Platform, StyleProp, ViewStyle } from 'react-native';
+
+const Modal = Platform.select({
+  windows: () => require('react-native-windows').Popup,
+  default: () => require('react-native-modal').default,
+})();
 
 type Props = {
   style?: StyleProp<ViewStyle>;
@@ -20,9 +23,9 @@ const UniversalModal = ({
   children,
 }: Props) =>
   isWindows ? (
-    <Popup style={style} isOpen={isVisible} onDismiss={onBackButtonPress}>
+    <Modal style={style} isOpen={isVisible} onDismiss={onBackButtonPress}>
       {children}
-    </Popup>
+    </Modal>
   ) : (
     <Modal
       style={style}
