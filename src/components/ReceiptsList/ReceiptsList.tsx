@@ -118,7 +118,6 @@ const ReceiptsList = () => {
           value={searchTerm}
           rightIconContainerStyle={styles.cancelIconContainer}
           rightIcon={
-            // TODO convenient to click on mobile? ...add padding
             <Icon
               style={styles.cancelIcon}
               name="close"
