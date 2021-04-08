@@ -27,6 +27,7 @@ import {
 import transformImage from '../../api/transformImage';
 import rgbToHex from '../../global/utils/rgbToHex';
 import getFilename from '../../global/utils/getFilename';
+import { isWindows } from '../../global/utils/platform';
 
 type HomeNavigationProp = StackNavigationProp<RootParamList, 'Home'>;
 
@@ -148,12 +149,14 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
 
   return (
     <View style={styles.modalContent}>
-      <Button
-        containerStyle={styles.buttonContainer}
-        title="Take an image"
-        onPress={addNewImage}
-        icon={<Icon style={styles.icon} name="camera-outline" />}
-      />
+      {!isWindows && (
+        <Button
+          containerStyle={styles.buttonContainer}
+          title="Take an image"
+          onPress={addNewImage}
+          icon={<Icon style={styles.icon} name="camera-outline" />}
+        />
+      )}
       <Button
         containerStyle={styles.buttonContainer}
         title="Select from gallery"
