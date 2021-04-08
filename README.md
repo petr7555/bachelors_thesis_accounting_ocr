@@ -162,4 +162,9 @@ return <Component style={{color: colors.secondary}}/>;
 4. new Date() behaves differently in RN and in the browser. The browser implementation is used when Debug is enabled.
    Whereas new Date("2007/13:29:17") fails without debug mode, with debug mode and in browser console it returns correct
    date.
-    
+5. 
+    ```
+    Failed to restore the NuGet packages: Error: Errors in packages.config projects
+    The process cannot access the file 'C:\Users\User\Desktop\bachelors_thesis_accounting_ocr\windows\packages\Microsoft.SourceLink.GitHub.1.0.0\tools\net461\Microsoft.SourceLink.GitHub.dll' because it is being used by another process.
+    ```
+    Kill `MSBuild.exe` in Task Manager.
