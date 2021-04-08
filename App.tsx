@@ -1,6 +1,8 @@
-// needs to be first import
+// needs to be the first import
 // https://reactnative.dev/docs/navigation#react-navigation
-// import 'react-native-gesture-handler';
+if (!isWindows) {
+  require('react-native-gesture-handler');
+}
 import React, { useEffect } from 'react';
 import {
   ActivityIndicator,
