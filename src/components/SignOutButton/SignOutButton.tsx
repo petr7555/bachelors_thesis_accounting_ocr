@@ -2,11 +2,13 @@ import React from 'react';
 import { authInstance } from '../../global/firebase';
 import Button from '../PrimaryButton/PrimaryButton';
 import { CommonActions, useNavigation } from '@react-navigation/native';
-import { isAndroid } from '../../global/utils/platform';
+import { Platform } from 'react-native';
 
-const googleSignin = isAndroid
-  ? require('@react-native-google-signin/google-signin').GoogleSignin
-  : null;
+const googleSignin = Platform.select({
+  android: () =>
+    require('@react-native-google-signin/google-signin').GoogleSignin,
+  default: () => () => null,
+})();
 
 const SignOutButton = () => {
   const navigation = useNavigation();
