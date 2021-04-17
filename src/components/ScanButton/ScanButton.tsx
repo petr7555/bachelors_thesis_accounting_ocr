@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     height: 90,
     justifyContent: 'center',
-    marginBottom: 10,
+    marginBottom: 41,
     width: 90,
   },
 });
