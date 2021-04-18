@@ -290,9 +290,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   privacySection: {
+    borderTopColor: Colors.grey,
+    borderTopWidth: 1,
     flexDirection: 'row',
-    marginLeft: 10,
     marginTop: 10,
+    paddingTop: 10,
   },
   validationErrorText: {
     marginBottom: 5,

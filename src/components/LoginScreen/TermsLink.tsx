@@ -24,11 +24,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   icon: {
-    fontSize: 20,
+    color: Colors.grey,
+    fontSize: 19,
     paddingRight: 10,
   },
   textStyle: {
-    color: Colors.blue,
+    color: Colors.grey,
+    fontSize: 14,
   },
 });
 
