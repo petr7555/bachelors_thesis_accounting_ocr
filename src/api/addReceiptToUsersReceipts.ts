@@ -1,6 +1,6 @@
 import { ReceiptData } from '../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { authInstance, firestore, firestoreInstance } from '../global/firebase';
-import { RECEIPTS, USERS } from './constants';
+import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from './constants';
 
 const addReceiptToUsersReceipts = async (
   urlOriginal: string,
@@ -8,12 +8,12 @@ const addReceiptToUsersReceipts = async (
   receiptData: ReceiptData,
 ): Promise<string | undefined> => {
   const user = authInstance.currentUser;
-  if (user != null) {
+  if (user) {
     try {
       const result = await firestoreInstance
-        .collection(USERS)
+        .collection(USERS_FIRESTORE)
         .doc(user.uid)
-        .collection(RECEIPTS)
+        .collection(RECEIPTS_FIRESTORE)
         .add({
           urlOriginal,
           urlProcessed,

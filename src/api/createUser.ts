@@ -1,5 +1,5 @@
 import { firestoreInstance } from '../global/firebase';
-import { USERS } from './constants';
+import { USERS_FIRESTORE } from './constants';
 import firebase from 'firebase';
 
 /**
@@ -9,7 +9,7 @@ const createUser = (user?: firebase.User) => {
   if (user) {
     const userId = user.uid;
     firestoreInstance
-      .collection(USERS)
+      .collection(USERS_FIRESTORE)
       .doc(userId)
       .get()
       .then((documentSnapshot) => {
@@ -18,7 +18,7 @@ const createUser = (user?: firebase.User) => {
         } else {
           console.log(`Creating User document with uid ${userId}.`);
           firestoreInstance
-            .collection(USERS)
+            .collection(USERS_FIRESTORE)
             .doc(userId)
             .set({
               name: user.displayName,

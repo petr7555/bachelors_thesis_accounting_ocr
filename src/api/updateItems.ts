@@ -1,6 +1,6 @@
 import { Item } from '../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { firestoreInstance } from '../global/firebase';
-import { RECEIPTS, USERS } from './constants';
+import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from './constants';
 
 const updateItems = async (
   userId: string,
@@ -9,9 +9,9 @@ const updateItems = async (
 ) => {
   try {
     await firestoreInstance
-      .collection(USERS)
+      .collection(USERS_FIRESTORE)
       .doc(userId)
-      .collection(RECEIPTS)
+      .collection(RECEIPTS_FIRESTORE)
       .doc(receiptId)
       .update({ items });
     console.log('Items updated!');
