@@ -12,6 +12,7 @@ const Colors = {
   statusBar: '#6d6d6d',
   blue: 'blue',
   grey: 'rgb(80,80,80)',
+  undefined: undefined,
 };
 
 export default Colors;
