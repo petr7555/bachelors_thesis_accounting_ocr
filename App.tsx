@@ -108,7 +108,7 @@ const App = () => {
   return (
     <ToastProvider
       placement="bottom"
-      offset={75}
+      offset={90}
       successColor={Colors.primary}
       textStyle={isWindows && styles.toastFixWindows}
       iconContainerStyle={isWindows && styles.toastFixWindows}>
