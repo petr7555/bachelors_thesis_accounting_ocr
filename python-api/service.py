@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET'])
 def welcome():
-    return "Welcome to our Machine Learning REST API!"
+    return "Welcome to the Machine Learning REST API for Receipts Scanner!"
 
 @app.route("/category", methods=['POST'])
 def category_route():
