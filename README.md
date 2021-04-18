@@ -170,3 +170,12 @@ return <Component style={{color: colors.secondary}}/>;
  The process cannot access the file 'C:\Users\User\Desktop\bachelors_thesis_accounting_ocr\windows\packages\Microsoft.SourceLink.GitHub.1.0.0\tools\net461\Microsoft.SourceLink.GitHub.dll' because it is being used by another process.
  ```
 Solution: Kill `MSBuild.exe` in Task Manager.
+
+## Privacy Policy, Terms & Conditions
+Generated using https://app-privacy-policy-generator.firebaseapp.com/, 
+slightly modifies in the paragraph Privacy Policy -> Information Collection and Use.
+
+Available at [Privacy Policy](https://receipts-scanner.flycricket.io/privacy.html) and
+[Terms & Conditions](https://receipts-scanner.flycricket.io/terms.html).
+
+Can be edited at https://app.flycricket.com/.

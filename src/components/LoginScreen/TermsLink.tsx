@@ -1,0 +1,35 @@
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import Colors from '../../global/styles/colors';
+
+type Props = {
+  icon: string;
+  text: string;
+  url: string;
+};
+const TermsLink = ({ icon, text, url }: Props) => {
+  return (
+    <Pressable style={styles.container} onPress={() => Linking.openURL(url)}>
+      <MaterialIcon name={icon} style={styles.icon} />
+      <Text style={styles.textStyle}>{text}</Text>
+    </Pressable>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+  },
+  icon: {
+    fontSize: 20,
+    paddingRight: 10,
+  },
+  textStyle: {
+    color: Colors.blue,
+  },
+});
+
+export default TermsLink;

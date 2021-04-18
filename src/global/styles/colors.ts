@@ -10,6 +10,7 @@ const Colors = {
   black: 'black',
   secondaryDarkMode: '#7425ff',
   statusBar: '#6d6d6d',
+  blue: 'blue',
 };
 
 export default Colors;
