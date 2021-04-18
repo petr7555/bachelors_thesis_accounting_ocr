@@ -1,5 +1,5 @@
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Linking, Pressable, StyleSheet, Text } from 'react-native';
 import React from 'react';
 import Colors from '../../global/styles/colors';
 
