@@ -12,7 +12,7 @@ deployed to Azure Container Instances.
 
 It is available on http://pythonapi.westeurope.azurecontainer.io/.
 
-For example requests and responses, see `postman_collection_tests.json`.
+Documentation of endpoints is available [here](https://documenter.getpostman.com/view/9355808/TzJsfdUK).
 
 ### Logs
 
