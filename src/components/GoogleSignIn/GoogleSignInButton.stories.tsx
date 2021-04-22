@@ -3,17 +3,15 @@ import React from 'react';
 import GoogleSignInButton from './GoogleSignInButton';
 import { action } from '@storybook/addon-actions';
 
-export const enabled = () => (
-  <GoogleSignInButton onPress={action('clicked-enabled')} />
-);
+export const Enabled = () => <GoogleSignInButton onPress={action('onPress')} />;
 
-export const disabled = () => (
-  <GoogleSignInButton onPress={action('clicked-disabled')} disabled={true} />
+export const Disabled = () => (
+  <GoogleSignInButton onPress={action('onPress')} disabled={true} />
 );
 
 storiesOf('GoogleSignInButton', module)
-  .add('enabled', enabled)
-  .add('disabled', disabled);
+  .add('Enabled', Enabled)
+  .add('Disabled', Disabled);
 
 export default {
   title: 'Buttons/GoogleSignInButton',

@@ -2,11 +2,15 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import CameraScreen from './CameraScreen';
 import MockedNavigator from '../../../tests/mocks/MockedNavigator';
+import { action } from '@storybook/addon-actions';
 
 const CameraScreenWithProps = () => (
-  <CameraScreen setModalVisible={() => {}} setProcessing={() => {}} />
+  <CameraScreen
+    setModalVisible={action('setModalVisible')}
+    setProcessing={action('setProcessing')}
+  />
 );
 
-const basic = () => <MockedNavigator component={CameraScreenWithProps} />;
+const Basic = () => <MockedNavigator component={CameraScreenWithProps} />;
 
-storiesOf('CameraScreen', module).add('basic', basic);
+storiesOf('CameraScreen', module).add('Basic', Basic);

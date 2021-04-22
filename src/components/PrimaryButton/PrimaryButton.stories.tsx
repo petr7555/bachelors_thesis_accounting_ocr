@@ -4,20 +4,20 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import PrimaryButton from './PrimaryButton';
 
-export const withText = () => (
+export const WithText = () => (
   <PrimaryButton
     onPress={action('clicked-text')}
     title={text('Button text', 'Hello Button')}
   />
 );
 
-export const withEmoji = () => (
+export const WithEmoji = () => (
   <PrimaryButton onPress={action('clicked-emoji')} title="😀 😎 👍 💯 🚀" />
 );
 
 storiesOf('PrimaryButton', module)
-  .add('with text', withText)
-  .add('with emoji', withEmoji);
+  .add('With text', WithText)
+  .add('With emoji', WithEmoji);
 
 export default {
   title: 'Buttons/PrimaryButton',
