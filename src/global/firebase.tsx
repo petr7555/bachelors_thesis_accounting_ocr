@@ -1,12 +1,10 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import androidAuth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import androidAuth from '@react-native-firebase/auth';
 import { ReactNativeFirebase } from '@react-native-firebase/app';
-import androidFirestore, {
-  FirebaseFirestoreTypes,
-} from '@react-native-firebase/firestore';
-import { isAndroid } from './utils/platform';
+import androidFirestore from '@react-native-firebase/firestore';
+import { isWindows } from './utils/platform';
 
 // to avoid error 'Firebase App named '[DEFAULT]' already exists'
 if (!firebase.apps.length) {
@@ -22,38 +20,17 @@ if (!firebase.apps.length) {
   });
 }
 
-let auth:
-  | ReactNativeFirebase.FirebaseModuleWithStaticsAndApp<
-      FirebaseAuthTypes.Module,
-      FirebaseAuthTypes.Statics
-    >
-  | ((app?: firebase.app.App) => firebase.auth.Auth);
-let authInstance: FirebaseAuthTypes.Module | firebase.auth.Auth;
-let firestore:
-  | ReactNativeFirebase.FirebaseModuleWithStaticsAndApp<
-      FirebaseFirestoreTypes.Module,
-      FirebaseFirestoreTypes.Statics
-    >
-  | ((app?: firebase.app.App) => firebase.firestore.Firestore);
-let firestoreInstance:
-  | FirebaseFirestoreTypes.Module
-  | firebase.firestore.Firestore;
+const auth = isWindows ? firebase.auth : androidAuth;
+const authInstance = isWindows ? firebase.auth() : androidAuth();
+const firestore = isWindows ? firebase.firestore : androidFirestore;
+const firestoreInstance = isWindows ? firebase.firestore() : androidFirestore();
 
-if (isAndroid) {
-  auth = androidAuth;
-  authInstance = androidAuth();
-  firestore = androidFirestore;
-  firestoreInstance = androidFirestore();
-} else {
-  auth = firebase.auth;
-  authInstance = firebase.auth();
-  firestore = firebase.firestore;
-
-  firestoreInstance = firebase.firestore();
+if (isWindows) {
+  // @ts-ignore
   firestoreInstance.settings({ experimentalForceLongPolling: true }); // otherwise fails with 'Could not reach Cloud Firestore backend. Backend didn't respond within 10 seconds.'
 }
 
-export { auth, firestore, authInstance, firestoreInstance };
+export { auth, firestore, authInstance, firestoreInstance, firebase };
 
 export type FirebaseError =
   | ReactNativeFirebase.NativeFirebaseError

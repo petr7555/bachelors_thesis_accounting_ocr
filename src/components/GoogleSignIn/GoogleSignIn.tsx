@@ -1,6 +1,6 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React from 'react';
-import auth from '@react-native-firebase/auth'; // specific import, because GoogleSignin is available only for Android yet
+import { auth, authInstance } from '../../global/firebase';
 import GoogleSignInButton from './GoogleSignInButton';
 
 GoogleSignin.configure({
@@ -16,7 +16,7 @@ const signIn = async () => {
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     // Sign-in the user with the credential
-    await auth().signInWithCredential(googleCredential);
+    await authInstance.signInWithCredential(googleCredential);
 
     console.log('Signed in with Google!');
   } catch (error) {
