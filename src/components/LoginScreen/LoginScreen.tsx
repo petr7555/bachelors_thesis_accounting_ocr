@@ -12,7 +12,6 @@ import {
   View,
 } from 'react-native';
 import Button from '../PrimaryButton/PrimaryButton';
-
 import { Controller, useForm } from 'react-hook-form';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
