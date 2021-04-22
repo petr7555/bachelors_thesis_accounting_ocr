@@ -22,9 +22,9 @@ import Colors from '../../global/styles/colors';
 import { isWindows } from '../../global/utils/platform';
 import TermsLink from './TermsLink';
 
-const PRIVACY_POLICY_URL =
+export const PRIVACY_POLICY_URL =
   'https://receipts-scanner.flycricket.io/privacy.html';
-const TERMS_CONDITIONS_URL =
+export const TERMS_CONDITIONS_URL =
   'https://receipts-scanner.flycricket.io/terms.html';
 
 const GoogleSignIn = Platform.select({

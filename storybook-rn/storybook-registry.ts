@@ -7,3 +7,5 @@ import '../src/components/ConfirmDelete/ConfirmationModal.stories';
 import '../src/components/EditReceipt/FullWidthImage.stories';
 import '../src/components/EditReceipt/ImageThumbnail.stories';
 import '../src/components/Items/ReceiptItem.stories';
+import '../src/components/ReceiptsList/Receipt.stories';
+import '../src/components/LoginScreen/TermsLink.stories';

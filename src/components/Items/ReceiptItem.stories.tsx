@@ -11,6 +11,7 @@ const item: Item = {
   price: 10,
   totalPrice: 10,
 };
+
 export const Basic = () => (
   <ReceiptItem
     item={item}
