@@ -10,6 +10,7 @@ const FullWidthImage = ({ uri }: Props) => {
   const [ratio, setRatio] = useState(1);
   useEffect(() => {
     if (uri) {
+      // @ts-ignore method getSize does exist on Image
       Image.getSize(uri, (width, height) => {
         setRatio(width / height);
       });
