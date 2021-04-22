@@ -6,3 +6,4 @@ import '../src/components/ConfirmDelete/ConfirmDelete.stories';
 import '../src/components/ConfirmDelete/ConfirmationModal.stories';
 import '../src/components/EditReceipt/FullWidthImage.stories';
 import '../src/components/EditReceipt/ImageThumbnail.stories';
+import '../src/components/Items/ReceiptItem.stories';
