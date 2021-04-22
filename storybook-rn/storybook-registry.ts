@@ -9,3 +9,5 @@ import '../src/components/EditReceipt/ImageThumbnail.stories';
 import '../src/components/Items/ReceiptItem.stories';
 import '../src/components/ReceiptsList/Receipt.stories';
 import '../src/components/LoginScreen/TermsLink.stories';
+import '../src/components/ThemedIcon/ThemedIonIcon.stories';
+import '../src/components/ToastIcon/ToastIcon.stories';
