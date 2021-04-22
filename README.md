@@ -152,6 +152,22 @@ return <Component style={{color: colors.secondary}}/>;
 - `emulator -list-avds`
 - `emulator -avd Pixel_3a_API_29 -wipe-data`
 
+## Build signed release AAB package
+
+Follow https://reactnative.dev/docs/signed-apk-android or run:
+
+```bash
+cd android
+./gradlew bundleRelease
+```
+
+The build uses password stored in a Keychain, as described
+in [this](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/) tutorial. It also uses `my-upload-key.keystore`
+file that should be in `~/android/app/` folder.
+
+Upload the generated `~/android/app/build/outputs/bundle/release/app-release.aab`
+to [Google Play Console](https://play.google.com/console/).
+
 ## Troubleshooting
 
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
@@ -165,15 +181,18 @@ return <Component style={{color: colors.secondary}}/>;
    Whereas new Date("2007/13:29:17") fails without debug mode, with debug mode and in browser console it returns correct
    date.
 5.
+
  ```
  Failed to restore the NuGet packages: Error: Errors in packages.config projects
  The process cannot access the file 'C:\Users\User\Desktop\bachelors_thesis_accounting_ocr\windows\packages\Microsoft.SourceLink.GitHub.1.0.0\tools\net461\Microsoft.SourceLink.GitHub.dll' because it is being used by another process.
  ```
+
 Solution: Kill `MSBuild.exe` in Task Manager.
 
 ## Privacy Policy, Terms & Conditions
-Generated using https://app-privacy-policy-generator.firebaseapp.com/, 
-slightly modifies in the paragraph Privacy Policy -> Information Collection and Use.
+
+Generated using https://app-privacy-policy-generator.firebaseapp.com/, slightly modifies in the paragraph Privacy Policy
+-> Information Collection and Use.
 
 Available at [Privacy Policy](https://receipts-scanner.flycricket.io/privacy.html) and
 [Terms & Conditions](https://receipts-scanner.flycricket.io/terms.html).

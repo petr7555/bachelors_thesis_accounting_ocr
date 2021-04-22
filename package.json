@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:release": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
     "windows": "react-native run-windows --arch \"x64\"",
     "windows:release": "npm run windows -- --release",
