@@ -37,8 +37,8 @@ const ReceiptWithProps = () => <Receipt userId="123" receipt={receipt} />;
 
 export const Basic = () => <MockedNavigator component={ReceiptWithProps} />;
 
-storiesOf('ReceiptItem', module).add('Basic', Basic);
+storiesOf('Receipt', module).add('Basic', Basic);
 
 export default {
-  title: 'ReceiptItem',
+  title: 'Receipt',
 };
