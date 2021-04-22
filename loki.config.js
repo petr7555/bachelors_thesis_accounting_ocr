@@ -2,7 +2,7 @@ module.exports = {
   diffingEngine: 'pixelmatch',
   configurations: {
     'chrome.laptop': {
-      target: 'chrome.docker',
+      target: 'chrome.app',
       width: 414,
       height: 736,
     },
