@@ -7,7 +7,9 @@ import { withKnobs } from '@storybook/addon-knobs';
 import ionicons from 'react-native-vector-icons/Fonts/Ionicons.ttf';
 import materialCommunityIcons from 'react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf';
 
-const iconFontStyles = `
+// if not running test
+if (typeof window !== 'undefined') {
+  const iconFontStyles = `
   @font-face {
     src: url(${ionicons});
     font-family: Ionicons;
@@ -18,13 +20,14 @@ const iconFontStyles = `
   }
 `;
 
-// Create stylesheet
-const style = document.createElement('style');
-style.type = 'text/css';
-style.appendChild(document.createTextNode(iconFontStyles));
-// Inject stylesheet
-document.head.appendChild(style);
-/** end **/
+  // Create stylesheet
+  const style = document.createElement('style');
+  style.type = 'text/css';
+  style.appendChild(document.createTextNode(iconFontStyles));
+  // Inject stylesheet
+  document.head.appendChild(style);
+  /** end **/
+}
 
 addDecorator(
   withKnobs({
