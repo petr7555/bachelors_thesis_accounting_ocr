@@ -23,5 +23,5 @@ export const Basic = () => {
 storiesOf('ConfirmationModal', module).add('Basic', Basic);
 
 export default {
-  title: 'ConfirmationModal',
+  title: 'Modals/ConfirmationModal',
 };

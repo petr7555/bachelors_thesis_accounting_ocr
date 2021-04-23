@@ -17,5 +17,5 @@ storiesOf('ToastIcon', module)
   .add('Basic', Basic);
 
 export default {
-  title: 'ToastIcon',
+  title: 'Icons/ToastIcon',
 };

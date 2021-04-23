@@ -10,7 +10,7 @@ export const Basic = () => (
 storiesOf('ThemedIonIcon', module).add('Basic', Basic);
 
 export default {
-  title: 'ThemedIonIcon',
+  title: 'Icons/ThemedIonIcon',
 };
 
 const styles = StyleSheet.create({
