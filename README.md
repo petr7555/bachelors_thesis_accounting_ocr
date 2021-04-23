@@ -49,10 +49,10 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 - `npm run android`
 - `npm run storybook:rn`
 - refresh app in metro bundler, components should be now visible in a browser in the sidebar
-- it is only possible to navigate through them in the browser, the component itself is shown on a mobile device /
-  emulator
-
-<img src="images/doc/storybook_rn.gif" alt="Storybook on mobile" width="200"/>
+- The storybook running in the browser is used to *navigate* between components.
+  The components themselves are shown on a mobile device / emulator.
+- This video shows how Storybook running on another emulator looks:
+  <img src="images/doc/storybook_rn.gif" alt="Storybook on mobile" width="200"/>
 
 ## Run visual regression Loki tests for React Native:
 
