@@ -21,11 +21,10 @@ import EmailValidator from 'email-validator';
 import Colors from '../../global/styles/colors';
 import { isWindows } from '../../global/utils/platform';
 import TermsLink from './TermsLink';
-
-export const PRIVACY_POLICY_URL =
-  'https://receipts-scanner.flycricket.io/privacy.html';
-export const TERMS_CONDITIONS_URL =
-  'https://receipts-scanner.flycricket.io/terms.html';
+import {
+  PRIVACY_POLICY_URL,
+  TERMS_CONDITIONS_URL,
+} from '../../global/constants';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,
