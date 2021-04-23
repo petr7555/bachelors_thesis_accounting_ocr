@@ -14,9 +14,12 @@ const GoogleSignInButton = ({
   disabled = false,
 }: GoogleSignInProps) => {
   const { width } = useWindowDimensions();
-
   const btnGoogleStyle = StyleSheet.flatten([
     styles.button,
+    { width: width - 60 },
+  ]);
+  const containerStyle = StyleSheet.flatten([
+    styles.container,
     { width: width - 60 },
   ]);
 
@@ -25,7 +28,7 @@ const GoogleSignInButton = ({
       icon={<Image containerStyle={styles.logo} source={googleLogo} />}
       buttonStyle={btnGoogleStyle}
       titleStyle={styles.text}
-      containerStyle={styles.container}
+      containerStyle={containerStyle}
       raised={true}
       onPress={onPress}
       disabled={disabled}
