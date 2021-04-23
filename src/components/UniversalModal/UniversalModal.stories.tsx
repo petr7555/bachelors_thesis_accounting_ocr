@@ -21,7 +21,7 @@ export const Basic = () => {
       }}
       children={
         <View style={styles.modalContent}>
-          {text('Modal text', 'This is text inside UniversalModal')}
+          {text('Modal text', 'This is text inside UniversalModal.')}
         </View>
       }
     />

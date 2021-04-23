@@ -36,7 +36,7 @@
     "build-storybook:web": "node_modules/@storybook/react/bin/build.js -o storybook-static",
     "serve-storybook:web": "npx http-server storybook-static -p 6006",
     "visual-test:web:dev": "npm run storycap:web && npm run reg-suit:web:dev",
-    "deploy": "vercel",
+    "deploy-vercel": "vercel",
     "chromatic": "chromatic --build-script-name=build-storybook:web --project-token=e90ee438f63d"
   },
   "dependencies": {
