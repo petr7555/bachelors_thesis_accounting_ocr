@@ -52,6 +52,8 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 - it is only possible to navigate through them in the browser, the component itself is shown on a mobile device /
   emulator
 
+<img src="images/doc/storybook_rn.gif" alt="Storybook on mobile" width="200"/>
+
 ## Run visual regression Loki tests for React Native:
 
 - `npm run android`
