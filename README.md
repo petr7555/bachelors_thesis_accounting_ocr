@@ -76,6 +76,7 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
 - The storybook running in the browser is used to *navigate* between components. The components themselves are shown on
   a mobile device / emulator.
 - This video shows how Storybook running on an emulator looks:
+  
   <img src="images/doc/storybook_rn.gif" alt="Storybook on mobile" width="200"/>
 
 ### Storybook for Web
