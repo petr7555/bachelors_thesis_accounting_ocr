@@ -1,11 +1,13 @@
 import numpy as np
 import cv2
 
+
 def process_image(original):
     processed = preprocess_image(original)
     corners = find_corners_of_largest_polygon(processed)
-    _, underlying = cv2.threshold(original, 0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    _, underlying = cv2.threshold(original, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     return crop_and_warp(underlying, corners)
+
 
 def preprocess_image(img, skip_dilate=False, skip_invert=False):
     """Uses a blurring function, adaptive thresholding and dilation to expose the main features of an image."""
@@ -27,6 +29,7 @@ def preprocess_image(img, skip_dilate=False, skip_invert=False):
 
     return proc
 
+
 def find_corners_of_largest_polygon(img):
     """Finds the 4 extreme corners of the largest contour in the image."""
     contours, _ = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  # Find contours
@@ -47,11 +50,13 @@ def find_corners_of_largest_polygon(img):
     # Each point is in its own array of one coordinate
     return [polygon[top_left][0], polygon[top_right][0], polygon[bottom_right][0], polygon[bottom_left][0]]
 
+
 def distance_between(p1, p2):
     """Returns the scalar distance between two points"""
     a = p2[0] - p1[0]
     b = p2[1] - p1[1]
-    return ((a ** 2) + (b ** 2))**(1/2)
+    return ((a ** 2) + (b ** 2)) ** (1 / 2)
+
 
 def crop_and_warp(img, crop_rect):
     """Crops and warps a rectangular-like section from an image into a rectangular similar size."""

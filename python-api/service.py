@@ -9,14 +9,17 @@ import io
 
 app = Flask(__name__)
 
+
 @app.route("/", methods=['GET'])
 def welcome():
     return "Welcome to the Machine Learning REST API for Receipts Scanner!"
+
 
 @app.route("/category", methods=['POST'])
 def category_route():
     request_data = request.get_json()
     return category(request_data["sentence"])
+
 
 @app.route("/process-image", methods=['POST'])
 def process_image_route():
@@ -33,11 +36,10 @@ def process_image_route():
     rawBytes.seek(0)
     img_base64 = base64.b64encode(rawBytes.read())
     return {
-        "image": str(img_base64).split("'")[1], # removes 'b from the beginning
+        "image": str(img_base64).split("'")[1],  # removes 'b from the beginning
         "mime": "image/jpeg"
     }
 
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
-

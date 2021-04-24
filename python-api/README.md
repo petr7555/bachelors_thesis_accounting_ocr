@@ -13,6 +13,7 @@ Run a docker container from the built image:
 - `docker run -p 8000:80 model`
 
 ## CI
+
 By pushing code to `master` branch, the Docker image is automatically built thanks to the
 `.github/workflows/python-apl.yml` pipeline. It is then published to Azure Container Registry. From there, it is
 deployed to Azure Container Instances.
