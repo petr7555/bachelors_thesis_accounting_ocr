@@ -4,7 +4,7 @@ import 'firebase/auth';
 import androidAuth from '@react-native-firebase/auth';
 import { ReactNativeFirebase } from '@react-native-firebase/app';
 import androidFirestore from '@react-native-firebase/firestore';
-import { isWindows } from './utils/platform';
+import { isAndroid } from './utils/platform';
 
 // to avoid error 'Firebase App named '[DEFAULT]' already exists'
 if (!firebase.apps.length) {
@@ -20,12 +20,12 @@ if (!firebase.apps.length) {
   });
 }
 
-const auth = isWindows ? firebase.auth : androidAuth;
-const authInstance = isWindows ? firebase.auth() : androidAuth();
-const firestore = isWindows ? firebase.firestore : androidFirestore;
-const firestoreInstance = isWindows ? firebase.firestore() : androidFirestore();
+const auth = isAndroid ? androidAuth : firebase.auth;
+const authInstance = isAndroid ? androidAuth() : firebase.auth();
+const firestore = isAndroid ? androidFirestore : firebase.firestore;
+const firestoreInstance = isAndroid ? androidFirestore() : firebase.firestore();
 
-if (isWindows) {
+if (!isAndroid) {
   // @ts-ignore
   firestoreInstance.settings({ experimentalForceLongPolling: true }); // otherwise fails with 'Could not reach Cloud Firestore backend. Backend didn't respond within 10 seconds.'
 }
