@@ -2036,7 +2036,7 @@ exports[`Storyshots Receipt Basic 1`] = `
                             testID="listItemTitle"
                           >
                             <Text>
-                              Lidl on Fri Apr 23 2021
+                              Lidl on Sat May 01 2021
                             </Text>
                           </Text>
                           <Text
@@ -2049,7 +2049,7 @@ exports[`Storyshots Receipt Basic 1`] = `
                             }
                             testID="listItemTitle"
                           >
-                            Fri Apr 23 2021
+                            Sat May 01 2021
                           </Text>
                         </View>
                         <View
