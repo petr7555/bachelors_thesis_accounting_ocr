@@ -87,6 +87,35 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
   repository to be able to deploy the Storybook to Vercel locally.
 - Keep in mind, that in Storybook for web `Platform.OS === 'web'`, so both `isAndroid` and `isWindows` are `false`.
 
+### Syntax
+
+Because [Storybook for Web](https://storybook.js.org/docs/react/get-started/introduction) is of version 6, it can use
+the modern Storybook syntax. However, the
+latest [Storybook for React Native](https://storybook.js.org/tutorials/intro-to-storybook/react-native/en/get-started/)
+is only version 5 and requires the old syntax.
+`storiesOf` creates the story for React Native.
+`export const WithEmoji` together with
+
+```tsx
+export default {
+    title: 'Buttons/PrimaryButton',
+};
+```
+
+creates the story for Web. We can reuse some code by writing the story the following way.
+
+```tsx
+export const WithEmoji = () => (
+    <PrimaryButton onPress={action('clicked-emoji')} title="😀 😎 👍 💯 🚀"/>
+);
+
+storiesOf('PrimaryButton', module).add('With emoji', WithEmoji);
+
+export default {
+    title: 'Buttons/PrimaryButton',
+};
+```
+
 ## Testing
 
 ### Run E2E tests locally
@@ -129,8 +158,8 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 - `npm run storycap:web` takes the screenshots and saves them to `__screenshots__`
 - `npm run reg-suit:web:dev` **dev**, as opposed to **ci**, exports path to Google Application Credentials file. A
   file `g_app_cred.json` containing the credentials needs to be present in the root of the repository. These credentials
-  are used to connect to the Google's bucket where snapshot images are stored. In the CI pipeline, repository secrets stored on
-  GitHub are used instead.
+  are used to connect to the Google's bucket where snapshot images are stored. In the CI pipeline, repository secrets
+  stored on GitHub are used instead.
 - `visual-test:web:dev` is a shortcut for the two commands above
 
   ##### How Storycap / Reg Suit works:
