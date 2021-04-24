@@ -26,8 +26,8 @@ if (typeof window !== 'undefined') {
   style.appendChild(document.createTextNode(iconFontStyles));
   // Inject stylesheet
   document.head.appendChild(style);
-  /** end **/
 }
+/** end **/
 
 addDecorator(
   withKnobs({
