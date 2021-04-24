@@ -2,7 +2,6 @@ import { storiesOf } from '@storybook/react-native';
 import React from 'react';
 import Receipt from './Receipt';
 import { FirebaseReceipt } from './ReceiptsList';
-import { firestore } from '../../global/firebase';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import MockedNavigator from '../../../tests/mocks/MockedNavigator';
 
