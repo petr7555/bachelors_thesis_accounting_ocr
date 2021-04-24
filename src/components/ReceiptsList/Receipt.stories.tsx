@@ -16,12 +16,18 @@ const item: Item = {
   totalPrice: 10,
 };
 
+// to ensure always the same date for snapshot tests
+const timestampMock = {
+  // months start at 0
+  toDate: () => new Date(2021, 4, 1, 8, 30, 15),
+};
+
 const receipt: FirebaseReceipt = {
   id: '456',
   urlOriginal: '',
   urlProcessed: '',
-  added: firestore.Timestamp.now(),
-  transactionDate: firestore.Timestamp.now(),
+  added: timestampMock,
+  transactionDate: timestampMock,
   merchantName: 'Lidl',
   merchantPhoneNumber: '602 123 456',
   merchantAddress: 'Brno, Czech Republic',
@@ -35,7 +41,7 @@ const receipt: FirebaseReceipt = {
 
 const ReceiptWithProps = () => <Receipt userId="123" receipt={receipt} />;
 
-export const Basic = () => <MockedNavigator component={ReceiptWithProps} />;
+const Basic = () => <MockedNavigator component={ReceiptWithProps} />;
 
 storiesOf('Receipt', module).add('Basic', Basic);
 
