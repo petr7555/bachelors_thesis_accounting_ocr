@@ -187,7 +187,14 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            signingConfig signingConfigs.release
+            if (file(MYAPP_UPLOAD_STORE_FILE).exists()) {
+                // we are on local
+                signingConfig signingConfigs.release
+            } else {
+                // we are in CI
+                logger.warn('WARN: {} file not found, probably running in CI pipeline.', MYAPP_UPLOAD_STORE_FILE)
+                signingConfig signingConfigs.debug
+            }
             minifyEnabled enableProguardInReleaseBuilds
             // Typical pro-guard definitions
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"

@@ -76,7 +76,7 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
 - The storybook running in the browser is used to *navigate* between components. The components themselves are shown on
   a mobile device / emulator.
 - This video shows how Storybook running on an emulator looks:
-  
+
   <img src="images/doc/storybook_rn.gif" alt="Storybook on mobile" width="200"/>
 
 ### Storybook for Web
@@ -85,7 +85,8 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
   This is not part of GitHub Actions but [Vercel's](https://vercel.com/petr7555/bachelors-thesis-accounting-ocr) own
   repository hook.
 - A directory `.vercel` containing a `project.json` with *orgId* and *projectId* needs to be present in the root of the
-  repository to be able to deploy the Storybook to Vercel locally.
+  repository to be able to deploy the Storybook to Vercel locally. This directory is ignored in version control as it
+  contains sensitive information.
 - Keep in mind, that in Storybook for web `Platform.OS === 'web'`, so both `isAndroid` and `isWindows` are `false`.
 
 ### Syntax
@@ -159,8 +160,8 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 - `npm run storycap:web` takes the screenshots and saves them to `__screenshots__`
 - `npm run reg-suit:web:dev` **dev**, as opposed to **ci**, exports path to Google Application Credentials file. A
   file `g_app_cred.json` containing the credentials needs to be present in the root of the repository. These credentials
-  are used to connect to the Google's bucket where snapshot images are stored. In the CI pipeline, repository secrets
-  stored on GitHub are used instead.
+  are used to connect to the Google's bucket where snapshot images are stored. This file is ignored in version control
+  as it contains sensitive information. In the CI pipeline, repository secrets stored on GitHub are used instead.
 - `visual-test:web:dev` is a shortcut for the two commands above
 
   ##### How Storycap / Reg Suit works:
@@ -263,8 +264,10 @@ cd android
 ```
 
 The build uses password stored in a Keychain, as described
-in [this](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/) tutorial. It also uses `my-upload-key.keystore`
-file that should be in `~/android/app/` folder.
+in [this](https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/) tutorial. It also
+requires `my-upload-key.keystore` file that should be in `~/android/app/` folder. This file is ignored in version
+control as it contains sensitive information. If the file is not present (e.g. in a CI pipeline), the debug
+signingConfig will be used and a warning will be shown in the console.
 
 Upload the generated `~/android/app/build/outputs/bundle/release/app-release.aab`
 to [Google Play Console](https://play.google.com/console/).
