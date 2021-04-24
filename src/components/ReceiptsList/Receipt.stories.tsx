@@ -40,7 +40,7 @@ const receipt: FirebaseReceipt = {
 
 const ReceiptWithProps = () => <Receipt userId="123" receipt={receipt} />;
 
-const Basic = () => <MockedNavigator component={ReceiptWithProps} />;
+export const Basic = () => <MockedNavigator component={ReceiptWithProps} />;
 
 storiesOf('Receipt', module).add('Basic', Basic);
 
