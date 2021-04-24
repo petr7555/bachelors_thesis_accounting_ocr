@@ -8,6 +8,5 @@ beforeAll(() => {
 });
 
 it('returns today at noon', () => {
-  console.log(new Date().getDate());
   expect(getTodaysDateAtNoon()).toEqual(new Date(2021, 4, 1, 12, 0, 0));
 });

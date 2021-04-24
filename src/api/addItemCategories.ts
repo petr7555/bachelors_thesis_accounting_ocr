@@ -4,7 +4,6 @@ import axios from 'axios';
 const addItemCategories = async (receiptData: ReceiptData) => {
   for (const item of receiptData.items) {
     const endpoint = 'http://pythonapi.westeurope.azurecontainer.io/category';
-    console.log(endpoint);
     try {
       const { data } = await axios.post(endpoint, {
         sentence: item.name,
