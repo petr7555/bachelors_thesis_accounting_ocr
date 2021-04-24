@@ -170,3 +170,8 @@ return <Component style={{color: colors.secondary}}/>;
  The process cannot access the file 'C:\Users\User\Desktop\bachelors_thesis_accounting_ocr\windows\packages\Microsoft.SourceLink.GitHub.1.0.0\tools\net461\Microsoft.SourceLink.GitHub.dll' because it is being used by another process.
  ```
 Solution: Kill `MSBuild.exe` in Task Manager.
+6.
+ ```
+ Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
+ ```
+Solution: Kill `Node.js` in Task Manager.
