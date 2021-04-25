@@ -16,4 +16,7 @@ ADD image_model.py /app
 ADD service.py /app
 ADD emoji_db.py /app
 
+# Download the model in advance to the directory where Magnitude expects it
+RUN wget -P ~/.magnitude http://magnitude.plasticity.ai/word2vec/medium/GoogleNews-vectors-negative300.magnitude
+
 CMD [ "python", "./service.py" ]
