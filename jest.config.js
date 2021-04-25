@@ -8,4 +8,7 @@ module.exports = {
     '<rootDir>/tests/setupJest.ts',
     './node_modules/react-native-gesture-handler/jestSetup.js',
   ],
+  moduleNameMapper: {
+    '\\.(ttf)$': '<rootDir>/tests/mocks/fileMock.ts',
+  },
 };

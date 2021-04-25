@@ -12,7 +12,6 @@ import { getReceiptDataFromImage } from '../../services/FormRecognizerClient/get
 import { useNavigation, useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootParamList } from '../RootNavigator/RootNavigator';
-import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import addReceiptToUsersReceipts from '../../api/addReceiptToUsersReceipts';
 import { MixedTheme } from '../../../App';
 import Button from '../PrimaryButton/PrimaryButton';
@@ -70,10 +69,40 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
   };
 
   const processImage = async (image: MyImage): Promise<string | undefined> => {
-    const receiptData = await getReceiptDataFromImage(image);
-    if (receiptData) {
-      const receiptDataWithCategories = await addItemCategories(receiptData);
-      return addReceipt(image, receiptDataWithCategories);
+    try {
+      const receiptDataWithCategoriesPromise = getReceiptDataFromImage(
+        image,
+      ).then((receiptData) => {
+        if (receiptData) {
+          return addItemCategories(receiptData);
+        }
+      });
+      const urlOriginalPromise = uploadImageToFirebaseStorage(image);
+      const urlProcessedPromise = transformImage(image).then(
+        (transformedImage) => {
+          if (transformedImage) {
+            return uploadBase64ToFirebaseStorage(
+              transformedImage.image,
+              `processed_${getFilename(image)}`,
+              transformedImage.mime,
+            );
+          }
+        },
+      );
+
+      const receiptDataWithCategories = await receiptDataWithCategoriesPromise;
+      const urlOriginal = await urlOriginalPromise;
+      const urlProcessed = await urlProcessedPromise;
+
+      if (receiptDataWithCategories && urlOriginal && urlProcessed) {
+        return addReceiptToUsersReceipts(
+          urlOriginal,
+          urlProcessed,
+          receiptDataWithCategories,
+        );
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -122,34 +151,6 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     }
   };
 
-  const addReceipt = async (
-    image: MyImage,
-    receiptData: ReceiptData,
-  ): Promise<string | undefined> => {
-    try {
-      const urlOriginal = await uploadImageToFirebaseStorage(image);
-
-      const transformedImage = await transformImage(image);
-      if (transformedImage) {
-        const urlProcessed = await uploadBase64ToFirebaseStorage(
-          transformedImage.image,
-          `processed_${getFilename(image)}`,
-          transformedImage.mime,
-        );
-
-        if (urlOriginal && urlProcessed) {
-          return addReceiptToUsersReceipts(
-            urlOriginal,
-            urlProcessed,
-            receiptData,
-          );
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <View style={styles.modalContent}>
       {!isWindows && (
@@ -182,7 +183,6 @@ const styles = StyleSheet.create({
   modalContent: {
     alignItems: 'center',
     backgroundColor: Colors.white,
-    borderColor: Colors.primary,
     borderRadius: 4,
     justifyContent: 'center',
     padding: 22,

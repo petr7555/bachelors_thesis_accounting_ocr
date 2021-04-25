@@ -1,4 +1,6 @@
 import getFilename from '../global/utils/getFilename';
+import { authInstance } from '../global/firebase';
+import { RECEIPTS_STORAGE, USERS_STORAGE } from './constants';
 import { MyImage } from '../components/CameraScreen/CameraScreen';
 import { Alert } from 'react-native';
 import { storageInstance } from '../global/firebase';
@@ -6,20 +8,25 @@ import { storageInstance } from '../global/firebase';
 export const uploadImageToFirebaseStorage = async (
   image: MyImage,
 ): Promise<string | undefined> => {
-  try {
-    const imageName = getFilename(image);
-    const reference = storageInstance.ref(`/receipts/${imageName}`);
+  const user = authInstance.currentUser;
+  if (user) {
+    try {
+      const imageName = getFilename(image);
+      const reference = storageInstance.ref(
+        `${USERS_STORAGE}/${user.uid}/${RECEIPTS_STORAGE}/${imageName}`,
+      );
 
-    await reference.putFile(image.path);
-    console.log(`Image ${imageName} uploaded to firebase storage.`);
+      await reference.putFile(image.path);
+      console.log(`Image ${imageName} uploaded to firebase storage.`);
 
-    const downloadUrl = await reference.getDownloadURL();
-    console.log(`Download url for image is ${downloadUrl}`);
+      const downloadUrl = await reference.getDownloadURL();
+      console.log(`Download url for image is ${downloadUrl}`);
 
-    return downloadUrl;
-  } catch (error) {
-    console.error(error);
-    Alert.alert('Upload to Firebase Storage failed');
+      return downloadUrl;
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Upload to Firebase Storage failed');
+    }
   }
 };
 
@@ -28,20 +35,25 @@ export const uploadBase64ToFirebaseStorage = async (
   imageName: string,
   mime: string,
 ): Promise<string | undefined> => {
-  try {
-    const reference = storageInstance.ref('/receipts/' + imageName);
+  const user = authInstance.currentUser;
+  if (user) {
+    try {
+      const reference = storageInstance.ref(
+        `${USERS_STORAGE}/${user.uid}/${RECEIPTS_STORAGE}/${imageName}`,
+      );
 
-    await reference.putString(base64String, 'base64', {
-      contentType: mime,
-    });
-    console.log(`Image ${imageName} uploaded to firebase storage.`);
+      await reference.putString(base64String, 'base64', {
+        contentType: mime,
+      });
+      console.log(`Image ${imageName} uploaded to firebase storage.`);
 
-    const downloadUrl = await reference.getDownloadURL();
-    console.log(`Download url for image is ${downloadUrl}`);
+      const downloadUrl = await reference.getDownloadURL();
+      console.log(`Download url for image is ${downloadUrl}`);
 
-    return downloadUrl;
-  } catch (error) {
-    console.error(error);
-    Alert.alert('Upload to Firebase Storage failed');
+      return downloadUrl;
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Upload to Firebase Storage failed');
+    }
   }
 };

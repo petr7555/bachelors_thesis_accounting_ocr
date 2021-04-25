@@ -25,7 +25,7 @@
               "})",
               "",
               "pm.test(\"Response is text 'Welcome to our Machine Learning REST API!'\", () => {",
-              "    pm.expect(pm.response.text()).to.be.equal(\"Welcome to our Machine Learning REST API!\");",
+              "    pm.expect(pm.response.text()).to.be.equal(\"Welcome to the Machine Learning REST API for Receipts Scanner!\");",
               "});"
             ],
             "type": "text/javascript"

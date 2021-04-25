@@ -78,6 +78,20 @@ import com.android.build.OutputFile
  * ]
  */
 
+// from https://pilloxa.gitlab.io/posts/safer-passwords-in-gradle/
+def getPassword(String currentUser, String keyChain) {
+   def stdout = new ByteArrayOutputStream()
+   def stderr = new ByteArrayOutputStream()
+   exec {
+       commandLine 'security', '-q', 'find-generic-password', '-a', currentUser, '-s', keyChain, '-w'
+       standardOutput = stdout
+       errorOutput = stderr
+       ignoreExitValue true
+   }
+   //noinspection GroovyAssignabilityCheck
+   stdout.toString().trim()
+}
+
 project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing
 ]
@@ -153,20 +167,40 @@ android {
     }
     signingConfigs {
         debug {
+            logger.warn('WARN: I am inside signingConfigs debug')
             storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            logger.warn('WARN: {} is the name of file.', MYAPP_UPLOAD_STORE_FILE)
+            logger.warn('WARN: should not be here')
+            def pass = getPassword("Petr Janik", "android_keystore")
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword pass
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword pass
+            }
+        }
     }
     buildTypes {
         debug {
+            logger.warn('WARN: I am inside debug')
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            logger.warn('WARN: I am inside release')
+            if (file(MYAPP_UPLOAD_STORE_FILE).exists()) {
+                // we are on local
+                logger.warn('WARN: {} not found, probably running on local.', MYAPP_UPLOAD_STORE_FILE)
+                signingConfig signingConfigs.release
+            } else {
+                // we are in CI
+                logger.warn('WARN: {} file not found, probably running in CI pipeline.', MYAPP_UPLOAD_STORE_FILE)
+                signingConfig signingConfigs.debug
+            }
             minifyEnabled enableProguardInReleaseBuilds
             // Typical pro-guard definitions
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"

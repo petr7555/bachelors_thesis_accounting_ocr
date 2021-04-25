@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android:release": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
     "windows": "react-native run-windows --arch \"x64\"",
     "windows:release": "npm run windows -- --release",
@@ -35,7 +36,7 @@
     "build-storybook:web": "node_modules/@storybook/react/bin/build.js -o storybook-static",
     "serve-storybook:web": "npx http-server storybook-static -p 6006",
     "visual-test:web:dev": "npm run storycap:web && npm run reg-suit:web:dev",
-    "deploy": "vercel",
+    "deploy-vercel": "vercel",
     "chromatic": "chromatic --build-script-name=build-storybook:web --project-token=e90ee438f63d"
   },
   "dependencies": {
@@ -80,9 +81,11 @@
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
     "@storybook/addon-actions": "^5.3.21",
+    "@storybook/addon-backgrounds": "^6.2.8",
     "@storybook/addon-knobs": "^5.3.21",
     "@storybook/addon-links": "^5.3.21",
     "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-backgrounds": "^5.3.23",
     "@storybook/addon-ondevice-knobs": "^5.3.25",
     "@storybook/addon-storyshots": "^6.1.21",
     "@storybook/addon-viewport": "^6.1.21",

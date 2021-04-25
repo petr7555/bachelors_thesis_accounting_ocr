@@ -22,7 +22,11 @@ const NullComponent = () => null;
 
 const RootNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        style: { height: 49 + 3 },
+        labelStyle: { paddingBottom: 3 },
+      }}>
       <Tab.Screen
         name="Home"
         component={HomeStackNavigator}

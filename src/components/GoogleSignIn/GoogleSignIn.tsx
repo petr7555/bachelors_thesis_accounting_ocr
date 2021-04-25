@@ -1,10 +1,7 @@
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from '@react-native-google-signin/google-signin';
-import { StyleSheet, useWindowDimensions } from 'react-native';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React from 'react';
-import auth from '@react-native-firebase/auth'; // specific import, because GoogleSignin is available only for android yet
+import { auth, authInstance } from '../../global/firebase';
+import GoogleSignInButton from './GoogleSignInButton';
 
 GoogleSignin.configure({
   webClientId:
@@ -19,7 +16,7 @@ const signIn = async () => {
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     // Sign-in the user with the credential
-    await auth().signInWithCredential(googleCredential);
+    await authInstance.signInWithCredential(googleCredential);
 
     console.log('Signed in with Google!');
   } catch (error) {
@@ -31,29 +28,8 @@ interface GoogleSignInProps {
   disabled?: boolean;
 }
 
-const GoogleSignIn = ({ disabled }: GoogleSignInProps) => {
-  const { width } = useWindowDimensions();
-
-  const btnGoogleStyle = StyleSheet.flatten([
-    styles.btnGoogle,
-    { width: width - 60 },
-  ]);
-
-  return (
-    <GoogleSigninButton
-      style={btnGoogleStyle}
-      onPress={signIn}
-      color={GoogleSigninButton.Color.Light}
-      disabled={disabled}
-    />
-  );
+const GoogleSignIn = ({ disabled = false }: GoogleSignInProps) => {
+  return <GoogleSignInButton onPress={signIn} disabled={disabled} />;
 };
-
-const styles = StyleSheet.create({
-  btnGoogle: {
-    height: 50,
-    marginTop: 20,
-  },
-});
 
 export default GoogleSignIn;

@@ -1,11 +1,11 @@
 import { firestoreInstance } from '../global/firebase';
-import { RECEIPTS, USERS } from './constants';
+import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from './constants';
 
 const getReceiptForUser = (userId: string, receiptId: string) =>
   firestoreInstance
-    .collection(USERS)
+    .collection(USERS_FIRESTORE)
     .doc(userId)
-    .collection(RECEIPTS)
+    .collection(RECEIPTS_FIRESTORE)
     .doc(receiptId);
 
 export default getReceiptForUser;

@@ -12,15 +12,19 @@ import {
   View,
 } from 'react-native';
 import Button from '../PrimaryButton/PrimaryButton';
-
 import { Controller, useForm } from 'react-hook-form';
-import Icon from 'react-native-vector-icons/Ionicons';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { authInstance, FirebaseError } from '../../global/firebase';
 import bgImage from '../../../images/background.png';
 import EmailValidator from 'email-validator';
 import Colors from '../../global/styles/colors';
 import { isWindows } from '../../global/utils/platform';
+import TermsLink from './TermsLink';
+import {
+  PRIVACY_POLICY_URL,
+  TERMS_CONDITIONS_URL,
+} from '../../global/constants';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,
@@ -96,10 +100,15 @@ const LoginScreen = () => {
     { width: width - 60 },
   ]);
 
+  const privacySectionStyle = StyleSheet.flatten([
+    styles.privacySection,
+    { width: width - 60 },
+  ]);
+
   return (
     <ImageBackground source={bgImage} style={styles.backgroundContainer}>
       <View style={styles.logoContainer}>
-        <Icon style={styles.logo} name="scan" />
+        <IonIcon style={styles.logo} name="scan" />
         <Text style={styles.logoText}>Receipts scanner</Text>
       </View>
 
@@ -107,7 +116,7 @@ const LoginScreen = () => {
         control={control}
         render={({ onChange, onBlur, value }) => (
           <View style={inputSectionStyle}>
-            <Icon style={styles.inputIcon} name="person-circle" />
+            <IonIcon style={styles.inputIcon} name="person-circle" />
             <TextInput
               style={[styles.input, styles.emailInput]}
               onBlur={onBlur}
@@ -203,6 +212,18 @@ const LoginScreen = () => {
         disabled={signInInProgress}
       />
       <GoogleSignIn disabled={signInInProgress || signUpInProgress} />
+      <View style={privacySectionStyle}>
+        <TermsLink
+          icon="shield-account"
+          text="Privacy Policy"
+          url={PRIVACY_POLICY_URL}
+        />
+        <TermsLink
+          icon="shield-check"
+          text="Terms & Conditions"
+          url={TERMS_CONDITIONS_URL}
+        />
+      </View>
     </ImageBackground>
   );
 };
@@ -231,7 +252,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   input: {
-    color: isWindows ? null : Colors.white,
+    color: isWindows ? Colors.undefined : Colors.white,
     flex: 1,
     fontSize: 18,
   },
@@ -265,6 +286,13 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginBottom: 40,
     marginTop: 10,
+  },
+  privacySection: {
+    borderTopColor: Colors.grey,
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    marginTop: 10,
+    paddingTop: 10,
   },
   validationErrorText: {
     marginBottom: 5,

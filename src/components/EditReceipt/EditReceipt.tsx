@@ -64,10 +64,12 @@ type FieldName =
   | 'tip'
   | 'currency';
 
+type InputType = typeof Input;
+
 type Field = {
   name: FieldName;
   keyboardType?: KeyboardTypeOptions;
-  ref?: MutableRefObject<Input | null>;
+  ref?: MutableRefObject<InputType | null>;
   render?: (
     onChange: any,
     onBlur: any,
@@ -118,14 +120,14 @@ const EditReceipt = ({ route }: Props) => {
 
   let flatListRef: FlatList | null;
 
-  const merchantAddressInput = useRef<Input>(null);
-  const merchantPhoneNumberInput = useRef<Input>(null);
-  const transactionDateInput = useRef<Input>(null);
-  const totalInput = useRef<Input>(null);
-  const subtotalInput = useRef<Input>(null);
-  const taxInput = useRef<Input>(null);
-  const tipInput = useRef<Input>(null);
-  const currencyInput = useRef<Input>(null);
+  const merchantAddressInput = useRef<InputType>(null);
+  const merchantPhoneNumberInput = useRef<InputType>(null);
+  const transactionDateInput = useRef<InputType>(null);
+  const totalInput = useRef<InputType>(null);
+  const subtotalInput = useRef<InputType>(null);
+  const taxInput = useRef<InputType>(null);
+  const tipInput = useRef<InputType>(null);
+  const currencyInput = useRef<InputType>(null);
 
   const ITEM_HEIGHT = 40 + 16 + 5 + 6;
   const getItemLayout = (data: any, index: number) => {
