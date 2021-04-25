@@ -296,7 +296,7 @@
               "    pm.expect(jsonData.category).to.be.equal(\"green salad\");",
               "});",
               "",
-              "pm.test(\"Emoji of sentence is pencil emoji\", () => {",
+              "pm.test(\"Emoji of sentence is salad emoji\", () => {",
               "    var jsonData = pm.response.json();",
               "    pm.expect(jsonData.emoji).to.be.equal(\"🥗\");",
               "});",
