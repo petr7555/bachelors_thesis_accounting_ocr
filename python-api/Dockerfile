@@ -16,6 +16,4 @@ ADD image_model.py /app
 ADD service.py /app
 ADD emoji_db.py /app
 
-RUN wget http://magnitude.plasticity.ai/word2vec/medium/GoogleNews-vectors-negative300.magnitude
-
 CMD [ "python", "./service.py" ]

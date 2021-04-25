@@ -1,12 +1,17 @@
 from pymagnitude import Magnitude
+from pymagnitude import MagnitudeUtils
 from pathlib import Path
 from emoji_db import categories
 
-docker_path = 'GoogleNews-vectors-negative300.magnitude'
-local_path = '~/.magnitude/word2vec_heavy_GoogleNews-vectors-negative300.magnitude'
-vec_file_path = docker_path if Path(docker_path).is_file() else local_path
 
-vectors = Magnitude(vec_file_path)
+model_path = '~/.magnitude/word2vec_medium_GoogleNews-vectors-negative300.magnitude'
+
+if Path(model_path).is_file():
+    print("The model is already downloaded.")
+else:
+    print("The model will be downloaded.")
+
+vectors = Magnitude(MagnitudeUtils.download_model('word2vec/medium/GoogleNews-vectors-negative300'))
 
 
 def category(sentence):
