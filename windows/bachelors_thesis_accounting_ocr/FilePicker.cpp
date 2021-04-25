@@ -1,19 +1,13 @@
 #include "pch.h"
 #include "FilePicker.h"
-//#include <filesystem>
-//#include <windows.h>
 #include <winrt/Windows.Storage.h>
 #include <winrt/Windows.Storage.Pickers.h>
 #include <winrt/Windows.Foundation.h>
-//#include <winrt/Windows.System.h>
 #include <winrt/Windows.Security.Cryptography.h>
 
 using namespace winrt;
 using namespace winrt::Windows::Storage;
-// using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Storage::Pickers;
-// using namespace winrt::Windows::System;
-// using namespace winrt::Windows::UI::Xaml;
 using namespace winrt::Windows::Security;
 
 namespace FilePicker {
