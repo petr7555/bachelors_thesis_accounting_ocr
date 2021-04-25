@@ -1,7 +1,9 @@
-import { Image } from 'react-native-image-crop-picker';
+import { MyImage } from '../../components/CameraScreen/CameraScreen';
 
-const getFilename = (image: Image) => {
-  return image.path.split('/').slice(-1)[0];
+// TODO test new functionality
+const getFilename = (image: MyImage) => {
+  const pathSeparator = image.path.includes('\\') ? '\\' : '/';
+  return image.path.split(pathSeparator).slice(-1)[0];
 };
 
 export default getFilename;

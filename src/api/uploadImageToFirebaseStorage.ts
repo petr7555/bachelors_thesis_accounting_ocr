@@ -1,13 +1,14 @@
-import { Image } from 'react-native-image-crop-picker';
-import storage from '@react-native-firebase/storage';
 import getFilename from '../global/utils/getFilename';
+import { MyImage } from '../components/CameraScreen/CameraScreen';
+import { Alert } from 'react-native';
+import { storageInstance } from '../global/firebase';
 
 export const uploadImageToFirebaseStorage = async (
-  image: Image,
+  image: MyImage,
 ): Promise<string | undefined> => {
   try {
     const imageName = getFilename(image);
-    const reference = storage().ref(`/receipts/${imageName}`);
+    const reference = storageInstance.ref(`/receipts/${imageName}`);
 
     await reference.putFile(image.path);
     console.log(`Image ${imageName} uploaded to firebase storage.`);
@@ -18,6 +19,7 @@ export const uploadImageToFirebaseStorage = async (
     return downloadUrl;
   } catch (error) {
     console.error(error);
+    Alert.alert('Upload to Firebase Storage failed');
   }
 };
 
@@ -27,7 +29,7 @@ export const uploadBase64ToFirebaseStorage = async (
   mime: string,
 ): Promise<string | undefined> => {
   try {
-    const reference = storage().ref('/receipts/' + imageName);
+    const reference = storageInstance.ref('/receipts/' + imageName);
 
     await reference.putString(base64String, 'base64', {
       contentType: mime,
@@ -40,5 +42,6 @@ export const uploadBase64ToFirebaseStorage = async (
     return downloadUrl;
   } catch (error) {
     console.error(error);
+    Alert.alert('Upload to Firebase Storage failed');
   }
 };

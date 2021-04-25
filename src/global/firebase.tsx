@@ -1,11 +1,17 @@
 import firebase from 'firebase/app';
-import 'firebase/firestore';
 import 'firebase/auth';
-import androidAuth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
+
 import { ReactNativeFirebase } from '@react-native-firebase/app';
+import androidAuth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import androidFirestore, {
   FirebaseFirestoreTypes,
 } from '@react-native-firebase/firestore';
+import androidStorage, {
+  FirebaseStorageTypes,
+} from '@react-native-firebase/storage';
+
 import { isAndroid } from './utils/platform';
 
 // to avoid error 'Firebase App named '[DEFAULT]' already exists'
@@ -29,6 +35,7 @@ let auth:
     >
   | ((app?: firebase.app.App) => firebase.auth.Auth);
 let authInstance: FirebaseAuthTypes.Module | firebase.auth.Auth;
+
 let firestore:
   | ReactNativeFirebase.FirebaseModuleWithStaticsAndApp<
       FirebaseFirestoreTypes.Module,
@@ -39,21 +46,43 @@ let firestoreInstance:
   | FirebaseFirestoreTypes.Module
   | firebase.firestore.Firestore;
 
+let storage:
+  | ReactNativeFirebase.FirebaseModuleWithStaticsAndApp<
+      FirebaseStorageTypes.Module,
+      FirebaseStorageTypes.Statics
+    >
+  | ((app?: firebase.app.App) => firebase.storage.Storage);
+let storageInstance: FirebaseStorageTypes.Module | firebase.storage.Storage;
+
 if (isAndroid) {
   auth = androidAuth;
   authInstance = androidAuth();
+
   firestore = androidFirestore;
   firestoreInstance = androidFirestore();
+
+  storage = androidStorage;
+  storageInstance = androidStorage();
 } else {
   auth = firebase.auth;
   authInstance = firebase.auth();
-  firestore = firebase.firestore;
 
+  firestore = firebase.firestore;
   firestoreInstance = firebase.firestore();
   firestoreInstance.settings({ experimentalForceLongPolling: true }); // otherwise fails with 'Could not reach Cloud Firestore backend. Backend didn't respond within 10 seconds.'
+
+  storage = firebase.storage;
+  storageInstance = firebase.storage();
 }
 
-export { auth, firestore, authInstance, firestoreInstance };
+export {
+  auth,
+  firestore,
+  authInstance,
+  firestoreInstance,
+  storage,
+  storageInstance,
+};
 
 export type FirebaseError =
   | ReactNativeFirebase.NativeFirebaseError

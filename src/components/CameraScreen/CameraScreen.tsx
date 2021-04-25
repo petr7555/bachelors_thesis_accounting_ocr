@@ -1,10 +1,7 @@
 import { Alert, StyleSheet, View } from 'react-native';
 import React, { Dispatch, SetStateAction } from 'react';
 import { RESULTS } from 'react-native-permissions';
-import ImagePicker, {
-  Image,
-  PickerErrorCode,
-} from 'react-native-image-crop-picker';
+import ImagePicker, { PickerErrorCode } from 'react-native-image-crop-picker';
 import {
   requestCameraPermission,
   requestStoragePermission,
@@ -36,10 +33,16 @@ type Props = {
   setProcessing: Dispatch<SetStateAction<boolean>>;
 };
 
+export type MyImage = {
+  path: string;
+  mime: string;
+  data: string;
+};
+
 const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
 
-  const prefillForm = async (image?: Image) => {
+  const prefillForm = async (image?: MyImage) => {
     if (image) {
       setModalVisible(false);
       setProcessing(true);
@@ -66,7 +69,7 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     await prefillForm(image);
   };
 
-  const processImage = async (image: Image): Promise<string | undefined> => {
+  const processImage = async (image: MyImage): Promise<string | undefined> => {
     const receiptData = await getReceiptDataFromImage(image);
     if (receiptData) {
       const receiptDataWithCategories = await addItemCategories(receiptData);
@@ -88,13 +91,13 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     cropperToolbarWidgetColor: rgbToHex(colors.text),
   };
 
-  const takeAnImage = async () => {
+  const takeAnImage = async (): Promise<MyImage | undefined> => {
     const cameraPermissionResult = await requestCameraPermission();
     if (cameraPermissionResult === RESULTS.GRANTED) {
       const storagePermissionResult = await requestStoragePermission();
       if (storagePermissionResult === RESULTS.GRANTED) {
         try {
-          return await ImagePicker.openCamera(pickerOptions);
+          return (await ImagePicker.openCamera(pickerOptions)) as MyImage;
         } catch (error) {
           console.error(error);
           if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
@@ -105,11 +108,11 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
     }
   };
 
-  const selectImageFromGallery = async () => {
+  const selectImageFromGallery = async (): Promise<MyImage | undefined> => {
     const storagePermissionResult = await requestStoragePermission();
     if (storagePermissionResult === RESULTS.GRANTED) {
       try {
-        return await ImagePicker.openPicker(pickerOptions);
+        return (await ImagePicker.openPicker(pickerOptions)) as MyImage;
       } catch (error) {
         console.error(error);
         if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
@@ -120,7 +123,7 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
   };
 
   const addReceipt = async (
-    image: Image,
+    image: MyImage,
     receiptData: ReceiptData,
   ): Promise<string | undefined> => {
     try {
