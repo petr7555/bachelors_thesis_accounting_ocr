@@ -1,9 +1,10 @@
 import { ReceiptData } from '../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import axios from 'axios';
+import { PYTHON_API } from '../global/constants';
 
 const addItemCategories = async (receiptData: ReceiptData) => {
   for (const item of receiptData.items) {
-    const endpoint = 'http://pythonapi.westeurope.azurecontainer.io/category';
+    const endpoint = `${PYTHON_API}/category`;
     try {
       const { data } = await axios.post(endpoint, {
         sentence: item.name,

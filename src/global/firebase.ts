@@ -9,19 +9,11 @@ import androidFirestore from '@react-native-firebase/firestore';
 import androidStorage from '@react-native-firebase/storage';
 
 import { isAndroid } from './utils/platform';
+import { FIREBASE_CREDENTIALS } from './constants';
 
-// to avoid error 'Firebase App named '[DEFAULT]' already exists'
+// 'if' to avoid error 'Firebase App named '[DEFAULT]' already exists'
 if (!firebase.apps.length) {
-  firebase.initializeApp({
-    apiKey: 'AIzaSyD74G5PwH1Tp78gKxMeSglmdEAnHjCVtN4',
-    authDomain: 'bachelorsthesisaccountingocr.firebaseapp.com',
-    databaseURL: 'https://bachelorsthesisaccountingocr.firebaseio.com',
-    projectId: 'bachelorsthesisaccountingocr',
-    storageBucket: 'bachelorsthesisaccountingocr.appspot.com',
-    messagingSenderId: '729638290812',
-    appId: '1:729638290812:web:8852ff14d3418065f810f9',
-    measurementId: 'G-96W0V52W5E',
-  });
+  firebase.initializeApp(FIREBASE_CREDENTIALS);
 }
 
 const auth = isAndroid ? androidAuth : firebase.auth;
