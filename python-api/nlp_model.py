@@ -16,3 +16,9 @@ def category(sentence):
         "category": most_similar,
         "emoji": emoji,
     }
+
+# the first call of category function takes long, 
+# call it now so that all subsequent calls (from users) are fast
+print("Calling category function for the first time...")
+category("cat")
+print("First call to category function done.")
