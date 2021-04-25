@@ -4,13 +4,24 @@ This API provides the image processing and item categorization functionality for
 
 ## Local development
 
+### Without Docker
+You can use any Python environment manager you like (venv/Conda).
+
+#### Conda
+- `conda create -n pythonapi python=3.8` to create a new environment
+- `conda activate pythonapi` to activate that environment
+- `pip install -r requirements.txt` to install all required dependencies
+
+Now you can run the server with `python service.py`.
+
+### With Docker
 Build a docker image:
 
 - `docker build -t model .`
 
 Run a docker container from the built image:
 
-- `docker run -p 8000:80 model`
+- `docker run -p 80:80 model`
 
 ## CI
 
@@ -29,9 +40,15 @@ Logs are available at Azure Portal -> aci-python-api -> Containers -> Logs.
 
 ### Tests
 
-The `tests/python-api.postman_collection.json` contains Postman tests that are run during the pipeline. To run them
+The `tests/Receipts-Scanner-Python-API.postman_collection.json` contains Postman tests that are run during the pipeline. To run them
 locally,
-run `cd python-api/tests/ && npx -y newman run python-api.postman_collection.json -e local.postman_environment.json && cd ../../`
+run `cd python-api/tests/ && npx -y newman run Receipts-Scanner-Python-API.postman_collection.json -e local.postman_environment.json && cd ../../`
+
+If you make changes in the Postman collection and its tests,
+reexport the collection from Postman and put it inside `~/python-api/tests/`.
+Run `npm run prettier:format` to reformat the json of that collectio.
+Follow the same process if changing Postman environment.
+
 
 ### Resources:
 

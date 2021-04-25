@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "74b705c4-7cd8-43b0-b2fb-a427ebe6a416",
-    "name": "python-api",
+    "name": "Receipts-Scanner-Python-API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -77,12 +77,12 @@
             }
           ],
           "cookie": [],
-          "body": "Welcome to our Machine Learning REST API!"
+          "body": "Welcome to the Machine Learning REST API for Receipts Scanner!"
         }
       ]
     },
     {
-      "name": "Get category of smartphone",
+      "name": "Get category of single word",
       "event": [
         {
           "listen": "test",
@@ -100,9 +100,9 @@
               "    pm.expect(pm.response.responseTime).to.be.below(500);",
               "})",
               "",
-              "pm.test(\"Category of smartphone is mobile\", () => {",
+              "pm.test(\"Category of smartphone is 'smartphone'\", () => {",
               "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.category).to.be.equal(\"mobile\");",
+              "    pm.expect(jsonData.category).to.be.equal(\"smartphone\");",
               "});",
               "",
               "pm.test(\"Emoji of smartphone is mobile emoji\", () => {",
@@ -139,7 +139,7 @@
       },
       "response": [
         {
-          "name": "Python API get category of smartphone",
+          "name": "Get category of 'smartphone'",
           "originalRequest": {
             "method": "POST",
             "header": [],
@@ -153,9 +153,52 @@
               }
             },
             "url": {
-              "raw": "http://pythonapi.westeurope.azurecontainer.io/category",
-              "protocol": "http",
-              "host": ["pythonapi", "westeurope", "azurecontainer", "io"],
+              "raw": "{{IP}}/category",
+              "host": ["{{IP}}"],
+              "path": ["category"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "59"
+            },
+            {
+              "key": "Server",
+              "value": "Werkzeug/1.0.1 Python/3.8.8"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 25 Apr 2021 09:11:22 GMT"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"category\": \"smartphone\",\n    \"emoji\": \"📱\"\n}"
+        },
+        {
+          "name": "Get category of 'samsung'",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"sentence\": \"samsung\" \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{IP}}/category",
+              "host": ["{{IP}}"],
               "path": ["category"]
             }
           },
@@ -177,11 +220,55 @@
             },
             {
               "key": "Date",
-              "value": "Sat, 27 Mar 2021 08:22:48 GMT"
+              "value": "Sun, 25 Apr 2021 09:12:51 GMT"
             }
           ],
           "cookie": [],
-          "body": "{\n    \"category\": \"mobile\",\n    \"emoji\": \"📱\"\n}"
+          "body": "{\n    \"category\": \"iphone\",\n    \"emoji\": \"📱\"\n}"
+        },
+        {
+          "name": "Get category of 'xiaomi'",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"sentence\": \"xiaomi\" \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{IP}}/category",
+              "host": ["{{IP}}"],
+              "path": ["category"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "54"
+            },
+            {
+              "key": "Server",
+              "value": "Werkzeug/1.0.1 Python/3.8.8"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 25 Apr 2021 09:13:02 GMT"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"category\": \"panda\",\n    \"emoji\": \"🐼\"\n}"
         }
       ]
     },
@@ -204,14 +291,14 @@
               "    pm.expect(pm.response.responseTime).to.be.below(500);",
               "})",
               "",
-              "pm.test(\"Category of sentence is pencil\", () => {",
+              "pm.test(\"Category of sentence is 'green salad'\", () => {",
               "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.category).to.be.equal(\"pencil\");",
+              "    pm.expect(jsonData.category).to.be.equal(\"green salad\");",
               "});",
               "",
               "pm.test(\"Emoji of sentence is pencil emoji\", () => {",
               "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.emoji).to.be.equal(\"✏️\");",
+              "    pm.expect(jsonData.emoji).to.be.equal(\"🥗\");",
               "});",
               "",
               ""
@@ -240,7 +327,7 @@
       },
       "response": [
         {
-          "name": "Python API get category of sentence",
+          "name": "Get category of sentence",
           "originalRequest": {
             "method": "POST",
             "header": [],
@@ -254,9 +341,8 @@
               }
             },
             "url": {
-              "raw": "http://pythonapi.westeurope.azurecontainer.io/category",
-              "protocol": "http",
-              "host": ["pythonapi", "westeurope", "azurecontainer", "io"],
+              "raw": "{{IP}}/category",
+              "host": ["{{IP}}"],
               "path": ["category"]
             }
           },
@@ -270,7 +356,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "55"
+              "value": "60"
             },
             {
               "key": "Server",
@@ -278,11 +364,11 @@
             },
             {
               "key": "Date",
-              "value": "Sat, 27 Mar 2021 08:23:56 GMT"
+              "value": "Sun, 25 Apr 2021 09:02:04 GMT"
             }
           ],
           "cookie": [],
-          "body": "{\n    \"category\": \"pencil\",\n    \"emoji\": \"✏️\"\n}"
+          "body": "{\n    \"category\": \"green salad\",\n    \"emoji\": \"🥗\"\n}"
         }
       ]
     },

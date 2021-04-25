@@ -3,6 +3,6 @@
     "newman": "^5.2.2"
   },
   "scripts": {
-    "test": "newman run python-api.postman_collection.json -e production.postman_environment.json"
+    "test": "newman run Receipts-Scanner-Python-API.postman_collection.json -e production.postman_environment.json"
   }
 }
