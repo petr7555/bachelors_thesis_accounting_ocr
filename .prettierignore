@@ -8,3 +8,4 @@ node_modules
 patches
 windows
 storybook-static
+python-api/venv/
