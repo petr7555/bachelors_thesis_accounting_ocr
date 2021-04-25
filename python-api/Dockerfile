@@ -1,6 +1,5 @@
 FROM python:3.8-slim
 
-RUN apt update
 RUN apt install --reinstall build-essential -y
 RUN apt install python3-opencv -y
 RUN apt install wget -y
