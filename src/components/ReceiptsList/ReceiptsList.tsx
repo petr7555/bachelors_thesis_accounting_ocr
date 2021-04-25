@@ -12,6 +12,7 @@ import {
   ListRenderItem,
   StyleSheet,
   View,
+  Text,
 } from 'react-native';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
@@ -24,6 +25,8 @@ import Receipt from './Receipt';
 import { Input } from 'react-native-elements';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import { useNavigation } from '@react-navigation/native';
+import Colors from '../../global/styles/colors';
+import ThemedIonIcon from '../ThemedIcon/ThemedIonIcon';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
@@ -126,16 +129,32 @@ const ReceiptsList = () => {
           }
         />
       )}
-      <FlatList
-        keyExtractor={(item) => item.id}
-        data={searchResults}
-        renderItem={renderItem}
-      />
+      {searchResults.length > 0 ? (
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={searchResults}
+          renderItem={renderItem}
+        />
+      ) : (
+        <View style={styles.noReceiptsContainer}>
+          <ThemedIonIcon name="logo-dropbox" style={styles.boxIcon} />
+          <Text style={styles.noReceiptsText}>
+            You do not have any receipts yet.
+          </Text>
+          <Text style={styles.noReceiptsText}>
+            Click the scan button below to add a receipt.
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  boxIcon: {
+    fontSize: 55,
+    marginBottom: 5,
+  },
   cancelIcon: {
     fontSize: 25,
   },
@@ -144,6 +163,15 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  noReceiptsContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  noReceiptsText: {
+    color: Colors.grey,
+    fontSize: 16,
   },
   searchIcon: {
     fontSize: 25,
