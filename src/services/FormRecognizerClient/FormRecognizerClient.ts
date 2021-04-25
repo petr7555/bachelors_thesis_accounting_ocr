@@ -1,14 +1,14 @@
-import { Image } from 'react-native-image-crop-picker';
 import base64ToArrayBuffer from 'base64-arraybuffer';
 import axios from 'axios';
 import { Alert } from 'react-native';
+import { MyImage } from '../../components/CameraScreen/CameraScreen';
 
 export class Poller {
   private readonly pollUrl: string;
   private readonly apiKey: string;
   private readonly pollInterval: number;
 
-  constructor(pollUrl: string, apiKey: string, pollInterval: number = 1000) {
+  constructor(pollUrl: string, apiKey: string, pollInterval: number = 2500) {
     this.pollUrl = pollUrl;
     this.apiKey = apiKey;
     this.pollInterval = pollInterval;
@@ -48,12 +48,12 @@ export class FormRecognizerClient {
     this.apiKey = apiKey;
   }
 
-  async beginRecognizeContent(image: Image): Promise<Poller | undefined> {
+  async beginRecognizeContent(image: MyImage): Promise<Poller | undefined> {
     try {
       if (image.data) {
-        const base64Data = base64ToArrayBuffer.decode(image.data);
+        const binaryImageData = base64ToArrayBuffer.decode(image.data);
         const requestUrl = `https://${this.endpoint}/formrecognizer/v2.0/prebuilt/receipt/analyze`;
-        const response = await axios.post(requestUrl, base64Data, {
+        const response = await axios.post(requestUrl, binaryImageData, {
           headers: {
             'Content-Type': image.mime,
             'Ocp-Apim-Subscription-Key': this.apiKey,

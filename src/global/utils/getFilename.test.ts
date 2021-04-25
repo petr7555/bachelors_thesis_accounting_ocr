@@ -1,5 +1,5 @@
-import { Image } from 'react-native-image-crop-picker';
 import getFilename from './getFilename';
+import { MyImage } from '../../components/CameraScreen/CameraScreen';
 
 it('returns filename without extension', () => {
   const imageName = 'image';
@@ -36,10 +36,8 @@ it('returns filename of image without path', () => {
   expect(getFilename(image)).toEqual(imageName);
 });
 
-const getImageWithPath = (path: string): Image => ({
+const getImageWithPath = (path: string): MyImage => ({
   path,
-  size: 0,
-  width: 0,
-  height: 0,
   mime: '',
+  data: '',
 });

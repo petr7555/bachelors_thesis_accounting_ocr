@@ -1,14 +1,15 @@
-import { Image } from 'react-native-image-crop-picker';
 import axios from 'axios';
 import getFilename from '../global/utils/getFilename';
+import { MyImage } from '../components/CameraScreen/CameraScreen';
 
 type ResponseData = {
+  // image as base64 string starting '/9j/4AAQS...'
   image: string;
   mime: string;
 };
 
 const transformImage = async (
-  image: Image,
+  image: MyImage,
 ): Promise<ResponseData | undefined> => {
   try {
     // local

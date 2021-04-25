@@ -1,17 +1,18 @@
-import { Image } from 'react-native-image-crop-picker';
-import storage from '@react-native-firebase/storage';
 import getFilename from '../global/utils/getFilename';
 import { authInstance } from '../global/firebase';
 import { RECEIPTS_STORAGE, USERS_STORAGE } from './constants';
+import { MyImage } from '../components/CameraScreen/CameraScreen';
+import { Alert } from 'react-native';
+import { storageInstance } from '../global/firebase';
 
 export const uploadImageToFirebaseStorage = async (
-  image: Image,
+  image: MyImage,
 ): Promise<string | undefined> => {
   const user = authInstance.currentUser;
   if (user) {
     try {
       const imageName = getFilename(image);
-      const reference = storage().ref(
+      const reference = storageInstance.ref(
         `${USERS_STORAGE}/${user.uid}/${RECEIPTS_STORAGE}/${imageName}`,
       );
 
@@ -24,6 +25,7 @@ export const uploadImageToFirebaseStorage = async (
       return downloadUrl;
     } catch (error) {
       console.error(error);
+      Alert.alert('Upload to Firebase Storage failed');
     }
   }
 };
@@ -36,7 +38,7 @@ export const uploadBase64ToFirebaseStorage = async (
   const user = authInstance.currentUser;
   if (user) {
     try {
-      const reference = storage().ref(
+      const reference = storageInstance.ref(
         `${USERS_STORAGE}/${user.uid}/${RECEIPTS_STORAGE}/${imageName}`,
       );
 
@@ -51,6 +53,7 @@ export const uploadBase64ToFirebaseStorage = async (
       return downloadUrl;
     } catch (error) {
       console.error(error);
+      Alert.alert('Upload to Firebase Storage failed');
     }
   }
 };

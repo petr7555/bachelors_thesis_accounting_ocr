@@ -1,11 +1,11 @@
-import { Image } from 'react-native-image-crop-picker';
 import { FormRecognizerClient } from './FormRecognizerClient';
 import convertReceiptResponseToReceiptData, {
   ReceiptData,
 } from './convertReceiptResponseToReceiptData';
+import { MyImage } from '../../components/CameraScreen/CameraScreen';
 
 export const getReceiptDataFromImage = async (
-  image: Image,
+  image: MyImage,
 ): Promise<ReceiptData | undefined> => {
   const endpoint = 'westeurope.api.cognitive.microsoft.com';
   const apiKey = 'f100cd7fa2ed413697fb5f2f0a87524f';

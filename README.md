@@ -100,7 +100,7 @@ is only version 5 and requires the old syntax.
 
 ```tsx
 export default {
-    title: 'Buttons/PrimaryButton',
+  title: 'Buttons/PrimaryButton',
 };
 ```
 
@@ -108,13 +108,13 @@ creates the story for Web. We can reuse some code by writing the story the follo
 
 ```tsx
 export const WithEmoji = () => (
-    <PrimaryButton onPress={action('clicked-emoji')} title="😀 😎 👍 💯 🚀"/>
+  <PrimaryButton onPress={action('clicked-emoji')} title="😀 😎 👍 💯 🚀" />
 );
 
 storiesOf('PrimaryButton', module).add('With emoji', WithEmoji);
 
 export default {
-    title: 'Buttons/PrimaryButton',
+  title: 'Buttons/PrimaryButton',
 };
 ```
 
@@ -233,20 +233,20 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
   enabled or not (for black and white colors).
 
 ```tsx
-import {useTheme} from 'react-native-elements';
+import { useTheme } from 'react-native-elements';
 
-const {theme} = useTheme();
-return <Component color={theme.colors?.black}/>;
+const { theme } = useTheme();
+return <Component color={theme.colors?.black} />;
 ```
 
 - Use `useTheme` hook from `@react-navigation/native` to obtain a theme that changes according to whether dark mode is
   enabled or not for any colors. These colors have to be defined in `App.tsx` for `MyDefaultTheme` and `MyDarkTheme`.
 
 ```tsx
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
-const {colors} = useTheme();
-return <Component style={{color: colors.secondary}}/>;
+const { colors } = useTheme();
+return <Component style={{ color: colors.secondary }} />;
 ```
 
 ## Clean emulator data
@@ -306,6 +306,14 @@ the [python-api/README.md](https://github.com/petr7555/bachelors_thesis_accounti
  ```
 
 Solution: Kill `MSBuild.exe` in Task Manager.
+
+6.
+
+ ```
+ Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
+ ```
+
+Solution: Kill `Node.js` in Task Manager.
 
 ## Privacy Policy, Terms & Conditions
 
