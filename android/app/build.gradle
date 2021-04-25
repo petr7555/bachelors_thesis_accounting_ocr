@@ -174,10 +174,9 @@ android {
             keyPassword 'android'
         }
         release {
-            logger.warn('WARN: {} is the name of file.', MYAPP_UPLOAD_STORE_FILE)
-            logger.warn('WARN: should not be here')
-            def pass = getPassword("Petr Janik", "android_keystore")
-            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+            logger.warn('WARN: signingConfigs release.')
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE') && file(MYAPP_UPLOAD_STORE_FILE).exists()) {
+                def pass = getPassword("Petr Janikk", "android_keystore2")
                 storeFile file(MYAPP_UPLOAD_STORE_FILE)
                 storePassword pass
                 keyAlias MYAPP_UPLOAD_KEY_ALIAS
@@ -192,13 +191,13 @@ android {
         }
         release {
             logger.warn('WARN: I am inside release')
-            if (file(MYAPP_UPLOAD_STORE_FILE).exists()) {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE') && file(MYAPP_UPLOAD_STORE_FILE).exists()) {
                 // we are on local
-                logger.warn('WARN: {} not found, probably running on local.', MYAPP_UPLOAD_STORE_FILE)
+                logger.warn('WARN: {} found, probably running on local.', MYAPP_UPLOAD_STORE_FILE)
                 signingConfig signingConfigs.release
             } else {
                 // we are in CI
-                logger.warn('WARN: {} file not found, probably running in CI pipeline.', MYAPP_UPLOAD_STORE_FILE)
+                logger.warn('WARN: Upload store file not found, probably running in CI pipeline.')
                 signingConfig signingConfigs.debug
             }
             minifyEnabled enableProguardInReleaseBuilds

@@ -93,7 +93,7 @@ jobs:
 
       - name: Build Android Release
         run: |
-          cd android && chmod +x ./gradlew && ./gradlew --scan assembleRelease 
+          cd android && chmod +x ./gradlew && ./gradlew assembleRelease --stacktrace 
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
