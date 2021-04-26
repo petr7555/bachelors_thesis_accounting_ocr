@@ -251,24 +251,32 @@
           "_postman_previewlanguage": "json",
           "header": [
             {
-              "key": "Content-Type",
+              "key": "content-type",
               "value": "application/json"
             },
             {
-              "key": "Content-Length",
-              "value": "54"
-            },
-            {
-              "key": "Server",
-              "value": "Werkzeug/1.0.1 Python/3.8.8"
+              "key": "X-Cloud-Trace-Context",
+              "value": "fc75e1bc09bdf53d84868203b6c5e1db"
             },
             {
               "key": "Date",
-              "value": "Sun, 25 Apr 2021 09:13:02 GMT"
+              "value": "Mon, 26 Apr 2021 21:28:11 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Google Frontend"
+            },
+            {
+              "key": "Content-Length",
+              "value": "59"
+            },
+            {
+              "key": "Alt-Svc",
+              "value": "h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
             }
           ],
           "cookie": [],
-          "body": "{\n    \"category\": \"panda\",\n    \"emoji\": \"🐼\"\n}"
+          "body": "{\n    \"category\": \"smartphone\",\n    \"emoji\": \"📱\"\n}"
         }
       ]
     },
@@ -291,14 +299,14 @@
               "    pm.expect(pm.response.responseTime).to.be.below(500);",
               "})",
               "",
-              "pm.test(\"Category of sentence is 'green salad'\", () => {",
+              "pm.test(\"Category of sentence is 'soup'\", () => {",
               "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.category).to.be.equal(\"green salad\");",
+              "    pm.expect(jsonData.category).to.be.equal(\"soup\");",
               "});",
               "",
-              "pm.test(\"Emoji of sentence is salad emoji\", () => {",
+              "pm.test(\"Emoji of sentence is soup emoji\", () => {",
               "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.emoji).to.be.equal(\"🥗\");",
+              "    pm.expect(jsonData.emoji).to.be.equal(\"🍵\");",
               "});",
               "",
               ""
