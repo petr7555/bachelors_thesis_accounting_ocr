@@ -8,7 +8,7 @@ from PIL import Image
 from flask import Flask, request
 
 from image_model import process_image
-from nlp_model import category
+# from nlp_model import category
 
 app = Flask(__name__)
 
@@ -18,10 +18,10 @@ def welcome():
     return "Welcome to the Machine Learning REST API for Receipts Scanner!"
 
 
-@app.route("/category", methods=['POST'])
-def category_route():
-    request_data = request.get_json()
-    return category(request_data["sentence"])
+# @app.route("/category", methods=['POST'])
+# def category_route():
+#     request_data = request.get_json()
+#     return category(request_data["sentence"])
 
 
 @app.route("/process-image", methods=['POST'])

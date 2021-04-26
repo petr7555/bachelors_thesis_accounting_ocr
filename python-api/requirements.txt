@@ -11,7 +11,6 @@ MarkupSafe==1.1.1
 numpy==1.20.1
 opencv-python==4.5.1.48
 Pillow==8.1.2
-pymagnitude==0.1.143
 scikit-learn==0.24.1
 scipy==1.6.2
 six==1.15.0
