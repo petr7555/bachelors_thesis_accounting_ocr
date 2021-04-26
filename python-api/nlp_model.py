@@ -3,10 +3,9 @@ from pymagnitude import MagnitudeUtils
 from pathlib import Path
 from emoji_db import categories
 
-
 model_path = '~/.magnitude/word2vec_medium_GoogleNews-vectors-negative300.magnitude'
 
-if Path(model_path).is_file():
+if Path(model_path).expanduser().is_file():
     print("The model is already downloaded.")
 else:
     print("The model will be downloaded.")
@@ -22,7 +21,8 @@ def category(sentence):
         "emoji": emoji,
     }
 
-# the first call of category function takes long, 
+
+# the first call of category function takes long,
 # call it now so that all subsequent calls (from users) are fast
 print("Calling category function for the first time...")
 category("cat")

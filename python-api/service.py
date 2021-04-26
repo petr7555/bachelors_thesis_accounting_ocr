@@ -6,6 +6,7 @@ import numpy as np
 import base64
 import cv2
 import io
+import os
 
 app = Flask(__name__)
 
@@ -42,4 +43,6 @@ def process_image_route():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True)
+    port = os.getenv('PORT', 80)
+    print(f"Starting server on port {port}...")
+    app.run(host='0.0.0.0', port=port, debug=True)
