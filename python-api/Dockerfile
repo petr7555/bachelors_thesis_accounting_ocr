@@ -9,7 +9,7 @@ RUN apt clean
 WORKDIR /app
 
 ADD requirements.txt /app
-RUN pip install --user -r requirements.txt
+RUN pip install -r requirements.txt
 
 ADD nlp_model.py /app
 ADD image_model.py /app
