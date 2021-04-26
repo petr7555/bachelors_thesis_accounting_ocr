@@ -3,15 +3,18 @@ from pymagnitude import MagnitudeUtils
 from pathlib import Path
 from emoji_db import categories
 
-model_path = '~/.magnitude/word2vec_medium_GoogleNews-vectors-negative300.magnitude'
+docker_path = 'GoogleNews-vectors-negative300.magnitude'
+local_path = '~/.magnitude/word2vec_medium_GoogleNews-vectors-negative300.magnitude'
 
-if Path(model_path).expanduser().is_file():
-    print("The model is already downloaded.")
+if Path(docker_path).is_file():
+    print("Running in docker, the model is already downloaded.")
+    vectors = Magnitude(docker_path)
+elif Path(local_path).expanduser().is_file():
+    print("Running locally, the model is already downloaded.")
+    vectors = Magnitude(local_path)
 else:
-    print("The model will be downloaded.")
-
-vectors = Magnitude(MagnitudeUtils.download_model('word2vec/medium/GoogleNews-vectors-negative300'))
-
+    print("Running locally, the model will be downloaded.")
+    vectors = Magnitude(MagnitudeUtils.download_model('word2vec/medium/GoogleNews-vectors-negative300'))
 
 def category(sentence):
     most_similar = vectors.most_similar_to_given(sentence, list(categories.keys()))

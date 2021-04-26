@@ -1,12 +1,14 @@
-from flask import Flask, request, send_file
-from nlp_model import category
-from image_model import process_image
-from PIL import Image
-import numpy as np
 import base64
-import cv2
 import io
 import os
+
+import cv2
+import numpy as np
+from PIL import Image
+from flask import Flask, request
+
+from image_model import process_image
+from nlp_model import category
 
 app = Flask(__name__)
 
