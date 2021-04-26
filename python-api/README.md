@@ -24,6 +24,8 @@ You can use any Python environment manager you like (venv/Conda).
 - `conda activate pythonapi` to activate that environment
 - `pip install -r requirements.txt` to install all required dependencies
 
+Download the word embeddings model from http://magnitude.plasticity.ai/fasttext/medium/wiki-news-300d-1M.magnitude.
+Place it into `~/.magnitude/wiki-news-300d-1M.magnitude`.
 Now you can run the server with `python service.py`.
 
 ### With Docker
