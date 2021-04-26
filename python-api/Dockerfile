@@ -8,6 +8,9 @@ RUN apt clean
 
 WORKDIR /app
 
+# Download the model in advance
+RUN wget -q http://magnitude.plasticity.ai/fasttext/medium/wiki-news-300d-1M.magnitude
+
 ADD requirements.txt /app
 RUN pip install -r requirements.txt
 
@@ -15,8 +18,5 @@ ADD nlp_model.py /app
 ADD image_model.py /app
 ADD service.py /app
 ADD emoji_db.py /app
-
-# Download the model in advance
-RUN wget -q http://magnitude.plasticity.ai/fasttext/medium/wiki-news-300d-1M.magnitude
 
 CMD [ "python", "./service.py" ]
