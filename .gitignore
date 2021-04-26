@@ -79,5 +79,6 @@ g_app_cred.json
 
 # python
 .ipynb_checkpoints
+venv
 
 build-storybook.log
