@@ -17,6 +17,6 @@ ADD service.py /app
 ADD emoji_db.py /app
 
 # Download the model in advance
-RUN wget -q http://magnitude.plasticity.ai/word2vec/light/GoogleNews-vectors-negative300.magnitude
+RUN wget -q http://magnitude.plasticity.ai/fasttext/medium/wiki-news-300d-1M.magnitude
 
 CMD [ "python", "./service.py" ]

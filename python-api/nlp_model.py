@@ -2,10 +2,8 @@ from pymagnitude import Magnitude
 from pathlib import Path
 from emoji_db import categories
 
-# 'light' | 'medium' | 'heavy', see https://github.com/plasticityai/magnitude#pre-converted-magnitude-formats-of-popular-embeddings-models
-model_type = 'light'
-docker_path = 'GoogleNews-vectors-negative300.magnitude'
-local_path = f'~/.magnitude/word2vec_{model_type}_GoogleNews-vectors-negative300.magnitude'
+docker_path = 'wiki-news-300d-1M.magnitude'
+local_path = '~/.magnitude/wiki-news-300d-1M.magnitude'
 
 if Path(docker_path).is_file():
     print("Running in docker, the model is already downloaded.")
@@ -14,7 +12,7 @@ elif Path(local_path).expanduser().is_file():
     print("Running locally, the model is already downloaded.")
     vectors = Magnitude(local_path)
 else:
-    exit(f"ERROR: Make sure to download the model first from 'http://magnitude.plasticity.ai/word2vec/{model_type}/GoogleNews-vectors-negative300.magnitude'.")
+    exit("ERROR: Make sure to download the model first from 'http://magnitude.plasticity.ai/fasttext/medium/wiki-news-300d-1M.magnitude'.")
     
 def category(sentence):
     most_similar = vectors.most_similar_to_given(sentence, list(categories.keys()))
