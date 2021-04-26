@@ -19,8 +19,8 @@ export const PRIVACY_POLICY_URL =
 export const TERMS_CONDITIONS_URL =
   'https://receipts-scanner.flycricket.io/terms.html';
 
-const PYTHON_API_LOCAL = 'http://10.0.2.2';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const PYTHON_API_PRODUCTION = 'http://pythonapi.westeurope.azurecontainer.io';
+const PYTHON_API_LOCAL = 'http://10.0.2.2';
+const PYTHON_API_PRODUCTION = 'https://python-api-munkyxsgfa-ew.a.run.app/';
 
-export const PYTHON_API = PYTHON_API_LOCAL;
+export const PYTHON_API = PYTHON_API_PRODUCTION;
