@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   confirmationText: {
+    color: Colors.black,
     fontSize: 20,
     paddingBottom: 15,
   },
