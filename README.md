@@ -88,6 +88,9 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
   repository to be able to deploy the Storybook to Vercel locally. This directory is ignored in version control as it
   contains sensitive information.
 - Keep in mind, that in Storybook for web `Platform.OS === 'web'`, so both `isAndroid` and `isWindows` are `false`.
+- This image shows how Storybook running on web looks:
+
+  <img src="images/doc/storybook_web.png" alt="Storybook on web" width="500"/>
 
 ### Syntax
 
