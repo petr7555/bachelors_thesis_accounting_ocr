@@ -3,7 +3,7 @@ import { Alert, StyleSheet, View } from 'react-native';
 import UniversalModal from '../UniversalModal/UniversalModal';
 import Camera from '../CameraScreen/CameraScreen';
 import ScanButtonRaw from './ScanButtonRaw';
-import { useConnection } from '../SettingsScreen/InternetStatus';
+import { useConnection } from '../../hooks/useConnection';
 
 const ScanButton = () => {
   const [processing, setProcessing] = useState(false);

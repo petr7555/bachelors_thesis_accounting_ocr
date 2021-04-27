@@ -1,24 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ThemedIonIcon from '../ThemedIcon/ThemedIonIcon';
-import { useEffect, useState } from 'react';
-import NetInfo from '@react-native-community/netinfo';
 import { Text } from 'react-native-elements';
-
-export const useConnection = () => {
-  const [isOffline, setOffline] = useState(false);
-
-  useEffect(() => {
-    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
-      const offline = !(state.isConnected && state.isInternetReachable);
-      setOffline(offline);
-    });
-
-    return () => removeNetInfoSubscription();
-  }, []);
-
-  return [isOffline];
-};
+import { useConnection } from '../../hooks/useConnection';
 
 const InternetStatus = () => {
   const [isOffline] = useConnection();
