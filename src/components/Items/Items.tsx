@@ -1,6 +1,7 @@
 import { RouteProp, useNavigation, useTheme } from '@react-navigation/native';
 import React, { useCallback, useLayoutEffect } from 'react';
-import { FlatList, ListRenderItem, StyleSheet, Text } from 'react-native';
+import { FlatList, ListRenderItem, StyleSheet } from 'react-native';
+import { Text } from 'react-native-elements';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { useDocumentData } from 'react-firebase-hooks/firestore';

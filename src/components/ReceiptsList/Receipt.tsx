@@ -1,11 +1,11 @@
-import { Avatar, ListItem } from 'react-native-elements';
+import { Avatar, ListItem, Text } from 'react-native-elements';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import ConfirmationModal from '../ConfirmDelete/ConfirmationModal';
 import React, { useState } from 'react';
 import { FirebaseReceipt, HomeScreenNavigationProp } from './ReceiptsList';
 import { useNavigation } from '@react-navigation/native';
 import deleteReceipt from '../../api/deleteReceipt';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Colors from '../../global/styles/colors';
 import { useToast } from 'react-native-fast-toast';
 import ToastIcon from '../ToastIcon/ToastIcon';
@@ -48,12 +48,16 @@ const Receipt = ({ userId, receipt }: Props) => {
         <ListItem.Title>
           <Text>
             {`${
-              receipt.merchantName || receipt.merchantAddress
-            } on ${receipt.transactionDate.toDate().toDateString()}`}
+              receipt.merchantName ||
+              receipt.merchantAddress ||
+              'Unknown merchant'
+            } for ${receipt.currency && `${receipt.currency} `}${
+              receipt.total
+            }.`}
           </Text>
         </ListItem.Title>
         <ListItem.Subtitle>
-          {receipt.added.toDate().toDateString()}
+          <Text>{receipt.added.toDate().toDateString()}</Text>
         </ListItem.Subtitle>
       </ListItem.Content>
       <IonIcon

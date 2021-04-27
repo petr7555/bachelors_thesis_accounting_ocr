@@ -12,8 +12,8 @@ import {
   ListRenderItem,
   StyleSheet,
   View,
-  Text,
 } from 'react-native';
+import { Input, Text } from 'react-native-elements';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -22,11 +22,10 @@ import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { FirebaseReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import getAllReceiptsForUser from '../../api/getAllReceiptsForUser';
 import Receipt from './Receipt';
-import { Input } from 'react-native-elements';
 import Icon from '../ThemedIcon/ThemedIonIcon';
+import ThemedIonIcon from '../ThemedIcon/ThemedIonIcon';
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../../global/styles/colors';
-import ThemedIonIcon from '../ThemedIcon/ThemedIonIcon';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],

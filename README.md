@@ -240,9 +240,7 @@ const {theme} = useTheme();
 return <Component color={theme.colors?.black}/>;
 ```
 
-- Use `Text` from `react-native-elements` to reflect the dark mode settings.
-
-
+- Always use `Text` from `react-native-elements` to reflect the dark mode settings.
 - Use `useTheme` hook from `@react-navigation/native` to obtain a theme that changes according to whether dark mode is
   enabled or not for any colors. These colors have to be defined in `App.tsx` for `MyDefaultTheme` and `MyDarkTheme`.
 

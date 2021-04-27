@@ -1,5 +1,6 @@
 import { useTheme } from '@react-navigation/native';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import * as React from 'react';
 import ReceiptsList from '../ReceiptsList/ReceiptsList';
 

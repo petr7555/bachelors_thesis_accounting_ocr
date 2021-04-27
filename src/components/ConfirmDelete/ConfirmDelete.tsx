@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import Button from '../PrimaryButton/PrimaryButton';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
