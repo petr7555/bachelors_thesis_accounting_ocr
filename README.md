@@ -229,8 +229,9 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 ## Theming
 
 - Use constants in `~/src/global/styles/colors.ts` for colors that do not change based on light / dark mode.
-- uUse `useTheme` hook from `react-native-elements` to obtain a theme that changes according to whether dark mode is
+- Use `useTheme` hook from `react-native-elements` to obtain a theme that changes according to whether dark mode is
   enabled or not (for black and white colors).
+- This `Component` will have a black color in light mode and a white color in a dark mode.
 
 ```tsx
 import {useTheme} from 'react-native-elements';
@@ -238,6 +239,9 @@ import {useTheme} from 'react-native-elements';
 const {theme} = useTheme();
 return <Component color={theme.colors?.black}/>;
 ```
+
+- Use `Text` from `react-native-elements` to reflect the dark mode settings.
+
 
 - Use `useTheme` hook from `@react-navigation/native` to obtain a theme that changes according to whether dark mode is
   enabled or not for any colors. These colors have to be defined in `App.tsx` for `MyDefaultTheme` and `MyDarkTheme`.
