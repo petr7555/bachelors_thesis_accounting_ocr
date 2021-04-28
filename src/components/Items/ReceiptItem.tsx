@@ -164,6 +164,7 @@ const ReceiptItem = ({ item, deleteItem, updateItem }: Props) => {
                       ref={field.ref}
                       blurOnSubmit={false}
                       selectTextOnFocus={true}
+                      selection={editing ? undefined : { start: 0 }}
                       onSubmitEditing={
                         isLastField(index)
                           ? handleSubmit(onSubmit)
