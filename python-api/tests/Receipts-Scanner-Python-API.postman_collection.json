@@ -45,14 +45,13 @@
       },
       "response": [
         {
-          "name": "Example response",
+          "name": "Hello ML",
           "originalRequest": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://pythonapi.westeurope.azurecontainer.io",
-              "protocol": "http",
-              "host": ["pythonapi", "westeurope", "azurecontainer", "io"]
+              "raw": "{{IP}}",
+              "host": ["{{IP}}"]
             }
           },
           "status": "OK",
@@ -65,15 +64,15 @@
             },
             {
               "key": "Content-Length",
-              "value": "41"
+              "value": "62"
             },
             {
               "key": "Server",
-              "value": "Werkzeug/1.0.1 Python/3.8.8"
+              "value": "Werkzeug/1.0.1 Python/3.8.5"
             },
             {
               "key": "Date",
-              "value": "Sat, 27 Mar 2021 08:24:26 GMT"
+              "value": "Wed, 28 Apr 2021 22:40:21 GMT"
             }
           ],
           "cookie": [],
@@ -82,7 +81,7 @@
       ]
     },
     {
-      "name": "Get category of single word",
+      "name": "Get category of zero sentences",
       "event": [
         {
           "listen": "test",
@@ -100,31 +99,22 @@
               "    pm.expect(pm.response.responseTime).to.be.below(500);",
               "})",
               "",
-              "pm.test(\"Category of smartphone is 'smartphone'\", () => {",
+              "pm.test(\"Response contains no categories\", () => {",
               "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.category).to.be.equal(\"smartphone\");",
+              "    pm.expect(jsonData.categories.length).to.be.equal(0);",
               "});",
-              "",
-              "pm.test(\"Emoji of smartphone is mobile emoji\", () => {",
-              "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.emoji).to.be.equal(\"📱\");",
-              "});",
-              "",
               ""
             ],
             "type": "text/javascript"
           }
         }
       ],
-      "protocolProfileBehavior": {
-        "disabledSystemHeaders": {}
-      },
       "request": {
         "method": "POST",
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"sentence\": \"smartphone\" \n}",
+          "raw": "{\n    \"sentences\": []\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -139,13 +129,13 @@
       },
       "response": [
         {
-          "name": "Get category of 'smartphone'",
+          "name": "Get category of zero sentences",
           "originalRequest": {
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"sentence\": \"smartphone\" \n}",
+              "raw": "{\n    \"sentences\": []\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -168,120 +158,24 @@
             },
             {
               "key": "Content-Length",
-              "value": "59"
+              "value": "23"
             },
             {
               "key": "Server",
-              "value": "Werkzeug/1.0.1 Python/3.8.8"
+              "value": "Werkzeug/1.0.1 Python/3.8.5"
             },
             {
               "key": "Date",
-              "value": "Sun, 25 Apr 2021 09:11:22 GMT"
+              "value": "Wed, 28 Apr 2021 22:40:08 GMT"
             }
           ],
           "cookie": [],
-          "body": "{\n    \"category\": \"smartphone\",\n    \"emoji\": \"📱\"\n}"
-        },
-        {
-          "name": "Get category of 'samsung'",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"sentence\": \"samsung\" \n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{IP}}/category",
-              "host": ["{{IP}}"],
-              "path": ["category"]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "key": "Content-Length",
-              "value": "55"
-            },
-            {
-              "key": "Server",
-              "value": "Werkzeug/1.0.1 Python/3.8.8"
-            },
-            {
-              "key": "Date",
-              "value": "Sun, 25 Apr 2021 09:12:51 GMT"
-            }
-          ],
-          "cookie": [],
-          "body": "{\n    \"category\": \"iphone\",\n    \"emoji\": \"📱\"\n}"
-        },
-        {
-          "name": "Get category of 'xiaomi'",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"sentence\": \"xiaomi\" \n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{IP}}/category",
-              "host": ["{{IP}}"],
-              "path": ["category"]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "content-type",
-              "value": "application/json"
-            },
-            {
-              "key": "X-Cloud-Trace-Context",
-              "value": "fc75e1bc09bdf53d84868203b6c5e1db"
-            },
-            {
-              "key": "Date",
-              "value": "Mon, 26 Apr 2021 21:28:11 GMT"
-            },
-            {
-              "key": "Server",
-              "value": "Google Frontend"
-            },
-            {
-              "key": "Content-Length",
-              "value": "59"
-            },
-            {
-              "key": "Alt-Svc",
-              "value": "h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
-            }
-          ],
-          "cookie": [],
-          "body": "{\n    \"category\": \"smartphone\",\n    \"emoji\": \"📱\"\n}"
+          "body": "{\n    \"categories\": []\n}"
         }
       ]
     },
     {
-      "name": "Get category of sentence",
+      "name": "Get category of one sentence",
       "event": [
         {
           "listen": "test",
@@ -301,12 +195,12 @@
               "",
               "pm.test(\"Category of sentence is 'soup'\", () => {",
               "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.category).to.be.equal(\"soup\");",
+              "    pm.expect(jsonData.categories[0].category).to.be.equal(\"soup\");",
               "});",
               "",
               "pm.test(\"Emoji of sentence is soup emoji\", () => {",
               "    var jsonData = pm.response.json();",
-              "    pm.expect(jsonData.emoji).to.be.equal(\"🍵\");",
+              "    pm.expect(jsonData.categories[0].emoji).to.be.equal(\"🍵\");",
               "});",
               "",
               ""
@@ -320,7 +214,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"sentence\": \"ginger carrot soup\" \n}",
+          "raw": "{\n    \"sentences\": [\"ginger carrot soup\"]\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -335,13 +229,13 @@
       },
       "response": [
         {
-          "name": "Get category of sentence",
+          "name": "Get category of one sentence",
           "originalRequest": {
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"sentence\": \"ginger carrot soup\" \n}",
+              "raw": "{\n    \"sentences\": [\"ginger carrot soup\"]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -364,19 +258,128 @@
             },
             {
               "key": "Content-Length",
-              "value": "60"
+              "value": "95"
             },
             {
               "key": "Server",
-              "value": "Werkzeug/1.0.1 Python/3.8.8"
+              "value": "Werkzeug/1.0.1 Python/3.8.5"
             },
             {
               "key": "Date",
-              "value": "Sun, 25 Apr 2021 09:02:04 GMT"
+              "value": "Wed, 28 Apr 2021 22:40:27 GMT"
             }
           ],
           "cookie": [],
-          "body": "{\n    \"category\": \"green salad\",\n    \"emoji\": \"🥗\"\n}"
+          "body": "{\n    \"categories\": [\n        {\n            \"category\": \"soup\",\n            \"emoji\": \"🍵\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get categories of multiple sentences",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Content-Type is application json\", () => {",
+              "    pm.response.to.be.header(\"Content-Type\", \"application/json\");",
+              "})",
+              "",
+              "pm.test(\"Response time is less than 500 ms\", () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);",
+              "})",
+              "",
+              "pm.test(\"Response contains three categories\", () => {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.categories.length).to.be.equal(3);",
+              "});",
+              "",
+              "pm.test(\"Categories of sentences are correct\", () => {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.categories[0].category).to.be.equal(\"cold beverage\");",
+              "    pm.expect(jsonData.categories[1].category).to.be.equal(\"lollipop\");",
+              "    pm.expect(jsonData.categories[2].category).to.be.equal(\"lotion\");",
+              "});",
+              "",
+              "pm.test(\"Emoji of sentences are correct\", () => {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.categories[0].emoji).to.be.equal(\"🚰\");",
+              "    pm.expect(jsonData.categories[1].emoji).to.be.equal(\"🍭\");",
+              "    pm.expect(jsonData.categories[2].emoji).to.be.equal(\"🧴\");",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"sentences\": [\n        \"CocaCola\",\n        \"Chupa lollipops\",\n        \"shampoo\"\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{IP}}/category",
+          "host": ["{{IP}}"],
+          "path": ["category"]
+        }
+      },
+      "response": [
+        {
+          "name": "Get categories of multiple sentences",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"sentences\": [\n        \"CocaCola\",\n        \"Chupa lollipops\",\n        \"shampoo\"\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{IP}}/category",
+              "host": ["{{IP}}"],
+              "path": ["category"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "252"
+            },
+            {
+              "key": "Server",
+              "value": "Werkzeug/1.0.1 Python/3.8.5"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 28 Apr 2021 22:40:30 GMT"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"categories\": [\n        {\n            \"category\": \"cold beverage\",\n            \"emoji\": \"🚰\"\n        },\n        {\n            \"category\": \"lollipop\",\n            \"emoji\": \"🍭\"\n        },\n        {\n            \"category\": \"lotion\",\n            \"emoji\": \"🧴\"\n        }\n    ]\n}"
         }
       ]
     },
@@ -455,9 +458,8 @@
               ]
             },
             "url": {
-              "raw": "http://pythonapi.westeurope.azurecontainer.io/process-image",
-              "protocol": "http",
-              "host": ["pythonapi", "westeurope", "azurecontainer", "io"],
+              "raw": "{{IP}}/process-image",
+              "host": ["{{IP}}"],
               "path": ["process-image"]
             }
           },
@@ -475,11 +477,11 @@
             },
             {
               "key": "Server",
-              "value": "Werkzeug/1.0.1 Python/3.8.8"
+              "value": "Werkzeug/1.0.1 Python/3.8.5"
             },
             {
               "key": "Date",
-              "value": "Sun, 28 Mar 2021 05:41:01 GMT"
+              "value": "Wed, 28 Apr 2021 22:40:41 GMT"
             }
           ],
           "cookie": [],
