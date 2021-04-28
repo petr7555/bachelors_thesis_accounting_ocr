@@ -8,7 +8,7 @@ from PIL import Image
 from flask import Flask, request
 
 from image_model import process_image
-from nlp_model import category
+from nlp_model import get_categories
 
 app = Flask(__name__)
 
@@ -21,7 +21,7 @@ def welcome():
 @app.route("/category", methods=['POST'])
 def category_route():
     request_data = request.get_json()
-    return category(request_data["sentence"])
+    return get_categories(request_data["sentences"])
 
 
 @app.route("/process-image", methods=['POST'])

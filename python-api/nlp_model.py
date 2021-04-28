@@ -12,9 +12,17 @@ elif Path(local_path).expanduser().is_file():
     print("Running locally, the model is already downloaded.")
     vectors = Magnitude(local_path)
 else:
-    exit("ERROR: Make sure to download the model first from 'http://magnitude.plasticity.ai/fasttext/medium/wiki-news-300d-1M.magnitude'.")
-    
-def category(sentence):
+    exit(
+        "ERROR: Make sure to download the model first from 'http://magnitude.plasticity.ai/fasttext/medium/wiki-news-300d-1M.magnitude'.")
+
+
+def get_categories(sentences):
+    return {
+        "categories": [get_category(sentence) for sentence in sentences],
+    }
+
+
+def get_category(sentence):
     most_similar = vectors.most_similar_to_given(sentence, list(categories.keys()))
     emoji = categories[most_similar]
     return {
@@ -26,5 +34,5 @@ def category(sentence):
 # the first call of category function takes long,
 # call it now so that all subsequent calls (from users) are fast
 print("Calling category function for the first time...")
-category("cat")
+get_category("cat")
 print("First call to category function done.")
