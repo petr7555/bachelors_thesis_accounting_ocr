@@ -4,7 +4,7 @@ if (!isWindows) {
   require('react-native-gesture-handler');
 }
 import React, { useEffect } from 'react';
-import { ActivityIndicator, StyleSheet, useColorScheme } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 import {
   DarkTheme,
   DefaultTheme,
@@ -16,7 +16,7 @@ import LoginScreen from './src/components/LoginScreen/LoginScreen';
 import Colors from './src/global/styles/colors';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from './src/global/firebase';
-import { Text, ThemeProvider } from 'react-native-elements';
+import { ThemeProvider } from 'react-native-elements';
 import createUser from './src/api/createUser';
 import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from 'react-native-fast-toast';

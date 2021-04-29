@@ -9,7 +9,7 @@ import androidFirestore from '@react-native-firebase/firestore';
 import androidStorage from '@react-native-firebase/storage';
 
 import { isAndroid } from './utils/platform';
-import { FIREBASE_CREDENTIALS } from '../global/constants';
+import { FIREBASE_CREDENTIALS } from './constants';
 
 // 'if' to avoid error 'Firebase App named '[DEFAULT]' already exists'
 if (!firebase.apps.length) {
