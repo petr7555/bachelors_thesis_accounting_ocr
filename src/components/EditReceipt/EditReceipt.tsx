@@ -46,6 +46,8 @@ import UniversalModal from '../UniversalModal/UniversalModal';
 import { isAndroid, isWindows } from '../../global/utils/platform';
 import { useToast } from 'react-native-fast-toast';
 import ToastIcon from '../ToastIcon/ToastIcon';
+import isOffline from '../../global/utils/isOffline';
+import HeaderButton from '../HeaderButton/HeaderButton';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
@@ -152,21 +154,34 @@ const EditReceipt = ({ route }: Props) => {
     });
   }, [toast]);
 
+  const showOfflineSavedToast = useCallback(() => {
+    toast?.show(
+      'You are offline. The changes will be saved after you reconnect.',
+      {
+        type: 'warning',
+        warningIcon: <ToastIcon name="warning" />,
+      },
+    );
+  }, [toast]);
+
   const onSubmit = useCallback(
     async (data: ReceiptData) => {
-      await updateReceipt(user.uid, receiptId, data);
-      showSavedToast();
+      updateReceipt(user.uid, receiptId, data).then(() => showSavedToast());
+      isOffline().then((offline) => offline && showOfflineSavedToast());
+
       navigation.navigate('HomeScreen');
     },
-    [navigation, receiptId, showSavedToast, user.uid],
+    [navigation, receiptId, showOfflineSavedToast, showSavedToast, user.uid],
   );
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Text style={styles.headerText} onPress={handleSubmit(onSubmit)}>
-          Save
-        </Text>
+        <HeaderButton
+          text="Save"
+          onPress={handleSubmit(onSubmit)}
+          textStyle={styles.headerText}
+        />
       ),
     });
   }, [handleSubmit, navigation, onSubmit]);
@@ -447,10 +462,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: Colors.primary,
-    fontFamily: 'sans-serif-medium',
-    fontSize: 20,
-    fontWeight: 'normal',
-    marginRight: 20,
   },
   icon: {
     fontSize: 20,

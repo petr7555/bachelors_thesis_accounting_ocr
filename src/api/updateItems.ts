@@ -8,13 +8,13 @@ const updateItems = async (
   items: Item[],
 ) => {
   try {
-    await firestoreInstance
+    return firestoreInstance
       .collection(USERS_FIRESTORE)
       .doc(userId)
       .collection(RECEIPTS_FIRESTORE)
       .doc(receiptId)
-      .update({ items });
-    console.log('Items updated!');
+      .update({ items })
+      .then(() => console.log('Items updated!'));
   } catch (error) {
     console.error(error);
   }

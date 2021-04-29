@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import NetInfo from '@react-native-community/netinfo';
 
+/**
+ * Do not use when navigating to a different component.
+ */
 export const useConnection = () => {
   const [isOffline, setOffline] = useState(false);
 

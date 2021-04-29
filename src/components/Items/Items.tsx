@@ -1,7 +1,6 @@
 import { RouteProp, useNavigation, useTheme } from '@react-navigation/native';
 import React, { useCallback, useLayoutEffect } from 'react';
-import { FlatList, ListRenderItem, StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
+import { FlatList, ListRenderItem } from 'react-native';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
@@ -15,10 +14,10 @@ import { authInstance } from '../../global/firebase';
 import updateItems from '../../api/updateItems';
 import ReceiptItem, { ItemFormData } from './ReceiptItem';
 import { v4 as uuidv4 } from 'uuid';
-import Colors from '../../global/styles/colors';
 import { MixedTheme } from '../../../App';
 import { useToast } from 'react-native-fast-toast';
 import ToastIcon from '../ToastIcon/ToastIcon';
+import HeaderButton from '../HeaderButton/HeaderButton';
 
 type ItemsScreenRouteProp = RouteProp<HomeStackParamList, 'Items'>;
 
@@ -39,8 +38,7 @@ const Items = ({ route }: Props) => {
   const deleteItem = async (itemId: string) => {
     if (items) {
       const newItems = items.filter(({ id }) => id !== itemId);
-      await updateItems(user.uid, receiptId, newItems);
-      showRemovedToast();
+      updateItems(user.uid, receiptId, newItems).then(() => showRemovedToast());
     }
   };
 
@@ -81,8 +79,9 @@ const Items = ({ route }: Props) => {
       price: 0,
       totalPrice: 0,
     };
-    await updateItems(user.uid, receiptId, [...(items || []), newItem]);
-    showAddedToast();
+    updateItems(user.uid, receiptId, [...(items || []), newItem]).then(() =>
+      showAddedToast(),
+    );
   }, [items, receiptId, showAddedToast, user.uid]);
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
@@ -92,11 +91,11 @@ const Items = ({ route }: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Text
-          style={[styles.headerText, { color: colors.secondary }]}
-          onPress={addItem}>
-          Add
-        </Text>
+        <HeaderButton
+          text="Add"
+          onPress={addItem}
+          textStyle={{ color: colors.secondary }}
+        />
       ),
     });
   }, [addItem, colors.secondary, navigation]);
@@ -116,15 +115,5 @@ const Items = ({ route }: Props) => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  headerText: {
-    color: Colors.secondary,
-    fontFamily: 'sans-serif-medium',
-    fontSize: 20,
-    fontWeight: 'normal',
-    marginRight: 20,
-  },
-});
 
 export default Items;

@@ -8,13 +8,13 @@ const updateReceipt = async (
   receiptData: ReceiptData,
 ) => {
   try {
-    await firestoreInstance
+    return firestoreInstance
       .collection(USERS_FIRESTORE)
       .doc(userId)
       .collection(RECEIPTS_FIRESTORE)
       .doc(receiptId)
-      .update(receiptData);
-    console.log('Receipt updated!');
+      .update(receiptData)
+      .then(() => console.log('Receipt updated!'));
   } catch (error) {
     console.error(error);
   }
