@@ -1,6 +1,6 @@
 import getFilename from '../global/utils/getFilename';
 import { authInstance } from '../global/firebase';
-import { RECEIPTS_STORAGE, USERS_STORAGE } from './constants';
+import { RECEIPTS_STORAGE, USERS_STORAGE } from '../global/constants';
 import { MyImage } from '../components/CameraScreen/CameraScreen';
 import { Alert } from 'react-native';
 import { storageInstance } from '../global/firebase';

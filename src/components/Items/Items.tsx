@@ -38,7 +38,8 @@ const Items = ({ route }: Props) => {
   const deleteItem = async (itemId: string) => {
     if (items) {
       const newItems = items.filter(({ id }) => id !== itemId);
-      updateItems(user.uid, receiptId, newItems).then(() => showRemovedToast());
+      updateItems(user.uid, receiptId, newItems);
+      showRemovedToast();
     }
   };
 
@@ -47,7 +48,7 @@ const Items = ({ route }: Props) => {
       const newItems = items.map((item) => {
         return item.id === itemId ? { ...item, ...itemFormData } : item;
       });
-      await updateItems(user.uid, receiptId, newItems);
+      updateItems(user.uid, receiptId, newItems);
     }
   };
 
@@ -79,9 +80,8 @@ const Items = ({ route }: Props) => {
       price: 0,
       totalPrice: 0,
     };
-    updateItems(user.uid, receiptId, [...(items || []), newItem]).then(() =>
-      showAddedToast(),
-    );
+    updateItems(user.uid, receiptId, [...(items || []), newItem]);
+    showAddedToast();
   }, [items, receiptId, showAddedToast, user.uid]);
 
   const navigation = useNavigation<HomeScreenNavigationProp>();

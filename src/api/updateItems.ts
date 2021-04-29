@@ -1,6 +1,6 @@
 import { Item } from '../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { firestoreInstance } from '../global/firebase';
-import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from './constants';
+import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../global/constants';
 
 const updateItems = async (
   userId: string,

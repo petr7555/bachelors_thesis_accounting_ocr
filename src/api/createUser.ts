@@ -1,6 +1,6 @@
 import { firestoreInstance } from '../global/firebase';
-import { USERS_FIRESTORE } from './constants';
 import firebase from 'firebase';
+import { USERS_FIRESTORE } from '../global/constants';
 
 /**
  * Create a user if they do not exist already

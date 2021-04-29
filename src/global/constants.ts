@@ -24,3 +24,9 @@ const PYTHON_API_LOCAL = 'http://10.0.2.2';
 const PYTHON_API_PRODUCTION = 'https://python-api-munkyxsgfa-ew.a.run.app/';
 
 export const PYTHON_API = PYTHON_API_PRODUCTION;
+
+export const USERS_FIRESTORE = 'Users';
+export const RECEIPTS_FIRESTORE = 'Receipts';
+
+export const USERS_STORAGE = 'Users';
+export const RECEIPTS_STORAGE = 'Receipts';

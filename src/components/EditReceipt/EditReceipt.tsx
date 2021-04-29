@@ -154,24 +154,14 @@ const EditReceipt = ({ route }: Props) => {
     });
   }, [toast]);
 
-  const showOfflineSavedToast = useCallback(() => {
-    toast?.show(
-      'You are offline. The changes will be saved after you reconnect.',
-      {
-        type: 'warning',
-        warningIcon: <ToastIcon name="warning" />,
-      },
-    );
-  }, [toast]);
-
   const onSubmit = useCallback(
     async (data: ReceiptData) => {
-      updateReceipt(user.uid, receiptId, data).then(() => showSavedToast());
-      isOffline().then((offline) => offline && showOfflineSavedToast());
+      updateReceipt(user.uid, receiptId, data);
+      showSavedToast();
 
       navigation.navigate('HomeScreen');
     },
-    [navigation, receiptId, showOfflineSavedToast, showSavedToast, user.uid],
+    [navigation, receiptId, showSavedToast, user.uid],
   );
 
   useLayoutEffect(() => {
