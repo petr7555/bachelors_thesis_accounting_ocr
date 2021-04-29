@@ -85,20 +85,12 @@ const App = () => {
   // set this to 'dark' or build using --release to test dark mode
   // const scheme = 'dark';
   const scheme = useColorScheme();
-  const [user, loading, error] = useAuthState(authInstance);
+  const [user] = useAuthState(authInstance);
 
   useEffect(() => {
     createUser(user);
     SplashScreen?.hide();
   }, [user]);
-
-  if (loading) {
-    return <ActivityIndicator size="large" />;
-  }
-
-  if (error) {
-    return <Text>Error!</Text>;
-  }
 
   return (
     <ToastProvider
