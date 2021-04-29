@@ -46,7 +46,6 @@ import UniversalModal from '../UniversalModal/UniversalModal';
 import { isAndroid, isWindows } from '../../global/utils/platform';
 import { useToast } from 'react-native-fast-toast';
 import ToastIcon from '../ToastIcon/ToastIcon';
-import isOffline from '../../global/utils/isOffline';
 import HeaderButton from '../HeaderButton/HeaderButton';
 
 // Types
