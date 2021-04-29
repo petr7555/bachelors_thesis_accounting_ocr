@@ -35,8 +35,8 @@ const Receipt = ({ userId, receipt }: Props) => {
   };
 
   const removeReceipt = async () => {
-    // delete works offline, it does not block
-    await deleteReceipt(userId, receipt.id);
+    // delete works offline, it does not block, therefore we can await it before showing the toast
+    await deleteReceipt(userId, receipt);
     showRemovedToast();
   };
 
