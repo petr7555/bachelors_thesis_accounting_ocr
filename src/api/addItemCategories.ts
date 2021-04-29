@@ -10,10 +10,12 @@ const addItemCategories = async (receiptData: ReceiptData) => {
     });
 
     for (let i = 0; i < receiptData.items.length; i++) {
-      console.log(
-        `Classified ${receiptData.items[i].name} as ${data.categories[i].category} ${data.categories[i].emoji}`,
-      );
-      receiptData.items[i].name = `${data.emoji} ${receiptData.items[i].name}`;
+      const itemName = receiptData.items[i].name;
+      const category = data.categories[i].category;
+      const emoji = data.categories[i].emoji;
+
+      console.log(`Classified ${itemName} as ${category} ${emoji}`);
+      receiptData.items[i].name = `${emoji} ${itemName}`;
     }
   } catch (error) {
     console.error(error);
