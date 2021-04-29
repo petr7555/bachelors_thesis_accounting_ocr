@@ -4,6 +4,7 @@ import { RECEIPTS_STORAGE, USERS_STORAGE } from '../global/constants';
 import { MyImage } from '../components/CameraScreen/CameraScreen';
 import { Alert } from 'react-native';
 import { storageInstance } from '../global/firebase';
+import base64ToArrayBuffer from 'base64-arraybuffer';
 
 export const uploadImageToFirebaseStorage = async (
   image: MyImage,
@@ -16,7 +17,14 @@ export const uploadImageToFirebaseStorage = async (
         `${USERS_STORAGE}/${user.uid}/${RECEIPTS_STORAGE}/${imageName}`,
       );
 
-      await reference.putFile(image.path);
+      const binaryImageData = base64ToArrayBuffer.decode(image.data);
+
+      // putString() does not fork with Firebase for Web
+      // [FirebaseError: Firebase Storage: String does not match format 'base64': Invalid character found (storage/invalid-format)]
+      // putFile() is available only in React Native Firebase
+      // React Native does not support Blob
+      // use therefore ArrayBuffer and put() method
+      await reference.put(binaryImageData, { contentType: image.mime });
       console.log(`Image ${imageName} uploaded to firebase storage.`);
 
       const downloadUrl = await reference.getDownloadURL();
@@ -42,9 +50,9 @@ export const uploadBase64ToFirebaseStorage = async (
         `${USERS_STORAGE}/${user.uid}/${RECEIPTS_STORAGE}/${imageName}`,
       );
 
-      await reference.putString(base64String, 'base64', {
-        contentType: mime,
-      });
+      const binaryImageData = base64ToArrayBuffer.decode(base64String);
+
+      await reference.put(binaryImageData, { contentType: mime });
       console.log(`Image ${imageName} uploaded to firebase storage.`);
 
       const downloadUrl = await reference.getDownloadURL();
