@@ -1,7 +1,7 @@
 import base64ToArrayBuffer from 'base64-arraybuffer';
 import axios from 'axios';
 import { Alert } from 'react-native';
-import { MyImage } from '../../components/CameraScreen/CameraScreen';
+import { MyImage } from '../../components/Camera/Camera';
 
 export class Poller {
   private readonly pollUrl: string;

@@ -1,4 +1,4 @@
-import { MyImage } from '../../components/CameraScreen/CameraScreen';
+import { MyImage } from '../../components/Camera/Camera';
 
 // TODO test new functionality
 const getFilename = (image: MyImage) => {

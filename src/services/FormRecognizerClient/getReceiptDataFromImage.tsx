@@ -2,7 +2,7 @@ import { FormRecognizerClient } from './FormRecognizerClient';
 import convertReceiptResponseToReceiptData, {
   ReceiptData,
 } from './convertReceiptResponseToReceiptData';
-import { MyImage } from '../../components/CameraScreen/CameraScreen';
+import { MyImage } from '../../components/Camera/Camera';
 import {
   FORM_RECOGNIZER_API_KEY,
   FORM_RECOGNIZER_ENDPOINT,

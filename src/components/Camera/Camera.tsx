@@ -24,6 +24,7 @@ import transformImage from '../../api/transformImage';
 import rgbToHex from '../../global/utils/rgbToHex';
 import getFilename from '../../global/utils/getFilename';
 import { isWindows } from '../../global/utils/platform';
+import FilePicker from '../../services/FilePicker/FilePicker';
 
 type HomeNavigationProp = StackNavigationProp<RootParamList, 'Home'>;
 
@@ -38,7 +39,7 @@ export type MyImage = {
   data: string;
 };
 
-const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
+const Camera = ({ setModalVisible, setProcessing }: Props) => {
   const navigation = useNavigation<HomeNavigationProp>();
 
   const prefillForm = async (image?: MyImage) => {
@@ -64,7 +65,9 @@ const CameraScreen = ({ setModalVisible, setProcessing }: Props) => {
   };
 
   const addExistingImage = async () => {
-    const image = await selectImageFromGallery();
+    const image = isWindows
+      ? await FilePicker.pickFile()
+      : await selectImageFromGallery();
     await prefillForm(image);
   };
 
@@ -189,4 +192,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CameraScreen;
+export default Camera;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import getFilename from '../global/utils/getFilename';
-import { MyImage } from '../components/CameraScreen/CameraScreen';
+import { MyImage } from '../components/Camera/Camera';
 import { PYTHON_API } from '../global/constants';
 
 type ResponseData = {

@@ -1,8 +1,8 @@
 import { NativeModules } from 'react-native';
-import { MyImage } from '../../components/CameraScreen/CameraScreen';
+import { MyImage } from '../../components/Camera/Camera';
 
 type FilePickerType = {
-  pickFile(): MyImage;
+  pickFile(): Promise<MyImage>;
 };
 
 const { FilePicker } = NativeModules;
