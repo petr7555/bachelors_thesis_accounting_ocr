@@ -1,27 +1,21 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import UniversalModal from '../UniversalModal/UniversalModal';
 import Camera from '../CameraScreen/CameraScreen';
 import ScanButtonRaw from './ScanButtonRaw';
-import { useConnection } from '../../hooks/useConnection';
+import { execIfOnline } from '../../hooks/useConnection';
 
 const ScanButton = () => {
   const [processing, setProcessing] = useState(false);
 
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const [isOffline] = useConnection();
-
   const hideModal = () => {
     setModalVisible(false);
   };
 
   const onPress = () => {
-    if (isOffline) {
-      Alert.alert('No internet connection');
-    } else {
-      setModalVisible((visible) => !visible);
-    }
+    execIfOnline(() => setModalVisible((visible) => !visible));
   };
 
   return (
