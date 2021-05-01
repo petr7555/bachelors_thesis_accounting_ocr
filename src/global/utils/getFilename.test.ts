@@ -1,5 +1,5 @@
 import getFilename from './getFilename';
-import { MyImage } from '../../components/CameraScreen/CameraScreen';
+import { MyImage } from '../../components/Camera/Camera';
 
 it('returns filename without extension', () => {
   const imageName = 'image';

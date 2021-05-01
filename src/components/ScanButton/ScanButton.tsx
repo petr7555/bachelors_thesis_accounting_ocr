@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import UniversalModal from '../UniversalModal/UniversalModal';
-import Camera from '../CameraScreen/CameraScreen';
+import Camera from '../Camera/Camera';
 import ScanButtonRaw from './ScanButtonRaw';
 import { execIfOnline } from '../../hooks/useConnection';
 

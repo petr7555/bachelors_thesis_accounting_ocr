@@ -36,15 +36,13 @@ const RootNavigator = () => {
         }}
       />
       {/* button to go to NullComponent is hidden under the tabBarButton, so it cannot be clicked */}
-      {!isWindows && (
-        <Tab.Screen
-          name="Scan"
-          component={NullComponent}
-          options={{
-            tabBarButton: () => <ScanButton />,
-          }}
-        />
-      )}
+      <Tab.Screen
+        name="Scan"
+        component={NullComponent}
+        options={{
+          tabBarButton: () => <ScanButton />,
+        }}
+      />
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
