@@ -114,7 +114,7 @@ const Camera = ({ setModalVisible, setProcessing }: Props) => {
   const pickerOptions = {
     cropping: true,
     freeStyleCropEnabled: true,
-    hideBottomControls: true,
+    hideBottomControls: false,
     compressImageMaxWidth: 720,
     includeBase64: true,
     cropperToolbarTitle: 'Edit photo',
