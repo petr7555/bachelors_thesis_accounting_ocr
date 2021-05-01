@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import NetInfo from '@react-native-community/netinfo';
 import { Alert } from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 
 /**
  * Do not use when navigating to a different component.
