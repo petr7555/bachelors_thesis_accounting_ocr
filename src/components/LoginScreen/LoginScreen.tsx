@@ -25,6 +25,7 @@ import {
   PRIVACY_POLICY_URL,
   TERMS_CONDITIONS_URL,
 } from '../../global/constants';
+import { execIfOnline } from '../../hooks/useConnection';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,
@@ -65,30 +66,37 @@ const LoginScreen = () => {
   };
 
   const signIn = async (data: FormData) => {
-    setSignInInProgress(true);
-    try {
-      await authInstance.signInWithEmailAndPassword(data.email, data.password);
-      console.log('User signed in.');
-    } catch (error) {
-      handleAuthError(error);
-    } finally {
-      setSignInInProgress(false);
-    }
+    execIfOnline(async () => {
+      setSignInInProgress(true);
+      try {
+        await authInstance.signInWithEmailAndPassword(
+          data.email,
+          data.password,
+        );
+        console.log('User signed in.');
+      } catch (error) {
+        handleAuthError(error);
+      } finally {
+        setSignInInProgress(false);
+      }
+    });
   };
 
   const signUp = async (data: FormData) => {
-    setSignUpInProgress(true);
-    try {
-      await authInstance.createUserWithEmailAndPassword(
-        data.email,
-        data.password,
-      );
-      console.log('User account created & signed in!');
-    } catch (error) {
-      handleAuthError(error);
-    } finally {
-      setSignUpInProgress(false);
-    }
+    execIfOnline(async () => {
+      setSignUpInProgress(true);
+      try {
+        await authInstance.createUserWithEmailAndPassword(
+          data.email,
+          data.password,
+        );
+        console.log('User account created & signed in!');
+      } catch (error) {
+        handleAuthError(error);
+      } finally {
+        setSignUpInProgress(false);
+      }
+    });
   };
 
   const passwordInput = useRef<TextInput>(null);

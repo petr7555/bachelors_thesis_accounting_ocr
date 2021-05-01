@@ -2,6 +2,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React from 'react';
 import { auth, authInstance } from '../../global/firebase';
 import GoogleSignInButton from './GoogleSignInButton';
+import { execIfOnline } from '../../hooks/useConnection';
 
 GoogleSignin.configure({
   webClientId:
@@ -9,19 +10,21 @@ GoogleSignin.configure({
 });
 
 const signIn = async () => {
-  try {
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
+  execIfOnline(async () => {
+    try {
+      // Get the users ID token
+      const { idToken } = await GoogleSignin.signIn();
 
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    // Sign-in the user with the credential
-    await authInstance.signInWithCredential(googleCredential);
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      // Sign-in the user with the credential
+      await authInstance.signInWithCredential(googleCredential);
 
-    console.log('Signed in with Google!');
-  } catch (error) {
-    console.error(error);
-  }
+      console.log('Signed in with Google!');
+    } catch (error) {
+      console.error(error);
+    }
+  });
 };
 
 interface GoogleSignInProps {
