@@ -12,8 +12,8 @@ describe('RootNavigator', () => {
       </NavigationContainer>
     );
 
-    const inst = create(component);
-    const textInst = inst.root.findAllByType(Text)[0];
+    const renderer = create(component);
+    const textInst = renderer.root.findAllByType(Text)[0];
     expect(textInst.props.children).toBe('My receipts');
   });
 });
