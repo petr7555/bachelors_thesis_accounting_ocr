@@ -2,13 +2,12 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SettingsScreen from '../SettingsScreen/SettingsScreen';
 import ScanButton from '../ScanButton/ScanButton';
-import { getNavigationIcon } from '../../global/navigation';
 import { NavigatorScreenParams } from '@react-navigation/native';
 import {
   HomeStackNavigator,
   HomeStackParamList,
 } from '../HomeStackNavigator/HomeStackNavigator';
-import { isWindows } from '../../global/utils/platform';
+import getNavigationIcon from '../../global/getNavigationIcon';
 
 export type RootParamList = {
   Home: NavigatorScreenParams<HomeStackParamList>;
