@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import UniversalModal from '../UniversalModal/UniversalModal';
 import Camera from '../Camera/Camera';
 import ScanButtonRaw from './ScanButtonRaw';
-import { execIfOnline } from '../../hooks/useConnection';
+import execIfOnline from '../../global/execIfOnline';
 
 const ScanButton = () => {
   const [processing, setProcessing] = useState(false);

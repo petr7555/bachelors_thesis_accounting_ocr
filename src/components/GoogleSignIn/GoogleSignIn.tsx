@@ -2,7 +2,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React from 'react';
 import { auth, authInstance } from '../../global/firebase';
 import GoogleSignInButton from './GoogleSignInButton';
-import { execIfOnline } from '../../hooks/useConnection';
+import execIfOnline from '../../global/execIfOnline';
 
 GoogleSignin.configure({
   webClientId:

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ThemedIonIcon from '../ThemedIcon/ThemedIonIcon';
 import { Text } from 'react-native-elements';
-import { useConnection } from '../../hooks/useConnection';
+import useConnection from '../../hooks/useConnection';
 
 const InternetStatus = () => {
   const { isOffline } = useConnection();

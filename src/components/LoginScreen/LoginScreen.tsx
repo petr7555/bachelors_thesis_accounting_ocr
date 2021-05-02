@@ -25,7 +25,7 @@ import {
   PRIVACY_POLICY_URL,
   TERMS_CONDITIONS_URL,
 } from '../../global/constants';
-import { execIfOnline } from '../../hooks/useConnection';
+import execIfOnline from '../../global/execIfOnline';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,
