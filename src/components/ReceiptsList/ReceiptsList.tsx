@@ -13,7 +13,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Input, Text } from 'react-native-elements';
+import { Image, Input, Text } from 'react-native-elements';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -136,7 +136,10 @@ const ReceiptsList = () => {
         />
       ) : (
         <View style={styles.noReceiptsContainer}>
-          <ThemedIonIcon name="logo-dropbox" style={styles.boxIcon} />
+          <Image
+            style={styles.emptyCartImg}
+            source={require('../../../images/cart.png')}
+          />
           <Text style={styles.noReceiptsText}>
             You do not have any receipts yet.
           </Text>
@@ -162,6 +165,11 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  emptyCartImg: {
+    height: 100,
+    resizeMode: 'contain',
+    width: 80,
   },
   noReceiptsContainer: {
     alignItems: 'center',
