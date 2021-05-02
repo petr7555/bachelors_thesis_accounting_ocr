@@ -23,6 +23,7 @@ exports[`Storyshots ConfirmDelete Basic 1`] = `
     <Text
       style={
         Object {
+          "color": "black",
           "fontSize": 20,
           "paddingBottom": 15,
         }
@@ -333,6 +334,7 @@ exports[`Storyshots ConfirmationModal Basic 1`] = `
         <Text
           style={
             Object {
+              "color": "black",
               "fontSize": 20,
               "paddingBottom": 15,
             }
@@ -564,7 +566,7 @@ exports[`Storyshots FullWidthImage Basic 1`] = `
       resizeMode="contain"
       source={
         Object {
-          "uri": "https://media-cdn.tripadvisor.com/media/photo-s/0b/91/f0/0f/receipt.jpg",
+          "uri": "https://storage.googleapis.com/images_bachelorsthesisaccountingocr/sample_receipt_01.jpg",
         }
       }
       style={
@@ -1762,7 +1764,7 @@ exports[`Storyshots Receipt Basic 1`] = `
                                 onLoadEnd={[Function]}
                                 source={
                                   Object {
-                                    "uri": "",
+                                    "uri": "https://storage.googleapis.com/images_bachelorsthesisaccountingocr/lidl_receipt.jpeg",
                                   }
                                 }
                                 style={
@@ -1861,7 +1863,7 @@ exports[`Storyshots Receipt Basic 1`] = `
                                   style={
                                     Object {
                                       "alignItems": "center",
-                                      "backgroundColor": "transparent",
+                                      "backgroundColor": "#bdbdbd",
                                       "flex": 1,
                                       "height": undefined,
                                       "justifyContent": "center",
@@ -1972,8 +1974,14 @@ exports[`Storyshots Receipt Basic 1`] = `
                               }
                               testID="listItemTitle"
                             >
-                              <Text>
-                                Lidl on Sat May 01 2021
+                              <Text
+                                style={
+                                  Object {
+                                    "color": "#242424",
+                                  }
+                                }
+                              >
+                                Lidl for £ 1.83.
                               </Text>
                             </Text>
                             <Text
@@ -1986,7 +1994,15 @@ exports[`Storyshots Receipt Basic 1`] = `
                               }
                               testID="listItemTitle"
                             >
-                              Sat May 01 2021
+                              <Text
+                                style={
+                                  Object {
+                                    "color": "#242424",
+                                  }
+                                }
+                              >
+                                Sat May 01 2021
+                              </Text>
                             </Text>
                           </View>
                           <View
@@ -2125,6 +2141,7 @@ exports[`Storyshots Receipt Basic 1`] = `
                                 <Text
                                   style={
                                     Object {
+                                      "color": "black",
                                       "fontSize": 20,
                                       "paddingBottom": 15,
                                     }
@@ -2511,6 +2528,11 @@ exports[`Storyshots ReceiptItem Basic 1`] = `
                   rejectResponderTermination={true}
                   returnKeyType="next"
                   selectTextOnFocus={true}
+                  selection={
+                    Object {
+                      "start": 0,
+                    }
+                  }
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2600,6 +2622,11 @@ exports[`Storyshots ReceiptItem Basic 1`] = `
                   rejectResponderTermination={true}
                   returnKeyType="next"
                   selectTextOnFocus={true}
+                  selection={
+                    Object {
+                      "start": 0,
+                    }
+                  }
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2689,6 +2716,11 @@ exports[`Storyshots ReceiptItem Basic 1`] = `
                   rejectResponderTermination={true}
                   returnKeyType="next"
                   selectTextOnFocus={true}
+                  selection={
+                    Object {
+                      "start": 0,
+                    }
+                  }
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2778,6 +2810,11 @@ exports[`Storyshots ReceiptItem Basic 1`] = `
                   rejectResponderTermination={true}
                   returnKeyType="done"
                   selectTextOnFocus={true}
+                  selection={
+                    Object {
+                      "start": 0,
+                    }
+                  }
                   style={
                     Object {
                       "alignSelf": "center",
@@ -2971,6 +3008,7 @@ exports[`Storyshots ReceiptItem Basic 1`] = `
             <Text
               style={
                 Object {
+                  "color": "black",
                   "fontSize": 20,
                   "paddingBottom": 15,
                 }
