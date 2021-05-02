@@ -1,6 +1,6 @@
 import React from 'react';
 import { create } from 'react-test-renderer';
-import { Text } from 'react-native-elements';
+import { Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import RootNavigator from './RootNavigator';
 
