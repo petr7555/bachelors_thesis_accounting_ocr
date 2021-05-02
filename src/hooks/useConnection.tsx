@@ -1,22 +1,13 @@
-import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import NetInfo from '@react-native-community/netinfo';
+import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
 
 /**
  * Do not use when navigating to a different component.
  */
 export const useConnection = () => {
-  const [isOffline, setOffline] = useState(false);
+  const netInfo = useNetInfo();
 
-  useEffect(() => {
-    // TODO useNetInfo
-    const removeNetInfoSubscription = NetInfo.addEventListener((state) => {
-      const offline = !(state.isConnected && state.isInternetReachable);
-      setOffline(offline);
-    });
-
-    return () => removeNetInfoSubscription();
-  }, []);
+  const isOffline = !(netInfo.isConnected && netInfo.isInternetReachable);
 
   return [isOffline];
 };
