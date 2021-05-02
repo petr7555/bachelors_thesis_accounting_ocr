@@ -36,6 +36,34 @@ it('returns filename of image without path', () => {
   expect(getFilename(image)).toEqual(imageName);
 });
 
+it('returns filename without extension on Windows', () => {
+  const imageName = 'image';
+  const image = getImageWithPath(`C:\\some\\path\\to\\${imageName}`);
+
+  expect(getFilename(image)).toEqual(imageName);
+});
+
+it('returns filename with extension on Windows', () => {
+  const imageName = 'image.png';
+  const image = getImageWithPath(`C:\\some\\path\\to\\${imageName}`);
+
+  expect(getFilename(image)).toEqual(imageName);
+});
+
+it('returns filename with two extensions on Windows', () => {
+  const imageName = 'image.second.png';
+  const image = getImageWithPath(`C:\\some\\path\\to\\${imageName}`);
+
+  expect(getFilename(image)).toEqual(imageName);
+});
+
+it('returns filename of image with relative path on Windows', () => {
+  const imageName = 'image.png';
+  const image = getImageWithPath(`..\\..\\some\\path\\to\\${imageName}`);
+
+  expect(getFilename(image)).toEqual(imageName);
+});
+
 const getImageWithPath = (path: string): MyImage => ({
   path,
   mime: '',
