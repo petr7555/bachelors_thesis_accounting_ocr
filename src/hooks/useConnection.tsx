@@ -9,7 +9,7 @@ export const useConnection = () => {
 
   const isOffline = !(netInfo.isConnected && netInfo.isInternetReachable);
 
-  return [isOffline];
+  return { isOffline };
 };
 
 export const execIfOnline = (func: () => void) => {

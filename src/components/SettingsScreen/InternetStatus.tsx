@@ -5,7 +5,7 @@ import { Text } from 'react-native-elements';
 import { useConnection } from '../../hooks/useConnection';
 
 const InternetStatus = () => {
-  const [isOffline] = useConnection();
+  const { isOffline } = useConnection();
 
   return (
     <View style={styles.internetStatus}>

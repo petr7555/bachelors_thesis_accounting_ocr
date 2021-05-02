@@ -4,7 +4,7 @@
  */
 
 export const useConnection = () => {
-  return [false];
+  return { isOffline: false };
 };
 
 export const execIfOnline = (func: () => void) => func();
