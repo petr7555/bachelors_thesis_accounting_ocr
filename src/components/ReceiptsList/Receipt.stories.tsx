@@ -5,14 +5,12 @@ import { FirebaseReceipt } from './ReceiptsList';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import MockedNavigator from '../../../tests/mocks/MockedNavigator';
 
-//TODO add real data from Verca
-
 const item: Item = {
   id: '789',
-  name: '🍦 Ice cream',
+  name: '☕️ Espresso Macchiato',
   quantity: 1,
-  price: 10,
-  totalPrice: 10,
+  price: 0.59,
+  totalPrice: 0.59,
 };
 
 // to ensure always the same date for snapshot tests
@@ -23,18 +21,20 @@ const timestampMock = {
 
 const receipt: FirebaseReceipt = {
   id: '456',
-  urlOriginal: '',
-  urlProcessed: '',
+  urlOriginal:
+    'https://storage.googleapis.com/images_bachelorsthesisaccountingocr/lidl_receipt.jpeg',
+  urlProcessed:
+    'https://storage.googleapis.com/images_bachelorsthesisaccountingocr/processed_lidl_receipt.jpeg',
   added: timestampMock,
   transactionDate: timestampMock,
   merchantName: 'Lidl',
-  merchantPhoneNumber: '602 123 456',
-  merchantAddress: 'Brno, Czech Republic',
-  total: 121,
-  subtotal: 100,
-  tax: 21,
+  merchantPhoneNumber: '+353 (0)89 420 0000',
+  merchantAddress: 'ABE-Hutcheon Street',
+  total: 1.83,
+  subtotal: 0,
+  tax: 0,
   tip: 0,
-  currency: 'CZK',
+  currency: '£',
   items: [item],
 };
 
