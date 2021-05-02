@@ -40,7 +40,7 @@ module.exports = ({ config }) => {
     'react-native-windows$': require.resolve('react-native-web'),
   };
 
-  config.resolve.extensions.push('.ts', '.tsx', '.web.js', '.web.tsx');
+  config.resolve.extensions.push('.ts', '.tsx', '.web.ts', '.web.tsx');
 
   return config;
 };
