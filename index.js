@@ -18,7 +18,7 @@ let RootComponent = App;
 // Only include Storybook if we're in dev mode
 if (__DEV__ && SWITCH_STORYBOOK_FROM_REACTOTRON) {
   const { StorybookUIRoot } = require('./storybook-rn');
-  const Reactotron = require('./src/services/reactotron');
+  const Reactotron = require('./src/services/Reactotron');
   const reactotron = new Reactotron.Reactotron();
   reactotron.setup();
   RootComponent = console.tron.storybookSwitcher(StorybookUIRoot)(App);
