@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   DEFAULT_REACTOTRON_CONFIG,
   ReactotronConfig,
-} from './reactotron-config';
+} from './reactotronConfig';
 
 // Teach TypeScript about the bad things we want to do.
 
