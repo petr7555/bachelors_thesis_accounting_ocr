@@ -75,6 +75,7 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
 - Refresh the application in the metro bundler. The components should now be visible in the browser in the sidebar.
 - The storybook running in the browser is used to *navigate* between components. The components themselves are shown on
   a mobile device / emulator.
+- When adding a new story, you must import it in `~/storybook-rn/storybook-registry.ts`.
 - This video shows how Storybook running on an emulator looks:
 
   <img src="images/doc/storybook_rn.gif" alt="Storybook on mobile" width="200"/>
@@ -88,6 +89,7 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
   repository to be able to deploy the Storybook to Vercel locally. This directory is ignored in version control as it
   contains sensitive information.
 - Keep in mind, that in Storybook for web `Platform.OS === 'web'`, so both `isAndroid` and `isWindows` are `false`.
+- Storybook for Web finds all stories that match this pattern `../src/**/*.stories.tsx`.
 - This image shows how Storybook running on web looks:
 
   <img src="images/doc/storybook_web.png" alt="Storybook on web" width="500"/>

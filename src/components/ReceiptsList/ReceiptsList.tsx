@@ -13,7 +13,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Image, Input, Text } from 'react-native-elements';
+import { Input, Text } from 'react-native-elements';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -23,9 +23,9 @@ import { FirebaseReceiptData } from '../../services/FormRecognizerClient/convert
 import getAllReceiptsForUser from '../../api/getAllReceiptsForUser';
 import Receipt from './Receipt';
 import Icon from '../ThemedIcon/ThemedIonIcon';
-import ThemedIonIcon from '../ThemedIcon/ThemedIonIcon';
 import { useNavigation } from '@react-navigation/native';
 import Colors from '../../global/styles/colors';
+import CartImage from './CartImage';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
@@ -136,10 +136,7 @@ const ReceiptsList = () => {
         />
       ) : (
         <View style={styles.noReceiptsContainer}>
-          <Image
-            style={styles.emptyCartImg}
-            source={require('../../../images/cart.png')}
-          />
+          <CartImage />
           <Text style={styles.noReceiptsText}>
             You do not have any receipts yet.
           </Text>
@@ -153,10 +150,6 @@ const ReceiptsList = () => {
 };
 
 const styles = StyleSheet.create({
-  boxIcon: {
-    fontSize: 55,
-    marginBottom: 5,
-  },
   cancelIcon: {
     fontSize: 25,
   },
@@ -165,11 +158,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  emptyCartImg: {
-    height: 100,
-    resizeMode: 'contain',
-    width: 80,
   },
   noReceiptsContainer: {
     alignItems: 'center',
