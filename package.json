@@ -25,7 +25,7 @@
     "storybook:web": "node_modules/@storybook/react/bin/index.js -p 6006 -c .storybook",
     "storybook:rn": "npm run adb && node_modules/@storybook/react-native-server/bin/index.js -p 9001 -c storybook-rn",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
-    "loki:update:rn": "loki update --port: 9001 --configurationFilter android",
+    "loki:update:rn": "loki update --port 9001 --configurationFilter android",
     "loki:test:rn": "loki test --port 9001 --configurationFilter android",
     "loki:update:web": "loki update --port 6006 --configurationFilter chrome",
     "loki:test:web": "loki test --port 6006 --configurationFilter chrome",
