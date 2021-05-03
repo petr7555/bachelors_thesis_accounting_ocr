@@ -167,16 +167,14 @@ android {
     }
     signingConfigs {
         debug {
-            logger.warn('WARN: I am inside signingConfigs debug')
             storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
         release {
-            logger.warn('WARN: signingConfigs release.')
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE') && file(MYAPP_UPLOAD_STORE_FILE).exists()) {
-                def pass = getPassword("Petr Janikk", "android_keystore2")
+                def pass = getPassword("Petr Janik", "android_keystore")
                 storeFile file(MYAPP_UPLOAD_STORE_FILE)
                 storePassword pass
                 keyAlias MYAPP_UPLOAD_KEY_ALIAS
@@ -186,14 +184,12 @@ android {
     }
     buildTypes {
         debug {
-            logger.warn('WARN: I am inside debug')
             signingConfig signingConfigs.debug
         }
         release {
-            logger.warn('WARN: I am inside release')
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE') && file(MYAPP_UPLOAD_STORE_FILE).exists()) {
                 // we are on local
-                logger.warn('WARN: {} found, probably running on local.', MYAPP_UPLOAD_STORE_FILE)
+                logger.warn('INFO: {} found, probably running on local.', MYAPP_UPLOAD_STORE_FILE)
                 signingConfig signingConfigs.release
             } else {
                 // we are in CI
