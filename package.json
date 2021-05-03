@@ -13,7 +13,7 @@
     "e2e:build": "detox build -c android.emu.debug",
     "e2e:test": "detox test -c android.emu.debug",
     "e2e:build:ci": "detox build -c android.emu.release",
-    "e2e:test:ci": "detox test -c android.emu.release --cleanup",
+    "e2e:test:ci": "detox test -c android.emu.release --cleanup --loglevel verbose",
     "prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx,json}'",
     "prettier:format": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
