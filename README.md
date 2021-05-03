@@ -176,8 +176,8 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
     - `reg-suit sync-expected` uses
       the [keygen plugin](https://github.com/reg-viz/reg-suit/blob/master/packages/reg-keygen-git-hash-plugin/README.md)
       to detect the previous commit when snapshots have been published. It downloads screenshots from Google Cloud for
-      this commit. The screenshots are stored in Google Cloud inside `reg-publish-bucket-...` in folder whose name is
-      the detected commit. From there they are downloaded and stored inside `.reg/expected` locally.
+      this commit. The screenshots are stored in Google Cloud Storage inside `reg-publish-bucket-...` in folder whose
+      name is the detected commit. From there they are downloaded and stored inside `.reg/expected` locally.
     - `reg-suit compare` copies new images from `__screenshots__` to `.reg/actual`, compares them with images
       in `.reg/expected` and stores the difference in `.reg/diff`.
     - `reg-suit publish` uses the last commit hash to create a new folder in Google Cloud and uploads new images there.
