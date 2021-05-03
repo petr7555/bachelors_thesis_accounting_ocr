@@ -86,8 +86,9 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
   This is not part of GitHub Actions but [Vercel's](https://vercel.com/petr7555/bachelors-thesis-accounting-ocr) own
   repository hook.
 - A directory `.vercel` containing a `project.json` with *orgId* and *projectId* needs to be present in the root of the
-  repository to be able to deploy the Storybook to Vercel locally. This directory is ignored in version control as it
-  contains sensitive information.
+  repository to be able to deploy the Storybook to Vercel locally, which is done by running `npm run deploy-vercel`
+  (currently does not work, because the file number limit is reached). This directory is ignored in version control as
+  it contains sensitive information.
 - Keep in mind, that in Storybook for web `Platform.OS === 'web'`, so both `isAndroid` and `isWindows` are `false`.
 - Storybook for Web finds all stories that match this pattern `../src/**/*.stories.tsx`.
 - This image shows how Storybook running on web looks:
