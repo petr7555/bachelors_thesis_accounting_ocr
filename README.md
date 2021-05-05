@@ -260,6 +260,7 @@ return <Component style={{color: colors.secondary}}/>;
 ## Clean emulator data
 
 - `emulator -list-avds`
+- the emulator to be cleaned must not be running
 - `emulator -avd Pixel_3a_API_29 -wipe-data`
 
 ## Build signed release AAB package
