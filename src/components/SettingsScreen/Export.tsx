@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useCallback } from 'react';
-import { StyleSheet } from 'react-native';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
 import getAllReceiptsForUser from '../../api/getAllReceiptsForUser';
@@ -14,6 +13,7 @@ import ToastIcon from '../ToastIcon/ToastIcon';
 import { requestStorageWritePermission } from '../../global/permissions';
 import { RESULTS } from 'react-native-permissions';
 import moment from 'moment';
+import { Alert } from 'react-native';
 
 const Export = (props: ButtonProps | null) => {
   const [user] = useAuthState(authInstance);
@@ -40,19 +40,61 @@ const Export = (props: ButtonProps | null) => {
   );
 
   const exportReceipts = async () => {
-    const path = `${
-      RNFS.DownloadDirectoryPath
-    }/receipts_export_${moment().format('YYYY-MM-DD-hh-mm-ss')}.json`;
+    try {
+      const storagePermissionResult = await requestStorageWritePermission();
+      if (storagePermissionResult === RESULTS.GRANTED) {
+        const directory = `${
+          RNFS.DownloadDirectoryPath
+        }/receipts_export_${moment().format('YYYY-MM-DD-hh-mm-ss')}`;
 
-    const storagePermissionResult = await requestStorageWritePermission();
-    if (storagePermissionResult === RESULTS.GRANTED) {
-      RNFS.writeFile(path, JSON.stringify(receipts, null, 2), 'utf8')
-        .then(() => {
-          showExportedToast(path);
-        })
-        .catch((e) => {
-          console.error(e);
-        });
+        await RNFS.mkdir(directory);
+
+        const jsonDataPromise = RNFS.mkdir(directory).then(() =>
+          RNFS.writeFile(
+            `${directory}/data.json`,
+            JSON.stringify(receipts, null, 2),
+            'utf8',
+          ),
+        );
+
+        const urlsOriginal = receipts.map((receipt) => receipt.urlOriginal);
+        const urlsProcessed = receipts.map((receipt) => receipt.urlProcessed);
+
+        await RNFS.mkdir(directory);
+
+        const originalImagesDirectory = `${directory}/original`;
+
+        const urlsOriginalPromises = RNFS.mkdir(originalImagesDirectory).then(
+          () =>
+            urlsOriginal.map((url, index) =>
+              RNFS.downloadFile({
+                fromUrl: url,
+                toFile: `${originalImagesDirectory}/${index}.jpg`,
+              }),
+            ),
+        );
+
+        const processedImagesDirectory = `${directory}/processed`;
+
+        const urlsProcessedPromises = RNFS.mkdir(processedImagesDirectory).then(
+          () =>
+            urlsProcessed.map((url, index) =>
+              RNFS.downloadFile({
+                fromUrl: url,
+                toFile: `${processedImagesDirectory}/${index}.jpg`,
+              }),
+            ),
+        );
+
+        await jsonDataPromise;
+        await urlsOriginalPromises;
+        await urlsProcessedPromises;
+
+        showExportedToast(directory);
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Receipts export failed');
     }
   };
 
