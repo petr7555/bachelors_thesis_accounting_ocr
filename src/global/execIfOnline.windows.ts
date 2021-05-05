@@ -3,8 +3,6 @@
  * Will be used only on Windows.
  */
 
-const useConnection = () => {
-  return { isOffline: false };
-};
+const execIfOnline = (func: () => void) => func();
 
-export default useConnection;
+export default execIfOnline;
