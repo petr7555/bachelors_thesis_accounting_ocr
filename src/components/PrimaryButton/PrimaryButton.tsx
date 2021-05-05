@@ -1,10 +1,9 @@
 import React from 'react';
-import { Button } from 'react-native-elements';
+import { Button, ButtonProps } from 'react-native-elements';
 import Colors from '../../global/styles/colors';
 import { StyleSheet, useWindowDimensions } from 'react-native';
-import { ButtonProps } from 'react-native-elements/dist/buttons/Button';
 
-const PrimaryButton = (props: ButtonProps | null) => {
+const PrimaryButton = ({ containerStyle, ...props }: ButtonProps) => {
   const { width } = useWindowDimensions();
 
   const buttonStyle = StyleSheet.flatten([
@@ -12,9 +11,14 @@ const PrimaryButton = (props: ButtonProps | null) => {
     { width: width - 60 },
   ]);
 
+  const mergedContainerStyles = StyleSheet.flatten([
+    styles.container,
+    containerStyle,
+  ]);
+
   return (
     <Button
-      containerStyle={styles.container}
+      containerStyle={mergedContainerStyles}
       buttonStyle={buttonStyle}
       titleStyle={styles.title}
       {...props}

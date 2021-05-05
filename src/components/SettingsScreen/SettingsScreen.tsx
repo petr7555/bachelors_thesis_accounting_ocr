@@ -2,13 +2,13 @@ import { StyleSheet, View } from 'react-native';
 import * as React from 'react';
 import SignOutButton from '../SignOutButton/SignOutButton';
 import InternetStatus from './InternetStatus';
-import Export from './Export';
+import ExportButton from './ExportButton';
 
 const SettingsScreen = () => {
   return (
     <View style={styles.container}>
       <InternetStatus />
-      <Export containerStyle={styles.exportButton} />
+      <ExportButton containerStyle={styles.exportButton} />
       <SignOutButton />
     </View>
   );

@@ -5,7 +5,6 @@ import { authInstance } from '../../global/firebase';
 import getAllReceiptsForUser from '../../api/getAllReceiptsForUser';
 import PrimaryButton from '../PrimaryButton/PrimaryButton';
 import RNFS from 'react-native-fs';
-import { ButtonProps } from 'react-native-elements/dist/buttons/Button';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { FirebaseReceipt } from '../ReceiptsList/ReceiptsList';
 import { useToast } from 'react-native-fast-toast';
@@ -14,8 +13,9 @@ import { requestStorageWritePermission } from '../../global/permissions';
 import { RESULTS } from 'react-native-permissions';
 import moment from 'moment';
 import { Alert } from 'react-native';
+import { ButtonProps } from 'react-native-elements';
 
-const Export = (props: ButtonProps | null) => {
+const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
   const [user] = useAuthState(authInstance);
   const [receipts = []] = useCollectionData<FirebaseReceipt>(
     getAllReceiptsForUser(user?.uid),
@@ -102,9 +102,10 @@ const Export = (props: ButtonProps | null) => {
     <PrimaryButton
       onPress={exportReceipts}
       title="Export receipts"
+      containerStyle={containerStyle}
       {...props}
     />
   );
 };
 
-export default Export;
+export default ExportButton;
