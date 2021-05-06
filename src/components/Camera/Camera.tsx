@@ -128,14 +128,11 @@ const Camera = ({ setModalVisible, setProcessing }: Props) => {
     if (cameraPermissionResult === RESULTS.GRANTED) {
       const storagePermissionResult = await requestStoragePermission();
       if (storagePermissionResult === RESULTS.GRANTED) {
-        try {
-          return (await ImagePicker.openCamera(pickerOptions)) as MyImage;
-        } catch (error) {
-          console.error(error);
+        return ImagePicker.openCamera(pickerOptions).catch((error) => {
           if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
             Alert.alert("Couldn't take a new image.");
           }
-        }
+        }) as Promise<MyImage>;
       }
     }
   };
@@ -143,14 +140,11 @@ const Camera = ({ setModalVisible, setProcessing }: Props) => {
   const selectImageFromGallery = async (): Promise<MyImage | undefined> => {
     const storagePermissionResult = await requestStoragePermission();
     if (storagePermissionResult === RESULTS.GRANTED) {
-      try {
-        return (await ImagePicker.openPicker(pickerOptions)) as MyImage;
-      } catch (error) {
-        console.error(error);
+      return ImagePicker.openPicker(pickerOptions).catch((error) => {
         if ((error.code as PickerErrorCode) !== 'E_PICKER_CANCELLED') {
           Alert.alert("Couldn't select an image from gallery.");
         }
-      }
+      }) as Promise<MyImage>;
     }
   };
 
