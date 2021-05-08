@@ -49,10 +49,22 @@ const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
 
         await RNFS.mkdir(directory);
 
-        const jsonDataPromise = RNFS.mkdir(directory).then(() =>
+        const allDataPromise = RNFS.mkdir(directory).then(() =>
           RNFS.writeFile(
             `${directory}/data.json`,
             JSON.stringify(receipts, null, 2),
+            'utf8',
+          ),
+        );
+
+        const items = receipts.flatMap((receipt) =>
+          receipt.items.map((item) => item.name),
+        );
+
+        const itemsPromise = RNFS.mkdir(directory).then(() =>
+          RNFS.writeFile(
+            `${directory}/items.json`,
+            JSON.stringify(items, null, 2),
             'utf8',
           ),
         );
@@ -86,7 +98,8 @@ const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
             ),
         );
 
-        await jsonDataPromise;
+        await allDataPromise;
+        await itemsPromise;
         await urlsOriginalPromises;
         await urlsProcessedPromises;
 
