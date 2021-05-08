@@ -10,7 +10,7 @@ export const FIREBASE_CREDENTIALS = {
 };
 
 export const FORM_RECOGNIZER_ENDPOINT =
-  'westeurope.api.cognitive.microsoft.com';
+  'https://westeurope.api.cognitive.microsoft.com/formrecognizer/v2.0/prebuilt/receipt/analyze';
 export const FORM_RECOGNIZER_API_KEY = 'f100cd7fa2ed413697fb5f2f0a87524f';
 
 export const PRIVACY_POLICY_URL =

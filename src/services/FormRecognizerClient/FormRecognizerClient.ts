@@ -52,8 +52,7 @@ export class FormRecognizerClient {
     try {
       if (image.data) {
         const binaryImageData = base64ToArrayBuffer.decode(image.data);
-        const requestUrl = `https://${this.endpoint}/formrecognizer/v2.0/prebuilt/receipt/analyze`;
-        const response = await axios.post(requestUrl, binaryImageData, {
+        const response = await axios.post(this.endpoint, binaryImageData, {
           headers: {
             'Content-Type': image.mime,
             'Ocp-Apim-Subscription-Key': this.apiKey,
