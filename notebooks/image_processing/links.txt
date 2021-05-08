@@ -1,17 +1,26 @@
-https://www.fim.uni-passau.de/fileadmin/dokumente/fakultaeten/fim/lehrstuhl/sauer/geyer/BA_MA_Arbeiten/BA-ZiegausMarco-201607.pdf
-https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_thresholding/py_thresholding.html#thresholding
+Optical Character Recognition on
+supermarket receipts, thesis: https://www.fim.uni-passau.de/fileadmin/dokumente/fakultaeten/fim/lehrstuhl/sauer/geyer/BA_MA_Arbeiten/BA-ZiegausMarco-201607.pdf
 
+OpenCV thresholding tutorial: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_thresholding/py_thresholding.html#thresholding
+
+Sudoku solver series:
 http://opencvpython.blogspot.com/2012/06/sudoku-solver-part-1.html?m=1
 http://opencvpython.blogspot.com/2012/06/sudoku-solver-part-2.html?m=1
 http://opencvpython.blogspot.com/2012/06/sudoku-solver-part-3.html?m=1
 
+Sudoku solver series:
 https://becominghuman.ai/image-processing-sudokuai-opencv-45380715a629
 https://becominghuman.ai/sudoku-and-cell-extraction-sudokuai-opencv-38b603066066
 https://becominghuman.ai/part-3-solving-the-sudoku-ai-solver-13f64a090922
 
+Sudoku solver series - the image processing is mostly based on this post:
 https://medium.com/@neshpatel/solving-sudoku-part-ii-9a7019d196a2
 
+Detect largest rectangle/square:
 https://stackoverflow.com/questions/23828078/neither-findcontour-for-largest-rectangle-nor-corner-detection-by-hough-transfor
+
+OpenCV Find Largest Square or Rectangle:
 https://stackoverflow.com/questions/17512234/android-opencv-find-largest-square-or-rectangle
 
+OpenCV Object Detection - Center Point:
 https://stackoverflow.com/questions/279410/opencv-object-detection-center-point
