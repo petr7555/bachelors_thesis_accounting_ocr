@@ -17,7 +17,7 @@ import Colors from './src/global/styles/colors';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from './src/global/firebase';
 import { ThemeProvider } from 'react-native-elements';
-import createUser from './src/api/createUser';
+import createUser from './src/api/firebase/createUser';
 import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from 'react-native-fast-toast';
 import { isAndroid, isWindows } from './src/global/utils/platform';

@@ -20,7 +20,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
 import { FirebaseReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
-import getAllReceiptsForUser from '../../api/getAllReceiptsForUser';
+import getAllReceiptsForUser from '../../api/firebase/getAllReceiptsForUser';
 import Receipt from './Receipt';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import { useNavigation } from '@react-navigation/native';

@@ -12,15 +12,15 @@ import { getReceiptDataFromImage } from '../../services/FormRecognizerClient/get
 import { useNavigation, useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootParamList } from '../RootNavigator/RootNavigator';
-import addReceiptToUsersReceipts from '../../api/addReceiptToUsersReceipts';
+import addReceiptToUsersReceipts from '../../api/firebase/addReceiptToUsersReceipts';
 import { MixedTheme } from '../../../App';
 import Button from '../PrimaryButton/PrimaryButton';
-import addItemCategories from '../../api/addItemCategories';
+import addItemCategories from '../../api/python-api/addItemCategories';
 import {
   uploadBase64ToFirebaseStorage,
   uploadImageToFirebaseStorage,
-} from '../../api/uploadImageToFirebaseStorage';
-import transformImage from '../../api/transformImage';
+} from '../../api/firebase/uploadImageToFirebaseStorage';
+import transformImage from '../../api/python-api/transformImage';
 import rgbToHex from '../../global/utils/rgbToHex';
 import getFilename from '../../global/utils/getFilename';
 import { isWindows } from '../../global/utils/platform';

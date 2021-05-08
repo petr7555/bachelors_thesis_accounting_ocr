@@ -1,5 +1,5 @@
-import { ReceiptData } from '../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
-import { PYTHON_API } from '../global/constants';
+import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
+import { PYTHON_API } from '../../global/constants';
 import axios from 'axios';
 
 const addItemCategories = async (receiptData: ReceiptData) => {

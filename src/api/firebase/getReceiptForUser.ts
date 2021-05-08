@@ -1,5 +1,5 @@
-import { firestoreInstance } from '../global/firebase';
-import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../global/constants';
+import { firestoreInstance } from '../../global/firebase';
+import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../../global/constants';
 
 const getReceiptForUser = (userId: string, receiptId: string) =>
   firestoreInstance

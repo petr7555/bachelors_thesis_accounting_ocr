@@ -1,6 +1,6 @@
-import { firestoreInstance, storageInstance } from '../global/firebase';
-import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../global/constants';
-import { FirebaseReceipt } from '../components/ReceiptsList/ReceiptsList';
+import { firestoreInstance, storageInstance } from '../../global/firebase';
+import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../../global/constants';
+import { FirebaseReceipt } from '../../components/ReceiptsList/ReceiptsList';
 
 const deleteReceipt = async (userId: string, receipt: FirebaseReceipt) => {
   try {

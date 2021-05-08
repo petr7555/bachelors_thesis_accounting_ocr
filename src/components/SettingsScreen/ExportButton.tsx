@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useCallback } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
-import getAllReceiptsForUser from '../../api/getAllReceiptsForUser';
+import getAllReceiptsForUser from '../../api/firebase/getAllReceiptsForUser';
 import PrimaryButton from '../PrimaryButton/PrimaryButton';
 import RNFS from 'react-native-fs';
 import { useCollectionData } from 'react-firebase-hooks/firestore';

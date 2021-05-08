@@ -4,7 +4,7 @@ import ConfirmationModal from '../ConfirmDelete/ConfirmationModal';
 import React, { useState } from 'react';
 import { FirebaseReceipt, HomeScreenNavigationProp } from './ReceiptsList';
 import { useNavigation } from '@react-navigation/native';
-import deleteReceipt from '../../api/deleteReceipt';
+import deleteReceipt from '../../api/firebase/deleteReceipt';
 import { StyleSheet } from 'react-native';
 import Colors from '../../global/styles/colors';
 import { useToast } from 'react-native-fast-toast';

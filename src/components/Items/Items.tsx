@@ -8,10 +8,10 @@ import {
   FirebaseReceipt,
   HomeScreenNavigationProp,
 } from '../ReceiptsList/ReceiptsList';
-import getReceiptForUser from '../../api/getReceiptForUser';
+import getReceiptForUser from '../../api/firebase/getReceiptForUser';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
-import updateItems from '../../api/updateItems';
+import updateItems from '../../api/firebase/updateItems';
 import ReceiptItem, { ItemFormData } from './ReceiptItem';
 import { v4 as uuidv4 } from 'uuid';
 import { MixedTheme } from '../../../App';

@@ -33,8 +33,8 @@ import {
 import { useAuthState } from 'react-firebase-hooks/auth';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Colors from '../../global/styles/colors';
-import updateReceipt from '../../api/updateReceipt';
-import getReceiptForUser from '../../api/getReceiptForUser';
+import updateReceipt from '../../api/firebase/updateReceipt';
+import getReceiptForUser from '../../api/firebase/getReceiptForUser';
 import { RegisterOptions } from 'react-hook-form/dist/types/validator';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import ImageThumbnail from './ImageThumbnail';

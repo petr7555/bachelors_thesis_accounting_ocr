@@ -1,9 +1,9 @@
-import getFilename from '../global/utils/getFilename';
-import { authInstance } from '../global/firebase';
-import { RECEIPTS_STORAGE, USERS_STORAGE } from '../global/constants';
-import { MyImage } from '../components/Camera/Camera';
+import getFilename from '../../global/utils/getFilename';
+import { authInstance } from '../../global/firebase';
+import { RECEIPTS_STORAGE, USERS_STORAGE } from '../../global/constants';
+import { MyImage } from '../../components/Camera/Camera';
 import { Alert } from 'react-native';
-import { storageInstance } from '../global/firebase';
+import { storageInstance } from '../../global/firebase';
 import base64ToArrayBuffer from 'base64-arraybuffer';
 
 export const uploadImageToFirebaseStorage = async (
