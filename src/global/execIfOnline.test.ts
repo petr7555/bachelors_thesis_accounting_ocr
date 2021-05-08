@@ -1,13 +1,15 @@
 import NetInfo from '@react-native-community/netinfo';
 import execIfOnline from './execIfOnline';
 
-it('executes if connected and internet is reachable', async () => {
+const mockNetInfo = (value: any) => {
   jest.mock('@react-native-community/netinfo');
 
   // @ts-ignore
-  NetInfo.fetch.mockReturnValue(
-    Promise.resolve({ isConnected: true, isInternetReachable: true }),
-  );
+  NetInfo.fetch.mockReturnValue(Promise.resolve(value));
+};
+
+it('executes if connected and internet is reachable', async () => {
+  mockNetInfo({ isConnected: true, isInternetReachable: true });
 
   const fn = jest.fn();
   await execIfOnline(fn);
@@ -16,12 +18,7 @@ it('executes if connected and internet is reachable', async () => {
 });
 
 it('does not execute if not connected', async () => {
-  jest.mock('@react-native-community/netinfo');
-
-  // @ts-ignore
-  NetInfo.fetch.mockReturnValue(
-    Promise.resolve({ isConnected: false, isInternetReachable: true }),
-  );
+  mockNetInfo({ isConnected: false, isInternetReachable: true });
 
   const fn = jest.fn();
   await execIfOnline(fn);
@@ -30,12 +27,7 @@ it('does not execute if not connected', async () => {
 });
 
 it('does not execute if internet is not reachable', async () => {
-  jest.mock('@react-native-community/netinfo');
-
-  // @ts-ignore
-  NetInfo.fetch.mockReturnValue(
-    Promise.resolve({ isConnected: true, isInternetReachable: false }),
-  );
+  mockNetInfo({ isConnected: true, isInternetReachable: false });
 
   const fn = jest.fn();
   await execIfOnline(fn);
@@ -44,12 +36,7 @@ it('does not execute if internet is not reachable', async () => {
 });
 
 it('does not execute if not connected and internet is not reachable', async () => {
-  jest.mock('@react-native-community/netinfo');
-
-  // @ts-ignore
-  NetInfo.fetch.mockReturnValue(
-    Promise.resolve({ isConnected: false, isInternetReachable: false }),
-  );
+  mockNetInfo({ isConnected: false, isInternetReachable: false });
 
   const fn = jest.fn();
   await execIfOnline(fn);

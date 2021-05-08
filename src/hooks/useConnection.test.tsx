@@ -2,11 +2,15 @@ import { renderHook } from '@testing-library/react-hooks';
 import useConnection from './useConnection';
 import { useNetInfo } from '@react-native-community/netinfo';
 
-it('should return online if connected and internet is reachable', async () => {
+const mockNetInfo = (value: any) => {
   jest.mock('@react-native-community/netinfo');
 
   // @ts-ignore
-  useNetInfo.mockReturnValue({ isConnected: true, isInternetReachable: true });
+  useNetInfo.mockReturnValue(value);
+};
+
+it('should return online if connected and internet is reachable', async () => {
+  mockNetInfo({ isConnected: true, isInternetReachable: true });
 
   const { result } = renderHook(() => useConnection());
 
@@ -14,10 +18,7 @@ it('should return online if connected and internet is reachable', async () => {
 });
 
 it('should return offline if not connected', async () => {
-  jest.mock('@react-native-community/netinfo');
-
-  // @ts-ignore
-  useNetInfo.mockReturnValue({ isConnected: false, isInternetReachable: true });
+  mockNetInfo({ isConnected: false, isInternetReachable: true });
 
   const { result } = renderHook(() => useConnection());
 
@@ -25,10 +26,7 @@ it('should return offline if not connected', async () => {
 });
 
 it('should return offline if internet is not reachable', async () => {
-  jest.mock('@react-native-community/netinfo');
-
-  // @ts-ignore
-  useNetInfo.mockReturnValue({ isConnected: true, isInternetReachable: false });
+  mockNetInfo({ isConnected: true, isInternetReachable: false });
 
   const { result } = renderHook(() => useConnection());
 
@@ -36,10 +34,7 @@ it('should return offline if internet is not reachable', async () => {
 });
 
 it('should return offline if not connected and internet is not reachable', async () => {
-  jest.mock('@react-native-community/netinfo');
-
-  // @ts-ignore
-  useNetInfo.mockReturnValue({
+  mockNetInfo({
     isConnected: false,
     isInternetReachable: false,
   });
