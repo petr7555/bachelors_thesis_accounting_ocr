@@ -1,5 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots CartImage Basic 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    fadeDuration={0}
+    onLoadEnd={[Function]}
+    source={
+      Object {
+        "testUri": "../../../images/cart_black.png",
+      }
+    }
+    style={
+      Object {
+        "height": 100,
+        "resizeMode": "contain",
+        "width": 80,
+      }
+    }
+  />
+</View>
+`;
+
 exports[`Storyshots ConfirmDelete Basic 1`] = `
 <View
   style={
@@ -42,6 +70,7 @@ exports[`Storyshots ConfirmDelete Basic 1`] = `
             "borderRadius": 3,
           },
           Object {
+            "borderRadius": 25,
             "marginVertical": 5,
           },
           false,
@@ -138,6 +167,7 @@ exports[`Storyshots ConfirmDelete Basic 1`] = `
             "borderRadius": 3,
           },
           Object {
+            "borderRadius": 25,
             "marginVertical": 5,
           },
           false,
@@ -353,6 +383,7 @@ exports[`Storyshots ConfirmationModal Basic 1`] = `
                 "borderRadius": 3,
               },
               Object {
+                "borderRadius": 25,
                 "marginVertical": 5,
               },
               false,
@@ -449,6 +480,7 @@ exports[`Storyshots ConfirmationModal Basic 1`] = `
                 "borderRadius": 3,
               },
               Object {
+                "borderRadius": 25,
                 "marginVertical": 5,
               },
               false,
@@ -2160,6 +2192,7 @@ exports[`Storyshots Receipt Basic 1`] = `
                                         "borderRadius": 3,
                                       },
                                       Object {
+                                        "borderRadius": 25,
                                         "marginVertical": 5,
                                       },
                                       false,
@@ -2256,6 +2289,7 @@ exports[`Storyshots Receipt Basic 1`] = `
                                         "borderRadius": 3,
                                       },
                                       Object {
+                                        "borderRadius": 25,
                                         "marginVertical": 5,
                                       },
                                       false,
@@ -3027,6 +3061,7 @@ exports[`Storyshots ReceiptItem Basic 1`] = `
                     "borderRadius": 3,
                   },
                   Object {
+                    "borderRadius": 25,
                     "marginVertical": 5,
                   },
                   false,
@@ -3123,6 +3158,7 @@ exports[`Storyshots ReceiptItem Basic 1`] = `
                     "borderRadius": 3,
                   },
                   Object {
+                    "borderRadius": 25,
                     "marginVertical": 5,
                   },
                   false,
