@@ -6,6 +6,9 @@
 // Includes from @react-native-async-storage/async-storage
 #include <winrt/ReactNativeAsyncStorage.h>
 
+// Includes from react-native-fs
+#include <winrt/RNFS.h>
+
 // Includes from react-native-permissions
 #include <winrt/RNPermissions.h>
 
@@ -16,6 +19,8 @@ void RegisterAutolinkedNativeModulePackages(winrt::Windows::Foundation::Collecti
 { 
     // IReactPackageProviders from @react-native-async-storage/async-storage
     packageProviders.Append(winrt::ReactNativeAsyncStorage::ReactPackageProvider());
+    // IReactPackageProviders from react-native-fs
+    packageProviders.Append(winrt::RNFS::ReactPackageProvider());
     // IReactPackageProviders from react-native-permissions
     packageProviders.Append(winrt::RNPermissions::ReactPackageProvider());
 }

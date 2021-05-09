@@ -6,6 +6,10 @@
     <ProjectReference Include="$(ProjectDir)..\..\node_modules\@react-native-async-storage\async-storage\windows\ReactNativeAsyncStorage\ReactNativeAsyncStorage.vcxproj">
       <Project>{4855D892-E16C-404D-8286-0089E0F7F9C4}</Project>
     </ProjectReference>
+    <!-- Projects from react-native-fs -->
+    <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-fs\windows\RNFS\RNFS.vcxproj">
+      <Project>{4f89a807-a843-4df0-8d74-a04a3f48fef9}</Project>
+    </ProjectReference>
     <!-- Projects from react-native-permissions -->
     <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-permissions\windows\RNPermissions\RNPermissions.vcxproj">
       <Project>{99677b9d-a27b-4239-930e-c36c8d339c54}</Project>
