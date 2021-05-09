@@ -13,7 +13,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Input, Text } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authInstance } from '../../global/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
