@@ -14,6 +14,8 @@ import { RESULTS } from 'react-native-permissions';
 import moment from 'moment';
 import { Alert } from 'react-native';
 import { ButtonProps } from 'react-native-elements';
+import combine from '../../global/utils/combine';
+import { isWindows } from '../../global/utils/platform';
 
 const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
   const [user] = useAuthState(authInstance);
@@ -32,7 +34,8 @@ const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
         {
           type: 'success',
           successIcon: <ToastIcon name="checkmark" />,
-          duration: 8000,
+          // longer timeout on Windows because the path is long
+          duration: isWindows ? 25000 : 8000,
         },
       );
     },
@@ -43,59 +46,53 @@ const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
     try {
       const storagePermissionResult = await requestStorageWritePermission();
       if (storagePermissionResult === RESULTS.GRANTED) {
-        const directory = `${
-          RNFS.DownloadDirectoryPath
-        }/receipts_export_${moment().format('YYYY-MM-DD-hh-mm-ss')}`;
+        // on Windows, permissions do not allow to access Download directory
+        const mainDir = isWindows
+          ? RNFS.DocumentDirectoryPath
+          : RNFS.DownloadDirectoryPath;
+        const directory = combine(
+          mainDir,
+          `receipts_export_${moment().format('YYYY-MM-DD-hh-mm-ss')}`,
+        );
 
         await RNFS.mkdir(directory);
 
-        const allDataPromise = RNFS.mkdir(directory).then(() =>
-          RNFS.writeFile(
-            `${directory}/data.json`,
-            JSON.stringify(receipts, null, 2),
-            'utf8',
-          ),
+        const allDataPromise = RNFS.writeFile(
+          combine(directory, 'data.json'),
+          JSON.stringify(receipts, null, 2),
+          'utf8',
         );
 
         const items = receipts.flatMap((receipt) =>
           receipt.items.map((item) => item.name),
         );
-
-        const itemsPromise = RNFS.mkdir(directory).then(() =>
-          RNFS.writeFile(
-            `${directory}/items.json`,
-            JSON.stringify(items, null, 2),
-            'utf8',
-          ),
+        const itemsPromise = RNFS.writeFile(
+          combine(directory, 'items.json'),
+          JSON.stringify(items, null, 2),
+          'utf8',
         );
+
+        const downloadImages = async (urls: string[], outputDir: string) => {
+          return RNFS.mkdir(outputDir).then(() =>
+            urls.map((url, index) =>
+              RNFS.downloadFile({
+                fromUrl: url,
+                toFile: combine(outputDir, `${index}.jpg`),
+              }),
+            ),
+          );
+        };
 
         const urlsOriginal = receipts.map((receipt) => receipt.urlOriginal);
-        const urlsProcessed = receipts.map((receipt) => receipt.urlProcessed);
-
-        await RNFS.mkdir(directory);
-
-        const originalImagesDirectory = `${directory}/original`;
-
-        const urlsOriginalPromises = RNFS.mkdir(originalImagesDirectory).then(
-          () =>
-            urlsOriginal.map((url, index) =>
-              RNFS.downloadFile({
-                fromUrl: url,
-                toFile: `${originalImagesDirectory}/${index}.jpg`,
-              }),
-            ),
+        const urlsOriginalPromises = downloadImages(
+          urlsOriginal,
+          combine(directory, 'original'),
         );
 
-        const processedImagesDirectory = `${directory}/processed`;
-
-        const urlsProcessedPromises = RNFS.mkdir(processedImagesDirectory).then(
-          () =>
-            urlsProcessed.map((url, index) =>
-              RNFS.downloadFile({
-                fromUrl: url,
-                toFile: `${processedImagesDirectory}/${index}.jpg`,
-              }),
-            ),
+        const urlsProcessed = receipts.map((receipt) => receipt.urlProcessed);
+        const urlsProcessedPromises = downloadImages(
+          urlsProcessed,
+          combine(directory, 'processed'),
         );
 
         await allDataPromise;
