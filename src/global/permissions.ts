@@ -1,8 +1,13 @@
 import { PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 import { Alert } from 'react-native';
+import { isWindows } from './utils/platform';
 
 export const requestCameraPermission = async () => {
-  console.log('Requesting permissions...');
+  if (isWindows) {
+    return RESULTS.GRANTED;
+  }
+
+  console.log('Requesting CAMERA permission.');
   const result = await request(PERMISSIONS.ANDROID.CAMERA);
   switch (result) {
     case RESULTS.UNAVAILABLE:
@@ -34,6 +39,10 @@ export const requestCameraPermission = async () => {
 };
 
 export const requestStoragePermission = async () => {
+  if (isWindows) {
+    return RESULTS.GRANTED;
+  }
+
   console.log('Requesting permission to READ_EXTERNAL_STORAGE');
   const result = await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
   switch (result) {
@@ -66,6 +75,10 @@ export const requestStoragePermission = async () => {
 };
 
 export const requestStorageWritePermission = async () => {
+  if (isWindows) {
+    return RESULTS.GRANTED;
+  }
+
   console.log('Requesting permission to WRITE_EXTERNAL_STORAGE');
   const result = await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
   switch (result) {
