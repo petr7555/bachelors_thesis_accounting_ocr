@@ -32,6 +32,7 @@ type CommonTheme = {
 type CustomTheme = {
   colors: {
     secondary: string;
+    grey: string;
   };
 };
 
@@ -50,6 +51,7 @@ const MyDefaultTheme: MixedTheme = {
     ...DefaultTheme.colors,
     ...commonTheme.colors,
     secondary: Colors.secondary,
+    grey: Colors.grey,
   },
 };
 
@@ -59,6 +61,7 @@ const MyDarkTheme: MixedTheme = {
     ...DarkTheme.colors,
     ...commonTheme.colors,
     secondary: Colors.secondaryDarkMode,
+    grey: Colors.greyDarkMode,
   },
 };
 
@@ -67,7 +70,7 @@ const androidInputStyle = isAndroid && {
 };
 
 const windowsInputStyle = isWindows && {
-  color: null,
+  color: undefined,
 };
 
 const theme = {
@@ -81,7 +84,7 @@ const theme = {
 };
 
 const App = () => {
-  // useColorScheme() will always return 'light' when remote debugging.
+  // ⚠ useColorScheme() will always return 'light' when remote debugging.
   // set this to 'dark' or build using --release to test dark mode
   // const scheme = 'dark';
   const scheme = useColorScheme();

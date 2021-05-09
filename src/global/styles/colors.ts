@@ -12,6 +12,7 @@ const Colors = {
   statusBar: '#6d6d6d',
   blue: 'blue',
   grey: 'rgb(80,80,80)',
+  greyDarkMode: 'rgb(120,120,120)',
   undefined: undefined,
 };
 
