@@ -1454,6 +1454,23 @@ exports[`Storyshots Modals/UniversalModal Basic 1`] = `
 </Modal>
 `;
 
+exports[`Storyshots NoReceipts Basic 1`] = `
+<Image
+  source={
+    Object {
+      "testUri": "../../../images/cart_black.png",
+    }
+  }
+  style={
+    Object {
+      "height": 100,
+      "resizeMode": "contain",
+      "width": 80,
+    }
+  }
+/>
+`;
+
 exports[`Storyshots Receipt Basic 1`] = `
 <View
   style={

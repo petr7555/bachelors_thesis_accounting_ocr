@@ -1226,6 +1226,34 @@ exports[`Storyshots ImageThumbnail Basic 1`] = `
 </View>
 `;
 
+exports[`Storyshots NoReceipts Basic 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    fadeDuration={0}
+    onLoadEnd={[Function]}
+    source={
+      Object {
+        "testUri": "../../../images/cart_black.png",
+      }
+    }
+    style={
+      Object {
+        "height": 100,
+        "resizeMode": "contain",
+        "width": 80,
+      }
+    }
+  />
+</View>
+`;
+
 exports[`Storyshots PrimaryButton With emoji 1`] = `
 <View
   style={
