@@ -45,6 +45,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReactNativeAsyncStorage", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DateTimePickerWindows", "..\node_modules\@react-native-community\datetimepicker\windows\DateTimePickerWindows\DateTimePickerWindows.vcxproj", "{0986A4DB-8E72-4BB7-AE32-7D9DF1758A9D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RNFS", "..\node_modules\react-native-fs\windows\RNFS\RNFS.vcxproj", "{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\node_modules\react-native-windows\Microsoft.ReactNative.Cxx\Microsoft.ReactNative.Cxx.vcxitems*{0986a4db-8e72-4bb7-ae32-7d9df1758a9d}*SharedItemsImports = 4
@@ -259,6 +261,22 @@ Global
 		{0986A4DB-8E72-4BB7-AE32-7D9DF1758A9D}.Release|x64.Build.0 = Release|x64
 		{0986A4DB-8E72-4BB7-AE32-7D9DF1758A9D}.Release|x86.ActiveCfg = Release|ARM
 		{0986A4DB-8E72-4BB7-AE32-7D9DF1758A9D}.Release|x86.Build.0 = Release|ARM
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Debug|ARM.ActiveCfg = Debug|ARM
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Debug|ARM.Build.0 = Debug|ARM
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Debug|ARM64.Build.0 = Debug|ARM64
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Debug|x64.ActiveCfg = Debug|x64
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Debug|x64.Build.0 = Debug|x64
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Debug|x86.ActiveCfg = Debug|Win32
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Debug|x86.Build.0 = Debug|Win32
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Release|ARM.ActiveCfg = Release|ARM
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Release|ARM.Build.0 = Release|ARM
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Release|ARM64.ActiveCfg = Release|ARM64
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Release|ARM64.Build.0 = Release|ARM64
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Release|x64.ActiveCfg = Release|x64
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Release|x64.Build.0 = Release|x64
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Release|x86.ActiveCfg = Release|Win32
+		{4F89A807-A843-4DF0-8D74-A04A3F48FEF9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

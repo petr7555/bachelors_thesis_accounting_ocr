@@ -24,8 +24,7 @@ import getAllReceiptsForUser from '../../api/firebase/getAllReceiptsForUser';
 import Receipt from './Receipt';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import { useNavigation } from '@react-navigation/native';
-import Colors from '../../global/styles/colors';
-import CartImage from './CartImage';
+import NoReceipts from './NoReceipts';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
@@ -135,15 +134,7 @@ const ReceiptsList = () => {
           renderItem={renderItem}
         />
       ) : (
-        <View style={styles.noReceiptsContainer}>
-          <CartImage />
-          <Text style={styles.noReceiptsText}>
-            You do not have any receipts yet.
-          </Text>
-          <Text style={styles.noReceiptsText}>
-            Click the scan button below to add a receipt.
-          </Text>
-        </View>
+        <NoReceipts />
       )}
     </View>
   );
@@ -158,15 +149,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  noReceiptsContainer: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  noReceiptsText: {
-    color: Colors.grey,
-    fontSize: 16,
   },
   searchIcon: {
     fontSize: 25,

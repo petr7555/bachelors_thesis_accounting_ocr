@@ -12,3 +12,4 @@ import '../src/components/ThemedIcon/ThemedIonIcon.stories';
 import '../src/components/ToastIcon/ToastIcon.stories';
 import '../src/components/ToastIcon/ToastIcon.stories';
 import '../src/components/ReceiptsList/CartImage.stories';
+import '../src/components/ReceiptsList/NoReceipts.stories';
