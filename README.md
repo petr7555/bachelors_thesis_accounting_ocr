@@ -252,8 +252,9 @@ return <Component color={theme.colors?.black}/>;
 
 ```tsx
 import {useTheme} from '@react-navigation/native';
+import {MixedTheme} from '../../../App';
 
-const {colors} = useTheme();
+const {colors} = useTheme() as MixedTheme;
 return <Component style={{color: colors.secondary}}/>;
 ```
 
@@ -295,10 +296,21 @@ This application uses its own Python API for image processing and item categoriz
 the [python-api/README.md](https://github.com/petr7555/bachelors_thesis_accounting_ocr/blob/master/python-api/README.md)
 .
 
+## Auto-linking
+
+Auto-linking happens automatically at the start of `npm run android` / `npm run windows` command. It can be triggered
+manually by running `npx react-native link`.
+
 ## Troubleshooting
 
 1. Invariant Violation: Module AppRegistry is not a registered callable module (calling runApplication)
     - solution: `npm start -- --reset-cache`
+    - Check if there are other errors above,
+      e.g. `TypeError: Cannot read property '<some property of native module>' of undefined`. This happens on Windows.
+      It means that native module has not been linked
+      automatically. [Try linking it manually.](https://microsoft.github.io/react-native-windows/docs/native-modules-using)
+      However, most likely the Windows support is old, vnext support is needed. Mock the library and wait for the vnext
+      support to be implemented.
 2. If you have multiple connections in Reactotron, switch to the right one to be able to control Storybook.
 3. DO NOT DELETE `package-lock.json`! Dependencies will resolve badly and something like this will show up:
     ```
