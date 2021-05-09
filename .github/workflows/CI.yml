@@ -25,9 +25,9 @@ jobs:
         run: |
           npm run lint
 
-#      - name: Check TypeScript
-#        run: |
-#          npm run lint:typescript
+      - name: Check TypeScript
+        run: |
+          npm run lint:typescript
 
   test:
     timeout-minutes: 20

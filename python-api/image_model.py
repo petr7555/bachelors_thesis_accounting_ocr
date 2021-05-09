@@ -5,66 +5,102 @@ import cv2
 def process_image(original):
     processed = preprocess_image(original)
     corners = find_corners_of_largest_polygon(processed)
-    _, underlying = cv2.threshold(original, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+    underlying = preprocess_underlying_image(original)
+
+    if not corners:
+        return underlying
+
     return crop_and_warp(underlying, corners)
 
 
-def preprocess_image(img, skip_dilate=False, skip_invert=False):
-    """Uses a blurring function, adaptive thresholding and dilation to expose the main features of an image."""
+def preprocess_image(img):
+    """Uses a blurring function, adaptive thresholding and dilation 
+    to expose the main features of an image."""
 
     # Gaussian blur with a kernel size (height, width) of 9.
     # Note that kernel sizes must be positive and odd and the kernel must be square.
+    # 0 means that standard deviations both in X and Y directions are calculated from the kernel size.
     proc = cv2.GaussianBlur(img, (9, 9), 0)
 
-    # Adaptive threshold using 11 nearest neighbour pixels
+    # Adaptive threshold with maximum value of 255 (white),
+    # The threshold value is a gaussian-weighted sum of 11 nearest neighbour pixels
+    # minus the constant 2.
+    # THRESH_BINARY means either 0 (black) or 255 (white).
     proc = cv2.adaptiveThreshold(proc, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
     # Invert colours, so gridlines have non-zero pixel values.
-    # Necessary to dilate the image, otherwise it will look like erosion instead.
+    # Necessary to dilate the image, otherwise it would look like erosion instead.
+    # Inverted image is useful also for further contours detection
+    # ! bitwise_not modifies image in place
     proc = cv2.bitwise_not(proc, proc)
 
     # Dilate the image to increase the size of the grid lines.
+    # A pixel will be considered white if at least one pixel in the original
+    # image under the kernel is white.
     kernel = np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]], np.uint8)
     proc = cv2.dilate(proc, kernel)
 
     return proc
 
 
+def preprocess_underlying_image(img):
+    """Uses a blurring function and adaptive thresholding."""
+    proc = cv2.GaussianBlur(img, (9, 9), 0)
+    proc = cv2.adaptiveThreshold(proc, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+
+    return proc
+
+
 def find_corners_of_largest_polygon(img):
     """Finds the 4 extreme corners of the largest contour in the image."""
-    contours, _ = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  # Find contours
-    contours = sorted(contours, key=cv2.contourArea, reverse=True)  # Sort by area, descending
-    polygon = contours[0]  # Largest image
-    print(cv2.contourArea(contours[0]))
 
-    # Bottom-right point has the largest (x + y) value
-    # Top-left has point smallest (x + y) value
-    # Bottom-left point has smallest (x - y) value
-    # Top-right point has largest (x - y) value
+    # Find contours.
+    # RETR_EXTERNAL returns only the extreme outer contours.
+    # CHAIN_APPROX_SIMPLE compresses horizontal, vertical,
+    # and diagonal segments and leaves only their end points.
+    contours, _ = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # Sort by contour area, descending.
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)
+    # Largest polygon
+    polygon = contours[0]
+
+    # If the found rectangle is smaller than 30% of the image,
+    # it is probably wrong and the image won't be cropped.
+    # This happens when the image has been taken without edges.
+    if cv2.contourArea(polygon) < 0.3 * img.shape[0] * img.shape[1]:
+        return False
+
+    # Bottom-right point has the largest (x + y) value.
+    # Top-left has point smallest (x + y) value.
+    # Bottom-left point has smallest (x - y) value.
+    # Top-right point has largest (x - y) value.
     bottom_right = np.array([pt[0][0] + pt[0][1] for pt in polygon]).argmax()
     top_left = np.array([pt[0][0] + pt[0][1] for pt in polygon]).argmin()
     bottom_left = np.array([pt[0][0] - pt[0][1] for pt in polygon]).argmin()
     top_right = np.array([pt[0][0] - pt[0][1] for pt in polygon]).argmax()
 
-    # Return an array of all 4 points using the indices
-    # Each point is in its own array of one coordinate
+    # Return an array of all 4 points using the indices.
+    # Each point is in its own array of one coordinate.
     return [polygon[top_left][0], polygon[top_right][0], polygon[bottom_right][0], polygon[bottom_left][0]]
 
 
 def distance_between(p1, p2):
-    """Returns the scalar distance between two points"""
+    """Returns the scalar distance between two points."""
     a = p2[0] - p1[0]
     b = p2[1] - p1[1]
     return ((a ** 2) + (b ** 2)) ** (1 / 2)
 
 
 def crop_and_warp(img, crop_rect):
-    """Crops and warps a rectangular-like section from an image into a rectangular similar size."""
+    """Crops and warps a quadrilateral section from an image into a rectangle of a similar size."""
 
-    # Rectangle described by top left, top right, bottom right and bottom left points
+    # Quadrilateral described by top left, top right, bottom right and bottom left points.
     top_left, top_right, bottom_right, bottom_left = crop_rect[0], crop_rect[1], crop_rect[2], crop_rect[3]
 
-    # Explicitly set the data type to float32 or `getPerspectiveTransform` will throw an error
+    # Explicitly set the data type to float32 otherwise `getPerspectiveTransform`
+    # would throw an error.
     src = np.array([top_left, top_right, bottom_right, bottom_left], dtype='float32')
 
     width = max([
@@ -77,16 +113,15 @@ def crop_and_warp(img, crop_rect):
         distance_between(top_left, bottom_left),
     ])
 
-    # If the found rectangle is smaller than 30% of the image,
-    # it is probably wrong and the image won't be cropped
-    if width * height < 0.3 * img.shape[0] * img.shape[1]:
-        return img
-
-    # Describe a rectangle with calculated width and height, this is the new perspective we want to warp to
+    # Describe a rectangle with calculated width and height,
+    # this is the new perspective we want to warp to.
+    # Explicitly set the data type to float32 otherwise `getPerspectiveTransform`
+    # would throw an error.
     dst = np.array([[0, 0], [width - 1, 0], [width - 1, height - 1], [0, height - 1]], dtype='float32')
 
-    # Gets the transformation matrix for skewing the image to fit a square by comparing the 4 before and after points
+    # Gets the transformation matrix for skewing the image to fit a rectangle
+    # by comparing the 4 source and destination points.
     m = cv2.getPerspectiveTransform(src, dst)
 
-    # Performs the transformation on the given image
+    # Performs the transformation on the given image using transofrmation matrix m.
     return cv2.warpPerspective(img, m, (int(width), int(height)))

@@ -4,6 +4,7 @@ import Receipt from './Receipt';
 import { FirebaseReceipt } from './ReceiptsList';
 import { Item } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import MockedNavigator from '../../../tests/mocks/MockedNavigator';
+import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 
 const item: Item = {
   id: '789',
@@ -17,7 +18,7 @@ const item: Item = {
 const timestampMock = {
   // months start at 0
   toDate: () => new Date(2021, 4, 1, 8, 30, 15),
-};
+} as FirebaseFirestoreTypes.Timestamp;
 
 const receipt: FirebaseReceipt = {
   id: '456',

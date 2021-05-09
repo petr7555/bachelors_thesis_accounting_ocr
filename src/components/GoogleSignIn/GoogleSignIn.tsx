@@ -18,6 +18,7 @@ const signIn = async () => {
       // Create a Google credential with the token
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       // Sign-in the user with the credential
+      // @ts-ignore
       await authInstance.signInWithCredential(googleCredential);
 
       console.log('Signed in with Google!');
