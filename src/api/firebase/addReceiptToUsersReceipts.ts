@@ -1,5 +1,9 @@
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
-import { authInstance, firestore, firestoreInstance } from '../../global/firebase';
+import {
+  authInstance,
+  firestore,
+  firestoreInstance,
+} from '../../global/firebase';
 import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../../global/constants';
 
 const addReceiptToUsersReceipts = async (
