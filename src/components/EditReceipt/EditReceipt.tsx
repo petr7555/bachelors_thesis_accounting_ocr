@@ -349,6 +349,7 @@ const EditReceipt = ({ route }: Props) => {
                 ? handleSubmit(onSubmit)
                 : () => {
                     scrollToIndex(index + 1);
+                    // @ts-ignore
                     fields[index + 1].ref?.current?.focus();
                   }
             }

@@ -12,6 +12,7 @@ const createUser = (user?: firebase.User) => {
       .collection(USERS_FIRESTORE)
       .doc(userId)
       .get()
+      // @ts-ignore
       .then((documentSnapshot) => {
         if (documentSnapshot.exists) {
           console.log(`User with uid ${userId} exists.`);

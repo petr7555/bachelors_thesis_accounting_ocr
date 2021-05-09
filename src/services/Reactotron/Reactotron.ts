@@ -27,23 +27,31 @@ if (__DEV__) {
 } else {
   // attach a mock so if things sneaky by our __DEV__ guards, we won't crash.
   console.tron = {
+    // @ts-ignore
     benchmark: noop,
     clear: noop,
     close: noop,
+    // @ts-ignore
     configure: noop,
+    // @ts-ignore
     connect: noop,
     display: noop,
     error: noop,
     image: noop,
     log: noop,
     logImportant: noop,
+    // @ts-ignore
     onCustomCommand: noop,
     overlay: noop,
     reportError: noop,
     send: noop,
+    // @ts-ignore
     startTimer: noop,
+    // @ts-ignore
     storybookSwitcher: noop,
+    // @ts-ignore
     use: noop,
+    // @ts-ignore
     useReactNative: noop,
     warn: noop,
   };
@@ -87,7 +95,7 @@ export class Reactotron {
 
       // hookup middleware
       if (this.config.useAsyncStorage) {
-        Tron.setAsyncStorageHandler(AsyncStorage);
+        Tron.setAsyncStorageHandler?.(AsyncStorage);
       }
 
       Tron.useReactNative({
@@ -99,7 +107,7 @@ export class Reactotron {
 
       // clear if we should
       if (this.config.clearOnLoad) {
-        Tron.clear();
+        Tron.clear?.();
       }
     }
   }
