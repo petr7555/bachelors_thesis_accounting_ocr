@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react-native';
 import React from 'react';
-import NoReceipts from './CartImage';
+import NoReceipts from './NoReceipts';
 
 export const Basic = () => <NoReceipts />;
 
