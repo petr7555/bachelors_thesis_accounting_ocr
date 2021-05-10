@@ -6,6 +6,6 @@ const getAllReceiptsForUser = (userId: string) =>
     .collection(USERS_FIRESTORE)
     .doc(userId)
     .collection(RECEIPTS_FIRESTORE)
-    .orderBy('transactionDate', 'desc');
+    .orderBy('added', 'desc');
 
 export default getAllReceiptsForUser;
