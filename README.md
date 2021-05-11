@@ -84,7 +84,8 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
 
 - Web version of Storybook is deployed to https://bachelors-thesis-accounting-ocr.vercel.app/ with each push to GitHub.
   This is not part of GitHub Actions but [Vercel's](https://vercel.com/petr7555/bachelors-thesis-accounting-ocr) own
-  repository hook.
+  repository hook. This deployment is partially redundant because Storybook is deployed also during [Chromatic build](
+  ## Chromatic).
 - A directory `.vercel` containing a `project.json` with *orgId* and *projectId* needs to be present in the root of the
   repository to be able to deploy the Storybook to Vercel locally, which is done by running `npm run deploy-vercel`
   (currently does not work, because the file number limit is reached). This directory is ignored in version control as
