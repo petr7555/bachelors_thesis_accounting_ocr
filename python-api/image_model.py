@@ -16,7 +16,7 @@ def process_image(original):
 def preprocess_image(img):
     """Uses a blurring function, Otsu's thresholding and dilation 
     to expose the main features of an image."""
-
+    
     # Gaussian blur with a kernel size (height, width) of 9.
     # Note that kernel sizes must be positive and odd and the kernel must be square.
     # 0 means that standard deviations both in X and Y directions are calculated from the kernel size.
@@ -28,8 +28,7 @@ def preprocess_image(img):
     # THRESH_BINARY means either 0 (black) or 255 (white).
     _, proc = cv2.threshold(proc, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-
-    # Invert colours, so gridlines have non-zero pixel values.
+    # Invert colors, so gridlines have non-zero pixel values.
     # Necessary to dilate the image, otherwise it would look like erosion instead.
     # ! bitwise_not modifies image in place
     proc = cv2.bitwise_not(proc, proc)
@@ -48,7 +47,15 @@ def preprocess_image(img):
 
 def preprocess_underlying_image(img):
     """Uses a blurring function and adaptive thresholding."""
+    # Gaussian blur with a kernel size (height, width) of 9.
+    # Note that kernel sizes must be positive and odd and the kernel must be square.
+    # 0 means that standard deviations both in X and Y directions are calculated from the kernel size.
     proc = cv2.GaussianBlur(img, (9, 9), 0)
+    
+    # Adaptive threshold with maximum value of 255 (white).
+    # The threshold value is a Gaussian-weighted sum of 11 nearest neighbour pixels,
+    # minus the constant 2.
+    # THRESH_BINARY means either 0 (black) or 255 (white).
     proc = cv2.adaptiveThreshold(proc, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
                                  cv2.THRESH_BINARY, 11, 2)
 
