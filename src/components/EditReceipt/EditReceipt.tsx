@@ -344,6 +344,7 @@ const EditReceipt = ({ route }: Props) => {
             ref={field.ref}
             blurOnSubmit={false}
             selectTextOnFocus={true}
+            // on Windows, this event is triggered by hitting Enter
             onSubmitEditing={
               isLastField(index)
                 ? handleSubmit(onSubmit)
