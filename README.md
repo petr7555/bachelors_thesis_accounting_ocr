@@ -260,6 +260,15 @@ const {colors} = useTheme() as MixedTheme;
 return <Component style={{color: colors.secondary}}/>;
 ```
 
+## Logging
+
+- Do not use `console.log()` etc.
+- Use `LOG.info()` etc. from `~/src/services/Logger/logger.ts` instead.
+  See [react-native-logs](https://www.npmjs.com/package/react-native-logs) for usage instructions.
+- All logs will appear in the console (only in development mode), WARN and higher will be sent to
+  the [Sentry](https://sentry.io/organizations/petr-janik/projects/bachelors-thesis-accounting-ocr/) too (both in
+  development and release).
+
 ## Clean emulator data
 
 - `emulator -list-avds`

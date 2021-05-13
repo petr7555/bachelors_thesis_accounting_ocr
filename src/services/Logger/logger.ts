@@ -7,7 +7,7 @@ const LOG = logger.createLogger({
     if (__DEV__) {
       consoleTransport(props);
     }
-    // send only warnings and errors to Sentry
+    // send WARN and higher to Sentry
     if (props.level.severity >= 2) {
       sentryTransport(props);
     }
