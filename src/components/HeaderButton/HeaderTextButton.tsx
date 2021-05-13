@@ -5,10 +5,10 @@ import { StyleSheet, TextStyle, TouchableOpacity } from 'react-native';
 type Props = {
   onPress: () => void;
   text: string;
-  textStyle: TextStyle;
+  textStyle?: TextStyle;
 };
 
-const HeaderButton = ({ onPress, text, textStyle }: Props) => {
+const HeaderTextButton = ({ onPress, text, textStyle }: Props) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={[styles.headerText, textStyle]}>{text}</Text>
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderButton;
+export default HeaderTextButton;

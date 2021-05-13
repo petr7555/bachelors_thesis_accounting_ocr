@@ -6,13 +6,13 @@ import PrimaryButton from './PrimaryButton';
 
 export const WithText = () => (
   <PrimaryButton
-    onPress={action('clicked-text')}
+    onPress={action('onPress')}
     title={text('Button text', 'Hello Button')}
   />
 );
 
 export const WithEmoji = () => (
-  <PrimaryButton onPress={action('clicked-emoji')} title="😀 😎 👍 💯 🚀" />
+  <PrimaryButton onPress={action('onPress')} title="😀 😎 👍 💯 🚀" />
 );
 
 storiesOf('PrimaryButton', module)

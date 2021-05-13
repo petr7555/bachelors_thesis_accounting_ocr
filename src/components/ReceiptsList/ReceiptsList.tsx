@@ -25,6 +25,7 @@ import Receipt from './Receipt';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import { useNavigation } from '@react-navigation/native';
 import NoReceipts from './NoReceipts';
+import HeaderIconButton from '../HeaderButton/HeaderIconButton';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
@@ -82,11 +83,7 @@ const ReceiptsList = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Icon
-          style={styles.searchIcon}
-          name="search"
-          onPress={handleSearchPress}
-        />
+        <HeaderIconButton icon="search" onPress={handleSearchPress} />
       ),
     });
   }, [handleSearchPress, navigation]);
@@ -145,6 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     height: '100%',
     paddingLeft: 15,
+    paddingRight: 5,
     textAlignVertical: 'bottom',
   },
   cancelIconContainer: {
@@ -152,10 +150,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  searchIcon: {
-    fontSize: 25,
-    paddingHorizontal: 15,
   },
 });
 

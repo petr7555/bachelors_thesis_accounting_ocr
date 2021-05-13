@@ -46,7 +46,7 @@ import UniversalModal from '../UniversalModal/UniversalModal';
 import { isAndroid, isWindows } from '../../global/utils/platform';
 import { useToast } from 'react-native-fast-toast';
 import ToastIcon from '../ToastIcon/ToastIcon';
-import HeaderButton from '../HeaderButton/HeaderButton';
+import HeaderTextButton from '../HeaderButton/HeaderTextButton';
 
 // Types
 type FormScreenRouteProp = RouteProp<HomeStackParamList, 'EditReceipt'>;
@@ -166,7 +166,7 @@ const EditReceipt = ({ route }: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <HeaderButton
+        <HeaderTextButton
           text="Save"
           onPress={handleSubmit(onSubmit)}
           textStyle={styles.headerText}
