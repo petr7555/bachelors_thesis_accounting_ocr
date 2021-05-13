@@ -26,6 +26,7 @@ import Icon from '../ThemedIcon/ThemedIonIcon';
 import { useNavigation } from '@react-navigation/native';
 import NoReceipts from './NoReceipts';
 import HeaderIconButton from '../HeaderButton/HeaderIconButton';
+import NoFilteredReceipts from './NoFilteredReceipts';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
@@ -130,6 +131,8 @@ const ReceiptsList = () => {
           data={searchResults}
           renderItem={renderItem}
         />
+      ) : receipts.length > 0 ? (
+        <NoFilteredReceipts />
       ) : (
         <NoReceipts />
       )}
