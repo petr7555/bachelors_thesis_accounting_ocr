@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { useTheme } from '@react-navigation/native';
 import { MixedTheme } from '../../../App';
+import Colors from '../../global/styles/colors';
 
 const NoReceipts = () => {
   const { colors } = useTheme() as MixedTheme;
@@ -13,9 +14,11 @@ const NoReceipts = () => {
     { color: colors.grey },
   ]);
 
+  const cartImageColor = colors.grey === Colors.greyDarkMode ? 'dark' : 'light';
+
   return (
     <View style={styles.noReceiptsContainer}>
-      <CartImage />
+      <CartImage colorScheme={cartImageColor} />
       <Text style={noReceiptsText}>You do not have any receipts yet.</Text>
       <Text style={noReceiptsText}>
         Click the scan button below to add a receipt.
