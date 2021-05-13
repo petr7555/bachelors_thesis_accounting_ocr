@@ -229,7 +229,8 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 ## Tools for easier development
 
 - [Reactotron](https://github.com/infinitered/reactotron)
-    - if the device is not connected, run `adb reverse tcp:9090 tcp:9090` and refresh (`r`) in the metro bundler
+    - if the device is not connected, run `adb reverse tcp:9090 tcp:9090` and refresh (`r`) in the metro bundler. This
+      applies both for an emulator and real device.
 - [patch-package](https://www.npmjs.com/package/patch-package) can be used to fix third-party dependencies
   in `node_modules`. `postinstall` script is run automatically both after `npm install` and `npm ci`.
 
