@@ -4,6 +4,7 @@ import Button from '../PrimaryButton/PrimaryButton';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { Platform } from 'react-native';
 import { isWindows } from '../../global/utils/platform';
+import { LOG } from '../../logger';
 
 const googleSignIn = Platform.select({
   android: () =>
@@ -23,17 +24,17 @@ const SignOutButton = () => {
     );
     try {
       await authInstance.signOut();
-      console.log('User signed out from firebase auth.');
+      LOG.info('User signed out from firebase auth.');
       if (!isWindows) {
         const isSignedIn = await googleSignIn.isSignedIn();
         if (isSignedIn) {
           await googleSignIn.revokeAccess();
           await googleSignIn.signOut();
-          console.log('User signed out from Google.');
+          LOG.info('User signed out from Google.');
         }
       }
     } catch (error) {
-      console.error(error);
+      LOG.error(error);
     }
   };
 

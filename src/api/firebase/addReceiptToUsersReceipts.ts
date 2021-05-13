@@ -5,6 +5,7 @@ import {
   firestoreInstance,
 } from '../../global/firebase';
 import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../../global/constants';
+import { LOG } from '../../logger';
 
 const addReceiptToUsersReceipts = async (
   urlOriginal: string,
@@ -25,10 +26,10 @@ const addReceiptToUsersReceipts = async (
           added: firestore.Timestamp.now(),
           ...receiptData,
         });
-      console.log('Receipt added!');
+      LOG.info('Receipt added!');
       return result.id;
     } catch (error) {
-      console.error(error);
+      LOG.error(error);
     }
   }
 };

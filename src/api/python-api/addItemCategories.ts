@@ -1,6 +1,7 @@
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { PYTHON_API } from '../../global/constants';
 import axios from 'axios';
+import {LOG} from "../../logger";
 
 const addItemCategories = async (receiptData: ReceiptData) => {
   const endpoint = `${PYTHON_API}/category`;
@@ -14,11 +15,11 @@ const addItemCategories = async (receiptData: ReceiptData) => {
       const category = data.categories[i].category;
       const emoji = data.categories[i].emoji;
 
-      console.log(`Classified ${itemName} as ${category} ${emoji}`);
+      LOG.info(`Classified ${itemName} as ${category} ${emoji}`);
       receiptData.items[i].name = `${emoji} ${itemName}`;
     }
   } catch (error) {
-    console.error(error);
+    LOG.error(error);
   }
   return receiptData;
 };

@@ -27,6 +27,7 @@ import { useNavigation } from '@react-navigation/native';
 import NoReceipts from './NoReceipts';
 import HeaderIconButton from '../HeaderButton/HeaderIconButton';
 import NoFilteredReceipts from './NoFilteredReceipts';
+import { LOG } from '../../logger';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
@@ -94,12 +95,12 @@ const ReceiptsList = () => {
   }
 
   if (errorUser) {
-    console.log(errorUser);
+    LOG.info(errorUser);
     Alert.alert('Cannot load current user.');
   }
 
   if (errorReceipts) {
-    console.log(errorReceipts);
+    LOG.info(errorReceipts);
     Alert.alert('Cannot load receipts.');
   }
 

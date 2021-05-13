@@ -1,6 +1,7 @@
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { firestoreInstance } from '../../global/firebase';
 import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../../global/constants';
+import { LOG } from '../../logger';
 
 const updateReceipt = async (
   userId: string,
@@ -14,9 +15,9 @@ const updateReceipt = async (
       .collection(RECEIPTS_FIRESTORE)
       .doc(receiptId)
       .update(receiptData)
-      .then(() => console.log('Receipt updated!'));
+      .then(() => LOG.info('Receipt updated!'));
   } catch (error) {
-    console.error(error);
+    LOG.error(error);
   }
 };
 

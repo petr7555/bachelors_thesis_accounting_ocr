@@ -7,6 +7,7 @@ import {
   FORM_RECOGNIZER_API_KEY,
   FORM_RECOGNIZER_ENDPOINT,
 } from '../../global/constants';
+import { LOG } from '../../logger';
 
 export const getReceiptDataFromImage = async (
   image: MyImage,
@@ -18,7 +19,7 @@ export const getReceiptDataFromImage = async (
   const poller = await client.beginRecognizeContent(image);
   if (poller) {
     const response = await poller.pollUntilDone();
-    console.log(JSON.stringify(response, null, 2));
+    LOG.info(JSON.stringify(response, null, 2));
     return convertReceiptResponseToReceiptData(response);
   }
 };
