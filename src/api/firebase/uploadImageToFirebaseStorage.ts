@@ -5,7 +5,7 @@ import { MyImage } from '../../components/Camera/Camera';
 import { Alert } from 'react-native';
 import { storageInstance } from '../../global/firebase';
 import base64ToArrayBuffer from 'base64-arraybuffer';
-import { LOG } from '../../logger';
+import { LOG } from '../../services/Logger/logger';
 
 export const uploadImageToFirebaseStorage = async (
   image: MyImage,

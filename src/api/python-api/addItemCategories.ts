@@ -1,7 +1,7 @@
 import { ReceiptData } from '../../services/FormRecognizerClient/convertReceiptResponseToReceiptData';
 import { PYTHON_API } from '../../global/constants';
 import axios from 'axios';
-import {LOG} from "../../logger";
+import {LOG} from "../../services/Logger/logger";
 
 const addItemCategories = async (receiptData: ReceiptData) => {
   const endpoint = `${PYTHON_API}/category`;

@@ -3,7 +3,7 @@ import React from 'react';
 import { auth, authInstance } from '../../global/firebase';
 import GoogleSignInButton from './GoogleSignInButton';
 import execIfOnline from '../../global/execIfOnline';
-import { LOG } from '../../logger';
+import { LOG } from '../../services/Logger/logger';
 
 GoogleSignin.configure({
   webClientId:

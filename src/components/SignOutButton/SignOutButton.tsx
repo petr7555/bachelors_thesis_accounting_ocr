@@ -4,7 +4,7 @@ import Button from '../PrimaryButton/PrimaryButton';
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import { Platform } from 'react-native';
 import { isWindows } from '../../global/utils/platform';
-import { LOG } from '../../logger';
+import { LOG } from '../../services/Logger/logger';
 
 const googleSignIn = Platform.select({
   android: () =>

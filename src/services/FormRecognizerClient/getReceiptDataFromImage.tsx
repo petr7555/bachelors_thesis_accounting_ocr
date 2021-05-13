@@ -7,7 +7,7 @@ import {
   FORM_RECOGNIZER_API_KEY,
   FORM_RECOGNIZER_ENDPOINT,
 } from '../../global/constants';
-import { LOG } from '../../logger';
+import { LOG } from '../Logger/logger';
 
 export const getReceiptDataFromImage = async (
   image: MyImage,

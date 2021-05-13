@@ -16,7 +16,7 @@ import { Alert } from 'react-native';
 import { ButtonProps } from 'react-native-elements';
 import combine from '../../global/utils/combine';
 import { isWindows } from '../../global/utils/platform';
-import { LOG } from '../../logger';
+import { LOG } from '../../services/Logger/logger';
 
 const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
   const [user] = useAuthState(authInstance);

@@ -2,7 +2,7 @@ import base64ToArrayBuffer from 'base64-arraybuffer';
 import axios from 'axios';
 import { Alert } from 'react-native';
 import { MyImage } from '../../components/Camera/Camera';
-import { LOG } from '../../logger';
+import { LOG } from '../Logger/logger';
 
 export class Poller {
   private readonly pollUrl: string;

@@ -27,7 +27,7 @@ import { useNavigation } from '@react-navigation/native';
 import NoReceipts from './NoReceipts';
 import HeaderIconButton from '../HeaderButton/HeaderIconButton';
 import NoFilteredReceipts from './NoFilteredReceipts';
-import { LOG } from '../../logger';
+import { LOG } from '../../services/Logger/logger';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],

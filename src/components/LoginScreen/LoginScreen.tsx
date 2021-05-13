@@ -26,7 +26,7 @@ import {
   TERMS_CONDITIONS_URL,
 } from '../../global/constants';
 import execIfOnline from '../../global/execIfOnline';
-import { LOG } from '../../logger';
+import { LOG } from '../../services/Logger/logger';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,

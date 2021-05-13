@@ -25,7 +25,7 @@ import rgbToHex from '../../global/utils/rgbToHex';
 import getFilename from '../../global/utils/getFilename';
 import { isWindows } from '../../global/utils/platform';
 import FilePicker from '../../services/FilePicker/FilePicker';
-import { LOG } from '../../logger';
+import { LOG } from '../../services/Logger/logger';
 
 type HomeNavigationProp = StackNavigationProp<RootParamList, 'Home'>;
 

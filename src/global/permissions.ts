@@ -1,7 +1,7 @@
 import { PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 import { Alert } from 'react-native';
 import { isWindows } from './utils/platform';
-import { LOG } from '../logger';
+import { LOG } from '../services/Logger/logger';
 
 export const requestCameraPermission = async () => {
   if (isWindows) {
