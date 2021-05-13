@@ -3,7 +3,9 @@ import * as Sentry from '@sentry/react-native';
 
 const LOG = logger.createLogger({
   transport: (props) => {
-    consoleTransport(props);
+    if (__DEV__) {
+      consoleTransport(props);
+    }
     sentryTransport(props);
   },
   transportOptions: {
