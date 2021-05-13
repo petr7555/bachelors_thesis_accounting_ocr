@@ -143,6 +143,9 @@ const ReceiptsList = () => {
 const styles = StyleSheet.create({
   cancelIcon: {
     fontSize: 25,
+    height: '100%',
+    paddingLeft: 15,
+    textAlignVertical: 'bottom',
   },
   cancelIconContainer: {
     justifyContent: 'flex-end',
