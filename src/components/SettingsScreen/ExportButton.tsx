@@ -103,7 +103,6 @@ const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
 
         showExportedToast(directory);
       }
-      throw Error('some error');
     } catch (error) {
       LOG.error(error);
       Alert.alert('Receipts export failed');
