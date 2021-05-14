@@ -347,6 +347,10 @@ Solution: Kill `MSBuild.exe` in Task Manager.
 
 Solution: Kill `Node.js` in Task Manager.
 
+7. When adding GitHub branch as a dependency, add it as `"library": "user/repository#branch"` into `package.json` and
+   make sure that `package-lock.json` contains `"resolved": "git+https://git@github.com/...`,
+   not `"resolved": "git+ssh://git@github.com/...`.
+
 ## Privacy Policy, Terms & Conditions
 
 Privacy Policy and Terms & Conditions have been generated using https://app-privacy-policy-generator.firebaseapp.com/
