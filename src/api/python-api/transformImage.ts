@@ -2,7 +2,7 @@ import axios from 'axios';
 import getFilename from '../../global/utils/getFilename';
 import { MyImage } from '../../components/Camera/Camera';
 import { PYTHON_API } from '../../global/constants';
-import {LOG} from "../../services/Logger/logger";
+import { LOG } from '../../services/Logger/logger';
 
 type ResponseData = {
   // image as base64 string starting '/9j/4AAQS...'
