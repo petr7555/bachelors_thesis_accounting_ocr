@@ -13,3 +13,6 @@ import '../src/components/ToastIcon/ToastIcon.stories';
 import '../src/components/ToastIcon/ToastIcon.stories';
 import '../src/components/ReceiptsList/CartImage.stories';
 import '../src/components/ReceiptsList/NoReceipts.stories';
+import '../src/components/ReceiptsList/NoFilteredReceipts.stories';
+import '../src/components/HeaderButton/HeaderTextButton.stories';
+import '../src/components/HeaderButton/HeaderIconButton.stories';

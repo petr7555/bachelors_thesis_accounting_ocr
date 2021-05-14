@@ -84,7 +84,8 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
 
 - Web version of Storybook is deployed to https://bachelors-thesis-accounting-ocr.vercel.app/ with each push to GitHub.
   This is not part of GitHub Actions but [Vercel's](https://vercel.com/petr7555/bachelors-thesis-accounting-ocr) own
-  repository hook.
+  repository hook. This deployment is partially redundant because Storybook is deployed also
+  during [Chromatic build](#chromatic).
 - A directory `.vercel` containing a `project.json` with *orgId* and *projectId* needs to be present in the root of the
   repository to be able to deploy the Storybook to Vercel locally, which is done by running `npm run deploy-vercel`
   (currently does not work, because the file number limit is reached). This directory is ignored in version control as
@@ -228,7 +229,8 @@ On CI, a release version of the app is built, so the Metro bundler is not needed
 ## Tools for easier development
 
 - [Reactotron](https://github.com/infinitered/reactotron)
-    - if the device is not connected, run `adb reverse tcp:9090 tcp:9090` and refresh (`r`) in the metro bundler
+    - if the device is not connected, run `adb reverse tcp:9090 tcp:9090` and refresh (`r`) in the metro bundler. This
+      applies both for an emulator and real device.
 - [patch-package](https://www.npmjs.com/package/patch-package) can be used to fix third-party dependencies
   in `node_modules`. `postinstall` script is run automatically both after `npm install` and `npm ci`.
 
@@ -257,6 +259,15 @@ import {MixedTheme} from '../../../App';
 const {colors} = useTheme() as MixedTheme;
 return <Component style={{color: colors.secondary}}/>;
 ```
+
+## Logging
+
+- Do not use `console.log()` etc.
+- Use `LOG.info()` etc. from `~/src/services/Logger/logger.ts` instead.
+  See [react-native-logs](https://www.npmjs.com/package/react-native-logs) for usage instructions.
+- All logs will appear in the console (only in development mode), WARN and higher will be sent to
+  the [Sentry](https://sentry.io/organizations/petr-janik/projects/bachelors-thesis-accounting-ocr/) too (both in
+  development and release).
 
 ## Clean emulator data
 
@@ -335,6 +346,10 @@ Solution: Kill `MSBuild.exe` in Task Manager.
  ```
 
 Solution: Kill `Node.js` in Task Manager.
+
+7. When adding GitHub branch as a dependency, add it as `"library": "user/repository#branch"` into `package.json` and
+   make sure that `package-lock.json` contains `"resolved": "git+https://git@github.com/...`,
+   not `"resolved": "git+ssh://git@github.com/...`.
 
 ## Privacy Policy, Terms & Conditions
 

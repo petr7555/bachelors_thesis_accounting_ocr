@@ -26,6 +26,7 @@ import {
   TERMS_CONDITIONS_URL,
 } from '../../global/constants';
 import execIfOnline from '../../global/execIfOnline';
+import { LOG } from '../../services/Logger/logger';
 
 const GoogleSignIn = Platform.select({
   android: () => require('../GoogleSignIn/GoogleSignIn').default,
@@ -62,7 +63,7 @@ const LoginScreen = () => {
       Alert.alert('You entered wrong password.');
     }
 
-    console.error(error);
+    LOG.error(error);
   };
 
   const signIn = async (data: FormData) => {
@@ -73,7 +74,7 @@ const LoginScreen = () => {
           data.email,
           data.password,
         );
-        console.log('User signed in.');
+        LOG.info('User signed in.');
       } catch (error) {
         handleAuthError(error);
       } finally {
@@ -90,7 +91,7 @@ const LoginScreen = () => {
           data.email,
           data.password,
         );
-        console.log('User account created & signed in!');
+        LOG.info('User account created & signed in!');
       } catch (error) {
         handleAuthError(error);
       } finally {

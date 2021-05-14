@@ -1,6 +1,7 @@
 import { firestoreInstance } from '../../global/firebase';
 import firebase from 'firebase';
 import { USERS_FIRESTORE } from '../../global/constants';
+import { LOG } from '../../services/Logger/logger';
 
 /**
  * Create a user if they do not exist already
@@ -15,9 +16,9 @@ const createUser = (user?: firebase.User) => {
       // @ts-ignore
       .then((documentSnapshot) => {
         if (documentSnapshot.exists) {
-          console.log(`User with uid ${userId} exists.`);
+          LOG.info(`User with uid ${userId} exists.`);
         } else {
-          console.log(`Creating User document with uid ${userId}.`);
+          LOG.info(`Creating User document with uid ${userId}.`);
           firestoreInstance
             .collection(USERS_FIRESTORE)
             .doc(userId)
@@ -26,7 +27,7 @@ const createUser = (user?: firebase.User) => {
               email: user.email,
             })
             .then(() => {
-              console.log('User added!');
+              LOG.info('User added!');
             });
         }
       });

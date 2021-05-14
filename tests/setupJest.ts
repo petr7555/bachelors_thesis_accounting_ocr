@@ -5,6 +5,7 @@ import './mocks/mock-native-event-emitter';
 import './mocks/mock-react-native-permissions';
 import './mocks/mock-react-native-netinfo';
 import './mocks/mock-react-native-fs';
+import './mocks/mock-sentry';
 
 // this mock would be used if we accessed #react-native-firebase from tests,
 // but since we access web firebase, it is not needed

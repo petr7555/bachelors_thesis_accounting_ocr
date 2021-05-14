@@ -21,6 +21,12 @@ import createUser from './src/api/firebase/createUser';
 import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from 'react-native-fast-toast';
 import { isAndroid, isWindows } from './src/global/utils/platform';
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn:
+    'https://a5dc3e66e3f6470fba8a5750b6deca42@o659171.ingest.sentry.io/5763914',
+});
 
 type CommonTheme = {
   colors: {

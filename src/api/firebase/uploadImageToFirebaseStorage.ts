@@ -5,6 +5,7 @@ import { MyImage } from '../../components/Camera/Camera';
 import { Alert } from 'react-native';
 import { storageInstance } from '../../global/firebase';
 import base64ToArrayBuffer from 'base64-arraybuffer';
+import { LOG } from '../../services/Logger/logger';
 
 export const uploadImageToFirebaseStorage = async (
   image: MyImage,
@@ -25,14 +26,14 @@ export const uploadImageToFirebaseStorage = async (
       // React Native does not support Blob
       // use therefore ArrayBuffer and put() method
       await reference.put(binaryImageData, { contentType: image.mime });
-      console.log(`Image ${imageName} uploaded to firebase storage.`);
+      LOG.info(`Image ${imageName} uploaded to firebase storage.`);
 
       const downloadUrl = await reference.getDownloadURL();
-      console.log(`Download url for image is ${downloadUrl}`);
+      LOG.info(`Download url for image is ${downloadUrl}`);
 
       return downloadUrl;
     } catch (error) {
-      console.error(error);
+      LOG.error(error);
       Alert.alert('Upload to Firebase Storage failed');
     }
   }
@@ -53,14 +54,14 @@ export const uploadBase64ToFirebaseStorage = async (
       const binaryImageData = base64ToArrayBuffer.decode(base64String);
 
       await reference.put(binaryImageData, { contentType: mime });
-      console.log(`Image ${imageName} uploaded to firebase storage.`);
+      LOG.info(`Image ${imageName} uploaded to firebase storage.`);
 
       const downloadUrl = await reference.getDownloadURL();
-      console.log(`Download url for image is ${downloadUrl}`);
+      LOG.info(`Download url for image is ${downloadUrl}`);
 
       return downloadUrl;
     } catch (error) {
-      console.error(error);
+      LOG.error(error);
       Alert.alert('Upload to Firebase Storage failed');
     }
   }

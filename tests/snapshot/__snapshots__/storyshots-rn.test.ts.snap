@@ -28,6 +28,62 @@ exports[`Storyshots CartImage Basic 1`] = `
 </View>
 `;
 
+exports[`Storyshots CartImage Dark mode 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#000",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    fadeDuration={0}
+    onLoadEnd={[Function]}
+    source={
+      Object {
+        "testUri": "../../../images/cart_white.png",
+      }
+    }
+    style={
+      Object {
+        "height": 100,
+        "resizeMode": "contain",
+        "width": 80,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Storyshots CartImage Light mode 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    fadeDuration={0}
+    onLoadEnd={[Function]}
+    source={
+      Object {
+        "testUri": "../../../images/cart_black.png",
+      }
+    }
+    style={
+      Object {
+        "height": 100,
+        "resizeMode": "contain",
+        "width": 80,
+      }
+    }
+  />
+</View>
+`;
+
 exports[`Storyshots ConfirmDelete Basic 1`] = `
 <View
   style={
@@ -1160,6 +1216,106 @@ exports[`Storyshots GoogleSignInButton Enabled 1`] = `
 </View>
 `;
 
+exports[`Storyshots HeaderIconButton Basic 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "height": "100%",
+        "justifyContent": "center",
+        "opacity": 1,
+        "paddingHorizontal": 20,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      allowFontScaling={false}
+      style={
+        Array [
+          Object {
+            "color": "#242424",
+            "fontSize": 12,
+          },
+          Object {
+            "fontSize": 25,
+          },
+          Object {
+            "fontFamily": "Ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Storyshots HeaderTextButton Basic 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "height": "100%",
+        "justifyContent": "center",
+        "opacity": 1,
+        "paddingHorizontal": 20,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#242424",
+          "fontFamily": "sans-serif-medium",
+          "fontSize": 20,
+          "fontWeight": "normal",
+        }
+      }
+    >
+      Save
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`Storyshots ImageThumbnail Basic 1`] = `
 <View
   style={
@@ -1222,6 +1378,54 @@ exports[`Storyshots ImageThumbnail Basic 1`] = `
         Receipt
       </Text>
     </View>
+  </View>
+</View>
+`;
+
+exports[`Storyshots NoFilteredReceipts Basic 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Image
+      fadeDuration={0}
+      onLoadEnd={[Function]}
+      source={
+        Object {
+          "testUri": "../../../images/cart_black.png",
+        }
+      }
+      style={
+        Object {
+          "height": 100,
+          "resizeMode": "contain",
+          "width": 80,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": undefined,
+          "fontSize": 16,
+        }
+      }
+    >
+      No receipts match the search criteria.
+    </Text>
   </View>
 </View>
 `;

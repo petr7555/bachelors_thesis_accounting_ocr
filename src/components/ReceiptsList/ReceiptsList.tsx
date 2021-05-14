@@ -25,6 +25,9 @@ import Receipt from './Receipt';
 import Icon from '../ThemedIcon/ThemedIonIcon';
 import { useNavigation } from '@react-navigation/native';
 import NoReceipts from './NoReceipts';
+import HeaderIconButton from '../HeaderButton/HeaderIconButton';
+import NoFilteredReceipts from './NoFilteredReceipts';
+import { LOG } from '../../services/Logger/logger';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
@@ -82,11 +85,7 @@ const ReceiptsList = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Icon
-          style={styles.searchIcon}
-          name="search"
-          onPress={handleSearchPress}
-        />
+        <HeaderIconButton icon="search" onPress={handleSearchPress} />
       ),
     });
   }, [handleSearchPress, navigation]);
@@ -96,12 +95,12 @@ const ReceiptsList = () => {
   }
 
   if (errorUser) {
-    console.log(errorUser);
+    LOG.info(errorUser);
     Alert.alert('Cannot load current user.');
   }
 
   if (errorReceipts) {
-    console.log(errorReceipts);
+    LOG.info(errorReceipts);
     Alert.alert('Cannot load receipts.');
   }
 
@@ -133,6 +132,8 @@ const ReceiptsList = () => {
           data={searchResults}
           renderItem={renderItem}
         />
+      ) : receipts.length > 0 ? (
+        <NoFilteredReceipts />
       ) : (
         <NoReceipts />
       )}
@@ -143,16 +144,16 @@ const ReceiptsList = () => {
 const styles = StyleSheet.create({
   cancelIcon: {
     fontSize: 25,
+    height: '100%',
+    paddingLeft: 15,
+    paddingRight: 5,
+    textAlignVertical: 'bottom',
   },
   cancelIconContainer: {
     justifyContent: 'flex-end',
   },
   container: {
     flex: 1,
-  },
-  searchIcon: {
-    fontSize: 25,
-    paddingHorizontal: 15,
   },
 });
 

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "729638290812-cst7imdke5tjfnqop91f0ku6ae04oqa0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bachelors_thesis_accounting_ocr",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "729638290812-k2lom3dbvbgu84o4a7i33e7me05c0012.apps.googleusercontent.com",
           "client_type": 3
         }

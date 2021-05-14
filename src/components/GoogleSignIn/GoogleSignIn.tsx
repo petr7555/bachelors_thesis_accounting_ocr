@@ -3,6 +3,7 @@ import React from 'react';
 import { auth, authInstance } from '../../global/firebase';
 import GoogleSignInButton from './GoogleSignInButton';
 import execIfOnline from '../../global/execIfOnline';
+import { LOG } from '../../services/Logger/logger';
 
 GoogleSignin.configure({
   webClientId:
@@ -21,9 +22,9 @@ const signIn = async () => {
       // @ts-ignore
       await authInstance.signInWithCredential(googleCredential);
 
-      console.log('Signed in with Google!');
+      LOG.info('Signed in with Google!');
     } catch (error) {
-      console.error(error);
+      LOG.error(error);
     }
   });
 };

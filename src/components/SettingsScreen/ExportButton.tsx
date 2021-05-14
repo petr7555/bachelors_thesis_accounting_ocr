@@ -16,6 +16,7 @@ import { Alert } from 'react-native';
 import { ButtonProps } from 'react-native-elements';
 import combine from '../../global/utils/combine';
 import { isWindows } from '../../global/utils/platform';
+import { LOG } from '../../services/Logger/logger';
 
 const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
   const [user] = useAuthState(authInstance);
@@ -102,8 +103,9 @@ const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
 
         showExportedToast(directory);
       }
+      throw Error('some error');
     } catch (error) {
-      console.error(error);
+      LOG.error(error);
       Alert.alert('Receipts export failed');
     }
   };

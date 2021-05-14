@@ -1,6 +1,7 @@
 import { firestoreInstance, storageInstance } from '../../global/firebase';
 import { RECEIPTS_FIRESTORE, USERS_FIRESTORE } from '../../global/constants';
 import { FirebaseReceipt } from '../../components/ReceiptsList/ReceiptsList';
+import { LOG } from '../../services/Logger/logger';
 
 const deleteReceipt = async (userId: string, receipt: FirebaseReceipt) => {
   try {
@@ -8,12 +9,12 @@ const deleteReceipt = async (userId: string, receipt: FirebaseReceipt) => {
     storageInstance
       .refFromURL(receipt.urlOriginal)
       .delete()
-      .then(() => console.log('Receipt original photo deleted!'));
+      .then(() => LOG.info('Receipt original photo deleted!'));
 
     storageInstance
       .refFromURL(receipt.urlProcessed)
       .delete()
-      .then(() => console.log('Receipt processed photo deleted!'));
+      .then(() => LOG.info('Receipt processed photo deleted!'));
 
     // delete the receipt itself
     firestoreInstance
@@ -22,9 +23,9 @@ const deleteReceipt = async (userId: string, receipt: FirebaseReceipt) => {
       .collection(RECEIPTS_FIRESTORE)
       .doc(receipt.id)
       .delete()
-      .then(() => console.log('Receipt deleted!'));
+      .then(() => LOG.info('Receipt deleted!'));
   } catch (error) {
-    console.error(error);
+    LOG.error(error);
   }
 };
 

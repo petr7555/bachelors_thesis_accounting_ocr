@@ -2,6 +2,7 @@ import base64ToArrayBuffer from 'base64-arraybuffer';
 import axios from 'axios';
 import { Alert } from 'react-native';
 import { MyImage } from '../../components/Camera/Camera';
+import { LOG } from '../Logger/logger';
 
 export class Poller {
   private readonly pollUrl: string;
@@ -27,14 +28,14 @@ export class Poller {
           },
         });
         const status: AnalyzeReceiptStatus = response.data.status;
-        console.log(`Status: ${status}`);
+        LOG.info(`Status: ${status}`);
         if (status === 'succeeded' || status === 'failed') {
           return response.data;
         }
         await this.sleep(this.pollInterval);
       }
     } catch (error) {
-      console.error(error);
+      LOG.error(error);
     }
   }
 }
@@ -62,7 +63,7 @@ export class FormRecognizerClient {
       }
       Alert.alert('Image does not contain base64 data.');
     } catch (error) {
-      console.error(error);
+      LOG.error(error);
     }
   }
 }

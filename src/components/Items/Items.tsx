@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { MixedTheme } from '../../../App';
 import { useToast } from 'react-native-fast-toast';
 import ToastIcon from '../ToastIcon/ToastIcon';
-import HeaderButton from '../HeaderButton/HeaderButton';
+import HeaderTextButton from '../HeaderButton/HeaderTextButton';
 
 type ItemsScreenRouteProp = RouteProp<HomeStackParamList, 'Items'>;
 
@@ -91,7 +91,7 @@ const Items = ({ route }: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <HeaderButton
+        <HeaderTextButton
           text="Add"
           onPress={addItem}
           textStyle={{ color: colors.secondary }}
