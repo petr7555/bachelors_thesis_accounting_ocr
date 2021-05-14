@@ -642,23 +642,6 @@ exports[`Storyshots Buttons/PrimaryButton With Text 1`] = `
 </View>
 `;
 
-exports[`Storyshots CartImage Basic 1`] = `
-<Image
-  source={
-    Object {
-      "testUri": "../../../images/cart_black.png",
-    }
-  }
-  style={
-    Object {
-      "height": 100,
-      "resizeMode": "contain",
-      "width": 80,
-    }
-  }
-/>
-`;
-
 exports[`Storyshots CartImage Dark Mode 1`] = `
 <Image
   source={
@@ -1608,20 +1591,50 @@ exports[`Storyshots NoFilteredReceipts Basic 1`] = `
 `;
 
 exports[`Storyshots NoReceipts Basic 1`] = `
-<Image
-  source={
-    Object {
-      "testUri": "../../../images/cart_black.png",
-    }
-  }
+<View
   style={
     Object {
-      "height": 100,
-      "resizeMode": "contain",
-      "width": 80,
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
     }
   }
-/>
+>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../images/cart_black.png",
+      }
+    }
+    style={
+      Object {
+        "height": 100,
+        "resizeMode": "contain",
+        "width": 80,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "color": undefined,
+        "fontSize": 16,
+      }
+    }
+  >
+    You do not have any receipts yet.
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": undefined,
+        "fontSize": 16,
+      }
+    }
+  >
+    Click the scan button below to add a receipt.
+  </Text>
+</View>
 `;
 
 exports[`Storyshots Receipt Basic 1`] = `
