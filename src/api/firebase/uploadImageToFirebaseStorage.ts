@@ -20,11 +20,15 @@ export const uploadImageToFirebaseStorage = async (
 
       const binaryImageData = base64ToArrayBuffer.decode(image.data);
 
-      // putString() does not fork with Firebase for Web
+      // putString() does not fork with Firebase for Web:
       // [FirebaseError: Firebase Storage: String does not match format 'base64': Invalid character found (storage/invalid-format)]
       // putFile() is available only in React Native Firebase
       // React Native does not support Blob
       // use therefore ArrayBuffer and put() method
+      // this works with Firebase for Web on Android, but does not work with Firebase for Web on Windows
+      // it says: 'Invariant Violation: NativeBlobModule is available.'
+      // using Blob polyfill from react-native-blob-util results in a different error:
+      // [FirebaseError: Firebase Storage: An unknown error occurred, please check the error payload for server response. (storage/unknown)]
       await reference.put(binaryImageData, { contentType: image.mime });
       LOG.info(`Image ${imageName} uploaded to firebase storage.`);
 
