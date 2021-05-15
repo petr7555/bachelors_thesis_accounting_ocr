@@ -111,7 +111,7 @@ jobs:
 
       - name: Build Windows Release
         run: |
-          npx react-native run-windows --release --arch x64
+          npm run windows:release
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
