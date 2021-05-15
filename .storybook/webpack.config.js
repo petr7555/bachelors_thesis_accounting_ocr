@@ -37,7 +37,9 @@ module.exports = ({ config }) => {
     // replace `react-native` imports with `react-native-web`
     'react-native$': require.resolve('react-native-web'),
     // "remove" react-native-windows import, because it is not possible to build a storybook with it
-    'react-native-windows$': require.resolve('react-native-web'),
+    'react-native-windows$': require.resolve('./__mocks__/universal-mock.ts'),
+    // "remove" @sentry/react-native import, because it is not possible to build a storybook with it
+    '@sentry/react-native$': require.resolve('./__mocks__/universal-mock.ts'),
   };
 
   config.resolve.extensions.push('.ts', '.tsx', '.web.ts', '.web.tsx');
