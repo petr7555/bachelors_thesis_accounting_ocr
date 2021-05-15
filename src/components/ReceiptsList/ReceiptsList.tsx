@@ -1,12 +1,12 @@
 import React, {
   useCallback,
+  useContext,
   useEffect,
   useLayoutEffect,
   useState,
 } from 'react';
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import {
-  ActivityIndicator,
   Alert,
   FlatList,
   ListRenderItem,
@@ -14,8 +14,6 @@ import {
   View,
 } from 'react-native';
 import { Input } from 'react-native-elements';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { authInstance } from '../../global/firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { HomeStackParamList } from '../HomeStackNavigator/HomeStackNavigator';
@@ -28,6 +26,8 @@ import NoReceipts from './NoReceipts';
 import HeaderIconButton from '../HeaderButton/HeaderIconButton';
 import NoFilteredReceipts from './NoFilteredReceipts';
 import { LOG } from '../../services/Logger/logger';
+import LoadingReceipts from './LoadingReceipts';
+import { UserContext } from '../../../App';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
@@ -56,21 +56,21 @@ export type FirebaseReceipt = {
 } & FirebaseReceiptData;
 
 const ReceiptsList = () => {
-  const [user, loadingUser, errorUser] = useAuthState(authInstance);
-  const [
+  const user = useContext(UserContext);
+  let [
     receipts = [],
     loadingReceipts,
     errorReceipts,
-  ] = useCollectionData<FirebaseReceipt>(getAllReceiptsForUser(user?.uid), {
+  ] = useCollectionData<FirebaseReceipt>(getAllReceiptsForUser(user.uid), {
     idField: 'id',
   });
-
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [searchVisible, setSearchVisible] = useState(false);
   const [searchTerm, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState<FirebaseReceipt[]>([]);
 
   useEffect(() => {
+    // necessary to prevent "maximum update depth exceeded"
     if (!loadingReceipts) {
       const results = filterReceipts(receipts, searchTerm);
       setSearchResults(results);
@@ -90,13 +90,8 @@ const ReceiptsList = () => {
     });
   }, [handleSearchPress, navigation]);
 
-  if (loadingUser || loadingReceipts) {
-    return <ActivityIndicator />;
-  }
-
-  if (errorUser) {
-    LOG.info(errorUser);
-    Alert.alert('Cannot load current user.');
+  if (loadingReceipts) {
+    return <LoadingReceipts />;
   }
 
   if (errorReceipts) {

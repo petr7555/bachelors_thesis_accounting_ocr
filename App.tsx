@@ -3,7 +3,7 @@
 if (!isWindows) {
   require('react-native-gesture-handler');
 }
-import React, { useEffect } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { StyleSheet, useColorScheme } from 'react-native';
 import {
   DarkTheme,
@@ -22,10 +22,12 @@ import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from 'react-native-fast-toast';
 import { isAndroid, isWindows } from './src/global/utils/platform';
 import * as Sentry from '@sentry/react-native';
+import User from 'firebase';
 
 Sentry.init({
   dsn:
     'https://a5dc3e66e3f6470fba8a5750b6deca42@o659171.ingest.sentry.io/5763914',
+  enableNative: !isWindows,
 });
 
 type CommonTheme = {
@@ -89,6 +91,9 @@ const theme = {
   },
 };
 
+// @ts-ignore
+export const UserContext = createContext<User>();
+
 const App = () => {
   // ⚠ useColorScheme() will always return 'light' when remote debugging.
   // set this to 'dark' or build using --release to test dark mode
@@ -111,7 +116,13 @@ const App = () => {
       <ThemeProvider theme={theme} useDark={scheme === 'dark'}>
         <NavigationContainer
           theme={scheme === 'dark' ? MyDarkTheme : MyDefaultTheme}>
-          {user ? <RootNavigator /> : <LoginScreen />}
+          {user ? (
+            <UserContext.Provider value={user}>
+              <RootNavigator />
+            </UserContext.Provider>
+          ) : (
+            <LoginScreen />
+          )}
         </NavigationContainer>
       </ThemeProvider>
     </ToastProvider>

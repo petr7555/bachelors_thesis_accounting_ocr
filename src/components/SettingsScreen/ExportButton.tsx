@@ -64,8 +64,13 @@ const ExportButton = ({ containerStyle, ...props }: ButtonProps) => {
           'utf8',
         );
 
-        const items = receipts.flatMap((receipt) =>
-          receipt.items.map((item) => item.name),
+        // cannot use flatMap, because it does not work on Windows release version
+        const items = receipts.reduce(
+          (acc: string[], receipt) => [
+            ...acc,
+            ...receipt.items.map((item) => item.name),
+          ],
+          [],
         );
         const itemsPromise = RNFS.writeFile(
           combine(directory, 'items.json'),
