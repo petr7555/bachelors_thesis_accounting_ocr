@@ -90,7 +90,7 @@ const ReceiptsList = () => {
     });
   }, [handleSearchPress, navigation]);
 
-  if (loadingReceipts) {
+  if (loadingReceipts || !user) {
     return <LoadingReceipts />;
   }
 

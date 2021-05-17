@@ -4,7 +4,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 
 import { ReactNativeFirebase } from '@react-native-firebase/app';
-import androidAuth from '@react-native-firebase/auth';
+import androidAuth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import androidFirestore from '@react-native-firebase/firestore';
 import androidStorage from '@react-native-firebase/storage';
 
@@ -40,3 +40,5 @@ export {
 export type FirebaseError =
   | ReactNativeFirebase.NativeFirebaseError
   | firebase.FirebaseError;
+
+export type User = FirebaseAuthTypes.User | firebase.User;

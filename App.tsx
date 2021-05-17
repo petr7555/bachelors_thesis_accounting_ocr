@@ -22,7 +22,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from 'react-native-fast-toast';
 import { isAndroid, isWindows } from './src/global/utils/platform';
 import * as Sentry from '@sentry/react-native';
-import User from 'firebase';
+import { User } from './src/global/firebase';
 
 Sentry.init({
   dsn:
@@ -91,8 +91,7 @@ const theme = {
   },
 };
 
-// @ts-ignore
-export const UserContext = createContext<User>();
+export const UserContext = createContext<User | undefined>(undefined);
 
 const App = () => {
   // ⚠ useColorScheme() will always return 'light' when remote debugging.
