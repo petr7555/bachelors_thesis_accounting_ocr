@@ -1145,6 +1145,40 @@ exports[`Storyshots ImageThumbnail Basic 1`] = `
 </View>
 `;
 
+exports[`Storyshots LoadingReceipts Basic 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <ActivityIndicator
+    animating={true}
+    color="#999999"
+    hidesWhenStopped={true}
+    size="large"
+    style={
+      Object {
+        "marginBottom": 10,
+      }
+    }
+  />
+  <Text
+    style={
+      Object {
+        "color": undefined,
+        "fontSize": 16,
+      }
+    }
+  >
+    Receipts are loading...
+  </Text>
+</View>
+`;
+
 exports[`Storyshots Modals/ConfirmationModal Basic 1`] = `
 <Modal
   animationType="none"
