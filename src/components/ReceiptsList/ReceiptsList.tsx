@@ -61,7 +61,7 @@ const ReceiptsList = () => {
     receipts = [],
     loadingReceipts,
     errorReceipts,
-  ] = useCollectionData<FirebaseReceipt>(getAllReceiptsForUser(user.uid), {
+  ] = useCollectionData<FirebaseReceipt>(getAllReceiptsForUser(user?.uid), {
     idField: 'id',
   });
   const navigation = useNavigation<HomeScreenNavigationProp>();
