@@ -1,4 +1,5 @@
 // libraries to mock
+// used for unit tests, component tests, snapshot tests (both RN and Web)
 import './mocks/mock-async-storage';
 import './mocks/mock-native-animated-helper';
 import './mocks/mock-native-event-emitter';
