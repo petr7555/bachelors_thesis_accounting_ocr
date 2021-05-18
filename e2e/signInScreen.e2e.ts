@@ -1,4 +1,4 @@
-import { by, device, element, expect } from 'detox';
+import { by, device, element, expect, waitFor } from 'detox';
 
 describe('Sign in screen', () => {
   beforeEach(async () => {
@@ -11,12 +11,16 @@ describe('Sign in screen', () => {
   });
 
   it('should be possible to sign in with test account', async () => {
-    await element(by.label('Email')).typeText('test@example.comm');
+    await element(by.label('Email')).typeText('test@example.com');
     await element(by.label('Password')).typeText('password');
 
     await element(by.text('Sign in')).tap();
 
-    await expect(element(by.text('My receipts'))).toBeVisible();
+    // https://github.com/wix/Detox/blob/master/docs/Troubleshooting.RunningTests.md#test-tries-to-find-my-component-before-its-created
+    await waitFor(element(by.text('My receipts')))
+      .toBeVisible()
+      .withTimeout(5000);
+
     await expect(element(by.label('Email'))).not.toBeVisible();
   });
 });
