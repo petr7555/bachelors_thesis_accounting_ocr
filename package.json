@@ -10,7 +10,7 @@
     "windows:release": "npm run windows -- --release",
     "start": "react-native start",
     "test": "jest --config jest.config.js",
-    "disable-autofill":"emulator -avd Pixel_3a_API_29 & adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\\r') ]]; do sleep 1; done; input keyevent 82' && adb shell settings put secure autofill_service null",
+    "disable-autofill": "emulator -avd Pixel_3a_API_29 & adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\\r') ]]; do sleep 1; done; input keyevent 82' && adb shell settings put secure autofill_service null",
     "e2e:build": "detox build -c android.emu.debug",
     "e2e:test": "npm run disable-autofill && detox test -c android.emu.debug",
     "e2e:build:ci": "detox build -c android.emu.release",
