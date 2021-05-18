@@ -19,7 +19,7 @@ describe('Sign in screen', () => {
     // https://github.com/wix/Detox/blob/master/docs/Troubleshooting.RunningTests.md#test-tries-to-find-my-component-before-its-created
     await waitFor(element(by.text('My receipts')))
       .toBeVisible()
-      .withTimeout(5000);
+      .withTimeout(10000);
 
     await expect(element(by.label('Email'))).not.toBeVisible();
   });
