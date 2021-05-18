@@ -1,6 +1,16 @@
 {
   "testRunner": "jest",
   "runnerConfig": "e2e/config.json",
+  "artifacts": {
+    "rootDir": ".artifacts",
+    "plugins": {
+      "instruments": "none",
+      "uiHierarchy": "none",
+      "log": "all",
+      "screenshot": "all",
+      "video": "all"
+    }
+  },
   "devices": {
     "emulator": {
       "type": "android.emulator",

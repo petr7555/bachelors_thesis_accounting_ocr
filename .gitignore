@@ -82,3 +82,6 @@ g_app_cred.json
 venv
 
 build-storybook.log
+
+# Detox artifacts
+.artifacts
