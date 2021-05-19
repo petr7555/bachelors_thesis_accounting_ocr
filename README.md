@@ -90,7 +90,7 @@ to [React Native for Web](https://github.com/necolas/react-native-web) also regu
   repository to be able to deploy the Storybook to Vercel locally, which is done by running `npm run deploy-vercel`
   (currently does not work, because the file number limit is reached). This directory is ignored in version control as
   it contains sensitive information.
-- Keep in mind, that in Storybook for web `Platform.OS === 'web'`, so both `isAndroid` and `isWindows` are `false`.
+- Keep in mind, that in Storybook for Web `Platform.OS === 'web'`, so both `isAndroid` and `isWindows` are `false`.
 - Storybook for Web finds all stories that match this pattern `../src/**/*.stories.tsx`.
 - This image shows how Storybook running on web looks:
 
@@ -136,7 +136,15 @@ export default {
     - `npm run start --reset-cache`
     - make sure the **App** is visible and not the Storybook
 
-On CI, a release version of the app is built, so the Metro bundler is not needed.
+### E2E tests in CI pipeline
+
+- Release version of the app is built, therefore the Metro bundler is not needed.
+- Artifacts from the tests are saved (both passing and failing). These contain:
+    - logs
+    - screenshots
+    - videos
+    - timeline
+- [Configuration of artifacts](https://github.com/wix/Detox/blob/master/docs/APIRef.Artifacts.md)
 
 ### Visual regression testing
 
@@ -311,6 +319,9 @@ the [python-api/README.md](https://github.com/petr7555/bachelors_thesis_accounti
 
 Auto-linking happens automatically at the start of `npm run android` / `npm run windows` command. It can be triggered
 manually by running `npx react-native link`.
+
+## Commit messages format
+![Meaning if emojis used in commit messages](images/doc/emoji_commits.png)
 
 ## Troubleshooting
 
