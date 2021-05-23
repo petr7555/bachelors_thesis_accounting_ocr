@@ -82,9 +82,9 @@ def find_corners_of_largest_polygon(img):
         return False
 
     # Bottom-right point has the largest (x + y) value.
-    # Top-left has point smallest (x + y) value.
-    # Bottom-left point has smallest (x - y) value.
-    # Top-right point has largest (x - y) value.
+    # Top-left point has the smallest (x + y) value.
+    # Bottom-left point has the smallest (x - y) value.
+    # Top-right point has the largest (x - y) value.
     bottom_right = np.array([pt[0][0] + pt[0][1] for pt in polygon]).argmax()
     top_left = np.array([pt[0][0] + pt[0][1] for pt in polygon]).argmin()
     bottom_left = np.array([pt[0][0] - pt[0][1] for pt in polygon]).argmin()
