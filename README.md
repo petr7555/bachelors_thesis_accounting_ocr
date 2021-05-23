@@ -321,6 +321,7 @@ Auto-linking happens automatically at the start of `npm run android` / `npm run 
 manually by running `npx react-native link`.
 
 ## Commit messages format
+
 ![Meaning if emojis used in commit messages](images/doc/emoji_commits.png)
 
 ## Troubleshooting
@@ -371,3 +372,9 @@ They are available at [Privacy Policy](https://receipts-scanner.flycricket.io/pr
 [Terms & Conditions](https://receipts-scanner.flycricket.io/terms.html).
 
 They can be edited at https://app.flycricket.com/.
+
+## Text of thesis
+
+The source for the thesis text is available in
+a [separate repository](https://github.com/petr7555/Receipt-database-with-OCR-scan-thesis-text). It describes the
+application architecture and functionality.
