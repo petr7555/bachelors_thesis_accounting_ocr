@@ -14,7 +14,11 @@ const LoadingReceipts = () => {
 
   return (
     <View style={styles.noReceiptsContainer}>
-      <ActivityIndicator size="large" style={styles.indicator} />
+      <ActivityIndicator
+        size="large"
+        style={styles.indicator}
+        color={colors.grey}
+      />
       <Text style={noReceiptsText}>Receipts are loading...</Text>
     </View>
   );
