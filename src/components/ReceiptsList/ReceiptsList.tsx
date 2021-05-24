@@ -27,7 +27,7 @@ import HeaderIconButton from '../HeaderButton/HeaderIconButton';
 import NoFilteredReceipts from './NoFilteredReceipts';
 import { LOG } from '../../services/Logger/logger';
 import LoadingReceipts from './LoadingReceipts';
-import { UserContext } from '../../../App';
+import { UserContext } from '../../global/userContext';
 
 export const filterReceipts = (
   receipts: FirebaseReceipt[],
