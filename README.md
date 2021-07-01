@@ -15,7 +15,7 @@ information extraction from the image,
 image processing. It is available on Android and Windows. However, it is not in the stores yet.
 
 ## Demo
-<img src="images/doc/videos/adding_english_receipt.gif" alt="Adding English receipt" width="200"/>
+<img src="images/doc/defense_presentation/adding_english_receipt.gif" alt="Adding English receipt" width="200"/>
 
 ## Local development
 
