@@ -15,8 +15,12 @@ information extraction from the image,
 image processing. It is available on Android and Windows. However, it is not in the stores yet.
 
 ## Demo
-<img src="images/doc/defense_presentation/adding_english_receipt.gif" alt="Adding English receipt" width="200"/>
-
+<p float="left">
+  <img src="images/doc/defense_presentation/adding_english_receipt.gif" alt="Adding English receipt" width="300"/>
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="images/doc/defense_presentation/adding_czech_receipt.gif" alt="Adding Czech receipt" width="300"/>
+<p>
+  
 ## Local development
 
 > Not all functionality (e.g. running unit tests) is described in this README.
