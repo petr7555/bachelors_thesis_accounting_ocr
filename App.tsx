@@ -3,7 +3,7 @@
 if (!isWindows) {
   require('react-native-gesture-handler');
 }
-import React, { createContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, useColorScheme } from 'react-native';
 import {
   DarkTheme,
@@ -22,7 +22,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { ToastProvider } from 'react-native-fast-toast';
 import { isAndroid, isWindows } from './src/global/utils/platform';
 import * as Sentry from '@sentry/react-native';
-import { User } from './src/global/firebase';
+import { UserContext } from './src/global/userContext';
 
 Sentry.init({
   dsn:
@@ -90,8 +90,6 @@ const theme = {
     },
   },
 };
-
-export const UserContext = createContext<User | undefined>(undefined);
 
 const App = () => {
   // ⚠ useColorScheme() will always return 'light' when remote debugging.
