@@ -14,6 +14,9 @@ information extraction from the image,
 [Magnitude](https://github.com/plasticityai/magnitude) to categorize receipt items and [OpenCV](https://opencv.org/) for
 image processing. It is available on Android and Windows. However, it is not in the stores yet.
 
+## Demo
+<img src="images/doc/videos/adding_english_receipt.gif" alt="Adding English receipt" width="200"/>
+
 ## Local development
 
 > Not all functionality (e.g. running unit tests) is described in this README.
