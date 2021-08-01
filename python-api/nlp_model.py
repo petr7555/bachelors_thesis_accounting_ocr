@@ -23,6 +23,10 @@ def get_categories(sentences):
 
 
 def get_category(sentence):
+    """
+    Query for the most similar key out of a list of keys to a given key.
+    Keys can be composed of multiple words.
+    """
     most_similar = vectors.most_similar_to_given(sentence, list(categories.keys()))
     emoji = categories[most_similar]
     return {
