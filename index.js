@@ -9,9 +9,9 @@ LogBox.ignoreLogs(['console.disableYellowBox']);
 // Ignore all log notifications
 // LogBox.ignoreAllLogs();
 
-// Should we show storybook instead of our app?
-// ⚠️ Leave this as `false` when checking into git.
 const SWITCH_STORYBOOK_FROM_REACTOTRON = true;
+// Setting `VISUAL_TESTS = true` helps reduce some flakiness when running Loki visual tests.
+// ⚠️ Leave this as `false` when checking into git.
 const VISUAL_TESTS = false;
 
 let RootComponent = App;

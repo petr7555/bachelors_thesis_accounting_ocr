@@ -421,7 +421,7 @@ const EditReceipt = ({ route }: Props) => {
         </View>
       </UniversalModal>
       <FlatList
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(_, index) => index.toString()}
         data={fields}
         renderItem={renderField}
         ref={(ref) => {

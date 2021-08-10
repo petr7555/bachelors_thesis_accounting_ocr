@@ -169,7 +169,7 @@ export default {
 - `npm run loki:update:rn` to create reference images
 - `npm run loki:test:rn` to create new images and compare them with the reference images
 - ⚠️ set `const VISUAL_TESTS = true;` in `index.js`, this reduces flakiness
-- ⚠️ there is still a lot of flakiness, many elements interfere the snapshots
+- ⚠️ there is still a lot of flakiness, many elements interfere with the snapshots
 
 #### Run visual regression Loki tests for Web:
 
@@ -376,6 +376,10 @@ Solution: Kill `Node.js` in Task Manager.
 7. When adding GitHub branch as a dependency, add it as `"dependency-name": "user/repository#branch"`
    into `package.json` and make sure that `package-lock.json` contains `"resolved": "git+https://git@github.com/...`,
    not `"resolved": "git+ssh://git@github.com/...`.
+
+8. `INSTALL_FAILED_INSUFFICIENT_STORAGE`
+
+Uninstall previously installed app.
 
 ## Privacy Policy, Terms & Conditions
 
