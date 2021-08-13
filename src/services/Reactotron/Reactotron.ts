@@ -26,7 +26,7 @@ if (__DEV__) {
   // eslint-disable-next-line no-console
   console.tron = Tron; // attach reactotron to `console.tron`
 } else {
-  // attach a mock so if things sneaky by our __DEV__ guards, we won't crash.
+  // attach a mock so if things sneak by our __DEV__ guards, we won't crash.
   // eslint-disable-next-line no-console
   console.tron = {
     // @ts-ignore
