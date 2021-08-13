@@ -21,6 +21,7 @@ if (__DEV__ && SWITCH_STORYBOOK_FROM_REACTOTRON) {
   const Reactotron = require('./src/services/Reactotron');
   const reactotron = new Reactotron.Reactotron();
   reactotron.setup();
+  // eslint-disable-next-line no-console
   RootComponent = console.tron.storybookSwitcher(StorybookUIRoot)(App);
 }
 
