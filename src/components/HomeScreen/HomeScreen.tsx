@@ -1,4 +1,3 @@
-import { useTheme } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import * as React from 'react';
@@ -7,12 +6,12 @@ import ReceiptsList from '../ReceiptsList/ReceiptsList';
 declare const global: { HermesInternal: null | {} };
 
 const HomeScreen = () => {
-  const { colors } = useTheme();
   return (
     <>
+      {/* Hermes is inactive in Debug mode (enabled from Dev Menu) */}
       {__DEV__ && global.HermesInternal && (
         <View style={styles.engine}>
-          <Text style={{ color: colors.text }}>Engine: Hermes</Text>
+          <Text>Engine: Hermes</Text>
         </View>
       )}
       <ReceiptsList />
@@ -22,8 +21,10 @@ const HomeScreen = () => {
 
 const styles = StyleSheet.create({
   engine: {
+    paddingRight: 5,
     position: 'absolute',
     right: 0,
+    zIndex: 1,
   },
 });
 
