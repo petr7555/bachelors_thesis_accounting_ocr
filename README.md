@@ -15,12 +15,13 @@ information extraction from the image,
 image processing. It is available on Android and Windows. However, it is not in the stores yet.
 
 ## Demo
+
 <p float="left">
   <img src="images/doc/defense_presentation/adding_english_receipt.gif" alt="Adding English receipt" width="300"/>
   &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="images/doc/defense_presentation/adding_czech_receipt.gif" alt="Adding Czech receipt" width="300"/>
 <p>
-  
+
 ## Local development
 
 > Not all functionality (e.g. running unit tests) is described in this README.
@@ -380,6 +381,11 @@ Solution: Kill `Node.js` in Task Manager.
 8. `INSTALL_FAILED_INSUFFICIENT_STORAGE`
 
 Uninstall previously installed app.
+
+9. Error: Unable to resolve module ./debugger-ui/debuggerWorker.aca173c4 from .../bachelors_thesis_accounting_ocr/.:
+   ./debugger-ui/debuggerWorker.aca173c4 could not be found within the project.
+
+This is not a problem, ignore it.
 
 ## Privacy Policy, Terms & Conditions
 
