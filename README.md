@@ -16,11 +16,11 @@ image processing. It is available on Android and Windows. However, it is not in 
 
 ## Demo
 
-<p float="left">
+<p>
   <img src="images/doc/defense_presentation/adding_english_receipt.gif" alt="Adding English receipt" width="300"/>
   &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="images/doc/defense_presentation/adding_czech_receipt.gif" alt="Adding Czech receipt" width="300"/>
-<p>
+</p>
 
 ## Local development
 
